@@ -1,8 +1,16 @@
-'use client'
+'use client';
 import '@mantine/core/styles.css';
 import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript} from '@mantine/core';
+
 import { theme } from '../theme';
+import { useState, useEffect } from 'react';
+//import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import '@/styles/globals.css';
+//
+//type ColorScheme = 'light' | 'dark';
+
 
 /*export const metadata = {
   title: 'Mantine Next.js template',
@@ -28,12 +36,18 @@ export default function RootLayout({ children }: { children: any }) {
   );
 }*/
 
+
+
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../store/store';
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+
+ 
+
+
   return (
     <html lang="en">
       <head>
@@ -45,17 +59,24 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         />
       </head>
       <body>
-      <MantineProvider theme={theme}>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        {children}
-      </PersistGate>
-    </Provider>
-    </MantineProvider>
-    </body>
+      
+      <MantineProvider 
+      theme={theme}
+    //theme={{ colorScheme }}
+    // withGlobalStyles 
+    // withNormalizeCSS
+     >
+        
+          <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+              {children}
+            </PersistGate>
+          </Provider>
+        </MantineProvider>
+        
+      </body>
     </html>
   );
 };
 
 export default RootLayout;
-
