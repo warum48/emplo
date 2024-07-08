@@ -2,11 +2,19 @@
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, Checkbox, Select, NumberInput, Button, Group, Container, Title } from '@mantine/core';
+import { updateJobSearchForm } from '@/features/searchJobForm/searchJob';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
+//import { updateJobSearchForm } from '@/features/JobSearchForm/JobSearchForm/jobSearchSlice';
 
 const JobSearchForm = () => {
+  const dispatch = useDispatch();
+  const formState = useSelector((state: RootState) => state.jobSearch);
+
+  
   // Define the form state using useForm from Mantine
   const form = useForm({
-    initialValues: {
+   /* initialValues: {
       position: '',
       region: [],
       relocation: '',
@@ -18,8 +26,8 @@ const JobSearchForm = () => {
       salaryUpTo: 0,
       jobSearchStatus: [],
       requiredResumes: 0,
-    },
-
+    },*/
+    initialValues:formState,
     // Add validation rules for the form fields
     validate: {
       position: (value) => (value ? null : 'Please select a position'),
@@ -31,10 +39,16 @@ const JobSearchForm = () => {
     },
   });
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch(updateJobSearchForm({ [name]: value }));
+  };
+
   // Handler for form submission
   const handleSubmit = (values: typeof form.values) => {
     // Process form data here
     console.log('Form submitted with values:', values);
+    dispatch(updateJobSearchForm(values));
   };
 
   return (
@@ -75,13 +89,14 @@ const JobSearchForm = () => {
         <Checkbox.Group
           label="График работы *"
           mt="md"
+          //onChange={handleChange}
           {...form.getInputProps('workSchedule', { type: 'checkbox' })}
         >
           <Checkbox value="full_day" label="Полный день" />
           <Checkbox value="shift" label="Сменный график" />
           <Checkbox value="flexible" label="Гибкий" />
           <Checkbox value="remote" label="Удаленная работа" />
-          <Checkbox value="rotation" label="Вахта" />
+          <Checkbox value="rotation" label="Вахта" onChange={handleChange}/>
         </Checkbox.Group>
 
         {/* Skills */}

@@ -7,6 +7,7 @@ import { api } from '../services/api';
 import { authApi } from '../services/authApi';
 import someSlice from '../features/someFeature/someSlice';
 import tempSlice from '../features/tempFeature/tempSlice';
+import jobSearchSlice from '../features/searchJobForm/searchJob';
 //import { tempSlice } from './features/tempFeature/tempSlice'; // Adjust the path as necessary
 
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
   someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
+  jobSearch: persistReducer({ key: 'jobSearch', storage }, jobSearchSlice),
   tempFeature: tempSlice, // Non-persistent slice
   // Add other slices here
   //temp: tempSlice.reducer, // Add the temp slice reducer here
