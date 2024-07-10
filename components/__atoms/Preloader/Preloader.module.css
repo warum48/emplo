@@ -1,0 +1,39 @@
+.preloader_container svg {
+    width: 300px;
+    display: block;
+    position: absolute;
+  
+   
+  }
+
+  .line1 {
+    stroke-dasharray: 340;
+    stroke-dashoffset: 40;
+    animation: dash 1.5s linear  infinite;
+  }
+
+  .line2 {
+    stroke-dasharray: 31;
+    stroke-dashoffset: -31;
+    animation: dash2 1.5s linear ;
+    animation-iteration-count: infinite;
+  animation-direction: forward;
+  }
+
+  @keyframes dash {
+    from {
+      stroke-dashoffset: 360;
+    }
+    to {
+      stroke-dashoffset: 40;
+    }
+  }
+
+  @keyframes dash2 {
+    from {
+      stroke-dashoffset: 31;
+    }
+    to {
+      stroke-dashoffset: -31;
+    }
+  }

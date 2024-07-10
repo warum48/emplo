@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
-import { TextInput, Checkbox, Select, NumberInput, Button, Group, Container, Title } from '@mantine/core';
+import { TextInput, Checkbox, Select, NumberInput, Button, Group, Container, Title, Box } from '@mantine/core';
 import { updateJobSearchForm } from '@/features/searchJobForm/searchJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
@@ -52,8 +52,9 @@ const JobSearchForm = () => {
   };
 
   return (
-    <Container size="sm" style={{ marginTop: 20 }}>
-      <Title order={1}>Поиск</Title>
+    <Box size="sm" m="xl" className="text-left space-y-1 flex flex-col gap-2">
+     {/*} <Title order={1}>Поиск</Title>
+     <h1 className="text-4xl  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">Поиск</h1>*/}
 
       <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
         {/* Position Input */}
@@ -89,14 +90,15 @@ const JobSearchForm = () => {
         <Checkbox.Group
           label="График работы *"
           mt="md"
+          //className="space-y-1"
           //onChange={handleChange}
           {...form.getInputProps('workSchedule', { type: 'checkbox' })}
         >
-          <Checkbox value="full_day" label="Полный день" />
-          <Checkbox value="shift" label="Сменный график" />
-          <Checkbox value="flexible" label="Гибкий" />
-          <Checkbox value="remote" label="Удаленная работа" />
-          <Checkbox value="rotation" label="Вахта" onChange={handleChange}/>
+          <Checkbox value="full_day" label="Полный день"  mt="xs"/>
+          <Checkbox value="shift" label="Сменный график" mt="xs"/>
+          <Checkbox value="flexible" label="Гибкий" mt="xs"/>
+          <Checkbox value="remote" label="Удаленная работа" mt="xs"/>
+          <Checkbox value="rotation" label="Вахта" onChange={handleChange} mt="xs"/>
         </Checkbox.Group>
 
         {/* Skills */}
@@ -176,7 +178,7 @@ const JobSearchForm = () => {
           Искать
         </Button>
       </form>
-    </Container>
+    </Box>
   );
 };
 

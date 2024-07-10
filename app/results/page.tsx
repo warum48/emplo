@@ -2,9 +2,10 @@
 
 import Head from 'next/head';
 import Header from '@/components/Header/Header';
-import { Input, Button } from '@mantine/core';
+import { Input, Button, Paper } from '@mantine/core';
 import Footer from '@/components/Footer/Footer';
-import Link from 'next/link';
+import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import { ResultList } from '@/components/ResultList/ResultList';
 
 const Home = () => {
   return (
@@ -20,36 +21,39 @@ const Home = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-0  '>
+            <div className='col-span-1'>
         <main
           className="  
-       flex-grow flex flex-col 
-      items-center
-      bg-cover
-      bg-[url('https://unsplash.com/photos/gMsnXqILjp4/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTJ8fGpvYiUyMHRlYW18ZW58MHx8fHwxNzIwNTQ5MTY0fDA&force=true&w=2400')]
-       text-center
-       mt-16 
-      "
-      
-          //
+                   flex-grow flex flex-col 
+                  items-center
+                  bg-cover
+                 
+                   text-center
+                   mt-16 
+                  "
+
+          // bg-[url('https://unsplash.com/photos/gMsnXqILjp4/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTJ8fGpvYiUyMHRlYW18ZW58MHx8fHwxNzIwNTQ5MTY0fDA&force=true&w=2400')]
           //mx-auto
           //container px-4
           //justify-center
         >
           <section
             className="
-       w-full flex flex-col flex-grow
-      items-center
-      bg-opacity-70
-        bg-gradient-to-br from-fuchsia-950/85 via-rose-500/75 to-rose-900/95 
-        
-        dark:from-indigo-950/75 dark:via-rose-800/50 dark:to-rose-900/75 
-        text-white px-8 rounded-lg shadow-md py-20"
-        //bg-gradient-to-r from-pink-400/75 via-red-500/85 to-orange-400 dark:from-indigo-950 dark:via-gray-800 dark:to-slate-900 
-         //dark:from-indigo-950/75 dark:via-gray-800/90 dark:to-slate-900/95 
-         //bg-gradient-to-br from-fuchsia-950/85 via-rose-500/85 to-rose-900  
-        >
+                       w-full flex flex-col flex-grow
+                      items-center
+                      bg-opacity-70
+                      bg-customGray-900
+                        bg-gradient-to-t from-fuchsia-950/85 via-rose-500/85 to-rose-900  
+                        dark:from-indigo-950/75 dark:via-rose-800/10 dark:to-rose-900/45 
+                        text-white shadow-md "
+                        //rounded-lg 
+                        //dark:from-indigo-950/75 dark:via-gray-800/90 dark:to-slate-900/95 
+                        //py-20 //px-8 
+            //bg-gradient-to-r from-pink-400/75 via-red-500/85 to-orange-400 dark:from-indigo-950 dark:via-gray-800 dark:to-slate-900
+          >
             <div className="w-full max-w-5xl flex flex-col justify-start">
-              <h1 className="text-4xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+             {/* <h1 className="text-4xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                 Найдите лучших сотрудников
               </h1>
               <p className="text-lg mb-8 text-left max-w-3xl ">
@@ -59,49 +63,64 @@ const Home = () => {
               <div className="flex justify-start items-center space-x-4 w-full p-4 bg-white bg-opacity-30">
                 <Input placeholder="Регион" size="lg" className="flex-grow flex-shrink-0" />
                 <Input placeholder="Профессия" size="lg" className="flex-grow flex-shrink-0" />
-                <Link href={"/results"}><Button size="lg" 
-               // className="flex-shrink-0 bg-blue-500 hover:bg-blue-700"
-               className='bg-opacity-80 hover:bg-opacity-100'
-                >
+                <Button size="lg" className="flex-shrink-0 bg-blue-500 hover:bg-blue-700">
                   Поиск
-                </Button></Link>
+                </Button>
               </div>
-              <div className="flex justify-end items-center"><div className="flex justify-end items-center bg-white bg-opacity-30 w-fit px-4 py-2"><a href='' className="underline">Расширенный поиск</a></div></div>
-              
-
-              <div className="mt-8 text-white text-left w-full">
-              <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">Популярные запросы</h2>
-              <div className="flex justify-between gap-4">
-                <ul className="mt-4 space-y-2">
-                  <li>Финансовые директора </li>
-                  <li>Технологические вакансии </li>
-                  <li>Вакансии в сфере продаж </li>
-                  {/*<li>Менеджеры проектов </li>
-                  <li>Менеджеры проектов </li>*/}
-                </ul>
-                <ul className="mt-4 space-y-2">
-                  <li>Финансовые директора </li>
-                  <li>Технологические вакансии </li>
-                  <li>Вакансии в сфере продаж </li>
-                  {/*<li>Менеджеры проектов </li>
-                  <li>Менеджеры проектов </li>*/}
-                </ul>
-                <ul className="mt-4 space-y-2">
-                  <li>Финансовые директора </li>
-                  <li>Технологические вакансии </li>
-                  <li>Вакансии в сфере продаж </li>
-                  {/*<li>Менеджеры проектов </li>
-                  <li>Менеджеры проектов </li>*/}
-                </ul>
+              <div className="flex justify-end items-center">
+                <div className="flex justify-end items-center bg-white bg-opacity-30 w-fit px-4 py-2">
+                  <a href="" className="underline">
+                    Расширенный поиск
+                  </a>
+                </div>
+              </div>*/}
+              <div className="my-8 bg-white bg-opacity-95 text-gray-900 mx-8 dark:text-white dark:bg-customGray-950/85">
+              <JobSearchForm />
               </div>
+
+            {/*  <div className="mt-8 text-white text-left w-full">
+                <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                  Популярные запросы
+                </h2>
+                <div className="flex justify-between gap-4">
+                  <ul className="mt-4 space-y-2">
+                    <li>Финансовые директора </li>
+                    <li>Технологические вакансии </li>
+                    <li>Вакансии в сфере продаж </li>
+                   
+                  </ul>
+                  <ul className="mt-4 space-y-2">
+                    <li>Финансовые директора </li>
+                    <li>Технологические вакансии </li>
+                    <li>Вакансии в сфере продаж </li>
+                    
+                  </ul>
+                  <ul className="mt-4 space-y-2">
+                    <li>Финансовые директора </li>
+                    <li>Технологические вакансии </li>
+                    <li>Вакансии в сфере продаж </li>
+                    
+                  </ul>
+                </div>
+              </div>*/}
             </div>
-
-
-            </div>
-
-            
           </section>
         </main>
+        </div>
+        <div className="col-span-2 mt-16 bg-gray-100 p-8 bg-right-top-50
+                         
+                          dark:bg-opacity-50
+                          dark:bg-customGray-900 
+
+        "
+        // bg-[url('/images/neuro_bg_cuted.png')]
+        //dark:bg-[url('/images/neuro_bg_transp.png')]
+        >
+        <h2 className="text-pink-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                Результаты поиска
+              </h2>
+            <ResultList/></div>
+        </div>
 
         <Footer />
       </div>
