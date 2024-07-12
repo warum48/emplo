@@ -1,4 +1,4 @@
-import { TAnyFields } from '@/types/types';
+//import { TAnyFields } from '@/types/types';
 import { Paper } from '@mantine/core';
 import * as React from 'react';
 
@@ -18,12 +18,12 @@ export const CardContainer = ({
   fitCell = true,
   className = '',
   onClick,
-  framed = true,
+ // framed = true,
   hasShadow = false,
 
   ...props
 }: // miw="100%"
-TProps & TAnyFields) => {
+TProps ) => {
   //React.PropsWithChildren
 
   return (
@@ -32,8 +32,8 @@ TProps & TAnyFields) => {
       style={{ position: 'relative', alignSelf: fitCell ? 'stretch' : 'start' }} //!!align-self used to make div not to take 100% height in grid cell
       shadow={(expanded && hasShadow) ? 'lg':"0"}
      // p={expanded ? { base: 'md', md: 'xl' } : 'md'} 
-      p={framed? (expanded ? { base: 'md', md: 'xl' } : 'md') : '0'}
-      withBorder = {framed}
+    //  p={framed? (expanded ? { base: 'md', md: 'xl' } : 'md') : '0'}
+    //  withBorder = {framed}
       className={className}
       onClick={onClick}
       //component='button'

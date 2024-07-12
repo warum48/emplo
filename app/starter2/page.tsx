@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import { Burger, Container, TextInput, Button,  Drawer } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';

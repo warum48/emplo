@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LinkButton } from '../Buttons/LinkButton';
+import { LinkButton } from '@/components/__atoms/Buttons/LinkButton';
 
 type ExpandableTextProps = {
   text: string;

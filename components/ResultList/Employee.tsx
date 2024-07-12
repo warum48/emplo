@@ -62,7 +62,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
    return  (
     
 
-    <Paper p='md' shadow='sm' withBorder className={`bg-neutral-50/90 dark:bg-customGray-950/90  ${classes.gridItem} ${expanded ? classes.expanded : ''}`}>
+    <Paper p='md' shadow='xs' withBorder className={`bg-neutral-50/90 dark:bg-customGray-950/90  ${classes.gridItem} ${expanded ? classes.expanded : ''}`}>
 
 
 <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
