@@ -36,8 +36,8 @@ export const theme = createTheme({
       '#F17785',
       '#ED5263',
       '#E82D41', // base pink
-      '#ba2557',
-      '#8c1d42',
+      '#8d4a82', //'#824089',// '#ba2557',
+      '#781d8c', //'#8c1d42',
       '#5e1531',
       '#300C0D', // darkest pink
     ],
