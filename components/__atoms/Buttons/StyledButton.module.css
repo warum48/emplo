@@ -1,0 +1,112 @@
+.intro_second {
+  border-radius: 100px;
+  background-color: var(--mantine-color-virilis-pink);
+  padding-left: rem(36);
+  padding-right: rem(36);
+  /*  font-family: `Greycliff CF, ${theme.fontFamily}`,*/
+  font-size: rem(16);
+  transition: all 0.4s;
+
+  /*[theme.fn.smallerThan('md')]: { */
+  @media (max-width: $mantine-breakpoint-md) {
+    width: '100%';
+  }
+}
+.intro_second:hover {
+  background-color: var(--mantine-color-virilis-green);
+}
+
+.main_second {
+  transition: all 0.4s;
+  border-radius: 100px;
+}
+.main_second:not([data-disabled~='true']) {
+  background-color: var(--mantine-color-virilis-pink);
+}
+.main_second:hover:not([data-disabled~='true']) {
+  background-color: var(--mantine-color-virilis-green);
+}
+
+.main_first {
+  transition: all 0.4s;
+  border-radius: 100px;
+}
+.main_first:not([data-disabled~='true'])  {
+  background-color: var(--mantine-color-virilis-green);
+}
+.main_first:hover:not([data-disabled~='true'])  {
+  background-color: var(--mantine-color-virilis-pink);
+}
+
+.main_second_outlined {
+  transition: all 0.4s;
+  background-color: var(--mantine-color-body);
+  border-color: var(--mantine-color-virilis-pink);
+  color: var(--mantine-color-virilis-pink);
+  border-radius: 100px;
+}
+.main_first_outlined:hover {
+  border-color: var(--mantine-color-virilis-pink);
+  color: var(--mantine-color-virilis-pink);
+}
+
+.main_warning{
+  transition: all 0.4s;
+  border-radius: 100px;
+  
+}
+
+.main_warning:not([data-disabled~='true'])  {
+ 
+  background-color: var(--mantine-color-body);
+  border-color: var(--mantine-color-orange-8);
+  color: var(--mantine-color-orange-8);
+
+}
+.main_warning:hover:not([data-disabled~='true'])  {
+  border-color: var(--mantine-color-red-8);
+  color: var(--mantine-color-red-9);
+}
+
+.main_first_outlined {
+  transition: all 0.4s;
+  background-color: var(--mantine-color-body);
+  border-color: var(--mantine-color-virilis-green);
+  color: var(--mantine-color-virilis-green);
+  border-radius: 100px;
+}
+
+.main_outlined:hover {
+  border-color: var(--mantine-color-virilis-green);
+  color: var(--mantine-color-virilis-green);
+}
+
+.main_small {
+  border-radius: 100px;
+  transition: all 0.4s;
+  /*background-color: var(--mantine-color-virilis-green);*/
+}
+.main_small:hover {
+ /* background-color: var(--mantine-color-virilis-pink);*/
+}
+
+.main_small_second_transparent {
+  border-radius: 100px;
+  transition: all 0.4s;
+  color: var(--mantine-color-virilis-pink);
+  background-color: rgba(201, 2, 108, 0.12);
+}
+.main_small_second_transparent:hover {
+  color: var(--mantine-color-virilis-green);
+  background-color: rgba(2, 201, 108, 0.12);
+}
+
+.outlined_pink_rect {
+  border-color: var(--mantine-color-virilis-pink);
+  color: var(--mantine-color-virilis-pink);
+}
+.outlined_tortoise_rect {
+  position: relative;
+  /*border-color: var(--mantine-color-virilis-pink);
+    color: var(--mantine-color-virilis-pink);*/
+}
