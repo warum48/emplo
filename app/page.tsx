@@ -62,14 +62,14 @@ const Home = () => {
 
         <div
           className={` transition-all duration-400 grid grid-cols-1 gap-0 
-             ${(resultState && isAnimating) || !resultState ? 'md:grid-cols-1' : 'md:grid-cols-3'}`}
+             ${(resultState && isAnimating) || !resultState ? 'md:grid-cols-1' : 'md:grid-cols-3 xl:grid-cols-4'}  `}
         >
           <div className="col-span-1">
             <main
               ref={mainRef}
               className={`  
                 relative
-         ${resultState && isAnimating ? 'w-1/3 ' : 'w-full'} 
+         ${resultState && isAnimating ? 'w-1/3 xl:w-1/4' : 'w-full'} 
          ${(resultState && isAnimating) || !resultState ? 'transition-all duration-500 items-center' : ''}
        flex-grow flex flex-col 
       
@@ -100,6 +100,7 @@ const Home = () => {
       px-0
       bg-opacity-70
         bg-gradient-to-br 
+        ${resultState ? 'bg-gradient-to-b' : 'bg-gradient-to-br'}
         ${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
         ${resultState ? 'dark:from-indigo-950/100 dark:via-rose-800/100 dark:to-rose-900/100' : 'dark:from-indigo-950/75 dark:via-rose-800/50 dark:to-rose-900/75 '} 
         ${resultState ? 'px-0' : 'px-8'}
@@ -245,7 +246,7 @@ transition-all
             
           
           <div
-            className="col-span-2 mt-16 bg-gray-100 p-8 bg-right-top-50
+            className="col-span-1 md:col-span-2 xl:col-span-3 mt-16 bg-gray-100 p-8 bg-right-top-50
                          
                           dark:bg-opacity-50
                           dark:bg-customGray-900 
