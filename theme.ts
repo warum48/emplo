@@ -36,8 +36,9 @@ export const theme = createTheme({
       '#F17785',
       '#ED5263',
       '#E82D41', // base pink
-      '#8d4a82', //'#824089',// '#ba2557',
-      '#781d8c', //'#8c1d42',
+      '#9e3472', //'#824089',// '#ba2557',
+      // this color is good for main button: '#863866',
+      '#67286b', //'#8c1d42',
       '#5e1531',
       '#300C0D', // darkest pink
     ],

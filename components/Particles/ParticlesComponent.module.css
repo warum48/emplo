@@ -1,0 +1,29 @@
+.particlesWrapper {
+    position: relative; /* or absolute depending on your needs */
+    width: 100%;
+    height: 100%;
+    //overflow: hidden;
+    //z-index: 1000;
+
+  }
+  
+  .particlesCanvas canvas {
+    position: absolute !important; /* or absolute */
+    width: 100% !important;
+    height: 100% !important;
+
+    top:0;
+    left:0;
+    //z-index: 1000;
+
+right:0;
+bottom:0;    
+  }
+
+  /*
+  #tsparticles canvas {
+
+    width: 100% !important;
+    height: 100% !important;
+  }*/
+  
