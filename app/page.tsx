@@ -157,7 +157,7 @@ transition-all
                             </p>
                             <div className="flex justify-start items-center space-x-4 w-full p-4 
                             bg-white bg-opacity-30
-                            dark:bg-black dark:bg-opacity-30 z-10"
+                             z-10"
                             >
                               <Input
                                 placeholder="Регион"
@@ -186,7 +186,11 @@ transition-all
                               </Button>
                             </div>
                             <div className="flex justify-end items-center z-20">
-                              <div className="flex justify-end items-center bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-30 w-fit px-4 py-2">
+                              <div className="flex justify-end items-center bg-white 
+                              
+                              bg-opacity-30 w-fit px-4 py-2"
+                              //dark:bg-black dark:bg-opacity-30 
+                              >
                                 <a href="" className="underline">
                                   Расширенный поиск
                                 </a>
