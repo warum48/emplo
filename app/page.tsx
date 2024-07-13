@@ -148,14 +148,17 @@ transition-all
                     `}
                           >
                             <h1 className="text-4xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
-                              Найдите лучших сотрудников
+                              Поиск лучших с помощью ИИ
                             </h1>
                             <p className="text-lg mb-8 text-left max-w-3xl ">
                               Наш сайт помогает найти лучших сотрудников, анализируя данные с
                               различных социальных сетей и подбирая наилучших кандидатов с помощью
                               искусственного интеллекта.
                             </p>
-                            <div className="flex justify-start items-center space-x-4 w-full p-4 bg-white bg-opacity-30">
+                            <div className="flex justify-start items-center space-x-4 w-full p-4 
+                            bg-white bg-opacity-30
+                            dark:bg-black dark:bg-opacity-30 z-10"
+                            >
                               <Input
                                 placeholder="Регион"
                                 size="lg"
@@ -182,8 +185,8 @@ transition-all
                                 Поиск
                               </Button>
                             </div>
-                            <div className="flex justify-end items-center">
-                              <div className="flex justify-end items-center bg-white bg-opacity-30 w-fit px-4 py-2">
+                            <div className="flex justify-end items-center z-20">
+                              <div className="flex justify-end items-center bg-white dark:bg-black dark:bg-opacity-30 bg-opacity-30 w-fit px-4 py-2">
                                 <a href="" className="underline">
                                   Расширенный поиск
                                 </a>
