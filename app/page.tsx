@@ -11,6 +11,7 @@ import particlesJS from 'particles.js';
 
 import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
 import { ParticlesComponent } from '@/components/Particles/Particles';
+import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
@@ -105,13 +106,14 @@ const Home = () => {
       border-box
       px-0
       bg-opacity-70
-        bg-gradient-to-br 
+       
         ${resultState ? 'bg-gradient-to-b' : 'bg-gradient-to-br'}
         ${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
         ${resultState ? 'dark:from-indigo-950/100 dark:via-rose-800/100 dark:to-rose-900/100' : 'dark:from-indigo-950/75 dark:via-rose-800/50 dark:to-rose-900/75 '} 
         ${resultState ? 'px-0' : 'px-8'}
          py-20
         text-white  shadow-md `}
+        // bg-gradient-to-br 
                 // items-center
                 //bg-gradient-to-r from-pink-400/75 via-red-500/85 to-orange-400 dark:from-indigo-950 dark:via-gray-800 dark:to-slate-900
                 //dark:from-indigo-950/75 dark:via-gray-800/90 dark:to-slate-900/95
@@ -126,18 +128,25 @@ transition-all
               </div>
 */}
 {!resultState &&  
-<div id="particles-js" className="absolute top-0 right-0 h-full w-1/4 overflow-hidden">
+<div id="particles-js" className={`absolute top-0 right-0 h-full w-1/4 overflow-hidden transition-all duration-500
+  ${resultState || isAnimating ? 'opacity-0' : 'opacity-100'}
+  `}>
 <ParticlesComponent/>
 </div>}
 {/*<div id="particles-js2" className="absolute bottom-0 left-0 h-1/3 w-1/4 overflow-hidden">
 <ParticlesComponent/>
 </div>*/}
+
+
                 <div className=" w-full  ">
                   <Transition
                     mounted={!resultState}
                     transition="fade"
                     duration={500}
                     timingFunction="ease"
+                    onExited={() => {console.log('EXITED'); setIsAnimating(false)}}
+                    onEntered={() => {console.log('EXITED'); setIsAnimating(false)}}
+                    
                   >
                     {(styles) => (
                       <div style={styles}>
@@ -197,34 +206,8 @@ transition-all
                               </div>
                             </div>
 
-                            <div className="mt-8 text-white text-left w-full">
-                              <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
-                                Популярные запросы
-                              </h2>
-                              <div className="flex justify-between gap-4">
-                                <ul className="mt-4 space-y-2">
-                                  <li>Финансовые директора </li>
-                                  <li>Технологические вакансии </li>
-                                  <li>Вакансии в сфере продаж </li>
-                                  {/*<li>Менеджеры проектов </li>
-                  <li>Менеджеры проектов </li>*/}
-                                </ul>
-                                <ul className="mt-4 space-y-2">
-                                  <li>Финансовые директора </li>
-                                  <li>Технологические вакансии </li>
-                                  <li>Вакансии в сфере продаж </li>
-                                  {/*<li>Менеджеры проектов </li>
-                  <li>Менеджеры проектов </li>*/}
-                                </ul>
-                                <ul className="mt-4 space-y-2">
-                                  <li>Финансовые директора </li>
-                                  <li>Технологические вакансии </li>
-                                  <li>Вакансии в сфере продаж </li>
-                                  {/*<li>Менеджеры проектов </li>
-                  <li>Менеджеры проектов </li>*/}
-                                </ul>
-                              </div>
-                            </div>
+                           <PopularSearches />
+
                           </div>
                         )}
                       </div>
