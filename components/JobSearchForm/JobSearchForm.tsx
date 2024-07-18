@@ -1,20 +1,35 @@
 'use client';
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
-import { TextInput, Checkbox, Select, NumberInput, Button, Group, Container, Title, Box } from '@mantine/core';
+import {
+  TextInput,
+  Text,
+  Checkbox,
+  Select,
+  NumberInput,
+  Button,
+  Group,
+  Container,
+  Title,
+  Box,
+  InputLabel,
+} from '@mantine/core';
 import { updateJobSearchForm } from '@/features/searchJobForm/searchJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 //import { updateJobSearchForm } from '@/features/JobSearchForm/JobSearchForm/jobSearchSlice';
 
-const JobSearchForm = () => {
+type TProps = {
+  gridCols?: number;
+}
+
+const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.jobSearch);
 
-  
   // Define the form state using useForm from Mantine
   const form = useForm({
-   /* initialValues: {
+    /* initialValues: {
       position: '',
       region: [],
       relocation: '',
@@ -27,7 +42,7 @@ const JobSearchForm = () => {
       jobSearchStatus: [],
       requiredResumes: 0,
     },*/
-    initialValues:formState,
+    initialValues: formState,
     // Add validation rules for the form fields
     validate: {
       position: (value) => (value ? null : 'Please select a position'),
@@ -51,16 +66,31 @@ const JobSearchForm = () => {
     dispatch(updateJobSearchForm(values));
   };
 
-  return (
-    <Box size="sm" m="xl" className="text-left space-y-1 flex flex-col gap-2">
-     {/*} <Title order={1}>Поиск</Title>
-     <h1 className="text-4xl  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">Поиск</h1>*/}
+  const customLabelStyle = {
+    marginBottom: '8px', // Adjust this value to set the distance you want
+  };
 
-      <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+  return (
+    <div className="p-4 w-full relative max-w-full text-black dark:text-white">
+      {/*
+     <Box size="sm" m="xl" className="text-left flex flex-col gap-8">
+     
+     } <Title order={1}>Поиск</Title>
+     <h1 className="text-4xl  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">Поиск</h1>*/
+     
+     //sm:grid-cols-1
+     }
+
+      <form
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+        className={`text-left grid grid-cols-${gridCols}  gap-6 w-full max-w-full relative `}
+      >
+        <div className='flex flex-col gap-6 w-full max-w-full'>
         {/* Position Input */}
         <Select
           label="Должность *"
           placeholder="--------"
+          labelProps={{ style: customLabelStyle}}
           data={[
             { value: 'developer', label: 'Developer' },
             { value: 'designer', label: 'Designer' },
@@ -70,48 +100,58 @@ const JobSearchForm = () => {
         />
 
         {/* Region Input */}
-        <Group mt="md">
-          <Checkbox label="Москва" value="moscow" {...form.getInputProps('region', { type: 'checkbox' })} />
-          <Checkbox label="Санкт-Петербург" value="spb" {...form.getInputProps('region', { type: 'checkbox' })} />
-        </Group>
+        <div>
+          <InputLabel htmlFor="region" style={customLabelStyle}>Регион</InputLabel>
+          <Group>
+            <Checkbox
+              label="Москва"
+              value="moscow"
+              {...form.getInputProps('region', { type: 'checkbox' })}
+            />
+            <Checkbox
+              label="Санкт-Петербург"
+              value="spb"
+              {...form.getInputProps('region', { type: 'checkbox' })}
+            />
+          </Group>
+        </div>
 
         {/* Willingness to relocate */}
+        <div className="flex flex-col gap-4">
         <Select
           label="Готовность к переезду"
           placeholder="Живет в регионе или готов переехать"
+          labelProps={{ style: customLabelStyle}}
           data={[
             { value: 'ready_to_relocate', label: 'Готов к переезду' },
             { value: 'not_ready_to_relocate', label: 'Не готов к переезду' },
           ]}
           {...form.getInputProps('relocation')}
         />
+        </div>
 
         {/* Work schedule */}
         <Checkbox.Group
           label="График работы *"
-          mt="md"
+          //mt="md"
           //className="space-y-1"
           //onChange={handleChange}
           {...form.getInputProps('workSchedule', { type: 'checkbox' })}
         >
-          <Checkbox value="full_day" label="Полный день"  mt="xs"/>
-          <Checkbox value="shift" label="Сменный график" mt="xs"/>
-          <Checkbox value="flexible" label="Гибкий" mt="xs"/>
-          <Checkbox value="remote" label="Удаленная работа" mt="xs"/>
-          <Checkbox value="rotation" label="Вахта" onChange={handleChange} mt="xs"/>
+          <Checkbox value="full_day" label="Полный день" mt="xs" />
+          <Checkbox value="shift" label="Сменный график" mt="xs" />
+          <Checkbox value="flexible" label="Гибкий" mt="xs" />
+          <Checkbox value="remote" label="Удаленная работа" mt="xs" />
+          <Checkbox value="rotation" label="Вахта" onChange={handleChange} mt="xs" />
         </Checkbox.Group>
 
-        {/* Skills */}
-        <Checkbox
-          mt="md"
-          label="Мерчендайзинг"
-          value="merchandising"
-          {...form.getInputProps('skills', { type: 'checkbox' })}
-        />
-
+       
+        </div>
+        <div className='flex flex-col gap-6'>
         {/* Experience */}
         <Select
           label="Опыт работы (лет) *"
+          labelProps={{ style: customLabelStyle}}
           placeholder="Нет опыта"
           data={[
             { value: 'no_experience', label: 'Нет опыта' },
@@ -125,10 +165,22 @@ const JobSearchForm = () => {
           {...form.getInputProps('experience')}
         />
 
+         {/* Skills */}
+         <div className="flex flex-col gap-2">
+          <InputLabel htmlFor="skills">Навыки</InputLabel>
+        <Checkbox
+          //mt="md"
+          label="Мерчендайзинг"
+          value="merchandising"
+          {...form.getInputProps('skills', { type: 'checkbox' })}
+        />
+        </div>
+
         {/* Gender */}
         <Select
           label="Пол *"
           placeholder="Мужской"
+          labelProps={{ style: customLabelStyle}}
           data={[
             { value: 'male', label: 'Мужской' },
             { value: 'female', label: 'Женский' },
@@ -139,15 +191,18 @@ const JobSearchForm = () => {
 
         {/* Age */}
         <NumberInput
-          mt="md"
+         // mt="md"
+          labelProps={{ style: customLabelStyle}}
           label="Возраст (от) *"
           placeholder="Введите возраст"
           {...form.getInputProps('ageFrom')}
         />
-
+        </div>
+        <div className='flex flex-col gap-6 w-full max-w-full'>
         {/* Salary */}
         <NumberInput
-          mt="md"
+        //  mt="md"
+          labelProps={{ style: customLabelStyle}}
           label="Зарплата (до) *"
           placeholder="Введите зарплату"
           {...form.getInputProps('salaryUpTo')}
@@ -155,30 +210,33 @@ const JobSearchForm = () => {
 
         {/* Job search status */}
         <Checkbox.Group
+        //labelProps={{ style: customLabelStyle}}
           label="Статус поиска работы"
-          mt="md"
+         // mt="md"
           {...form.getInputProps('jobSearchStatus', { type: 'checkbox' })}
         >
-          <Checkbox value="actively_looking" label="Активно ищет работу" />
-          <Checkbox value="open_to_offers" label="Рассматривает предложения" />
-          <Checkbox value="considering_offer" label="Предложили работу, решает" />
-          <Checkbox value="not_looking" label="Не ищет работу" />
+          <Checkbox mt="xs" value="actively_looking" label="Активно ищет работу" />
+          <Checkbox mt="xs" value="open_to_offers" label="Рассматривает предложения" />
+          <Checkbox mt="xs" value="considering_offer" label="Предложили работу, решает" />
+          <Checkbox mt="xs" value="not_looking" label="Не ищет работу" />
         </Checkbox.Group>
 
         {/* Required number of resumes */}
         <NumberInput
-          mt="md"
+         // mt="md"
           label="Требуемое кол-во резюме (до) *"
+          labelProps={{ style: customLabelStyle}}
           placeholder="Введите количество резюме"
           {...form.getInputProps('requiredResumes')}
         />
 
         {/* Submit button */}
-        <Button mt="md" type="submit">
+        <Button mt="md" type="submit" className='w-full max-w-full'>
           Искать
         </Button>
+        </div>
       </form>
-    </Box>
+    </div>
   );
 };
 

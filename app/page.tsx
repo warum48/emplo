@@ -20,6 +20,7 @@ const Home = () => {
   const [resultState, setResultState] = React.useState(false);
   const [isAnimating, setIsAnimating] = React.useState(false);
   const mainRef = React.useRef<HTMLDivElement>(null);
+  const [extendedSearch, setExtendedSearch] = React.useState(false);
 
   const onSearch = () => {
     setResultState(!resultState);
@@ -144,8 +145,22 @@ const Home = () => {
                                         `}
                           >
                             <IntroText />
-                            <QuickSearch onSearch={onSearch} />
-                            <ExpandSearchButton />
+                            <div
+        className={`flex justify-start items-center space-x-4 w-full p-4 
+          transition-all duration-500
+       bg-opacity-30 dark:bg-gray-950 
+      bg-white
+     
+      ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-70' : 'bg-opacity-30 dark:bg-opacity-30'} 
+       z-10`}
+       //${extendedSearch ? 'bg-pink-900' : 'bg-white'} 
+       //${extendedSearch ? 'dark:bg-opacity-70' : 'dark:bg-opacity-30'} 
+      >
+                            {extendedSearch ? <JobSearchForm gridCols={3} key={'extendedSearch'}/> : 
+                            <QuickSearch onSearch={onSearch} /> }
+
+                            </div>
+                            <ExpandSearchButton extendedSearch={extendedSearch} setExtendedSearch={setExtendedSearch}/>
                             <PopularSearches />
                           </div>
                         )}
