@@ -101,10 +101,12 @@ const Home = () => {
                             bg-opacity-70
                             ${resultState ? 'bg-gradient-to-b' : 'bg-gradient-to-br'}
                             ${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
-                            ${resultState ? 'dark:from-indigo-950/100 dark:via-rose-800/100 dark:to-rose-900/100' : 'dark:from-indigo-950/75 dark:via-rose-800/50 dark:to-rose-900/75 '} 
+                            ${resultState ? 'dark:from-indigo-950/100 dark:via-rose-800/100 dark:to-rose-900/100' : 'dark:from-indigo-950/75 dark:via-rose-800/75 dark:to-pink-900/95 '} 
                             ${resultState ? 'px-0' : 'px-8'}
                             py-20
                             text-white  shadow-md `}
+                            //!!fuchsia-rose
+                            //${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
               >
                 {!resultState && (
                   <div
@@ -147,7 +149,7 @@ const Home = () => {
        bg-opacity-30 dark:bg-gray-900 
       bg-white
      
-      ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-70' : 'bg-opacity-30 dark:bg-opacity-30'} 
+      ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-85' : 'bg-opacity-30 dark:bg-opacity-85'} 
        z-10`}
        //${extendedSearch ? 'bg-pink-900' : 'bg-white'} 
        //${extendedSearch ? 'dark:bg-opacity-70' : 'dark:bg-opacity-30'} 

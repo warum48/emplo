@@ -13,4 +13,7 @@
         background-size: 50% auto;
         background-repeat: no-repeat;
       }
+    .form-paper{
+        @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85; //dark:bg-customGray-950/85 
+    }  
   }

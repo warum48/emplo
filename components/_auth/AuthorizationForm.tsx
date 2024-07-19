@@ -35,14 +35,18 @@ const AuthorizationForm = () => {
 
       <div
         id="auth-form"
-        className="w-full max-w-md p-8 bg-white shadow-md rounded-lg transform transition-transform duration-500"
+        className="w-full max-w-md p-8 
+       
+        form-paper
+        shadow-md rounded-lg transform transition-transform duration-500"
+        // bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85 
       >
         <form onSubmit={form.onSubmit((values) => console.log(values))}>
           <TextInput
             label="Логин"
             placeholder="Введите ваш логин"
             {...form.getInputProps('name')}
-            className="mb-4"
+            className="mb-4 "
           />
           <PasswordInput
             label="Пароль"
@@ -50,7 +54,9 @@ const AuthorizationForm = () => {
             {...form.getInputProps('password')}
             className="mb-4"
           />
-          <Button type="submit" fullWidth className="mb-4 bg-purple-600 hover:bg-purple-700">
+          <Button type="submit" fullWidth className="mb-4" 
+          // bg-purple-600 hover:bg-purple-700
+          >
             Войти
           </Button>
           <div className="flex justify-between">

@@ -36,7 +36,7 @@ export const theme = createTheme({
       '#F17785',
       '#ED5263',
       '#E82D41', // base pink
-      '#9e3472', //'#824089',// '#ba2557',
+       '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
       // this color is good for main button: '#863866',
       '#67286b', //'#8c1d42',
       '#5e1531',
@@ -49,7 +49,7 @@ export const theme = createTheme({
       '#57606f',
       '#2f3542',
       '#1e272e',
-      '#202831', // '#131a21',
+      '#343c4fa2', // '#202831',// '#131a21',
       '#0e1114',//'#0e1114',
       '#080a0c',//'#080a0c',
       '#040506',//'#040506',
@@ -69,4 +69,27 @@ export const theme = createTheme({
     ]
   },
   primaryColor: 'myCustomPink',
+  /*components: {
+    Input: {
+      styles: (theme:any) => ({
+        input: {
+          backgroundColor: `${theme.colors.gray[0]}B3`, // Adds 70% opacity to the default background color
+        },
+      }),
+    },
+    TextInput: {
+      styles: (theme:any) => ({
+        input: {
+          backgroundColor: `${theme.colors.gray[0]}B3`, // Adds 70% opacity to the default background color
+        },
+      }),
+    },
+    PasswordInput: {
+      styles: (theme:any) => ({
+        input: {
+          backgroundColor: `${theme.colors.gray[0]}B3`, // Adds 70% opacity to the default background color
+        },
+      }),
+    },
+  },*/
 });

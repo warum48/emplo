@@ -83,7 +83,8 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
 
       <form
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
-        className={`text-left grid grid-cols-${gridCols}  gap-6 w-full max-w-full relative `}
+        className={`text-left grid ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'}   gap-6 w-full max-w-full relative `}
+        //${gridCols}
       >
         <div className='flex flex-col gap-6 w-full max-w-full'>
         {/* Position Input */}
