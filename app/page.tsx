@@ -55,11 +55,7 @@ const Home = () => {
 
   return (
     <>
-      <div
-        className="dark:bg-gray-900 min-h-screen 
-    flex flex-col
-    "
-      >
+      
         <Head>
           <title>sotrudnik.ru</title>
           <meta name="description" content="overseasjobs.com" />
@@ -74,7 +70,7 @@ const Home = () => {
         >
           switch view
         </Button>
-        <Header />
+        
 
         <div
           className={` transition-all duration-400 grid grid-cols-1 gap-0 
@@ -148,7 +144,7 @@ const Home = () => {
                             <div
         className={`flex justify-start items-center space-x-4 w-full p-4 
           transition-all duration-500
-       bg-opacity-30 dark:bg-gray-950 
+       bg-opacity-30 dark:bg-gray-900 
       bg-white
      
       ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-70' : 'bg-opacity-30 dark:bg-opacity-30'} 
@@ -210,8 +206,8 @@ const Home = () => {
           )}
         </div>
         <About />
-        <Footer />
-      </div>
+        
+      
     </>
   );
 };

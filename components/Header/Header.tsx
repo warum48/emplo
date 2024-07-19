@@ -3,6 +3,7 @@ import { Burger, Drawer, Button, useMantineTheme, useMantineColorScheme } from '
 import { useColorScheme } from '@mantine/hooks';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 import { ColorSchemeButton } from './ColorSchemeButton/ColorSchemeButton';
+import Link from 'next/link';
 //import Link from 'next/link';
 
 const Header = () => {
@@ -14,7 +15,9 @@ const Header = () => {
     <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-md z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center">
-          <span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>
+          <Link href="/">
+            <span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>
+          </Link>
         </div>
         <nav className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-200">
           <a href="#" className="hover:text-blue-500">Найти работу</a>
@@ -31,8 +34,9 @@ const Header = () => {
           
            
           */}
-         
+         <Link href="/auth">
           <Button variant="filled">Войти</Button>
+          </Link>
         </div>
       </div>
       <Drawer

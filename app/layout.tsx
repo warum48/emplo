@@ -41,6 +41,8 @@ export default function RootLayout({ children }: { children: any }) {
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../store/store';
+import Header from '@/components/Header/Header';
+import Footer from '@/components/Footer/Footer';
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -76,7 +78,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
+            <div
+        className="dark:bg-gray-900 min-h-screen 
+    flex flex-col relative
+    "
+      >
+            <Header />
               {children}
+              <Footer />
+              </div>
             </PersistGate>
           </Provider>
         </MantineProvider>

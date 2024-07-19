@@ -1,3 +1,4 @@
+'use client';
 import { useCallback, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import type { Container, Engine } from "@tsparticles/engine";
@@ -6,8 +7,9 @@ import type { Container, Engine } from "@tsparticles/engine";
 //import { loadSlim } from "@tsparticles/slim"; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 // import { loadBasic } from "@tsparticles/basic"; // if you are going to use `loadBasic`, install the "@tsparticles/basic" package too.
 import styles from './ParticlesComponent.module.css';
+import React from "react";
 
-export const ParticlesComponent = () => {
+export const ParticlesComponent = React.memo(() => {
     const [ init, setInit ] = useState(false);
 
     // this should be run only once per application lifetime
@@ -112,4 +114,4 @@ export const ParticlesComponent = () => {
 </>
 )
     ;
-};
+});
