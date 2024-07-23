@@ -1,0 +1,13 @@
+@keyframes gradientBorder {
+    0% {
+      border-image: linear-gradient(to bottom, #800080, #ff1493, #0000ff) 1;
+    }
+    100% {
+      border-image: linear-gradient(to bottom, #ff1493, #0000ff, #800080) 1;
+    }
+  }
+  
+  .gradient-border {
+    border-right: 1px solid;
+    animation: gradientBorder 5s infinite alternate;
+  }

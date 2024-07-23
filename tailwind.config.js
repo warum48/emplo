@@ -6,6 +6,7 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx}', // Include any pages
    // './components/**/*.{js,ts,jsx,tsx}', // Include any components
     './components/**/*.{js,ts,jsx,tsx}',
+    './styles/gradient_border.css',
   ],
   theme: {
     extend: {

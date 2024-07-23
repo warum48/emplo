@@ -15,6 +15,7 @@ import { About } from '@/components/About/About';
 import { QuickSearch } from '@/components/JobSearchForm/QuickSearch';
 import { IntroText } from '@/components/_main/IntroText';
 import { ExpandSearchButton } from '@/components/_main/ExpandSearchButton';
+import { MainBlockContainer } from '@/components/_main/MainBlockContainer';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
@@ -55,161 +56,130 @@ const Home = () => {
 
   return (
     <>
-      
-        <Head>
-          <title>sotrudnik.ru</title>
-          <meta name="description" content="overseasjobs.com" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <Button
-          className="fixed z-50 bottom-5 right-5"
-          onClick={() => {
-            setResultState(!resultState);
-            setIsAnimating(true);
-          }}
-        >
-          switch view
-        </Button>
-        
+     <Header />
+      <Head>
+        <title>sotrudnik.ru</title>
+        <meta name="description" content="overseasjobs.com" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Button
+        className="fixed z-50 bottom-5 right-5"
+        onClick={() => {
+          setResultState(!resultState);
+          setIsAnimating(true);
+        }}
+      >
+        switch view
+      </Button>
 
-        <div
-          className={` transition-all duration-400 grid grid-cols-1 gap-0 
+      <div
+        className={` transition-all duration-400 grid grid-cols-1 gap-0 
              ${(resultState && isAnimating) || !resultState ? 'md:grid-cols-1' : 'md:grid-cols-3 xl:grid-cols-4'}  `}
-        >
-          <div className="col-span-1">
-            <main
-              ref={mainRef}
-              className={`  
-                          relative
-                          ${resultState && isAnimating ? 'w-1/3 xl:w-1/4' : 'w-full'} 
-                          ${(resultState && isAnimating) || !resultState ? 'transition-all duration-500 items-center' : ''}
-                          flex-grow flex flex-col 
-                          bg-cover
-                          bg-[url('https://unsplash.com/photos/gMsnXqILjp4/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8MTJ8fGpvYiUyMHRlYW18ZW58MHx8fHwxNzIwNTQ5MTY0fDA&force=true&w=2400')]
-                          text-center
-                          mt-16 
-                        `}
-            >
-              <section
-                className={`
-                            transition-all
-                            w-full flex flex-col flex-grow
-                            relative
-                            items-center
-                            border-box
-                            px-0
-                            bg-opacity-70
-                            ${resultState ? 'bg-gradient-to-b' : 'bg-gradient-to-br'}
-                            ${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
-                            ${resultState ? 'dark:from-indigo-950/100 dark:via-rose-800/100 dark:to-rose-900/100' : 'dark:from-indigo-950/75 dark:via-rose-800/75 dark:to-pink-900/95 '} 
-                            ${resultState ? 'px-0' : 'px-8'}
-                            py-20
-                            text-white  shadow-md `}
-                            //!!fuchsia-rose
-                            //${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
-              >
-                {!resultState && (
-                  <div
-                    id="particles-js"
-                    className={`absolute top-0 right-0 h-full w-1/4 overflow-hidden transition-all duration-500
+      >
+        <div className="col-span-1">
+          <MainBlockContainer resultState={resultState} isAnimating={isAnimating} mainRef={mainRef}>
+            {!resultState && (
+              <div
+               // id="particles-js"
+                className={`absolute top-0 right-0 h-full w-1/4 overflow-hidden transition-all duration-500
                                 ${resultState || isAnimating ? 'opacity-0' : 'opacity-100'}
                                 `}
-                  >
-                    <ParticlesComponent />
-                  </div>
-                )}
+              >
+                <ParticlesComponent />
+              </div>
+            )}
 
-                <div className=" w-full  ">
-                  <Transition
-                    mounted={!resultState}
-                    transition="fade"
-                    duration={500}
-                    timingFunction="ease"
-                    onExited={() => {
-                      console.log('EXITED');
-                      setIsAnimating(false);
-                    }}
-                    onEntered={() => {
-                      console.log('EXITED');
-                      setIsAnimating(false);
-                    }}
-                  >
-                    {(styles) => (
-                      <div style={styles}>
-                        {((resultState && isAnimating) || !resultState) && (
-                          <div
-                            className={`w-full max-w-5xl flex m-auto flex-col justify-start transition-all duration-700
+            <div className=" w-full  ">
+              <Transition
+                mounted={!resultState}
+                transition="fade"
+                duration={500}
+                timingFunction="ease"
+                onExited={() => {
+                  console.log('EXITED');
+                  setIsAnimating(false);
+                }}
+                onEntered={() => {
+                  console.log('EXITED');
+                  setIsAnimating(false);
+                }}
+              >
+                {(styles) => (
+                  <div style={styles}>
+                    {((resultState && isAnimating) || !resultState) && (
+                      <div
+                        className={`w-full max-w-5xl flex m-auto flex-col justify-start transition-all duration-700
                                         ${resultState ? 'opacity-0' : 'opacity-100'}
                                         `}
-                          >
-                            <IntroText />
-                            <div
-        className={`flex justify-start items-center space-x-4 w-full p-4 
-          transition-all duration-500
-       bg-opacity-30 dark:bg-gray-900 
-      bg-white
-     
-      ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-85' : 'bg-opacity-30 dark:bg-opacity-85'} 
-       z-10`}
-       //${extendedSearch ? 'bg-pink-900' : 'bg-white'} 
-       //${extendedSearch ? 'dark:bg-opacity-70' : 'dark:bg-opacity-30'} 
-      >
-                            {extendedSearch ? <JobSearchForm gridCols={3} key={'extendedSearch'}/> : 
-                            <QuickSearch onSearch={onSearch} /> }
-
-                            </div>
-                            <ExpandSearchButton extendedSearch={extendedSearch} setExtendedSearch={setExtendedSearch}/>
-                            <PopularSearches />
-                          </div>
-                        )}
+                      >
+                        <IntroText />
+                        <div
+                          className={`flex justify-start items-center space-x-4 w-full p-4 
+                                      transition-all duration-500
+                                      bg-opacity-30 dark:bg-gray-900 
+                                      bg-white   
+                                      ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-85' : 'bg-opacity-30 dark:bg-opacity-85'} 
+                                      z-10`}
+                        >
+                          {extendedSearch ? (
+                            <JobSearchForm gridCols={3} key={'extendedSearch'} />
+                          ) : (
+                            <QuickSearch onSearch={onSearch} />
+                          )}
+                        </div>
+                        <ExpandSearchButton
+                          extendedSearch={extendedSearch}
+                          setExtendedSearch={setExtendedSearch}
+                        />
+                        <PopularSearches />
                       </div>
                     )}
-                  </Transition>
+                  </div>
+                )}
+              </Transition>
 
-                  <Transition
-                    mounted={resultState}
-                    transition="fade"
-                    duration={500}
-                    timingFunction="ease"
-                    enterDelay={400}
-                  >
-                    {(styles) => (
-                      <div
-                        style={styles}
-                        className={`w-full max-w-5xl flex flex-col justify-start
+              <Transition
+                mounted={resultState}
+                transition="fade"
+                duration={500}
+                timingFunction="ease"
+                enterDelay={400}
+              >
+                {(styles) => (
+                  <div
+                    style={styles}
+                    className={`w-full max-w-5xl flex flex-col justify-start
                                     ${isAnimating ? ' absolute ' : ' relative'}
                                     `}
-                      >
-                        <div
-                          className={`bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85            
+                  >
+                    <div
+                      className={`bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85            
                                       mx-4 -my-12
                                       `}
-                        >
-                          {resultState && <JobSearchForm />}
-                        </div>
-                      </div>
-                    )}
-                  </Transition>
-                </div>
-              </section>
-            </main>
-          </div>
-          {resultState && !isAnimating && (
-            <div
-              className="col-span-1 md:col-span-2 xl:col-span-3 mt-16 bg-gray-100 p-8 bg-right-top-50
+                    >
+                      {resultState && <JobSearchForm />}
+                    </div>
+                  </div>
+                )}
+              </Transition>
+            </div>
+          </MainBlockContainer>
+        </div>
+        {resultState && !isAnimating && (
+          <div
+            className="col-span-1 md:col-span-2 xl:col-span-3 mt-16 bg-gray-100 p-8 bg-right-top-50
                           dark:bg-opacity-50
                           dark:bg-customGray-900"
-            >
-              <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
-                Результаты поиска
-              </h2>
-              <ResultList />
-            </div>
-          )}
-        </div>
-        <About />
-        
-      
+          >
+            <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+              Результаты поиска
+            </h2>
+            <ResultList />
+          </div>
+        )}
+      </div>
+      <About />
+      <Footer />
     </>
   );
 };

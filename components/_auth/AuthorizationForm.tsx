@@ -56,6 +56,7 @@ const AuthorizationForm = () => {
           />
           <Button type="submit" fullWidth className="mb-4" 
           // bg-purple-600 hover:bg-purple-700
+          onClick={()=> window.location.href = '/dashboard'} 
           >
             Войти
           </Button>
