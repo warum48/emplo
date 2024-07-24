@@ -4,6 +4,7 @@ import { useColorScheme } from '@mantine/hooks';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 import { ColorSchemeButton } from './ColorSchemeButton/ColorSchemeButton';
 import Link from 'next/link';
+import { LogoHorizontal } from './Logos/LogoHorizontal';
 //import Link from 'next/link';
 
 const Header = () => {
@@ -16,7 +17,8 @@ const Header = () => {
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center">
           <Link href="/">
-            <span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>
+          <LogoHorizontal colorScheme={colorScheme} className="h-[48px]"/>
+            {/*<span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>*/}
           </Link>
         </div>
         <nav className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-200">

@@ -62,7 +62,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       bg-gradient-to-br
        from-gray-100 via-gray-100 to-customGray-200
 
-       dark:bg-gradient-to-b  dark:from-customGray-900 dark:to-customGray-950
+       dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
 
        
        "
