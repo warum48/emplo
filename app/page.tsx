@@ -57,7 +57,7 @@ const Home = () => {
 
   return (
     <>
-     <Header />
+    <Header /> 
       <Head>
         <title>sotrudnik.ru</title>
         <meta name="description" content="overseasjobs.com" />
@@ -74,7 +74,9 @@ const Home = () => {
       </Button>
 
       <div
-        className={` transition-all duration-400 grid grid-cols-1 gap-0 
+        className={` 
+          pt-20
+          transition-all duration-400 grid grid-cols-1 gap-0 
              ${(resultState && isAnimating) || !resultState ? 'md:grid-cols-1' : 'md:grid-cols-3 xl:grid-cols-4'}  `}
       >
         <div className="col-span-1">
@@ -156,7 +158,7 @@ const Home = () => {
                     <div
                       className={`bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85            
                                        
-                                    ${smallGradientPadding ? 'mx-0.5 -my-16' : 'mx-4 -my-12'}
+                                    ${smallGradientPadding ? 'mx-0.5 -my-[76px] ' : 'mx-4  -my-16 '}
                                       `
                                     // mx-0.5 -my-16
                                     // mx-1 -my-16
@@ -180,9 +182,10 @@ const Home = () => {
         </div>
         {resultState && !isAnimating && (
           <div
-            className="col-span-1 md:col-span-2 xl:col-span-3 mt-16 bg-gray-100 p-8 bg-right-top-50
+            className="col-span-1 md:col-span-2 xl:col-span-3  bg-gray-100 p-8 bg-right-top-50
                           dark:bg-opacity-50
                           dark:bg-customGray-900"
+                          //mt-16
           >
             <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
               Результаты поиска

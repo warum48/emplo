@@ -75,7 +75,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <PersistGate loading={null} persistor={persistor}>
               <div
                 className="dark:bg-gray-900 min-h-screen 
-    flex flex-col relative
+    flex flex-col relative 
     "
               >
                

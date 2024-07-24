@@ -117,6 +117,11 @@ export function DoctorInfo({
                   ' ' +
                   (patronymic ? patronymic : '') || 'Неизвестно'}
               </CardTitle>
+              <div className='text-sm'>
+              <b>Детский Мир</b> - Продавец-кассир<br/>
+              <b>Пекарня-кондитерская "крем"</b> - Пекарь<br/>
+              <b>Суши бар "shido"</b> - Промоутер-консультант<br/>
+              </div>
               <br />
 
               {!expanded && (

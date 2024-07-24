@@ -16,8 +16,10 @@ export const MainBlockContainer = ({ children, resultState, isAnimating, mainRef
                 flex-grow flex flex-col 
                 
                 text-center
-                mt-16 
-              `}
+                
+              `
+              //mt-16 
+            }
   >
     <div className={`absolute top-0 left-0 w-full h-full
                     ${resultState ? 'opacity-0' : 'opacity-100'}
@@ -35,11 +37,13 @@ export const MainBlockContainer = ({ children, resultState, isAnimating, mainRef
                   px-0
                   bg-opacity-70
                   ${resultState ? 'bg-gradient-to-b' : 'bg-gradient-to-br'}
-                  ${resultState ? 'from-fuchsia-950/95 via-rose-500/95 to-rose-900/95' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
+                  ${resultState ? 'from-fuchsia-950/85 via-rose-500/95 to-rose-900/85' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
                   ${resultState ? 'dark:from-indigo-950/90 dark:via-rose-800/70 dark:to-rose-900/10' : 'dark:from-indigo-950/75 dark:via-rose-800/75 dark:to-pink-900/95 '} 
                   ${resultState ? 'px-0 ' : 'px-8'}
-                  py-20
-                  text-white  shadow-md `}
+                 py-20
+                  text-white  shadow-md `
+                // 
+                }
                   //!!fuchsia-rose
                   //${resultState ? 'from-fuchsia-950/100 via-rose-500/100 to-rose-900/100' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
     >{children}</section>

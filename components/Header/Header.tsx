@@ -13,11 +13,11 @@ const Header = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-md z-50">
+    <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-md z-50 h-[80px]">
       <div className="container mx-auto flex items-center justify-between p-4">
         <div className="flex items-center">
           <Link href="/">
-          <LogoHorizontal colorScheme={colorScheme} className="h-[48px]"/>
+          <LogoHorizontal colorScheme={colorScheme} className="h-[45px]"/>
             {/*<span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>*/}
           </Link>
         </div>

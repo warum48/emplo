@@ -88,11 +88,17 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
       <TitleLabel>Опыт работы:</TitleLabel> <TextInfo>12 лет</TextInfo>
     </div>
               <br />
+              <div className='text-xs'>
+              <b>Детский Мир</b> - Продавец-кассир<br/>
+              <b>Пекарня-кондитерская "крем"</b> - Пекарь<br/>
+              <b>Суши бар "shido"</b> - Промоутер-консультант<br/>
+              </div>
 
               {!expanded && (
                 <>
                   <Button
                     my="xs"
+                    size='xs'
                    // appearance={'main_small_second_transparent'}
                     onClick={() => {
                      // makeAppointment(id);
