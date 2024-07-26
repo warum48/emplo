@@ -134,7 +134,7 @@ const Home = () => {
                           extendedSearch={extendedSearch}
                           setExtendedSearch={setExtendedSearch}
                         />
-                        <PopularSearches />
+                        <PopularSearches onSearch={onSearch}  />
                       </div>
                     )}
                   </div>

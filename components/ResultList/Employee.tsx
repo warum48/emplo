@@ -100,6 +100,9 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
               <div>
                   <TitleLabel>Пол:</TitleLabel> <TextInfo>{employee.gender}</TextInfo>
                 </div>
+                <div>
+                  <TitleLabel>Зарплата:</TitleLabel> <TextInfo>{employee.salary}&nbsp;₽</TextInfo>
+                </div>
               <br />
               {/*<div className="text-xs">
                 <b>Детский Мир</b> - Продавец-кассир
@@ -179,9 +182,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                 <div>
                   <TitleLabel>Skills:</TitleLabel> <TextInfo>{employee.skills}</TextInfo>
                 </div>
-                <div>
-                  <TitleLabel>Salary:</TitleLabel> <TextInfo>{employee.salary}</TextInfo>
-                </div>
+                
                 <div>
                   <TitleLabel>Experience:</TitleLabel>
                   <ul className="space-y-4">

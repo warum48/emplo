@@ -22,10 +22,6 @@ export const QuickSearch = ({onSearch}:TProps) => {
      // await searchCandidates({ specialty, area }).unwrap();
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       const results = await searchCandidates({ specialty, area }).unwrap();
-      console.log('results', results);
-      console.log('Array.isArray(results)', Array.isArray(results?.candidates));
-      console.log('results-с', results);
-      console.log('Array.isArray(results)-с', Array.isArray(results));
       if (Array.isArray(results?.candidates)) {
         dispatch(setSearchResults(results));
         onSearch();
