@@ -180,7 +180,7 @@ const Home = () => {
             </div>
           </MainBlockContainer>
         </div>
-        {resultState && !isAnimating && (
+        {resultState && !isAnimating   &&(
           <div
             className="col-span-1 md:col-span-2 xl:col-span-3  bg-gray-100 p-8 bg-right-top-50
                           dark:bg-opacity-50

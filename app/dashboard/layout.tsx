@@ -38,14 +38,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
         <nav className="mt-16 text-black dark:text-white">
           <ul>
-            <li className="p-6 py-2 text-sm font-semibold hover:bg-gray-700">
+            <li className="p-6 py-2 text-sm font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
               <a href="/dashboard">Профиль</a>
             </li>
-            <li className="p-6 py-2 text-sm  font-semibold hover:bg-gray-700">
+            <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
               <a href="/dashboard/search">Поиск</a>
             </li>
-            <li className="p-6 py-2 text-sm  font-semibold hover:bg-gray-700">
+            <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
               <a href="/dashboard/settings">Настройки</a>
+            </li>
+            <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
+              <a href="/dashboard/selected">Отбор</a>
             </li>
           </ul>
         </nav>
