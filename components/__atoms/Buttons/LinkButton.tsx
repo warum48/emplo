@@ -1,4 +1,4 @@
-import { Anchor } from '@mantine/core';
+import { Anchor, Group } from '@mantine/core';
 import * as React from 'react';
 import { Preloader } from '../Preloader/Preloader';
 
@@ -9,11 +9,13 @@ type TProps = {
   onClick: () => void;
   colorScheme?: string;
   disabled?: boolean;
+  loading?: boolean;
   [key: string]: any;
 };
 
-export const LinkButton = ({ children, onClick, colorScheme = 'light', disabled,  ...props }: TProps) => {
+export const LinkButton = ({ children, onClick, colorScheme = 'light', disabled,  loading=false, ...props }: TProps) => {
   return (
+    <Group gap={'xs'}>
     <Anchor
       // mt='lg'
       className={`${colorScheme == 'light' ? 'text-black enabled:hover:text-pink-800' : 'text-white enabled:hover:text-pink-200'}   text-md
@@ -25,7 +27,11 @@ export const LinkButton = ({ children, onClick, colorScheme = 'light', disabled,
       {...props}
       disabled={disabled}
     >
-      {children} <Preloader/>
+      {children} 
     </Anchor>
+    {loading &&
+    <Preloader/>
+}
+    </Group>
   );
 };

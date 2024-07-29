@@ -1,0 +1,29 @@
+.container {
+    display: grid;
+    gap:16px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/*  center last row doesn't work grid-template-rows: repeat(auto-fill, minmax(1fr, 80px));
+    justify-content: center;*/
+}
+
+
+
+.gridItem {
+    position: relative;
+    min-width: 300px;
+    max-width: 100%;
+    flex: 1;
+  
+}
+
+
+.gridItem.expanded  {
+    min-width: 100%;
+    max-width: 100%;
+    width:100%;
+    flex: 1;
+   /* border: 1px solid black;*/
+    grid-column:  1 /  -1;
+}
+
+

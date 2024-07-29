@@ -34,7 +34,7 @@ export const PopularSearches = ({onSearch}:TProps) => {
     </h2>
     <div className="flex justify-between gap-4">
       <ul className="mt-4 space-y-2">
-      <li><LinkButton disabled={isLoading} colorScheme='dark' onClick={()=>handleSearch('Водитель-курьер', 'Москва')}>Москва - Водитель-курьер</LinkButton></li>
+      <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme='dark' onClick={()=>handleSearch('Водитель-курьер', 'Москва')}>Москва - Водитель-курьер</LinkButton></li>
         <li>Технологические вакансии </li>
         <li>Вакансии в сфере продаж </li>
         {/*<li>Менеджеры проектов </li>

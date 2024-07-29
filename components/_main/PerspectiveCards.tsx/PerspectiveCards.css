@@ -1,0 +1,68 @@
+.perspective-container {
+    display: flex;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .card {
+    transition: transform 0.5s;
+    box-shadow: -70px 0px 40px rgba(0, 0, 0, 0.075);
+  }
+
+/*
+  .card:nth-child(1) {
+    transform:   rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(200px) translateZ(-30px) 
+  }
+  
+  .card:nth-child(2) {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(0px) translateZ(0px) 
+  }
+  
+  .card:nth-child(3) {
+    transform: rotateZ(-90deg) rotateY(60deg)  translateX(-20px) translateY(-190px) translateZ(-30px) 
+  }
+    */
+
+
+.card:nth-child(1) {
+  transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(250) translateZ(-30px);
+  animation: move1 3s ease-in-out infinite alternate;
+}
+
+.card:nth-child(2) {
+  transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(0px) translateZ(0px);
+  animation: move2 2.5s ease-in-out infinite alternate;
+}
+
+.card:nth-child(3) {
+  transform: rotateZ(-90deg) rotateY(60deg) translateX(-20px) translateY(-230px) translateZ(-30px);
+  animation: move3 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes move1 {
+  from {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(160px) translateZ(-30px);
+  }
+  to {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(160px) translateZ(-10px);
+  }
+}
+
+@keyframes move2 {
+  from {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(0px) translateZ(20px);
+  }
+  to {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(0px) translateY(0px) translateZ(40px);
+  }
+}
+
+@keyframes move3 {
+  from {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(-20px) translateY(-160px) translateZ(-30px);
+  }
+  to {
+    transform: rotateZ(-90deg) rotateY(60deg) translateX(-20px) translateY(-160px) translateZ(-10px);
+  }
+}
+  

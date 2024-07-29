@@ -16,6 +16,8 @@ import { QuickSearch } from '@/components/JobSearchForm/QuickSearch';
 import { IntroText } from '@/components/_main/IntroText';
 import { ExpandSearchButton } from '@/components/_main/ExpandSearchButton';
 import { MainBlockContainer } from '@/components/_main/MainBlockContainer';
+import { InfoBlock } from '@/components/_main/InfoBlock';
+import PerspectiveCards from '@/components/_main/PerspectiveCards.tsx/PerspectiveCards';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
@@ -195,6 +197,7 @@ const Home = () => {
         )}
       </div>
       <About />
+      <InfoBlock/>
       <Footer />
     </>
   );
