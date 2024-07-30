@@ -4,8 +4,10 @@ import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import './styles.css'; // Ensure your custom CSS for the animation is imported
 import { ParticlesComponent } from '../Particles/Particles';
+import { useRouter } from 'next/navigation';
 
 const AuthorizationForm = () => {
+  const router = useRouter();
   const form = useForm({
     initialValues: {
       name: '',
@@ -56,7 +58,7 @@ const AuthorizationForm = () => {
           />
           <Button type="submit" fullWidth className="mb-4" 
           // bg-purple-600 hover:bg-purple-700
-          onClick={()=> window.location.href = '/dashboard'} 
+          onClick={()=> router.push('/dashboard')} 
           >
             Войти
           </Button>

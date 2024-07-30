@@ -3,7 +3,7 @@ import PerspectiveCards from './PerspectiveCards.tsx/PerspectiveCards';
 
 export const InfoBlock = () => {
   return (
-    <div className="flex-grow px-8 bg-gray-100 dark:bg-gray-950">
+    <div className="flex-grow px-8 bg-gray-100 dark:bg-adjGray-950">
       <div className="w-full max-w-5xl mx-auto my-16 ">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div className="flex flex-col items-start">

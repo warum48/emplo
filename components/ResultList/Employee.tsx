@@ -67,7 +67,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
     <Paper
       p="md"
       shadow="xs"
-      withBorder
+      //withBorder
       className={`bg-neutral-50/90 dark:bg-customGray-950/90  ${classes.gridItem} ${expanded ? classes.expanded : ''}`}
     >
       <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
@@ -113,7 +113,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                 <br />
               </div>*/}
 
-              <div className="text-xs">
+              <div className="text-xs dark:text-gray-400 text-gray-800">
               {employee?.experience?.filter(item => item?.company && item?.position)
         .map((item, index) => (
           <div key={index}>

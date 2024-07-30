@@ -7,6 +7,7 @@ import { ParticlesComponent } from '@/components/Particles/Particles';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { useMantineColorScheme } from '@mantine/core';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -26,7 +27,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       
        dark:bg-gradient-to-t
       dark:from-pink-950/25 dark:via-customGray-800/50   dark:to-customGray-900
-      text-white h-screen fixed  "
+      text-white h-screen fixed  
+      gradient-border
+      "
       //from-pink-600/65 via-gray-100 to-gray-100 
      // bg-gray-100
       >
@@ -36,19 +39,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 
 
-        <nav className="mt-16 text-black dark:text-white">
+        <nav className="mt-16 text-black dark:text-white ">
           <ul>
-            <li className="p-6 py-2 text-sm font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <a href="/dashboard">Профиль</a>
+            <li className="p-6 py-2 text-sm font-semibold dark:hover:bg-gray-700 hover:bg-pink-200">
+              <Link href="/dashboard">Профиль</Link>
             </li>
             <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <a href="/dashboard/search">Поиск</a>
+              <Link href="/dashboard/search">Поиск</Link>
             </li>
             <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <a href="/dashboard/settings">Настройки</a>
+              <Link href="/dashboard/settings">Настройки</Link>
             </li>
             <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <a href="/dashboard/selected">Отбор</a>
+              <Link href="/dashboard/selected">Отбор</Link>
             </li>
           </ul>
         </nav>

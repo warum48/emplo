@@ -41,6 +41,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../store/store';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+import { GlobalProvider } from '@/global/context/ContextGlobal';
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -64,7 +65,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-roboto bg-white dark:bg-customGray-900">
+      <body className="font-roboto bg-white dark:bg-adjGray-900">
+      <GlobalProvider>
         <MantineProvider
           theme={theme}
           //theme={{ colorScheme }}
@@ -74,7 +76,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
               <div
-                className="dark:bg-gray-900 min-h-screen 
+                className="dark:bg-adjGray-900 min-h-screen 
                 text-black dark:text-white
     flex flex-col relative 
     "
@@ -86,6 +88,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </PersistGate>
           </Provider>
         </MantineProvider>
+        </GlobalProvider>
       </body>
     </html>
   );

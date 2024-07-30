@@ -9,5 +9,6 @@
   
   .gradient-border {
     border-right: 1px solid;
-    animation: gradientBorder 5s infinite alternate;
+    border-image: linear-gradient(to bottom, #ff149300, #ff149300, #0000ff, #0000ff, #0000ff, #800080,#800080, #800080) 1;
+    /*animation: gradientBorder 5s infinite alternate;*/
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TitleLabel: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="font-bold">{children}</span>
+  <span className="font-bold text-sm">{children}</span>
 );
 
 const TextInfo: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -9,7 +9,7 @@ const TextInfo: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const CardTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="font-bold uppercase">{children}</span>
+  <span className="font-bold uppercase ">{children}</span>
 );
 
 const CardPreTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
