@@ -5,7 +5,8 @@ import EmployeeMock from './EmployeeMock';
 
 const PerspectiveCards = () => {
   return (
-    <div className="flex justify-center items-center min-h-[300px]  max-w-[600px] -mt-20 ">
+    <div className="flex justify-center items-center min-h-[300px]  max-w-[600px] -mt-20 relative">
+      
       <div className="perspective-container">
         {/*<div className="card bg-customGray-950">Card 1</div>
         <div className="card bg-pink-400">Card 2</div>

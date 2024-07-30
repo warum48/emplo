@@ -25,7 +25,7 @@ const EmployeeMock: React.FC<{className?: string}> = ({className}:{className?: s
       p="md"
       shadow="xs"
       withBorder
-      className={`bg-white/90 dark:bg-customGray-950/90  ${classes.gridItem} ${expanded ? classes.expanded : ''}` + (className ? ' ' + className : '')}
+      className={`border-4 bg-white/90 dark:bg-customGray-950/90  ${classes.gridItem} ${expanded ? classes.expanded : ''}` + (className ? ' ' + className : '')}
     >
       <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
       <Grid>

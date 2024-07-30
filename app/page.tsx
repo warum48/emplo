@@ -196,8 +196,9 @@ const Home = () => {
           </div>
         )}
       </div>
-      <About />
       <InfoBlock/>
+      <About />
+      
       <Footer />
     </>
   );
