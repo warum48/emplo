@@ -1,18 +1,19 @@
-import { useSearchCandidatesMutation } from "@/services/api";
+import { useSearchCandidatesMutation } from "@/rtk/services/api";
 import { LinkButton } from "../__atoms/Buttons/LinkButton";
 import { useDispatch } from "react-redux";
-import { setSearchResults, clearSearchResults } from '@/features/search/searchSlice';
+import { setSearchResults, clearSearchResults } from '@/rtk/features/search/searchSlice';
 
 type TProps = {
   onSearch: () => void;
+  gridCols?: number;
 }
 
-export const PopularSearches = ({onSearch}:TProps) => {
+export const PopularSearches = ({onSearch, gridCols=3}:TProps) => {
 
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
   const dispatch = useDispatch();
 
-  const handleSearch = async (specialty:string, area:string) => {
+  const handleSearch = async (specialty:string, area:string[]) => {
     try {
      // await searchCandidates({ specialty, area }).unwrap();
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
@@ -28,13 +29,11 @@ export const PopularSearches = ({onSearch}:TProps) => {
     }
   };
   return (
-  <div className="mt-8 text-white text-left w-full">
-    <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
-      Популярные запросы
-    </h2>
-    <div className="flex justify-between gap-4">
+  
+    
+    <div className={`}=flex =justify-between =gap-4 grid  ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'} `}>
       <ul className="mt-4 space-y-2">
-      <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme='dark' onClick={()=>handleSearch('Водитель-курьер', 'Москва')}>Москва - Водитель-курьер</LinkButton></li>
+      <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme='dark' onClick={()=>handleSearch('Водитель-курьер', ['Москва'])}>Москва - Водитель-курьер</LinkButton></li>
         <li>Технологические вакансии </li>
         <li>Вакансии в сфере продаж </li>
         {/*<li>Менеджеры проектов </li>
@@ -55,6 +54,6 @@ export const PopularSearches = ({onSearch}:TProps) => {
 <li>Менеджеры проектов </li>*/}
       </ul>
     </div>
-  </div>
+  
 )
 }

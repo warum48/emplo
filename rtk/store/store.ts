@@ -8,13 +8,24 @@ import { authApi } from '../services/authApi';
 import someSlice from '../features/someFeature/someSlice';
 import tempSlice from '../features/tempFeature/tempSlice';
 import jobSearchSlice from '../features/searchJobForm/searchJob';
-import searchReducer from '@/features/search/searchSlice';
+import searchReducer from '../features/search/searchSlice';
+import authReducer from '../features/authSlice';
+import { predictorApi } from '@/rtk/services/predictorApi';
+import thunk from 'redux-thunk';
+
+//import { configureStore, createAsyncThunk, createSlice, MiddlewareArray } from '@reduxjs/toolkit';
+import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
+//import thunk from 'redux-thunk';
 //import { tempSlice } from './features/tempFeature/tempSlice'; // Adjust the path as necessary
 
 
 const rootReducer = combineReducers({
+  [predictorApi.reducerPath]: predictorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
+
+  auth: authReducer,
   search: searchReducer,
   someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
   jobSearch: persistReducer({ key: 'jobSearch', storage }, jobSearchSlice),
@@ -28,7 +39,12 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Required for persist to work with non-serializable data like promises
-    }).concat(api.middleware, authApi.middleware,),
+      thunk: {
+        extraArgument: loginAndFetchUser//authApi
+      }
+    }).concat(api.middleware, authApi.middleware, predictorApi.middleware)//.concat(thunk),
+  //middleware: (getDefaultMiddleware) =>
+  //  getDefaultMiddleware().concat(authApi.middleware).concat(thunk),
     
 });
 
@@ -37,6 +53,7 @@ setupListeners(store.dispatch);
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+
 
 export default store;
 

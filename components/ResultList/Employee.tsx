@@ -123,7 +123,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
               </div>
 
               {!expanded && (
-                <>
+                <Group>
                   <Button
                     my="xs"
                     size="xs"
@@ -136,7 +136,22 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                   >
                     Отобрать
                   </Button>
-                </>
+                  <a href = {('/resume/'+employee?.id)}>
+                  <Button
+                    my="xs"
+                    size="xs"
+                    // appearance={'main_small_second_transparent'}
+                    onClick={() => {
+                      // makeAppointment(id);
+                      //doctorIdVar([ id || 0]); //doctorId
+                      //nextStep?.();
+                    //  window.open('/resume/'+employee?.id)
+                    }}
+                  >
+                    Открыть
+                  </Button>
+                  </a>
+                </Group>
               )}
             </div>
           </Group>

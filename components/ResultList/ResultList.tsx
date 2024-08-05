@@ -5,7 +5,7 @@ import { ParticlesComponent } from "../Particles/Particles";
 
 
 import { useSelector } from 'react-redux';
-import { RootState } from '@/store/store';
+import { RootState } from '@/rtk/store/store';
 import { JSONViewer } from "../__atoms/JSONViewer/JSONViewr";
 import { Debugger } from "../__atoms/Debugger/Debugger";
 

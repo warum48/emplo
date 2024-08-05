@@ -1,9 +1,10 @@
 import { Button, Input } from "@mantine/core";
 import { useState } from "react";
 
-import { useSearchCandidatesMutation } from '@/services/api';
+import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from '@/rtk/services/api';
 import { useDispatch } from "react-redux";
-import { setSearchResults, clearSearchResults } from '@/features/search/searchSlice';
+import { setSearchResults, clearSearchResults } from '@/rtk/features/search/searchSlice';
+import { setSearchHHResults } from "@/rtk/features/searchHHSlice";
 
 
 type TProps = {
@@ -15,15 +16,34 @@ export const QuickSearch = ({onSearch}:TProps) => {
   const [specialty, setSpecialty] = useState('');
   const [area, setArea] = useState('');
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
+  const [searchHHCandidates, { data:data_hh, error:error_hh, isLoading:isLoading_hh }] = useSearchHHCandidatesMutation();
   const dispatch = useDispatch();
 
   const handleSearch = async () => {
     try {
      // await searchCandidates({ specialty, area }).unwrap();
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      const results = await searchCandidates({ specialty, area }).unwrap();
+      //const results = await searchCandidates({ specialty, area }).unwrap();
+      const results = await searchCandidates({ specialty, area: [area] }).unwrap();
       if (Array.isArray(results?.candidates)) {
         dispatch(setSearchResults(results));
+        onSearch();
+      } else {
+        console.error('Failed to search candidates: results is not an array');
+      }
+    } catch (err) {
+      console.error('Failed to search candidates:', err);
+    }
+  };
+
+  const handleSearchHH = async () => {
+    try {
+     // await searchCandidates({ specialty, area }).unwrap();
+    //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
+      //const results = await searchCandidates({ specialty, area }).unwrap();
+      const results = await searchHHCandidates({ specialty, area: [area] }).unwrap();
+      if (Array.isArray(results?.candidates)) {
+        dispatch(setSearchHHResults(results));
         onSearch();
       } else {
         console.error('Failed to search candidates: results is not an array');
@@ -56,7 +76,8 @@ export const QuickSearch = ({onSearch}:TProps) => {
           size="lg"
           className="bg-opacity-80 hover:bg-opacity-100"
           //onClick={onSearch}
-          onClick={handleSearch} disabled={isLoading}
+          onClick={handleSearchHH} disabled={isLoading}
+          //onClick={handleSearch} disabled={isLoading}
         >
           {isLoading ? 'Загрузка...' : 'Поиск'}
         </Button>

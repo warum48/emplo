@@ -8,7 +8,11 @@ import Head from 'next/head';
 
 const Dashboard = () => {
   return (
-    <div className="flex justify-center space-x-4 p-4 mt-16">
+    
+    <div className="dashboard-page-container">
+      <div>
+      <h2 className="page-header">Профиль</h2></div>
+    <div className="flex justify-center space-x-4">
       <div className="bg-pink-500/80 text-white text-center rounded-lg shadow-lg p-4 flex-1 flex flex-col items-center justify-center min-h-[300px]">
         <div className="text-lg">Открытых вакансий</div>
         <div className="text-4xl">0</div>
@@ -26,6 +30,7 @@ const Dashboard = () => {
         <div>На текущей неделе - 0</div>
         <div>Всего - 0</div>
       </div>
+    </div>
     </div>
   );
 };

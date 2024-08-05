@@ -13,7 +13,19 @@
         background-size: 50% auto;
         background-repeat: no-repeat;
       }
+      .border-default{
+        @apply  border-neutral-400/15
+      }
     .form-paper{
         @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85; //dark:bg-customGray-950/85 
-    }  
+    }
+    .page-header{
+      @apply text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+    } 
+    .dashboard-section-header{
+      @apply text-neutral-700 dark:text-neutral-50 text-xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+    }
+    .dashboard-page-container{
+      @apply flex flex-col space-y-8 px-8 mt-16 py-1;
+    }
   }

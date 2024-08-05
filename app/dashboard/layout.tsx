@@ -8,6 +8,8 @@ import { ResultList } from '@/components/ResultList/ResultList';
 import { useMantineColorScheme } from '@mantine/core';
 import Head from 'next/head';
 import Link from 'next/link';
+import { IconSettings } from '@tabler/icons-react';
+import { IconSearch } from '@tabler/icons-react';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -23,7 +25,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
       <div className="min-w-64 
       bg-gradient-to-t
-      from-gray-200 via-gray-100 to-gray-100 
+      from-gray-300 via-gray-200 to-gray-200 
       
        dark:bg-gradient-to-t
       dark:from-pink-950/25 dark:via-customGray-800/50   dark:to-customGray-900
@@ -33,27 +35,27 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       //from-pink-600/65 via-gray-100 to-gray-100 
      // bg-gray-100
       >
-        <div className="w-full p-4 flex items-center justify-center">
+        <div className="w-full py-4 px-8 flex items-center justify-center">
         <a href="/"><LogoVertical colorScheme={colorScheme}/></a>
         </div>
 
 
 
-        <nav className="mt-16 text-black dark:text-white ">
-          <ul>
-            <li className="p-6 py-2 text-sm font-semibold dark:hover:bg-gray-700 hover:bg-pink-200">
-              <Link href="/dashboard">Профиль</Link>
-            </li>
-            <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <Link href="/dashboard/search">Поиск</Link>
-            </li>
-            <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
+        <nav className="mt-10 text-black dark:text-white flex flex-col gap-2 ">
+         
+            <div className="px-8 py-2 text-sm font-semibold dark:hover:bg-gray-700 hover:bg-pink-200">
+              <Link href="/dashboard" className="flex gap-4 items-center"><IconSettings/> Профиль</Link>
+            </div>
+            <div className="px-8 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
+              <Link href="/dashboard/search" className="flex gap-4 items-center"><IconSearch/>Поиск</Link>
+            </div>
+            <div className="px-8 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
               <Link href="/dashboard/settings">Настройки</Link>
-            </li>
-            <li className="p-6 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
+            </div>
+            <div className="px-8 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
               <Link href="/dashboard/selected">Отбор</Link>
-            </li>
-          </ul>
+            </div>
+          
         </nav>
       </div>
 
@@ -66,7 +68,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       </div>*/}
       <div className="flex-1 ml-64 p-0 
       bg-gradient-to-br
-       from-gray-100 via-gray-100 to-customGray-200
+       from-gray-200 via-gray-200 to-customGray-300
 
        dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
 

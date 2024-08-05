@@ -14,7 +14,7 @@ import {
   Box,
   InputLabel,
 } from '@mantine/core';
-import { updateJobSearchForm } from '@/features/searchJobForm/searchJob';
+import { updateJobSearchForm } from '@/rtk/features/searchJobForm/searchJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 //import { updateJobSearchForm } from '@/features/JobSearchForm/JobSearchForm/jobSearchSlice';

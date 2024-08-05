@@ -18,13 +18,14 @@ import { ExpandSearchButton } from '@/components/_main/ExpandSearchButton';
 import { MainBlockContainer } from '@/components/_main/MainBlockContainer';
 import { InfoBlock } from '@/components/_main/InfoBlock';
 import PerspectiveCards from '@/components/_main/PerspectiveCards.tsx/PerspectiveCards';
+import { Plans } from '@/components/_main/Plans';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
   const [isAnimating, setIsAnimating] = React.useState(false);
   const mainRef = React.useRef<HTMLDivElement>(null);
   const [extendedSearch, setExtendedSearch] = React.useState(false);
-  const [smallGradientPadding, setSmallGradientPadding] = React.useState(false); 
+  const [smallGradientPadding, setSmallGradientPadding] = React.useState(false);
 
   const onSearch = () => {
     setResultState(!resultState);
@@ -59,10 +60,10 @@ const Home = () => {
 
   return (
     <>
-    <Header /> 
+      <Header />
       <Head>
         <title>sotrudnik.ru</title>
-        <meta name="description" content="overseasjobs.com" />
+        <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Button
@@ -85,7 +86,7 @@ const Home = () => {
           <MainBlockContainer resultState={resultState} isAnimating={isAnimating} mainRef={mainRef}>
             {!resultState && (
               <div
-               // id="particles-js"
+                // id="particles-js"
                 className={`absolute top-0 right-0 h-full w-1/4 overflow-hidden transition-all duration-500
                                 ${resultState || isAnimating ? 'opacity-0' : 'opacity-100'}
                                 `}
@@ -136,7 +137,12 @@ const Home = () => {
                           extendedSearch={extendedSearch}
                           setExtendedSearch={setExtendedSearch}
                         />
-                        <PopularSearches onSearch={onSearch}  />
+                        <div className="mt-8 text-white text-left w-full">
+                          <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                            Популярные запросы
+                          </h2>
+                          <PopularSearches onSearch={onSearch} />
+                        </div>
                       </div>
                     )}
                   </div>
@@ -158,23 +164,30 @@ const Home = () => {
                                     `}
                   >
                     <div
-                      className={`bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85            
+                      className={
+                        `bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85            
                                        
                                     ${smallGradientPadding ? 'mx-0.5 -my-[76px] ' : 'mx-4  -my-16 '}
                                       `
-                                    // mx-0.5 -my-16
-                                    // mx-1 -my-16
-                                    }
+                        // mx-0.5 -my-16
+                        // mx-1 -my-16
+                      }
                     >
-                      {resultState && <><JobSearchForm />
-                      <div className='text-xs flex p-4 gap-2'>
-                        <Checkbox 
-                        checked={smallGradientPadding}
-                        onChange={(event) => setSmallGradientPadding(event.currentTarget.checked)}
-                        />
-                        Я серьезный белый гетеросексуальный мужик, поменьше этих ваших розовых радуг пожалуйста</div>
-                        
-                      </>}
+                      {resultState && (
+                        <>
+                          <JobSearchForm />
+                          <div className="text-xs flex p-4 gap-2">
+                            <Checkbox
+                              checked={smallGradientPadding}
+                              onChange={(event) =>
+                                setSmallGradientPadding(event.currentTarget.checked)
+                              }
+                            />
+                            Я серьезный белый гетеросексуальный мужик, поменьше этих ваших розовых
+                            радуг пожалуйста
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 )}
@@ -182,12 +195,12 @@ const Home = () => {
             </div>
           </MainBlockContainer>
         </div>
-        {resultState && !isAnimating   &&(
+        {resultState && !isAnimating && (
           <div
             className="col-span-1 md:col-span-2 xl:col-span-3  bg-gray-100 p-8 bg-right-top-50
                           dark:bg-opacity-50
                           dark:bg-customGray-900"
-                          //mt-16
+            //mt-16
           >
             <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
               Результаты поиска
@@ -196,9 +209,9 @@ const Home = () => {
           </div>
         )}
       </div>
-      <InfoBlock/>
+      <InfoBlock />
       <About />
-      
+      {/* <Plans/>*/}
       <Footer />
     </>
   );

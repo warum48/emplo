@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: any }) {
 
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from '../store/store';
+import store, { persistor } from '../rtk/store/store';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { GlobalProvider } from '@/global/context/ContextGlobal';

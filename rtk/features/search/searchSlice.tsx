@@ -1,6 +1,6 @@
 // store/searchSlice.ts
 
-import { SearchResponse } from '@/services/api';
+import { SearchResponse } from '@/rtk/services/api';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {

@@ -2,10 +2,10 @@
 
 'use client';
 import React from 'react';
-import { useGetCandidatesQuery } from '../../rtk/services/api';
+import { useGetCandidatesQuery } from '@/rtk/services/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../rtk/store/store';
-import { increment } from '../../rtk/features/someFeature/someSlice';
+import { RootState } from '@/rtk/store/store';
+
 
 const CandidatesPage: React.FC = () => {
   const { data: posts, error, isLoading } = useGetCandidatesQuery();
@@ -26,10 +26,7 @@ const CandidatesPage: React.FC = () => {
           </>
         ))}
       </ul>
-      <div>
-        <button onClick={() => dispatch(increment())}>Increment Value</button>
-        <p>Value: {value}</p>
-      </div>
+      
     </div>
   );
 };

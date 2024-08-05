@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react';
 import { Burger, Drawer, Button, useMantineTheme, useMantineColorScheme } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
@@ -5,6 +6,7 @@ import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 import { ColorSchemeButton } from './ColorSchemeButton/ColorSchemeButton';
 import Link from 'next/link';
 import { LogoHorizontal } from './Logos/LogoHorizontal';
+import { UserButton } from './UserButton.tsx/UserButton';
 //import Link from 'next/link';
 
 const Header = () => {
@@ -13,8 +15,8 @@ const Header = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-md z-50 h-[80px]">
-      <div className="container mx-auto flex items-center justify-between p-4">
+    <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-sm z-50 h-[80px]">
+      <div className="container mx-auto flex items-center justify-between px-1 py-1 h-full">
         <div className="flex items-center">
           <Link href="/">
           <LogoHorizontal colorScheme={colorScheme} className="h-[45px]"/>
@@ -36,9 +38,7 @@ const Header = () => {
           
            
           */}
-         <Link href="/auth">
-          <Button variant="filled">Войти</Button>
-          </Link>
+         <UserButton/>
         </div>
       </div>
       <Drawer

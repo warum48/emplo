@@ -1,4 +1,4 @@
-const Routes = {
+export const Routes = {
     MAIN: '/',
     LOGIN: '/login',
     REGISTRATION: '/registration',
@@ -11,4 +11,5 @@ const Routes = {
         SETTINGS: '/dashboard/settings',
     }
 };
-export default Routes
+
+export const apiPath = 'http://192.168.0.230:8005/api/';
