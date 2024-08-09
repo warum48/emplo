@@ -8,7 +8,7 @@ import { ResultList } from '@/components/ResultList/ResultList';
 import { useMantineColorScheme } from '@mantine/core';
 import Head from 'next/head';
 import Link from 'next/link';
-import { IconSettings } from '@tabler/icons-react';
+import { IconSettings, IconUser, IconCommand } from '@tabler/icons-react';
 import { IconSearch } from '@tabler/icons-react';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -21,39 +21,57 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+     
       <DashBoardHeader />
+
+
 
       <div className="min-w-64 
       bg-gradient-to-t
-      from-gray-300 via-gray-200 to-gray-200 
       
-       dark:bg-gradient-to-t
+
+      bg-customGray-900
+      bg-gradient-to-t
+      from-pink-950/25 via-customGray-800/50   to-customGray-900
+      
+      dark:bg-gradient-to-t
       dark:from-pink-950/25 dark:via-customGray-800/50   dark:to-customGray-900
       text-white h-screen fixed  
       gradient-border
       "
+     // from-gray-100 via-gray-50 to-gray-50/100 
+
       //from-pink-600/65 via-gray-100 to-gray-100 
      // bg-gray-100
       >
+        <div className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[url('/images/menubg.png')] bg-cover dark:bg-none" 
+        // dark:bg-none
+        ></div>
         <div className="w-full py-4 px-8 flex items-center justify-center">
-        <a href="/"><LogoVertical colorScheme={colorScheme}/></a>
+        <a href="/"><LogoVertical colorScheme={
+          //colorScheme
+          'dark'
+          }/></a>
         </div>
 
 
 
-        <nav className="mt-10 text-black dark:text-white flex flex-col gap-2 ">
+        <nav className="mt-6 text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative">
          
-            <div className="px-8 py-2 text-sm font-semibold dark:hover:bg-gray-700 hover:bg-pink-200">
-              <Link href="/dashboard" className="flex gap-4 items-center"><IconSettings/> Профиль</Link>
+            <div className="dashboard-menu-item">
+              <Link href="/dashboard" className="flex gap-4 items-center"><IconUser/> Профиль</Link>
             </div>
-            <div className="px-8 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
+            <div className="dashboard-menu-item">
               <Link href="/dashboard/search" className="flex gap-4 items-center"><IconSearch/>Поиск</Link>
             </div>
-            <div className="px-8 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <Link href="/dashboard/settings">Настройки</Link>
+            <div className="dashboard-menu-item">
+              <Link href="/dashboard/settings"  className="flex gap-4 items-center"><IconSettings/>Настройки</Link>
             </div>
-            <div className="px-8 py-2 text-sm  font-semibold dark:hover:bg-gray-700 hover:bg-violet-200">
-              <Link href="/dashboard/selected">Отбор</Link>
+            <div className="dashboard-menu-item">
+              <Link href="/dashboard/selected"  className="flex gap-4 items-center"><IconCommand/>Отбор</Link>
+            </div>
+            <div className="dashboard-menu-item">
+              <Link href="/dashboard/resume"  className="flex gap-4 items-center"><IconCommand/>Создать резюме</Link>
             </div>
           
         </nav>
@@ -68,15 +86,23 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       </div>*/}
       <div className="flex-1 ml-64 p-0 
       bg-gradient-to-br
-       from-gray-200 via-gray-200 to-customGray-300
-
+       from-gray-100/100 via-gray-100 to-customGray-200
+relative
        dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
+      
 
        
        "
        //dark:bg-customGray-900
        //bg-gray-100 
        >
+     {/*   <div className="absolute right-0 top-0 w-1/4 h-[40vh] ">
+      <div className="-mt-96 -mr-96 absolute scale-x-150 left-0 top-0 right-0 bottom-0 
+          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-pink-200/50 via-pink-600/0 to-blue-600/0
+          dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-pink-800/30 dark:via-pink-800/0 dark:to-blue-600/0
+          "></div>
+          </div>*/}
+         
         {/*} <header className="bg-white p-4 shadow">
           <h1 className="text-xl font-bold">Main Content</h1>
         </header>*/}

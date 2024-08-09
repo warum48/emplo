@@ -36,15 +36,21 @@ export default function RootLayout({ children }: { children: any }) {
   );
 }*/
 
-import { Provider } from 'react-redux';
+import { Provider, useDispatch } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import store, { persistor } from '../rtk/store/store';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { GlobalProvider } from '@/global/context/ContextGlobal';
+import { useCookies } from 'react-cookie';
+import { setAuthToken } from '@/rtk/features/authSlice';
+import { AuthProvider } from '@/global/context/AuthProvider';
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  
+
+
   return (
     <html lang="en">
       <head>
@@ -74,6 +80,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           // withNormalizeCSS
         >
           <Provider store={store}>
+            <AuthProvider>
             <PersistGate loading={null} persistor={persistor}>
               <div
                 className="dark:bg-adjGray-900 min-h-screen 
@@ -86,6 +93,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 
               </div>
             </PersistGate>
+            </AuthProvider>
           </Provider>
         </MantineProvider>
         </GlobalProvider>

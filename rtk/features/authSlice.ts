@@ -5,21 +5,40 @@ import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
 
 interface AuthState {
   isAuthenticated: boolean;
-  user: User | null;
+  user: User  | null;
+  token: string | null;
+}
+
+interface TokenState {
+  //isAuthenticated: boolean;
+ // user: User | string | null;
+  token: string | null;
 }
 
 const initialState: AuthState = {
   isAuthenticated: false,
   user: null,
+  token: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setAuthState: (state, action: PayloadAction<AuthState>) => {
+    setAuthState: (state, action: PayloadAction<Omit<AuthState, 'user'>>) => {
       state.isAuthenticated = action.payload.isAuthenticated;
-      state.user = action.payload.user;
+      //state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    setAuthToken: (state, action: PayloadAction<TokenState>) => {
+      state.isAuthenticated = true;//action.payload.isAuthenticated;
+      //state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    setUser: (state, action: PayloadAction<User>) => {
+     // state.isAuthenticated = action.payload.isAuthenticated;
+      state.user = action.payload;
+     // state.token = action.payload.token;
     },
   },
   extraReducers: (builder) => {
@@ -35,5 +54,5 @@ const authSlice = createSlice({
   }
 });
 
-export const { setAuthState } = authSlice.actions;
+export const { setAuthState, setAuthToken, setUser } = authSlice.actions;
 export default authSlice.reducer;

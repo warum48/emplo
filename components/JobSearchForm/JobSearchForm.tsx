@@ -17,6 +17,7 @@ import {
 import { updateJobSearchForm } from '@/rtk/features/searchJobForm/searchJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
+import { STYLES } from '@/global/CONSTS';
 //import { updateJobSearchForm } from '@/features/JobSearchForm/JobSearchForm/jobSearchSlice';
 
 type TProps = {
@@ -67,24 +68,15 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
   };
 
   const customLabelStyle = {
-    marginBottom: '8px', // Adjust this value to set the distance you want
+    marginBottom: STYLES.FORM.labelMargin//'4px', // Adjust this value to set the distance you want
   };
 
   return (
     <div className="p-4 w-full relative max-w-full text-black dark:text-white">
-      {/*
-     <Box size="sm" m="xl" className="text-left flex flex-col gap-8">
-     
-     } <Title order={1}>Поиск</Title>
-     <h1 className="text-4xl  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">Поиск</h1>*/
-     
-     //sm:grid-cols-1
-     }
 
       <form
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className={`text-left grid ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'}   gap-6 w-full max-w-full relative `}
-        //${gridCols}
       >
         <div className='flex flex-col gap-6 w-full max-w-full'>
         {/* Position Input */}
@@ -95,7 +87,6 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
           data={[
             { value: 'developer', label: 'Developer' },
             { value: 'designer', label: 'Designer' },
-            // Add more positions as needed
           ]}
           {...form.getInputProps('position')}
         />
@@ -134,12 +125,9 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
         {/* Work schedule */}
         <Checkbox.Group
           label="График работы *"
-          //mt="md"
-          //className="space-y-1"
-          //onChange={handleChange}
           {...form.getInputProps('workSchedule', { type: 'checkbox' })}
         >
-          <Checkbox value="full_day" label="Полный день" mt="xs" />
+          <Checkbox value="full_day" label="Полный день" mt={STYLES.FORM.labelMargin} />
           <Checkbox value="shift" label="Сменный график" mt="xs" />
           <Checkbox value="flexible" label="Гибкий" mt="xs" />
           <Checkbox value="remote" label="Удаленная работа" mt="xs" />
@@ -161,16 +149,16 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
             { value: '3_years', label: '3 года' },
             { value: '5_years', label: '5 лет' },
             { value: '10_years', label: '10 лет' },
-            // Add more experience levels as needed
           ]}
           {...form.getInputProps('experience')}
         />
 
          {/* Skills */}
-         <div className="flex flex-col gap-2">
+         <div className="flex flex-col ">
           <InputLabel htmlFor="skills">Навыки</InputLabel>
         <Checkbox
           //mt="md"
+          mt={STYLES.FORM.labelMargin}
           label="Мерчендайзинг"
           value="merchandising"
           {...form.getInputProps('skills', { type: 'checkbox' })}
@@ -192,7 +180,6 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
 
         {/* Age */}
         <NumberInput
-         // mt="md"
           labelProps={{ style: customLabelStyle}}
           label="Возраст (от) *"
           placeholder="Введите возраст"
@@ -202,7 +189,6 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
         <div className='flex flex-col gap-6 w-full max-w-full'>
         {/* Salary */}
         <NumberInput
-        //  mt="md"
           labelProps={{ style: customLabelStyle}}
           label="Зарплата (до) *"
           placeholder="Введите зарплату"
@@ -211,12 +197,10 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
 
         {/* Job search status */}
         <Checkbox.Group
-        //labelProps={{ style: customLabelStyle}}
           label="Статус поиска работы"
-         // mt="md"
           {...form.getInputProps('jobSearchStatus', { type: 'checkbox' })}
         >
-          <Checkbox mt="xs" value="actively_looking" label="Активно ищет работу" />
+          <Checkbox mt={STYLES.FORM.labelMargin} value="actively_looking" label="Активно ищет работу" />
           <Checkbox mt="xs" value="open_to_offers" label="Рассматривает предложения" />
           <Checkbox mt="xs" value="considering_offer" label="Предложили работу, решает" />
           <Checkbox mt="xs" value="not_looking" label="Не ищет работу" />
@@ -224,7 +208,6 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
 
         {/* Required number of resumes */}
         <NumberInput
-         // mt="md"
           label="Требуемое кол-во резюме (до) *"
           labelProps={{ style: customLabelStyle}}
           placeholder="Введите количество резюме"

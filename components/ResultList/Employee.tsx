@@ -10,48 +10,9 @@ import { DoctorAvatarContainer } from '../__atoms/AvatarContainer/AvatarContaine
 import { CardExpandButton } from '../__atoms/Card/CardExpandButton';
 import { SpaceYMain } from '../__atoms/Spacers/Spacers';
 import classes from './autogrid.module.css';
+import { Candidate } from '@/types/Candidate';
 
-interface Experience {
-  start: string;
-  end: string | null;
-  company: string;
-  company_id: string;
-  industry: string | null;
-  industries: Array<{
-    id: string;
-    name: string;
-  }>;
-  area: string | null;
-  company_url: string;
-  employer: {
-    id: string;
-    name: string;
-    url: string;
-    alternate_url: string;
-    logo_urls: {
-      '90': string;
-    };
-  };
-  position: string;
-  description: string;
-}
 
-interface Candidate {
-  id: number;
-  candidate_id: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
-  age: number;
-  gender: string;
-  birth_date: string;
-  alternate_url: string;
-  area: string;
-  business_trip_readiness: string;
-  skills: string;
-  salary: number;
-  experience: Experience[];
-}
 
 interface EmployeeProps {
   employee: DeepNullable<Candidate>;
@@ -136,7 +97,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                   >
                     Отобрать
                   </Button>
-                  <a href = {('/resume/'+employee?.id)}>
+                  <a href = {('/resume/'+employee?.id)} target="_blank">
                   <Button
                     my="xs"
                     size="xs"

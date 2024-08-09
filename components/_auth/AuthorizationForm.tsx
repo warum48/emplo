@@ -5,11 +5,15 @@ import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import './styles.css'; // Ensure your custom CSS for the animation is imported
 import { ParticlesComponent } from '../Particles/Particles';
 import { useRouter } from 'next/navigation';
-import { useLoginMutation, useMeQuery } from '@/rtk/services/authApi';
-import { useDispatch } from 'react-redux';
+import { useLazyMeQuery, useLoginMutation,  } from '@/rtk/services/authApi'; //useMeQuery
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuthState } from '@/rtk/features/authSlice';
+import { useCookies } from 'react-cookie';
+import { RootState } from '@/rtk/store/store';
+import { Debugger } from '../__atoms/Debugger/Debugger';
 
 const AuthorizationForm = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const form = useForm({
     initialValues: {
@@ -23,9 +27,8 @@ const AuthorizationForm = () => {
     formElement?.classList.add('animate-form');
   }, []);
 
- 
+ /*
   const [loginUser, { data, error, isLoading, isSuccess: isLoginSuccess  }] = useLoginMutation();
-  //const [login, { data: loginData, isSuccess: isLoginSuccess }] = useLoginMutation();
   const dispatch = useDispatch();
 
   const onSubmit = (values: any) => {
@@ -34,22 +37,13 @@ const AuthorizationForm = () => {
 
   const handleSearch = async (values:any) => {
     try {
-     // await searchCandidates({ specialty, area }).unwrap();
-    //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      //const results = await searchCandidates({ specialty, area }).unwrap();
       const results = await loginUser(values).unwrap();
       console.log('values-login:', values)  
-        //dispatch(setSearchResults(results));
-       
-      
     } catch (err) {
       console.error('Failed to search candidates:', err);
     }
   };
 
-  //--------
-  //const dispatch = useDispatch<AppDispatch>();
- // const [login, { data: loginData, isSuccess: isLoginSuccess }] = useLoginMutation();
   const { data: userData, refetch: refetchUser } = useMeQuery(undefined, {
     skip: !isLoginSuccess,
   });
@@ -67,10 +61,72 @@ const AuthorizationForm = () => {
       router.push('/dashboard')
     }
   }, [userData, dispatch]);
+  */
 
-  /*const handleLogin = async () => {
-    await login({ username: 'test', password: 'password' });
-  };*/
+  //const [username, setUsername] = React.useState('');
+  //const [password, setPassword] = React.useState('');
+  const [token, setToken] = React.useState('');
+  const [login, { isLoading: isLoginLoading, error: loginError, data: loginData }] = useLoginMutation();
+  const [fetchMe, { isLoading: isMeLoading, error: meError, data: meData }] = useLazyMeQuery();
+  const [cookiesToken, setCookieToken] = useCookies(['jwt_token']);
+
+  const tokenInStore = useSelector((state: RootState) => state.auth.token);
+
+  const handleLogin = async () => {
+    try {
+      const result = await login( form.values).unwrap(); // username, password
+      console.log('RESULTTTT', result);
+      console.log('RESULTTTT', result.jwt_token);
+      setCookieToken('jwt_token', result.jwt_token, { path: '/' });
+      //const cookie = document.cookie; // Assuming the cookie is set here
+      //console.log('cookie', cookiesToken);
+      const bearerToken = `Bearer ${result.jwt_token}`;
+      //setToken(bearerToken);
+      setToken(result.jwt_token);
+
+      // Fetch user details
+      //fetchMe({ 'Authorization': bearerToken });
+      fetchMe();
+    } catch (err) {
+      console.error('Failed to login:', err);
+    }
+  };
+
+  useEffect(() => {
+    console.log('USE EF TOKEN', token);
+    if (token) {
+      //fetchMe({ 'Authorization': 'Bearer ' + token });
+      console.log('DISpatching');
+      dispatch(setAuthState({ isAuthenticated: true, token: token }));   // user: '', 
+      //fetchMe();
+    }
+  }, [token, fetchMe]);
+
+  useEffect(() => {
+    console.log('USE EF TOKEN_in_Store', tokenInStore);
+    if (tokenInStore) {
+      //fetchMe({ 'Authorization': 'Bearer ' + token });
+      //dispatch(setAuthState({ isAuthenticated: true, user: '', token: token }));  
+      fetchMe();
+    }
+  }, [tokenInStore]); //, fetchMe
+
+  useEffect(() => {
+    console.log('meData', meData);
+    if (meData) {
+      dispatch(setAuthState({ isAuthenticated: true,  token: token }));  //user: meData,
+      router.push('/dashboard')
+    }
+  }, [meData, dispatch]);
+
+  
+
+  const onSubmit = (values: any) => {
+   // handleSearch(values);
+   handleLogin();
+  };
+
+
 
   return (
     <div
@@ -79,6 +135,7 @@ const AuthorizationForm = () => {
     from-fuchsia-950/85 via-rose-500/75 to-rose-900/95
     "
     >
+     
       <div
         id="particles-js"
         className={`absolute top-0 left-0 h-full w-full overflow-hidden transition-all duration-500
@@ -96,6 +153,7 @@ const AuthorizationForm = () => {
         shadow-md rounded-lg transform transition-transform duration-500"
         // bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85
       >
+         <Debugger>ts{tokenInStore}</Debugger>
         <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
           <TextInput
             label="Логин"
