@@ -25,7 +25,7 @@ const Home = () => {
   const [isAnimating, setIsAnimating] = React.useState(false);
   const mainRef = React.useRef<HTMLDivElement>(null);
   const [extendedSearch, setExtendedSearch] = React.useState(false);
-  const [smallGradientPadding, setSmallGradientPadding] = React.useState(false);
+  const [smallGradientPadding, setSmallGradientPadding] = React.useState(true);
 
   const onSearch = () => {
     setResultState(!resultState);
@@ -166,14 +166,15 @@ const Home = () => {
                     <div
                       className={
                         `bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-customGray-950/85            
-                                       
-                                    ${smallGradientPadding ? 'mx-0.5 -my-[76px] ' : 'mx-4  -my-16 '}
+                        ${smallGradientPadding ? 'ml-0 mr-0.5 -mt-[80px] -mb-[80px] ' : 'mx-4  -my-16 '}
                                       `
+                        //${smallGradientPadding ? 'mx-0.5 -my-[76px] ' : 'mx-4  -my-16 '}
                         // mx-0.5 -my-16
                         // mx-1 -my-16
                       }
                     >
-                      {resultState && (
+                       <JobSearchForm />
+                      {/*resultState && (
                         <>
                           <JobSearchForm />
                           <div className="text-xs flex p-4 gap-2">
@@ -187,7 +188,7 @@ const Home = () => {
                             радуг пожалуйста
                           </div>
                         </>
-                      )}
+                      )*/}
                     </div>
                   </div>
                 )}

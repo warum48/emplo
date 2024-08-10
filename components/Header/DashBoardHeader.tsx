@@ -13,7 +13,7 @@ const DashBoardHeader = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <header className="fixed top-0 right-0 p-2 px-4 w-full flex  items-center justify-end
+    <header className="fixed top-0 right-0 p-2 px-4 w-full flex  items-center justify-end h-[80px]
       z-50 shadow-xs
     bg-gradient-to-r
        from-gray-50/0 via-gray-50/0 to-white

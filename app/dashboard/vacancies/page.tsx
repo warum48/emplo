@@ -1,6 +1,7 @@
 'use client';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
+import VacanciesList from '@/components/_dashboard/predictor/VacanciesList/VacanciesList';
 import { XY } from '@/components/_dashboard/predictor/XY';
 import ResumeForm from '@/components/CreateResumeForm/CreateResume';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
@@ -14,11 +15,11 @@ const Settings = () => {
   return (
     <div className="dashboard-page-container">
       <div>
-     <h2 className="page-header-sm">Создать резюме</h2></div>
+     <h2 className="page-header">Создать резюме</h2></div>
      <div className="p-4 w-full relative max-w-full text-black dark:text-white
      bg-white dark:text-white dark:bg-customGray-950/85
      ">
-      <ResumeForm/>
+      <VacanciesList/>
       </div>
       
     </div>

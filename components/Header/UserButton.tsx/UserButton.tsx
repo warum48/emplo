@@ -13,7 +13,7 @@ export const UserButton = () =>{
         <div className='flex gap-4 items-center'
        // border p-0 px-4 border-default rounded-sm shadow-sm
         >
-            <Avatar src={photo} size={50} radius="xl" />
+            <Link href="/dashboard"><Avatar src={photo} size={50} radius="xl" /></Link>
             <div>
                 <div className="text-xs">{(isAuthenticated && user )?  user?.username  : 'Гость'}</div>
                 <Link href="/auth">

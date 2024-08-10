@@ -10,9 +10,14 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { IconSettings, IconUser, IconCommand } from '@tabler/icons-react';
 import { IconSearch } from '@tabler/icons-react';
+import { RootState } from '@/rtk/store/store';
+import { useSelector } from 'react-redux';
+import { LogoHorizontal } from '@/components/Header/Logos/LogoHorizontal';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const { colorScheme, setColorScheme } = useMantineColorScheme();
+    const compactLayout = useSelector((state: RootState) => state.UISettings.compactLayout);
+    const leftSideMenuCollapsed = useSelector((state: RootState) => state.UISettings.leftSideMenuCollapsed);
   return (
     <>
       <Head>
@@ -48,10 +53,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         // dark:bg-none
         ></div>
         <div className="w-full py-4 px-8 flex items-center justify-center">
-        <a href="/"><LogoVertical colorScheme={
+        <a href="/" >{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] m-0.5 -ml-4"/> : <LogoVertical colorScheme={
           //colorScheme
           'dark'
-          }/></a>
+          }/>}</a> 
         </div>
 
 
@@ -73,6 +78,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="dashboard-menu-item">
               <Link href="/dashboard/resume"  className="flex gap-4 items-center"><IconCommand/>Создать резюме</Link>
             </div>
+            <div className="dashboard-menu-item">
+              <Link href="/dashboard/vacancies"  className="flex gap-4 items-center"><IconCommand/>Вакансии</Link>
+            </div>
+            
           
         </nav>
       </div>

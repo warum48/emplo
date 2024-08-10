@@ -15,14 +15,18 @@ const Dashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="dashboard-page-container">
-      <h2 className="page-header">Профиль</h2>
+      <div className="dashboard-page-container-nopadding ">
+      <div className="text-sm text-gray-700 dark:text-white my-2">Панель управления / Поиск</div>  
+    {/*} <h2 className="page-header"
+      //page-header-sm
+      >Профиль</h2>*/}
       <main className="mt-0 flex flex-row ">
         <div
           className="w-1/4 
             min-w-64
             =mt-16
             bg-white dark:text-white dark:bg-customGray-950/85
+            
             "
           //my-16
           //grid grid-cols-4 gap-0
