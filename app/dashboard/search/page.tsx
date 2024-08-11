@@ -1,4 +1,5 @@
 'use client';
+import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
@@ -15,9 +16,9 @@ const Dashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="dashboard-page-container-nopadding ">
-      <div className="text-sm text-gray-700 dark:text-white my-2">Панель управления / Поиск</div>  
-    {/*} <h2 className="page-header"
+      <DashBoardPageContainer header="Поиск" hasLeftMenu>
+   {/*   <div className="text-sm text-gray-700 dark:text-white my-2">Панель управления / Поиск</div>  
+     <h2 className="page-header"
       //page-header-sm
       >Профиль</h2>*/}
       <main className="mt-0 flex flex-row ">
@@ -25,7 +26,7 @@ const Dashboard = () => {
           className="w-1/4 
             min-w-64
             =mt-16
-            bg-white dark:text-white dark:bg-customGray-950/85
+            bg-gray-300 dark:text-white dark:bg-customGray-950/85
             
             "
           //my-16
@@ -33,8 +34,9 @@ const Dashboard = () => {
           //bg-gradient-to-b from-fuchsia-950/95 via-rose-500/95 to-rose-900/95
         >
           <JobSearchForm />
+          <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1}/>
         </div>
-        <div
+       {/*} <div
           className="w-1/4 
             min-w-64
             =mt-16
@@ -45,7 +47,7 @@ const Dashboard = () => {
           //bg-gradient-to-b from-fuchsia-950/95 via-rose-500/95 to-rose-900/95
         >
           <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1}/>
-        </div>
+        </div>*/}
         <div className="flex-grow w-full flex-1 px-4 =py-16">
           <ResultList />
         </div>
@@ -53,7 +55,7 @@ const Dashboard = () => {
             <p>Welcome to the dashboard!</p>
           </div>*/}
       </main>
-      </div>
+      </DashBoardPageContainer>
     </>
   );
 };

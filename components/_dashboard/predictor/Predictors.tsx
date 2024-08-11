@@ -18,7 +18,7 @@ export const PredictorsList: React.FC = () => {
 
   return (
     <div>
-      <h3 className="dashboard-section-header">Predictors</h3>
+      
       <div className="flex gap-4">
         {predictors?.result?.map((predictor:any) => (
             <Predictor name={predictor}/>

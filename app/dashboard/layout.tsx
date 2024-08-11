@@ -53,7 +53,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         // dark:bg-none
         ></div>
         <div className="w-full py-4 px-8 flex items-center justify-center">
-        <a href="/" >{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] m-0.5 -ml-4"/> : <LogoVertical colorScheme={
+        <a href="/" className="w-full">{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8"/> : <LogoVertical colorScheme={
           //colorScheme
           'dark'
           }/>}</a> 
@@ -61,7 +61,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
 
 
-        <nav className="mt-6 text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative">
+        <nav className={` ${compactLayout ?"mt-2" : "mt-5"} text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative`}>
          
             <div className="dashboard-menu-item">
               <Link href="/dashboard" className="flex gap-4 items-center"><IconUser/> Профиль</Link>
@@ -72,9 +72,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="dashboard-menu-item">
               <Link href="/dashboard/settings"  className="flex gap-4 items-center"><IconSettings/>Настройки</Link>
             </div>
+            {/*
             <div className="dashboard-menu-item">
               <Link href="/dashboard/selected"  className="flex gap-4 items-center"><IconCommand/>Отбор</Link>
-            </div>
+            </div> */}
             <div className="dashboard-menu-item">
               <Link href="/dashboard/resume"  className="flex gap-4 items-center"><IconCommand/>Создать резюме</Link>
             </div>
@@ -98,10 +99,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
        from-gray-100/100 via-gray-100 to-customGray-200
 relative
        dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
-      
+      overflow-hidden
 
        
        "
+       //
        //dark:bg-customGray-900
        //bg-gray-100 
        >

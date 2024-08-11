@@ -19,6 +19,10 @@ const ResumePage = ({ params }: { params: { slug: string } }) => {
           </Head>
         <div className="w-full pt-20 =bg-gray-50 dark:bg-transparent flex flex-grow">
         <div className="w-full max-w-5xl mx-auto ">
+
+        
+
+
         <ResumeCard candidate={candidates?.find(item => item.id == candidateId)}/>
         </div>
         </div>

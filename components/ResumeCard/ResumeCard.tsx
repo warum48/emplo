@@ -85,12 +85,12 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
   return (
     
     <div
-      className="=dark:bg-customGray-800   text-gray-900 dark:text-gray-100 text-sm h-full"
+      className="=dark:bg-customGray-800   text-gray-900 dark:text-gray-100 text-sm h-full "
       //shadow-lg
     >
       
       {candidate ? (<>
-      <div className="flex border-b border-default">
+      <div className="flex border-b border-default ">
         <div className="flex justify-between items-center w-3/4 p-4 pl-0 ">
           <div>
             <div>

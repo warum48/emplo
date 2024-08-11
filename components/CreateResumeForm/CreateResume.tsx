@@ -56,13 +56,13 @@ const ResumeForm = ({ gridCols = 1 }: TProps ) => {
   };
 
   return (
-    <div className="p-4 w-full relative max-w-full text-black dark:text-white">
+    <div className="p-4 w-full relative max-w-full text-black dark:text-white ">
 
       <form
         onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className={`text-left grid ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'} gap-6 w-full max-w-full relative `}
       >
-        <div className='flex flex-col gap-6 w-full max-w-full'>
+        <div className='flex flex-col gap-6 w-full max-w-full '>
 
         {/* Full Name */}
         <TextInput
@@ -141,9 +141,11 @@ const ResumeForm = ({ gridCols = 1 }: TProps ) => {
         />
 
         {/* Submit button */}
-        <Button mt="md" type="submit" className='w-full max-w-full'>
+        <div className="w-full flex justify-center">
+        <Button mt="md" type="submit" className='w-full max-w-80'>
           Создать резюме
         </Button>
+        </div>
         </div>
       </form>
     </div>
