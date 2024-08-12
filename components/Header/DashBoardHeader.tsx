@@ -25,7 +25,7 @@ const DashBoardHeader = () => {
    // 
     >
       
-        <div className={`flex items-center space-x-2 ${compactLayout ? 'p-1 px-4 bg-white dark:bg-customGray-950 rounded-2xl' : ''} `}>
+        <div className={`flex items-center space-x-2 shadow ${compactLayout ? 'p-1 px-4 bg-white dark:bg-customGray-950 rounded-2xl' : ''} `}>
         <ColorSchemeButton />
           <Button onClick={() => setDrawerOpened(true)} className="md:hidden">Меню</Button>
          <Link href="/">

@@ -1,6 +1,7 @@
 import { Table, Checkbox, Button, Badge, Menu, ActionIcon, Group, Text } from '@mantine/core';
 import { useState } from 'react';
 import { IconDotsVertical } from '@tabler/icons-react';
+import { StyledButton } from '@/components/__atoms/Buttons/StyledButton';
 
 interface Candidate {
   id: number;
@@ -114,9 +115,11 @@ const candidates: Candidate[] = [
   },
 ];
 
-export default function CandidatesTable() {
+export function CandidatesTable() { //default 
   return (
-    <div className="p-4 w-full max-w-full text-black dark:text-white">
+    <div className="p-4 text-black dark:text-white"
+    //w-full max-w-full 
+    >
       <Group 
       //position="apart"
       >
@@ -135,7 +138,8 @@ export default function CandidatesTable() {
             <Table.Th>Город</Table.Th>
             <Table.Th>Пол</Table.Th>
             <Table.Th>Навыки</Table.Th>
-            <Table.Th>Опыт работы (лет)</Table.Th>
+            <Table.Th>Опыт работы </Table.Th> 
+            <Table.Th></Table.Th>
             <Table.Th></Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -152,6 +156,7 @@ export default function CandidatesTable() {
               <Table.Td>{candidate.gender}</Table.Td>
               <Table.Td>{candidate.skills}</Table.Td>
               <Table.Td>{candidate.total_experience}</Table.Td>
+              <Table.Td><StyledButton appearance="info_circle" onClick={() => {}} ></StyledButton></Table.Td>
               <Table.Td>
                 <Menu>
                   <Menu.Target>

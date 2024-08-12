@@ -82,6 +82,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="dashboard-menu-item">
               <Link href="/dashboard/vacancies"  className="flex gap-4 items-center"><IconCommand/>Вакансии</Link>
             </div>
+            <div className="dashboard-menu-item">
+              <Link href="/dashboard/vacancies/create"  className="flex gap-4 items-center"><IconCommand/>Создать вакансию</Link>
+            </div>
             
           
         </nav>

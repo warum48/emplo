@@ -88,6 +88,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                   <Button
                     my="xs"
                     size="xs"
+                    variant="outline"
                     // appearance={'main_small_second_transparent'}
                     onClick={() => {
                       // makeAppointment(id);
@@ -101,6 +102,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                   <Button
                     my="xs"
                     size="xs"
+                    //variant="outline"
                     // appearance={'main_small_second_transparent'}
                     onClick={() => {
                       // makeAppointment(id);

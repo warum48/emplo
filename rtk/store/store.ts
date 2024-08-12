@@ -9,6 +9,9 @@ import someSlice from '../features/someFeature/someSlice';
 import tempSlice from '../features/tempFeature/tempSlice';
 import jobSearchSlice from '../features/searchJobForm/searchJob';
 import resumeFormSlice from '../features/resumeForm';
+import createVacancySlice from '../features/vacancy/vacancySlice';
+import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
+//import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
 import UISettingsSlice from '../features/UISettings';
 import searchReducer from '../features/search/searchSlice';
 import authReducer from '../features/authSlice';
@@ -28,6 +31,8 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
 
+  createVacancy: persistReducer({ key: 'createVacancyHH', storage }, createVacancySlice),
+  createVacancyHH: persistReducer({ key: 'createVacancyHH', storage }, createVacancyHHSlice),
   auth: authReducer,
   search: searchReducer,
   someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
@@ -58,6 +63,7 @@ setupListeners(store.dispatch);
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+//export type AppDispatch = typeof store.dispatch;
 
 
 export default store;
