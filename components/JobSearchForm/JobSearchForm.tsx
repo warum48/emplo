@@ -72,7 +72,7 @@ const JobSearchForm = ({ gridCols = 1 }: TProps ) => {
   };
 
   return (
-    <div className="p-4 w-full relative max-w-full text-black dark:text-white">
+    <div className="p-4 px-8 w-full relative max-w-full text-black dark:text-white">
 
       <form
         onSubmit={form.onSubmit((values) => handleSubmit(values))}

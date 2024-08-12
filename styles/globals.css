@@ -24,7 +24,7 @@
     } 
 
     .page-header-compact{
-      @apply text-neutral-700 dark:text-neutral-50 text-base font-light mt-1 mb-2 text-left  [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+      @apply text-neutral-700 dark:text-neutral-50 text-base font-light mt-3 mb-2 text-left  [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
     }
 
     .dashboard-section-header{
@@ -37,13 +37,13 @@
       @apply flex flex-col space-y-8 px-8 mt-16 py-4;
     }
     .dashboard-page-container-compact{
-      @apply flex flex-col space-y-8 px-8 mt-6 py-1; /*6*/
+      @apply flex flex-col space-y-8 px-8 mt-3 py-1; /*6*/
     }
     .dashboard-page-container-nopadding{
       @apply flex flex-col space-y-8 pl-0 pr-0 mt-16 py-5;
     }
     .dashboard-page-container-compact-nopadding{
-      @apply flex flex-col space-y-8 pl-0 pr-0 mt-6 py-0; /*6*/
+      @apply flex flex-col space-y-8 pl-0 pr-0 mt-3 py-0; /*6*/
     }
     .dashboard-menu-item{
       @apply px-8 py-2 text-sm  hover:bg-gray-700  /*font-semibold*/

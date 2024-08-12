@@ -27,6 +27,7 @@ const Dashboard = () => {
             min-w-64
             =mt-16
             bg-gray-300 dark:text-white dark:bg-customGray-950/85
+            bg-white shadow mb-8
             
             "
           //my-16
@@ -34,7 +35,9 @@ const Dashboard = () => {
           //bg-gradient-to-b from-fuchsia-950/95 via-rose-500/95 to-rose-900/95
         >
           <JobSearchForm />
-          <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1}/>
+          <div className="px-8">
+          <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1} />
+          </div>
         </div>
        {/*} <div
           className="w-1/4 

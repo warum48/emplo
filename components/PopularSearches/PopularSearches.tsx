@@ -2,6 +2,7 @@ import { useSearchCandidatesMutation } from "@/rtk/services/api";
 import { LinkButton } from "../__atoms/Buttons/LinkButton";
 import { useDispatch } from "react-redux";
 import { setSearchResults, clearSearchResults } from '@/rtk/features/search/searchSlice';
+import { useMantineColorScheme } from "@mantine/core";
 
 type TProps = {
   onSearch: () => void;
@@ -9,7 +10,7 @@ type TProps = {
 }
 
 export const PopularSearches = ({onSearch, gridCols=3}:TProps) => {
-
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ export const PopularSearches = ({onSearch, gridCols=3}:TProps) => {
     
     <div className={`}=flex =justify-between =gap-4 grid  ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'} `}>
       <ul className="mt-4 space-y-2">
-      <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme='dark' onClick={()=>handleSearch('Водитель-курьер', ['Москва'])}>Москва - Водитель-курьер</LinkButton></li>
+      <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme={colorScheme} onClick={()=>handleSearch('Водитель-курьер', ['Москва'])}>Москва - Водитель-курьер</LinkButton></li>
         <li>Технологические вакансии </li>
         <li>Вакансии в сфере продаж </li>
         {/*<li>Менеджеры проектов </li>
