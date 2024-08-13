@@ -26,7 +26,7 @@ const Footer = () => (
           <ul>
             <li><a href="#" className="hover:text-blue-500">Разместить вакансию</a></li>
             <li><a href="#" className="hover:text-blue-500">Вход для работодателей</a></li>
-            <li><a href="#" className="hover:text-blue-500">Помощь и поддержка</a></li>
+            <li><a href="#" className="hover:text-blue-500">Помощь и поддержка.</a></li>
           </ul>
         </div>
       </div>
