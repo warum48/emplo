@@ -97,12 +97,12 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       {/*<div className="h-[70px] ml-64 p-0 bg-gray-100">
       
       </div>*/}
-      <div className="flex-1 ml-64 p-0 
+      <div className=" h-full flex-1 ml-64 p-0 
       bg-gradient-to-br
        from-gray-100/100 via-gray-100 to-customGray-200
 relative
        dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
-      overflow-hidden
+      overflow-x-hidden
 
        
        "

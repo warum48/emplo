@@ -18,14 +18,42 @@ import { updateJobSearchForm } from '@/rtk/features/searchCandidateForm/searchCa
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';
+import { useSearchCandidatesMutation } from '@/rtk/services/api';
+import { setSearchResults } from '@/rtk/features/search/searchSlice';
+import { Preloader } from '../__atoms/Preloader/Preloader';
 
 type TProps = {
   gridCols?: number;
 };
 
 const JobSearchForm = ({ gridCols = 1 }: TProps) => {
+  //const dispatch = useDispatch();
+  //const formState = useSelector((state: RootState) => state.jobSearch);
+
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.jobSearch);
+  //const [searchCandidates] = useSearchCandidatesMutation();
+  const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
+
+  //const form = useForm({
+  //  initialValues: formState,
+  //  validate: { /* Your validation logic here */ },
+  //});
+
+  const handleSubmit = async (values: typeof form.values) => {
+    console.log('submit', values);
+    try {
+      const candidates = await searchCandidates(values).unwrap();
+      console.log('Candidates:', candidates);
+      if (Array.isArray(candidates?.candidates)) {
+      dispatch(setSearchResults(candidates));
+      }else{
+        console.error('Failed to search candidates: results is not an array');
+      }
+    } catch (error) {
+      console.error('Failed to search candidates:', error);
+    }
+  };
 
   // Define the form state using useForm from Mantine
   const form = useForm({
@@ -33,11 +61,11 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
     // Add validation rules for the form fields
     validate: {
       specialty: (value) => (value ? null : 'Please select a position'),
-      experience: (value) => (value ? null : 'Please select your experience level'),
+     /* experience: (value) => (value ? null : 'Please select your experience level'),
       gender: (value) => (value ? null : 'Please select your gender'),
       age: (value) => (value >= 14 && value <= 90 ? null : 'Please enter a valid age (14-90)'),
       salary: (value) => (value >= 10000 ? null : 'Please enter a valid salary (min 10000)'),
-      limit: (value) => (value >= 1 && value <= 200 ? null : 'Please enter a valid number of resumes (1-200)'),
+      limit: (value) => (value >= 1 && value <= 200 ? null : 'Please enter a valid number of resumes (1-200)'),*/
     },
   });
 
@@ -51,11 +79,12 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
   };
 
   return (
-    <div className="p-4 px-8 w-full relative max-w-full text-black dark:text-white">
+    <div className="p-4 px-8 pb-8 w-full relative max-w-full text-black dark:text-white">
       <form
         onSubmit={form.onSubmit((values) => {
           console.log('Form submitted with values:', values);
           dispatch(updateJobSearchForm(values));
+          handleSubmit(values);
         })}
         className={`text-left grid ${gridCols === 3 ? 'grid-cols-3' : 'grid-cols-1'} gap-6 w-full max-w-full relative`}
       >
@@ -66,17 +95,16 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
             placeholder="--------"
             labelProps={{ style: customLabelStyle }}
             data={[
-              { value: 'developer', label: 'Developer' },
+              { value: 'Водитель-курьер', label: 'Водитель-курьер' },
               { value: 'designer', label: 'Designer' },
             ]}
             {...form.getInputProps('specialty')}
           />
 
           {/* Area */}
-          <div>
+          {/*<div>
             <InputLabel htmlFor="area" style={customLabelStyle}>Регион</InputLabel>
             <Group>
-              {/* Populate dynamically */}
               <Checkbox
                 label="Москва"
                 value="moscow"
@@ -88,7 +116,18 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
                 {...form.getInputProps('area', { type: 'checkbox' })}
               />
             </Group>
-          </div>
+          </div>*/}
+
+          <Checkbox.Group
+            label="Регион *"
+            {...form.getInputProps('area', { type: 'checkbox' })}
+          >
+            <Checkbox mt="xs" label="Москва"
+                value="Москва" />
+            <Checkbox mt="xs" label="Санкт-Петербург"
+                value="Санкт-Петербург" />
+
+          </Checkbox.Group>
 
           {/* Relocation Type */}
           <div className="flex flex-col gap-4">
@@ -106,7 +145,7 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
           </div>
 
           {/* Schedule */}
-          <Checkbox.Group
+      {/*    <Checkbox.Group
             label="График работы *"
             {...form.getInputProps('schedule', { type: 'checkbox' })}
           >
@@ -115,23 +154,26 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
             <Checkbox value="flexible" label="Гибкий" mt="xs" />
             <Checkbox value="remote" label="Удаленная работа" mt="xs" />
             <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
-          </Checkbox.Group>
+          </Checkbox.Group>*/}
         </div>
         <div className='flex flex-col gap-6'>
           {/* Skills */}
           <div className="flex flex-col ">
-            <InputLabel htmlFor="skills">Навыки</InputLabel>
-            {/* Populate dynamically */}
-            <Checkbox
-              mt={STYLES.FORM.labelMargin}
-              label="Мерчендайзинг"
-              value="merchandising"
+           {/* <InputLabel htmlFor="skills">Навыки</InputLabel>
+             Populate dynamically */}
+            <Checkbox.Group
+              label="Навыки *"
               {...form.getInputProps('skills', { type: 'checkbox' })}
-            />
+              >
+              
+              <Checkbox label="Мерчендайзинг"
+              value="merchandising"  mt={STYLES.FORM.labelMargin}/>
+              <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
+            </Checkbox.Group>
           </div>
 
           {/* Experience */}
-          <Select
+          {/*<Select
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
             placeholder="Нет опыта"
@@ -141,6 +183,12 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
               { value: 'between3And6', label: 'От 3 до 6 лет' },
               { value: 'moreThan6', label: 'Более 6 лет' },
             ]}
+            {...form.getInputProps('experience')}
+          />*/}
+          <NumberInput
+            label="Опыт работы (лет) *"
+            labelProps={{ style: customLabelStyle }}
+            placeholder="Введите опыт работы"
             {...form.getInputProps('experience')}
           />
 
@@ -193,8 +241,10 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
           />
 
           {/* Submit button */}
-          <Button mt="md" type="submit" className='w-full max-w-full'>
-            Искать
+          <Button mt="md" type="submit" className='w-full max-w-full' disabled={
+            //!form.isDirty() || !form.isValid() || 
+            isLoading}>
+            Искать {isLoading && <span className="-mt-1"><Preloader /></span> }
           </Button>
         </div>
       </form>

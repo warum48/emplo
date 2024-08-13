@@ -16,7 +16,7 @@ import Head from 'next/head';
 import React from 'react';
 
 const Settings = () => {
-    const [active, setActive] = React.useState(1);
+  const [active, setActive] = React.useState(1);
   return (
     <DashBoardPageContainer header="Создать резюме">
       <div className="flex flex-col items-center w-full ">
@@ -45,15 +45,15 @@ const Settings = () => {
      bg-white dark:text-white dark:bg-customGray-950/85 max-w-screen-md rounded-2xl
      "
           >
-             <VacancyCreationFormHH />
+            <VacancyCreationFormHH />
           </div>
 
           <div className="w-[250px] pt-8 pl-4">
-          <Stepper active={active} onStepClick={setActive} orientation="vertical">
-      <Stepper.Step label="Шаг 1" description="Основная информация" />
-      <Stepper.Step label="Шаг 2" description="Контактная информация" />
-      <Stepper.Step label="Шаг 3" description="Выбор типа публикации" />
-    </Stepper>
+            <Stepper active={active} onStepClick={setActive} orientation="vertical">
+              <Stepper.Step label="Шаг 1" description="Основная информация" />
+              <Stepper.Step label="Шаг 2" description="Контактная информация" />
+              <Stepper.Step label="Шаг 3" description="Выбор типа публикации" />
+            </Stepper>
           </div>
         </div>
       </div>

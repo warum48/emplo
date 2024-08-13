@@ -34,13 +34,13 @@ export const theme = createTheme({
       '#F9C2C8',
       '#F59CA7',
       '#bd5889',
-      '#a9375f', //'#ED5263',
-      '#982153', //'#E82D41',// base pink
-       '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
+      '#a93776', //'#ED5263',
+      '#982168', //'#E82D41',// base pink
+      '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
       // this color is good for main button: '#863866',
-      '#67286b', //'#8c1d42',
-      '#5e1531',
-      '#300C0D', // darkest pink
+      '#6b284f', //'#8c1d42',
+      '#5e153e',
+      '#310d2d', // darkest pink
     ],
     dark: [
       '#dfe4ea',

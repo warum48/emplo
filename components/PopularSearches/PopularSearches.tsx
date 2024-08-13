@@ -33,21 +33,21 @@ export const PopularSearches = ({onSearch, gridCols=3}:TProps) => {
   
     
     <div className={`}=flex =justify-between =gap-4 grid  ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'} `}>
-      <ul className="mt-4 space-y-2">
+      <ul className="space-y-2">
       <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme={colorScheme} onClick={()=>handleSearch('Водитель-курьер', ['Москва'])}>Москва - Водитель-курьер</LinkButton></li>
         <li>Технологические вакансии </li>
         <li>Вакансии в сфере продаж </li>
         {/*<li>Менеджеры проектов </li>
 <li>Менеджеры проектов </li>*/}
       </ul>
-      <ul className="mt-4 space-y-2">
+      <ul className="space-y-2">
         <li>Финансовые директора </li>
         <li>Технологические вакансии </li>
         <li>Вакансии в сфере продаж </li>
         {/*<li>Менеджеры проектов </li>
 <li>Менеджеры проектов </li>*/}
       </ul>
-      <ul className="mt-4 space-y-2">
+      <ul className="space-y-2">
         <li>Финансовые директора </li>
         <li>Технологические вакансии </li>
         <li>Вакансии в сфере продаж </li>

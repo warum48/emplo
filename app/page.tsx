@@ -138,7 +138,7 @@ const Home = () => {
                           setExtendedSearch={setExtendedSearch}
                         />
                         <div className="mt-8 text-white text-left w-full">
-                          <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                          <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] mb-4">
                             Популярные запросы
                           </h2>
                           <PopularSearches onSearch={onSearch} />

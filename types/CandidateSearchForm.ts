@@ -21,7 +21,7 @@ export interface CandidateSearchFormValues {
   relocation_type?: RelocationType;
   schedule: Schedule[];
   skills?: string[]; // Use appropriate type if specific options are available
-  experience: "noExperience" | "between1And3" | "between3And6" | "moreThan6";
+  experience: number; //"noExperience" | "between1And3" | "between3And6" | "moreThan6";
   gender: Gender;
   age: number;
   salary: number;

@@ -13,7 +13,7 @@ export const DashBoardPageContainer = ({ children, header, className, hasLeftMen
   const compactLayout = useSelector((state: RootState) => state.UISettings.compactLayout);
   return (
     <div
-      className={`relative ${compactLayout ? 
+      className={`relative h-full ${compactLayout ? 
         (hasLeftMenu ? 'dashboard-page-container-compact-nopadding' : 'dashboard-page-container-compact') 
         : hasLeftMenu ? 'dashboard-page-container-nopadding' : 'dashboard-page-container'} 
         ${className}`}

@@ -52,7 +52,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    <html lang="en">
+    <html lang="en" 
+    //className='h-full'
+    >
       <head>
         <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
@@ -71,7 +73,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-roboto bg-white dark:bg-adjGray-900">
+      <body className="font-roboto bg-white dark:bg-adjGray-900 h-full">
       <GlobalProvider>
         <MantineProvider
           theme={theme}
@@ -83,7 +85,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <AuthProvider>
             <PersistGate loading={null} persistor={persistor}>
               <div
-                className="dark:bg-adjGray-900 min-h-screen 
+                className="dark:bg-adjGray-900 min-h-screen h-full
                 text-black dark:text-white
     flex flex-col relative 
     "
