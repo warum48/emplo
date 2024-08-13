@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import { useGetPostsQuery } from '../../services/api';
+import { useGetPostsQuery } from '../../rtk/services/api';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { increment } from '../../features/someFeature/someSlice';
+import { RootState } from '../../rtk/store/store';
+import { increment } from '../../rtk/features/someFeature/someSlice';
 
 const PostsPage: React.FC = () => {
   const { data: posts, error, isLoading } = useGetPostsQuery();

@@ -1,5 +1,5 @@
 const Footer = () => (
-    <footer className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 py-8 ">
+    <footer className="bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-200 py-8 px-8">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 
      max-w-5xl
       "

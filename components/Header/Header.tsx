@@ -1,8 +1,12 @@
+'use client'
 import { useState } from 'react';
 import { Burger, Drawer, Button, useMantineTheme, useMantineColorScheme } from '@mantine/core';
 import { useColorScheme } from '@mantine/hooks';
 import { ColorSchemeToggle } from '../ColorSchemeToggle/ColorSchemeToggle';
 import { ColorSchemeButton } from './ColorSchemeButton/ColorSchemeButton';
+import Link from 'next/link';
+import { LogoHorizontal } from './Logos/LogoHorizontal';
+import { UserButton } from './UserButton.tsx/UserButton';
 //import Link from 'next/link';
 
 const Header = () => {
@@ -11,10 +15,13 @@ const Header = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-md z-50">
-      <div className="container mx-auto flex items-center justify-between p-4">
+    <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-sm z-50 h-[80px]">
+      <div className="container mx-auto flex items-center justify-between px-1 py-1 h-full">
         <div className="flex items-center">
-          <span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>
+          <Link href="/">
+          <LogoHorizontal colorScheme={colorScheme} className="h-[45px]"/>
+            {/*<span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>*/}
+          </Link>
         </div>
         <nav className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-200">
           <a href="#" className="hover:text-blue-500">Найти работу</a>
@@ -31,8 +38,7 @@ const Header = () => {
           
            
           */}
-         
-          <Button variant="filled">Войти</Button>
+         <UserButton/>
         </div>
       </div>
       <Drawer

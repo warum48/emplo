@@ -1,0 +1,17 @@
+
+
+@keyframes form-appear {
+    from {
+      transform: perspective(600px) translateY(-100px) rotateX(30deg);
+      opacity: 0;
+    }
+    to {
+      transform: perspective(600px) translateY(0) rotateX(0deg);
+      opacity: 1;
+    }
+  }
+  
+  .animate-form {
+    animation: form-appear 0.5s ease-out forwards;
+  }
+  
