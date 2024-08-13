@@ -60,7 +60,7 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useLazyMeQuery } = authApi;
+export const { useLoginMutation, useRegisterMutation, useLazyMeQuery , useMeQuery} = authApi;
 
 // Define types for the requests and responses
 export interface LoginRequest {

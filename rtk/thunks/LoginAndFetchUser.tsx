@@ -13,7 +13,10 @@ export const loginAndFetchUser = createAsyncThunk(
       const userResponse = await dispatch(authApi.endpoints.me.initiate());
       if ('data' in userResponse) {
         console.log('thunk-me');
-        dispatch(setAuthState({ isAuthenticated: true, user: userResponse.data }));
+        dispatch(setAuthState({ isAuthenticated: true, 
+         // user: userResponse.data
+        token: userResponse.data.token
+        }));
       }
     }
   }

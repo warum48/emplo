@@ -1,6 +1,6 @@
 'use client';
 import React, { createContext, useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+//import { useSearchParams } from 'next/navigation';
 
 interface IContext {
   //isDemo: boolean;
@@ -19,8 +19,8 @@ type Props = {
 export const GlobalProvider = ({ children }: Props) => {
   const [isDebug, setIsDebug] = useState<boolean>(false);
 
-  const searchParams = useSearchParams();
-  const _searchDebug = searchParams.get('debug');
+  //const searchParams = useSearchParams();
+  const _searchDebug = null; //searchParams.get('debug');
 
   useEffect(() => {
     if(_searchDebug) {
