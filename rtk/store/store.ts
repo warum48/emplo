@@ -7,7 +7,7 @@ import { api } from '../services/api';
 import { authApi } from '../services/authApi';
 import someSlice from '../features/someFeature/someSlice';
 import tempSlice from '../features/tempFeature/tempSlice';
-import jobSearchSlice from '../features/searchJobForm/searchJob';
+import candidateSearchSlice from '../features/searchCandidateForm/searchCandidate';
 import resumeFormSlice from '../features/resumeForm';
 import createVacancySlice from '../features/vacancy/vacancySlice';
 import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
@@ -36,7 +36,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   search: searchReducer,
   someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
-  jobSearch: persistReducer({ key: 'jobSearch', storage }, jobSearchSlice),
+  jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),
   UISettings: persistReducer({ key: 'UISettings', storage }, UISettingsSlice),
   tempFeature: tempSlice, // Non-persistent slice

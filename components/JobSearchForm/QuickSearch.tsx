@@ -76,8 +76,8 @@ export const QuickSearch = ({onSearch}:TProps) => {
           size="lg"
           className="bg-opacity-80 hover:bg-opacity-100"
           //onClick={onSearch}
-          onClick={handleSearchHH} disabled={isLoading}
-          //onClick={handleSearch} disabled={isLoading}
+          //onClick={handleSearchHH} disabled={isLoading}
+          onClick={handleSearch} disabled={isLoading}
         >
           {isLoading ? 'Загрузка...' : 'Поиск'}
         </Button>
