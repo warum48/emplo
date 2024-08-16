@@ -30,10 +30,23 @@ export const theme = createTheme({
       '#33000B',
     ],
     myCustomPink: [
-      '#FDE7EA', // lightest pink
-      '#F9C2C8',
-      '#F59CA7',
-      '#bd5889',
+      '#fde7f8', // lightest pink
+      '#f9c2f2',
+      '#f59ce8',
+      '#d25ebf',
+      '#ba4083', //'#ED5263',
+     '#b13780', // '#982168', //'#E82D41',// base pink
+      '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
+      // this color is good for main button: '#863866',
+      '#6b284f', //'#8c1d42',
+      '#5e153e',
+      '#310d2d', // darkest pink
+    ],
+    'my-custom-pink': [
+      '#fde7f8', // lightest pink
+      '#f9c2f2',
+      '#f59ce8',
+      '#d25ebf',
       '#a93776', //'#ED5263',
       '#982168', //'#E82D41',// base pink
       '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
@@ -50,7 +63,7 @@ export const theme = createTheme({
       '#2f3542',
       '#1e272e',
       '#212632', //'#343c4f'// '#202831',// '#131a21',
-      '#0e1114',//'#0e1114',
+      '#12141b',//'#0e1114',
       '#080a0c',//'#080a0c',
       '#040506',//'#040506',
     ],

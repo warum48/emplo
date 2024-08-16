@@ -4,6 +4,7 @@
     width: rem(255px);
     padding: var(--mantine-spacing-md);
     padding-bottom: 0;
+    padding-top: var(--mantine-spacing-sm);
     display: flex;
     flex-direction: column;
     /*border-right: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));*/
@@ -25,8 +26,8 @@
   }
   
   .linksInner {
-    padding-top: var(--mantine-spacing-xl);
-    padding-bottom: var(--mantine-spacing-xl);
+   /* padding-top: var(--mantine-spacing-xl);
+    padding-bottom: var(--mantine-spacing-xl); */
   }
   
   .footer {

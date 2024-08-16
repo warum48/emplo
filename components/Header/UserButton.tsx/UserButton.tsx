@@ -39,7 +39,7 @@ export const UserButton = () => {
       </Link>
       <div>
         <div className="text-xs">{isAuthenticated && user ? user?.username : 'Гость'}</div>
-        {isAuthenticated + ''}
+       
         {!isAuthenticated ? (
           <Link href="/auth">
             <Button variant="filled" size="compact-xs">

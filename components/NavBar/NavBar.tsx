@@ -12,7 +12,9 @@ import {
 import { LinksGroup } from './NavbarLinksGroup';
 //import { Logo } from './Logo';
 import classes from './NavbarNested.module.css';
+import { Routes } from '@/global/ROUTES';
 
+/*
 const mockdata = [
   { label: 'Dashboard', icon: IconGauge },
   {
@@ -48,9 +50,10 @@ const mockdata = [
     ],
   },
 ];
+*/
 
 export function NavbarNested() {
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label} />);
+  const links = Routes.DASHBOARD.pages.map((item) => <LinksGroup {...item} key={item.label} />);
 
   return (
     <nav className={classes.navbar}>
@@ -65,9 +68,9 @@ export function NavbarNested() {
         <div className={classes.linksInner}>{links}</div>
       </ScrollArea>
 
-      <div className={classes.footer}>
+  {/*}    <div className={classes.footer}>
         user but
-      </div>
+      </div>*/}
     </nav>
   );
 }

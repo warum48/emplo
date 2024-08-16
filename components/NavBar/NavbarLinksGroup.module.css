@@ -3,7 +3,8 @@
     display: block;
     width: 100%;
     padding: var(--mantine-spacing-xs) var(--mantine-spacing-md) var(--mantine-spacing-xs) var(--mantine-spacing-lg); /* ... md*/
-    color: var(--mantine-color-text);
+    /*color: var(--mantine-color-text);*/
+    color: var(--mantine-color-light-0);
     font-size: var(--mantine-font-size-sm);
   
     @mixin hover {
@@ -13,7 +14,7 @@
   }
   
   .link {
-    font-weight: 500;
+    font-weight: 400;
     display: block;
     text-decoration: none;
     padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
@@ -21,8 +22,8 @@
     /*margin-left: var(--mantine-spacing-xl);*/
     margin-left:32px;
     font-size: var(--mantine-font-size-sm);
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-    border-left: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
+    color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-0));
+    border-left: 1px solid light-dark(var(--mantine-color-dark-4), var(--mantine-color-dark-4));
   
     @mixin hover {
       background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
@@ -33,3 +34,81 @@
   .chevron {
     transition: transform 200ms ease;
   }
+
+
+
+
+
+  @media(max-width: $mantine-breakpoint-xs) {
+    .control {
+      //margin-left: 0;
+      padding: 4px var(--mantine-spacing-md);
+    }
+  }
+
+  .level1link, .level1link:hover, .level1link:hover button {
+    text-decoration: none !important;
+  }
+
+  .active button  {
+    font-weight: 700;
+    color: var(--mantine-color-virilis-green) !important;
+    pointer-events: none;
+    border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
+  }
+
+  .active_with_link button  {
+    font-weight: 700;
+    color: var(--mantine-color-virilis-green) !important;
+    
+    border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
+  }
+
+  .link.active_with_link  {
+    font-weight: 700;
+    color: var(--mantine-color-virilis-green) !important;
+    
+    border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
+  }
+
+  .active_with_link:hover{
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .active:hover{
+    text-decoration: none;
+    cursor: default;
+  }
+
+  /*.active button div div div {
+    
+    color: var(--mantine-color-second-4);
+    background-color:var(--mantine-color-second-0);
+
+  }*/
+
+  .active :global(.mantine-ThemeIcon-root){
+    /* color: pink;  */
+    color: var(--mantine-color-second-4);
+    background-color:var(--mantine-color-second-0);
+
+  }
+  
+
+
+  .chevron_collapsed {
+    transition: transform 200ms ease;
+    position: absolute;
+    top: 7px;
+    left: 40px;
+  }
+
+  .green_dot{
+width: 5px;
+height:5px;
+border-radius: 10px;
+background-color: var(--mantine-color-virilis-green);
+margin: 10px 0;
+  }
+  

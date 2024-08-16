@@ -61,9 +61,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
 
 
-
-        <nav className={` ${compactLayout ?"mt-2" : "mt-5"} text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative`}>
-         
+{/*
+        <nav className={` ${compactLayout ?"mt-2" : "mt-5"} text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative`}>        
             <div className="dashboard-menu-item">
               <Link href="/dashboard" className="flex gap-4 items-center"><IconUser/> Профиль</Link>
             </div>
@@ -73,10 +72,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="dashboard-menu-item">
               <Link href="/dashboard/settings"  className="flex gap-4 items-center"><IconSettings/>Настройки</Link>
             </div>
-            {/*
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard/selected"  className="flex gap-4 items-center"><IconCommand/>Отбор</Link>
-            </div> */}
             <div className="dashboard-menu-item">
               <Link href="/dashboard/resume"  className="flex gap-4 items-center"><IconCommand/>Создать резюме</Link>
             </div>
@@ -86,10 +81,11 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="dashboard-menu-item">
               <Link href="/dashboard/vacancies/create"  className="flex gap-4 items-center"><IconCommand/>Создать вакансию</Link>
             </div>
-            
-          
-        </nav>
-        <NavbarNested/>
+        </nav> */}
+
+
+
+       <NavbarNested/>
       </div>
 
      {/*} <div className="fixed left-0 bottom-0 h-1/2  overflow-hidden w-56 m-4">
