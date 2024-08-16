@@ -81,7 +81,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
         >
           {isLoading ? 'Загрузка...' : 'Поиск'}
         </Button>
-        {error && <div>Error: {error.toString()}</div>}
+        {error && <div>Error: {JSON.stringify(error)}</div>}
       {/*data && (
         <div>
           <h2>Results</h2>

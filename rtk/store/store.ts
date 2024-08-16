@@ -22,6 +22,8 @@ import thunk from 'redux-thunk';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
 import UISettings from '../features/UISettings';
+import { listenerMiddleware } from './listenerMidleware';
+import { vacancyApi } from '../features/vacancy/vacancyZayavkaSlice';
 //import thunk from 'redux-thunk';
 //import { tempSlice } from './features/tempFeature/tempSlice'; // Adjust the path as necessary
 
@@ -30,6 +32,7 @@ const rootReducer = combineReducers({
   [predictorApi.reducerPath]: predictorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
+  [vacancyApi.reducerPath]: vacancyApi.reducer,
 
   createVacancy: persistReducer({ key: 'createVacancyHH', storage }, createVacancySlice),
   createVacancyHH: persistReducer({ key: 'createVacancyHH', storage }, createVacancyHHSlice),
@@ -52,7 +55,7 @@ const store = configureStore({
       thunk: {
         extraArgument: loginAndFetchUser//authApi
       }
-    }).concat(api.middleware, authApi.middleware, predictorApi.middleware)//.concat(thunk),
+    }).concat(api.middleware, authApi.middleware, predictorApi.middleware).prepend(listenerMiddleware.middleware)//.concat(thunk),
   //middleware: (getDefaultMiddleware) =>
   //  getDefaultMiddleware().concat(authApi.middleware).concat(thunk),
     

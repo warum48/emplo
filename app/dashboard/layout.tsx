@@ -13,6 +13,7 @@ import { IconSearch } from '@tabler/icons-react';
 import { RootState } from '@/rtk/store/store';
 import { useSelector } from 'react-redux';
 import { LogoHorizontal } from '@/components/Header/Logos/LogoHorizontal';
+import { NavbarNested } from '@/components/NavBar/NavBar';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -53,10 +54,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         // dark:bg-none
         ></div>
         <div className="w-full py-4 px-8 flex items-center justify-center">
-        <a href="/" className="w-full">{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8"/> : <LogoVertical colorScheme={
+        <Link href="/" className="w-full">{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8"/> : <LogoVertical colorScheme={
           //colorScheme
           'dark'
-          }/>}</a> 
+          }/>}</Link> 
         </div>
 
 
@@ -88,6 +89,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             
           
         </nav>
+        <NavbarNested/>
       </div>
 
      {/*} <div className="fixed left-0 bottom-0 h-1/2  overflow-hidden w-56 m-4">

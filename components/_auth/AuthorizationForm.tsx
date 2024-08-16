@@ -7,7 +7,7 @@ import { ParticlesComponent } from '../Particles/Particles';
 import { useRouter } from 'next/navigation';
 import { useLazyMeQuery, useLoginMutation,  } from '@/rtk/services/authApi'; //useMeQuery
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthState } from '@/rtk/features/authSlice';
+import { setAuthState, setAuthToken } from '@/rtk/features/authSlice';
 import { useCookies } from 'react-cookie';
 import { RootState } from '@/rtk/store/store';
 import { Debugger } from '../__atoms/Debugger/Debugger';
@@ -83,6 +83,7 @@ const AuthorizationForm = () => {
       const bearerToken = `Bearer ${result.jwt_token}`;
       //setToken(bearerToken);
       setToken(result.jwt_token);
+      dispatch(setAuthToken({ token: result.jwt_token }));  
 
       // Fetch user details
       //fetchMe({ 'Authorization': bearerToken });

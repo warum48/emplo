@@ -7,7 +7,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { GlobalProvider } from '@/global/context/ContextGlobal';
 import { useCookies } from 'react-cookie';
-import { setAuthToken, setUser } from '@/rtk/features/authSlice';
+import { setAuthState, setAuthToken, setUser } from '@/rtk/features/authSlice';
 import { useLazyMeQuery } from '@/rtk/services/authApi';
 
 const AuthContext = createContext(null);
@@ -22,13 +22,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   
     useEffect(() => {
       // Check for token in cookies/localStorage
-      const token = cookiesToken; // Implement getCookie to read cookies
+      const token = cookiesToken.jwt_token; // Implement getCookie to read cookies
+      console.log('COOKIE TOKEN', token);
+    //  console.log('JWT TOKEN', cookiesToken.jwt_token)
       if (token) {
         // Dispatch an action to store the token in the Redux state
        // dispatch(setAuthToken(token));
         dispatch(setAuthToken({ token: cookiesToken.jwt_token }));  
         // Fetch user details if token exists
         //dispatch(fetchUserDetails());
+      }else{
+        dispatch(setAuthState({ token: '', isAuthenticated: false }));
       }
     }, [dispatch]);
 
