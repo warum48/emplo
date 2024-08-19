@@ -1,3 +1,5 @@
+import { Gender, RelocationType, Schedule } from "./CandidateSearchForm";
+
 export interface Vacancy {
   id?: number;
   title: string; // Название вакансии
@@ -15,25 +17,39 @@ export interface Vacancy {
   application_deadline: string; // Срок подачи заявок
 }
 
-type Department = 'HR' | 'IT' | 'Finance' | 'Marketing' | 'Sales' | '';
-type ProjectDirection = 'development' | 'analytics' | 'support' | '';
-type MassRecruitment = boolean; // Boolean field for mass recruitment
-type Experience = 'no_experience' | '1_to_3_years' | '3_to_6_years' | 'over_6_years';
+export type Department = 'HR' | 'IT' | 'Finance' | 'Marketing' | 'Sales' | '';
+export type ProjectDirection = 'development' | 'analytics' | 'support' | '';
+export type MassRecruitment = boolean; // Boolean field for mass recruitment
+export type Experience = 'no_experience' | '1_to_3_years' | '3_to_6_years' | 'over_6_years';
 
 export interface VacancyZayavka {
   desiredClosureDate: string,
   jobID: string,
   jobName: string,
   jobTitle: string;
-  //position: string; // Должность
+  
   department: Department; // Подразделение
   projectDirection: ProjectDirection; // Проект/направление
- // vacancyName: string; // Наименование вакансии
- // vacancyId: string; // ID вакансии
- // desiredClosingDate: Date; // Желаемая дата закрытия
+
   massRecruitment: MassRecruitment; // Массовый подбор
   candidateCount: number; // Количество кандидатов
   responsibilities: string; // Обязанности
   conditions: string; // Условия
   requirements: string; // Требования
+
+  area: string[],
+  relocation_type?: RelocationType,
+  schedule: Schedule[],
+  experience: number;
+  gender: Gender;
+  age: { from: number, to: number },
+  salary:number,
+  parsing: any[],//{ hh: boolean, rabota: boolean },
+  postVacancy: any[]//{ hh: boolean, rabota: boolean },
 }
+
+//
+ // vacancyName: string; // Наименование вакансии
+ // vacancyId: string; // ID вакансии
+ // desiredClosingDate: Date; // Желаемая дата закрытия
+ //position: string; // Должность

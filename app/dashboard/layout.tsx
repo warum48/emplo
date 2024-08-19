@@ -44,16 +44,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       dark:from-pink-950/25 dark:via-customGray-800/50   dark:to-customGray-900
       text-white h-screen fixed  
       gradient-border
+      z-10
       "
      // from-gray-100 via-gray-50 to-gray-50/100 
 
       //from-pink-600/65 via-gray-100 to-gray-100 
      // bg-gray-100
       >
-        <div className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[url('/images/menubg.png')] bg-cover dark:bg-none" 
+        <div className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[url('/images/menubg.png')] bg-cover dark:bg-none z-100"  
         // dark:bg-none
         ></div>
-        <div className="w-full py-4 px-8 flex items-center justify-center">
+        <div className="w-full py-4 px-8 flex items-center justify-center z-100 relative">
         <Link href="/" className="w-full">{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8"/> : <LogoVertical colorScheme={
           //colorScheme
           'dark'

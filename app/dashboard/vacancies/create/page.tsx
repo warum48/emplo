@@ -17,7 +17,26 @@ import Head from 'next/head';
 import React from 'react';
 
 const Settings = () => {
-  const [active, setActive] = React.useState(1);
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  const [formData, setFormData] = React.useState({ field1: '', field2: '' });
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
+  const handleNext = (values: any) => {
+    setFormData((prevData) => ({ ...prevData, ...values }));
+    if (activeStep < 1) {
+      setActiveStep(activeStep + 1);
+    } else {
+      console.log('Final form data:', { ...formData, ...values });
+    }
+  };
+
+
+
+
   return (
     <DashBoardPageContainer header="Создать резюме">
       <div className="flex flex-col items-center w-full ">
@@ -47,11 +66,12 @@ const Settings = () => {
      "
           >
             {/*<VacancyCreationFormHH />*/}
-            <VacancyCreationFormZayavka/>
+            <VacancyCreationFormZayavka activeStep={activeStep} onNext={handleNext}/>
           </div>
 
           <div className="w-[250px] pt-8 pl-4">
-            <Stepper active={active} onStepClick={setActive} orientation="vertical">
+            {activeStep}
+            <Stepper active={activeStep} onStepClick={setActiveStep} orientation="vertical">
               <Stepper.Step label="Шаг 1" description="Основная информация" />
               <Stepper.Step label="Шаг 2" description="Контактная информация" />
               <Stepper.Step label="Шаг 3" description="Выбор типа публикации" />

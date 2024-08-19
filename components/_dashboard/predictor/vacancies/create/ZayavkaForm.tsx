@@ -18,21 +18,46 @@ import { createVacancyHH } from '@/rtk/features/vacancy/vacancySliceHH';
 import { AppDispatch } from '@/rtk/store/store';
 import { VacancyZayavka } from '@/types/Vacancy';
 import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyZayavkaSlice';
+import { RelocationType } from '@/types/CandidateSearchForm';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyApiSlice';
 
+type TProps = {
+  activeStep: number;
+  onNext: (values: any) => void;
+}
 
-export const VacancyCreationFormZayavka = () => {
+export const VacancyCreationFormZayavka = ({activeStep, onNext}: TProps) => {
   const dispatch = useDispatch<AppDispatch>(); 
   const [createVacancy] = useCreateVacancyMutation();
 
   const form = useForm<VacancyZayavka>({
     initialValues: {
+    /*  jobTitle: '',
+      department: '',
+      projectDirection: '',
+      jobName: '',
+      jobID: '',
+      desiredClosureDate: '',
+      massRecruitment: false,
+      candidateCount: 1,
+      responsibilities: '',
+      conditions: '',
+      requirements: '',*/
       jobTitle: '',
       department: '',
       projectDirection: '',
       jobName: '',
       jobID: '',
       desiredClosureDate: '',
+      area: [],
+      relocation_type: undefined,
+      schedule: [],
+      experience: 0,
+      gender: 'male',
+      age: { from: 0, to: 0 },
+      salary: 0,
+      parsing: [],//{ hh: false, rabota: false },
+      postVacancy: [],//{ hh: false, rabota: false },
       massRecruitment: false,
       candidateCount: 1,
       responsibilities: '',
@@ -55,7 +80,7 @@ export const VacancyCreationFormZayavka = () => {
 
   const handleSubmit = async (values: VacancyZayavka) => {
     try {
-      await createVacancy(values).unwrap();
+      //!!!!await createVacancy(values).unwrap();
       console.log('Vacancy created successfully');
     } catch (error) {
       console.error('Failed to create vacancy:', error);
@@ -75,6 +100,8 @@ export const VacancyCreationFormZayavka = () => {
         <div className="flex flex-col gap-6 w-full max-w-full">
           <Title order={2} className="font-light">Основная информация</Title>
 
+          {activeStep === 0 && (
+            <>
           <TextInput
             label="Должность"
             placeholder="штатное расписание для совместимости с 1С или системами Заказчика"
@@ -155,6 +182,146 @@ export const VacancyCreationFormZayavka = () => {
             minRows={4}
             {...form.getInputProps('requirements')}
           />
+          </>)}
+
+          {/*---------------------------------*/}
+          {activeStep === 1 && (
+            <>
+          <Select
+            label="Метро/район"
+            placeholder="Выберите один или несколько регионов"
+            data={[]} // Replace with actual data
+            multiple
+            {...form.getInputProps('area')}
+          />
+
+          <Select
+            label="Готовность к переезду"
+            placeholder="Выберите готовность к переезду"
+            data={[
+              { value: 'living_or_relocation', label: 'Проживание или переезд' },
+              { value: 'living', label: 'Проживание' },
+              { value: 'relocation', label: 'Переезд' },
+            ]}
+            {...form.getInputProps('relocationType')}
+          />
+
+          <Checkbox.Group
+            label="График работы"
+            {...form.getInputProps('schedule')}
+          >
+            <Checkbox value="fullDay" label="Полный день" />
+            <Checkbox value="shift" label="Сменный график" />
+            <Checkbox value="flexible" label="Гибкий" />
+            <Checkbox value="remote" label="Удаленная работа" />
+            <Checkbox value="flyInFlyOut" label="Вахта" />
+          </Checkbox.Group> 
+
+          <NumberInput
+            label="Опыт работы (лет)"
+            labelProps={{ style: customLabelStyle }}
+            placeholder="Введите количество лет опыта"
+            min={0}
+            {...form.getInputProps('experience')}
+          />
+
+          <Select
+            label="Пол"
+            placeholder="Выберите пол"
+            data={[
+              { value: 'male', label: 'Муж' },
+              { value: 'female', label: 'Жен' },
+            ]}
+            {...form.getInputProps('gender')}
+          />
+
+          <Group>
+            <NumberInput
+              label="Возраст (от)"
+              labelProps={{ style: customLabelStyle }}
+              placeholder="Введите возраст от"
+              min={0}
+              {...form.getInputProps('age.from')}
+            />
+
+            <NumberInput
+              label="Возраст (до)"
+              labelProps={{ style: customLabelStyle }}
+              placeholder="Введите возраст до (не обязательно)"
+              min={0}
+              {...form.getInputProps('age.to')}
+            />
+          </Group>
+
+          <NumberInput
+            label="Зарплата до"
+            labelProps={{ style: customLabelStyle }}
+            placeholder="Введите зарплату до (не обязательно)"
+            min={0}
+            {...form.getInputProps('salary')}
+          />
+
+</>)}
+
+{activeStep === 2 && (
+            <>
+
+         <Checkbox.Group
+            label="Парсинг"
+            {...form.getInputProps('parsing')}
+          >
+            <Checkbox value="hh" label="hh.ru" />
+            <Checkbox value="rabota" label="rabota.ru" />
+          </Checkbox.Group>
+
+          <Checkbox.Group
+            label="Разместить вакансию"
+            {...form.getInputProps('postVacancy')}
+          >
+            <Checkbox value="hh" label="hh.ru" />
+            <Checkbox value="rabota" label="rabota.ru" />
+          </Checkbox.Group>
+          
+
+          </>)}
+
+{/*
+          <Checkbox
+            label="Массовый подбор"
+            {...form.getInputProps('massRecruitment', { type: 'checkbox' })}
+          />
+
+          <NumberInput
+            label="Количество кандидатов"
+            labelProps={{ style: customLabelStyle }}
+            placeholder="Введите количество кандидатов"
+            min={1}
+            {...form.getInputProps('candidateCount')}
+          />
+
+          <Textarea
+            label="Обязанности"
+            placeholder="Введите обязанности"
+            labelProps={{ style: customLabelStyle }}
+            {...form.getInputProps('responsibilities')}
+          />
+
+          <Textarea
+            label="Условия"
+            placeholder="Введите условия"
+            labelProps={{ style: customLabelStyle }}
+            {...form.getInputProps('conditions')}
+          />
+
+          <Textarea
+            label="Требования"
+            placeholder="Введите требования"
+            labelProps={{ style: customLabelStyle }}
+            {...form.getInputProps('requirements')}
+          />
+          */}
+
+
 
           <div className="w-full flex justify-center">
             <Button mt="md" type="submit" className='w-full max-w-80'>

@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 //import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
 import '@/styles/globals.css';
+import '@/styles/styles.css';
 import '@/styles/gradient_border.css';
 //
 //type ColorScheme = 'light' | 'dark';

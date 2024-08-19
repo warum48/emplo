@@ -3,14 +3,20 @@ import { Paper, rem } from "@mantine/core"
 import { IconChevronRight } from "@tabler/icons-react"
 import React from "react";
 import classes from "./CollapseButton.module.css"
+import { RootState } from "@/rtk/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { setLeftSideMenuCollapsed } from '@/rtk/features/UISettings';
 
 export const CollapseButton = () => {
    // const {navBarCollapsed, setNavBarCollapsed} = React.useContext(GlobalContext);
+   const leftSideMenuCollapsed = useSelector((state: RootState) => state.UISettings.leftSideMenuCollapsed);
+   const dispatch = useDispatch();
     
     return(
-        <Paper withBorder shadow="0" className={classes.but} onClick={() => {}
+        <Paper withBorder shadow="0" className={classes.but} onClick={() => //{}
        // setNavBarCollapsed(!navBarCollapsed)
-        }>
+       dispatch(setLeftSideMenuCollapsed (leftSideMenuCollapsed))}
+        >
             <div className={classes.overlay}></div>
             <IconChevronRight
               stroke={1.5}
@@ -18,7 +24,7 @@ export const CollapseButton = () => {
 
                 width: rem(16),
                 height: rem(16),
-               // transform: !navBarCollapsed ? 'rotate(-180deg)' : 'none',
+                transform: !leftSideMenuCollapsed ? 'rotate(-180deg)' : 'none',
               }}
             />
         </Paper>

@@ -1,6 +1,6 @@
 .but{
 position: absolute;
-bottom: 0;
+bottom: 50%;
 right:0;
 width: 24px;
 height: 24px;
@@ -10,6 +10,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 cursor: pointer;
+z-index:400;
 }
 
 .overlay{

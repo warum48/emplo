@@ -1,0 +1,6 @@
+button {
+    transition: all 0.2s ease-in-out;
+}
+/*button:hover {
+    box-shadow: 0 0 30px 0 rgb(55, 82, 163, 20);
+}*/
