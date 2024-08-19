@@ -128,7 +128,7 @@ const Home = () => {
                                       z-10`}
                         >
                           {extendedSearch ? (
-                            <JobSearchForm gridCols={3} key={'extendedSearch'} />
+                            <JobSearchForm gridCols={3} key={'extendedSearch'} onSearch={onSearch} />
                           ) : (
                             <QuickSearch onSearch={onSearch} />
                           )}

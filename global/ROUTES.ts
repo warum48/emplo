@@ -32,7 +32,7 @@ export const Routes = {
               initiallyOpened: true,
               links: [
                 { label: 'По внутренней базе данных', link: '/dashboard/search' },
-                { label: 'ИИ поиск', link: '/dashboard/search' },
+                { label: 'ИИ поиск', link: '/dashboard/search/ai' },
               ],
             },
             {

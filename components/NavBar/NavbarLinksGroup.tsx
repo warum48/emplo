@@ -74,7 +74,7 @@ export function LinksGroup({
           <Group justify="space-between" gap={0} wrap="nowrap" className="relative">
             <Box style={{ display: 'flex', alignItems: 'center' }}>
               <ThemeIcon variant="light" size={30} radius="xl" p={'0.1rem'}>
-                <Icon style={{ width: rem(18), height: rem(18), color: theme.colors.myCustomPink[1] }} />
+                <Icon style={{ width: rem(18), height: rem(18), color: theme.colors.myCustomPink[3] }} />
               </ThemeIcon>
               {!navBarCollapsed && (
                 <Box ml="md" style={{ textDecoration: 'none !important' }}>

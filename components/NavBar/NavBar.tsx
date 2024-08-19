@@ -13,6 +13,7 @@ import { LinksGroup } from './NavbarLinksGroup';
 //import { Logo } from './Logo';
 import classes from './NavbarNested.module.css';
 import { Routes } from '@/global/ROUTES';
+import { CollapseButton } from './CollapseButton';
 
 /*
 const mockdata = [
@@ -54,6 +55,7 @@ const mockdata = [
 
 export function NavbarNested() {
   const links = Routes.DASHBOARD.pages.map((item) => <LinksGroup {...item} key={item.label} />);
+  const isMobile = false;
 
   return (
     <nav className={classes.navbar}>
@@ -63,6 +65,7 @@ export function NavbarNested() {
           <Code fw={700}>v3.1.2</Code>
         </Group>
       </div> */}
+      {!isMobile && <CollapseButton />}
 
       <ScrollArea className={classes.links}>
         <div className={classes.linksInner}>{links}</div>

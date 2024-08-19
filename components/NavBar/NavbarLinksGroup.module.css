@@ -74,6 +74,7 @@
   .active_with_link:hover{
     text-decoration: none;
     cursor: pointer;
+    color: var(--mantine-color-my-custom-pink-5) !important;
   }
 
   .active:hover{

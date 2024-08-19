@@ -24,9 +24,11 @@ import { Preloader } from '../__atoms/Preloader/Preloader';
 
 type TProps = {
   gridCols?: number;
+  onSearch?: () => void;
+  searchType?: 'inner' | 'outer';
 };
 
-const JobSearchForm = ({ gridCols = 1 }: TProps) => {
+const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}: TProps) => {
   //const dispatch = useDispatch();
   //const formState = useSelector((state: RootState) => state.jobSearch);
 
@@ -34,6 +36,7 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
   const formState = useSelector((state: RootState) => state.jobSearch);
   //const [searchCandidates] = useSearchCandidatesMutation();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
+  const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] = useSearchCandidatesMutation();
 
   //const form = useForm({
   //  initialValues: formState,
@@ -43,10 +46,12 @@ const JobSearchForm = ({ gridCols = 1 }: TProps) => {
   const handleSubmit = async (values: typeof form.values) => {
     console.log('submit', values);
     try {
-      const candidates = await searchCandidates(values).unwrap();
+     // const candidates = await searchHHCandidates(values).unwrap();
+      const candidates =  searchType === 'inner' ? await searchCandidates(values).unwrap() : await searchHHCandidates(values).unwrap();
       console.log('Candidates:', candidates);
       if (Array.isArray(candidates?.candidates)) {
       dispatch(setSearchResults(candidates));
+      onSearch();
       }else{
         console.error('Failed to search candidates: results is not an array');
       }
