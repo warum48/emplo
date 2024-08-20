@@ -19,7 +19,7 @@
     text-decoration: none;
     box-sizing: border-box;
     padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
-    padding-left: var(--mantine-spacing-lg); /*md or xl*/
+    padding-left: var(--mantine-spacing-xl); /*md or xl*/
     /*margin-left: var(--mantine-spacing-xl);*/
     margin-left:32px;
     font-size: var(--mantine-font-size-sm);
@@ -52,23 +52,23 @@
   }
 
   .active button  {
-    font-weight: 700;
+   /* font-weight: 700;*/
     color: var(--mantine-color-virilis-green) !important;
     pointer-events: none;
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
   }
 
   .active_with_link button  {
-    font-weight: 700;
+   /* font-weight: 700;*/
     color: var(--mantine-color-virilis-green) !important;
     
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
   }
 
   .link.active_with_link  {
-    font-weight: 700;
-    color: var(--mantine-color-virilis-green) !important;
-    
+   /* font-weight: 700; */
+   color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-2));
+    padding-left: 28px ;
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
   }
 

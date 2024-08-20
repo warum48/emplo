@@ -41,7 +41,8 @@ export const Routes = {
               initiallyOpened: true,
               links: [
                 { label: 'Список вакансий', link: '/dashboard/vacancies' },
-                { label: 'Новая заявка', link: '/dashboard/vacancies/create' },
+                { label: 'Новая заявка 1С', link: '/dashboard/vacancies/create' },
+                { label: 'Новая заявка HH', link: '/dashboard/vacancies/createHH' },
               ],
             },
             { label: 'Подать резюме', icon: IconPresentationAnalytics, link: '/dashboard/resume' },

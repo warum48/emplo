@@ -18,8 +18,8 @@ import React from 'react';
 
 const Settings = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-
   const [formData, setFormData] = React.useState({ field1: '', field2: '' });
+  const stepNames = ["Основная информация","Критерии", "Настройки и администрирование"] //"Этапы работы с кандидатами","Параметры поиска","Согласование","История"
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
@@ -34,13 +34,10 @@ const Settings = () => {
     }
   };
 
-
-
-
   return (
     <DashBoardPageContainer header="Создать резюме">
       <div className="flex flex-col items-center w-full ">
-        <div className="absolute -left-[100px]  top-1/5 w-1/2 h-1/2 ">
+        <div className="absolute -left-[100px]  top-1/5 w-1/2 h-[400px] ">
           <div
             className="absolute scale-y-150 left-0 top-0 right-0 bottom-0 
           bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-300/50 via-cyan-300/0 to-blue-600/0
@@ -50,7 +47,7 @@ const Settings = () => {
           ></div>
         </div>
 
-        <div className="absolute right-[150px] top-0 w-1/2 h-1/2 ">
+        <div className="absolute right-[150px] top-0 w-1/2 h-[400px] ">
           <div
             className="absolute scale-y-120 scale-x-150 left-0 top-0 right-0 bottom-0 
           bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-fuchsia-200/30 via-purple-600/0 to-blue-600/0
@@ -66,15 +63,21 @@ const Settings = () => {
      "
           >
             {/*<VacancyCreationFormHH />*/}
-            <VacancyCreationFormZayavka activeStep={activeStep} onNext={handleNext}/>
+            <VacancyCreationFormZayavka activeStep={activeStep} onNext={handleNext} stepNames={stepNames} setActiveStep={setActiveStep}/>
           </div>
 
           <div className="w-[250px] pt-8 pl-4">
             {activeStep}
             <Stepper active={activeStep} onStepClick={setActiveStep} orientation="vertical">
-              <Stepper.Step label="Шаг 1" description="Основная информация" />
+             {/*} <Stepper.Step label="Шаг 1" description="Основная информация" />
               <Stepper.Step label="Шаг 2" description="Контактная информация" />
-              <Stepper.Step label="Шаг 3" description="Выбор типа публикации" />
+              <Stepper.Step label="Шаг 3" description="Выбор типа публикации" /> 
+              <Stepper.Step label={name} description={''} />
+              */}
+              {stepNames.map((name, index) => (
+                
+                <Stepper.Step label={"Шаг "+(index+1)} description={name} />
+              ))}
             </Stepper>
           </div>
         </div>
