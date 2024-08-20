@@ -6,4 +6,4 @@ export const STYLES = {
     
 }
 
-export const apiPath = 'http://192.168.0.230:8005/api/';
+export const apiPath = process.env.NEXT_PUBLIC_API_PATH;//'http://192.168.0.230:8005/api/';

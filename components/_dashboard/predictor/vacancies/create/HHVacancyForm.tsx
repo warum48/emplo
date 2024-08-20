@@ -9,11 +9,13 @@ import {
   Group,
   Select,
   Checkbox,
+  Divider,
 } from '@mantine/core';
 import { useDispatch } from 'react-redux';
 import { createVacancy } from '@/rtk/features/vacancy/vacancySlice';
 import { NewVacancyFormValues } from '@/types/HHVacancy';
 import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancySliceHHReal';
+import { STYLES } from '@/global/CONSTS';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyZayavkaSlice';
 
 const NewVacancyForm = () => {
@@ -79,11 +81,19 @@ const NewVacancyForm = () => {
     }
   };
 
+  const customLabelStyle = {
+    marginBottom: STYLES.FORM.labelMargin,
+  };
+
   return (
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+    <div className="p-4 w-full relative max-w-full text-black dark:text-white">
+    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}
+    className="text-left grid grid-cols-1 gap-6 w-full max-w-full relative"
+    >
       {/* Job Name */}
       <TextInput
         label="Название вакансии *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Введите название вакансии"
         {...form.getInputProps('name')}
       />
@@ -91,6 +101,7 @@ const NewVacancyForm = () => {
       {/* Professional Roles */}
       <TextInput
         label="Должность *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Введите должность"
         {...form.getInputProps('professional_roles')}
       />
@@ -98,6 +109,7 @@ const NewVacancyForm = () => {
       {/* Employment Type */}
       <Select
         label="Тип занятости *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Выберите тип занятости"
         data={[
           { value: 'full', label: 'Полная занятость' },
@@ -112,36 +124,47 @@ const NewVacancyForm = () => {
       {/* Area */}
       <TextInput
         label="Регион поиска *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Введите регион"
         {...form.getInputProps('area')}
       />
 
+<Divider/>
       {/* Salary */}
       <div className="grid grid-cols-1 gap-4">
-        <TextInput
-          label="Валюта"
-          placeholder="Введите код валюты"
-          {...form.getInputProps('salary.currency')}
-        />
+       
+        <Group>
         <NumberInput
           label="Нижняя граница ЗП"
+          labelProps={{ style: customLabelStyle }}
           placeholder="Введите минимальную зарплату"
           {...form.getInputProps('salary.bottom')}
         />
         <NumberInput
           label="Верхняя граница ЗП"
+          labelProps={{ style: customLabelStyle }}
           placeholder="Введите максимальную зарплату"
           {...form.getInputProps('salary.to')}
         />
+         <TextInput
+          label="Валюта"
+          labelProps={{ style: customLabelStyle }}
+          placeholder="Введите код валюты"
+          {...form.getInputProps('salary.currency')}
+        />
+        </Group>
         <Checkbox
           label="С вычетом налога"
+          
           {...form.getInputProps('salary.gross', { type: 'checkbox' })}
         />
       </div>
+      <Divider/>
 
       {/* Vacancy Type */}
       <Select
         label="Тип вакансии *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Выберите тип вакансии"
         data={[
           { value: 'open', label: 'Открытая' },
@@ -155,6 +178,7 @@ const NewVacancyForm = () => {
       {/* Description */}
       <Textarea
         label="Описание вакансии *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Опишите вакансию"
         {...form.getInputProps('description')}
       />
@@ -162,6 +186,7 @@ const NewVacancyForm = () => {
       {/* Billing Type */}
       <Select
         label="Система биллинга *"
+        labelProps={{ style: customLabelStyle }}
         placeholder="Выберите систему биллинга"
         data={[
           { value: 'free', label: 'Бесплатная' },
@@ -171,6 +196,8 @@ const NewVacancyForm = () => {
         ]}
         {...form.getInputProps('billing_type')}
       />
+
+<Divider/>
 
       {/* Checkboxes */}
       <Checkbox
@@ -197,6 +224,7 @@ const NewVacancyForm = () => {
         <Button type="submit">Создать вакансию</Button>
       </Group>
     </form>
+    </div>
   );
 };
 
