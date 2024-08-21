@@ -67,14 +67,14 @@
 
   .link.active_with_link  {
    /* font-weight: 700; */
-   color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-2));
+   color: light-dark(var(--mantine-color-dark-2), var(--mantine-color-dark-2));
     padding-left: 28px ;
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
   }
 
   .active_with_link:hover{
     text-decoration: none;
-    color: black !important;
+   /* color: black !important; */
     background-color: none !important;
     background: none !important;
     cursor: default;
