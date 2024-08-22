@@ -68,7 +68,7 @@
   .link.active_with_link  {
    /* font-weight: 700; */
    color: light-dark(var(--mantine-color-dark-2), var(--mantine-color-dark-2));
-    padding-left: 28px ;
+    padding-left: 29px ;
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
   }
 
@@ -114,7 +114,7 @@
 width: 5px;
 height:5px;
 border-radius: 10px;
-background-color: var(--mantine-color-my-custom-pink-3);
-margin-left: -20px;
+background-color: var(--mantine-color-my-custom-pink-1);
+/*margin-left: -10px;*/
   }
   

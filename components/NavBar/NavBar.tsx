@@ -63,7 +63,7 @@ export function NavbarNested() {
 
   return (
     
-    <nav className={classes.navbar + ' transition-all ' +(  leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.navBarInnerWidth_collapsed : STYLES.LEFT_SIDE_NAVBAR.navBarInnerWidth_expanded)}>
+    <nav className={classes.navbar + ' =transition-all ' +(  leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.navBarInnerWidth_collapsed : STYLES.LEFT_SIDE_NAVBAR.navBarInnerWidth_expanded)}>
       {/*<div className={classes.header}>
         <Group justify="space-between">
           logo

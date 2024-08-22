@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import { LogoHorizontal } from '@/components/Header/Logos/LogoHorizontal';
 import { NavbarNested } from '@/components/NavBar/NavBar';
 import { LogoNoText } from '@/components/Header/Logos/LogoNoText';
+import { STYLES } from '@/global/CONSTS';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -33,7 +34,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <DashBoardHeader />
 
       <div
-        className="
+        className={`
       bg-gradient-to-t
       
 
@@ -46,7 +47,8 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       text-white h-screen fixed  
       gradient-border
       z-10
-      "
+      ${leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.navBarWidth_collapsed : STYLES.LEFT_SIDE_NAVBAR.navBarWidth_expanded}
+      `}
         //min-w-16
         // from-gray-100 via-gray-50 to-gray-50/100
 
@@ -60,7 +62,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="w-full py-4 px-8 flex items-center justify-center z-100 relative ">
           <Link href="/" className="w-full ">
             {compactLayout ? (
-              leftSideMenuCollapsed ? <LogoNoText/> : <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8" />
+              leftSideMenuCollapsed   ? <LogoNoText/> : <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8" />
             ) : (
               leftSideMenuCollapsed ? <LogoNoText/> : <LogoVertical
                 colorScheme={
@@ -105,7 +107,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       
       </div>*/}
       <div
-        className={` ${leftSideMenuCollapsed ? 'ml-16' : 'ml-64'}   h-full flex-1  p-0 transition-all
+        className={` ${leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_collapsed : STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_expanded}   h-full flex-1  p-0 transition-all
       bg-gradient-to-br
        from-gray-100/100 via-gray-100 to-customGray-200
 relative
