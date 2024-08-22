@@ -21,7 +21,13 @@ export const vacancyApi = createApi({
     getMe: builder.query<any, void>({ //<UserDetails, void>
       query: () => 'hhru/me',
     }),
+    getVacancyById:builder.query<any, string>({
+      query: (id) => `hhru/vacancies/${id}`,
+    }),
+    getVacancyNegotiationsById:builder.query<any, string>({
+      query: (id) => `hhru/vacancies/negotiations/${id}`,
+    }),
   }),
 });
 
-export const { useCreateVacancyMutation , useGetVacanciesQuery, useGetMeQuery} = vacancyApi;
+export const { useCreateVacancyMutation , useGetVacanciesQuery, useGetMeQuery, useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery} = vacancyApi;

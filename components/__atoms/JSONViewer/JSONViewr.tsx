@@ -5,7 +5,7 @@ import * as React from 'react';
 export const JSONViewer: React.FC<{ data: any }> = ({ data }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
   return (
-    <Box>
+    <Box className="">
       {isExpanded ? (
         <>
           <a onClick={()=>{setIsExpanded(false)}}>collapse</a>
@@ -16,7 +16,7 @@ export const JSONViewer: React.FC<{ data: any }> = ({ data }) => {
           </pre>
         </>
       ) : (
-        <a onClick={()=>{setIsExpanded(true)}}>expand debug</a>
+        <a onClick={()=>{setIsExpanded(true)}} className="text-xs text-gray-500 cursor-pointer">data</a>
       )}
     </Box>
   );

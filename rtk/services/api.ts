@@ -1,5 +1,6 @@
 import { apiPath } from '@/global/CONSTS';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { customBaseQuery } from './customBaseQuery';
 
 export interface SearchRequest {
   specialty: string;
@@ -26,7 +27,8 @@ export const api = createApi({
       query: (id) => `posts/${id}`,
     }),
   }),*/
-  baseQuery: fetchBaseQuery({ baseUrl: apiPath }),
+  //baseQuery: fetchBaseQuery({ baseUrl: apiPath }),
+  baseQuery: customBaseQuery,
   endpoints: (builder) => ({
     getCandidates: builder.query<any[], void>({ //
       query: () => 'candidates/',

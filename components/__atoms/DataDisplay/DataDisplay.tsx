@@ -7,7 +7,7 @@ interface DataDisplayProps {
 const DataDisplay: React.FC<DataDisplayProps> = ({ data }) => {
   const renderData = (data: Record<string, any>) => {
     return Object.entries(data || {} ).map(([key, value]) => (
-      <div key={key} className="mb-4">
+      <div key={key} className="mb-1 text-xs">
         <span className="font-semibold text-gray-700 dark:text-gray-200">{key}:</span>
         {typeof value === 'object' && value !== null ? (
           <div className="ml-4 border-l-2 border-gray-300 pl-4">
@@ -21,7 +21,7 @@ const DataDisplay: React.FC<DataDisplayProps> = ({ data }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-3xl overflow-auto">
       {renderData(data)}
     </div>
   );

@@ -18,9 +18,10 @@ import { updateJobSearchForm } from '@/rtk/features/searchCandidateForm/searchCa
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';
-import { useSearchCandidatesMutation } from '@/rtk/services/api';
+import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from '@/rtk/services/api';
 import { setSearchResults } from '@/rtk/features/search/searchSlice';
 import { Preloader } from '../__atoms/Preloader/Preloader';
+import ErrorList, { ErrorDetail } from '../Errors/ErrorList';
 
 type TProps = {
   gridCols?: number;
@@ -31,12 +32,12 @@ type TProps = {
 const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}: TProps) => {
   //const dispatch = useDispatch();
   //const formState = useSelector((state: RootState) => state.jobSearch);
-
+const [errors, setErrors] = useState<ErrorDetail[]>();
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.jobSearch);
   //const [searchCandidates] = useSearchCandidatesMutation();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
-  const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] = useSearchCandidatesMutation();
+  const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] = useSearchHHCandidatesMutation();
 
   //const form = useForm({
   //  initialValues: formState,
@@ -49,14 +50,29 @@ const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}
      // const candidates = await searchHHCandidates(values).unwrap();
       const candidates =  searchType === 'inner' ? await searchCandidates(values).unwrap() : await searchHHCandidates(values).unwrap();
       console.log('Candidates:', candidates);
+      //@ts-ignore
+      console.log('candidates?.items', candidates?.items);
       if (Array.isArray(candidates?.candidates)) {
       dispatch(setSearchResults(candidates));
       onSearch();
-      }else{
+      }else
+      
+      //@ts-ignore
+      if (Array.isArray(candidates?.items)) {
+        //@ts-ignore
+        dispatch(setSearchResults(candidates?.items));
+        onSearch();
+        }else
+      
+      {
         console.error('Failed to search candidates: results is not an array');
       }
-    } catch (error) {
+    } catch (error:any) {
       console.error('Failed to search candidates:', error);
+     // setErrors(error);
+      if(error?.data?.detail){
+        setErrors(error.data.detail);
+        }
     }
   };
 
@@ -150,7 +166,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}
           </div>
 
           {/* Schedule */}
-      {/*    <Checkbox.Group
+          <Checkbox.Group
             label="График работы *"
             {...form.getInputProps('schedule', { type: 'checkbox' })}
           >
@@ -159,7 +175,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}
             <Checkbox value="flexible" label="Гибкий" mt="xs" />
             <Checkbox value="remote" label="Удаленная работа" mt="xs" />
             <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
-          </Checkbox.Group>*/}
+          </Checkbox.Group>
         </div>
         <div className='flex flex-col gap-6'>
           {/* Skills */}
@@ -178,7 +194,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}
           </div>
 
           {/* Experience */}
-          {/*<Select
+          <Select
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
             placeholder="Нет опыта"
@@ -189,13 +205,14 @@ const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}
               { value: 'moreThan6', label: 'Более 6 лет' },
             ]}
             {...form.getInputProps('experience')}
-          />*/}
+          />
+          {/*
           <NumberInput
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
             placeholder="Введите опыт работы"
             {...form.getInputProps('experience')}
-          />
+          />*/}
 
           {/* Gender */}
           <Select
@@ -244,6 +261,13 @@ const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}
             placeholder="Введите количество резюме"
             {...form.getInputProps('limit')}
           />
+
+{errors  && 
+
+<ErrorList errors={errors} />
+
+
+}
 
           {/* Submit button */}
           <Button mt="md" type="submit" className='w-full max-w-full' disabled={

@@ -13,9 +13,9 @@ export const CollapseButton = () => {
    const dispatch = useDispatch();
     
     return(
-        <Paper withBorder shadow="0" className={classes.but} onClick={() => //{}
+        <div className={classes.but + ' bg-customGray-900 border border-customGray-500'} onClick={() => //{}
        // setNavBarCollapsed(!navBarCollapsed)
-       dispatch(setLeftSideMenuCollapsed (leftSideMenuCollapsed))}
+       dispatch(setLeftSideMenuCollapsed(!leftSideMenuCollapsed))}
         >
             <div className={classes.overlay}></div>
             <IconChevronRight
@@ -27,6 +27,6 @@ export const CollapseButton = () => {
                 transform: !leftSideMenuCollapsed ? 'rotate(-180deg)' : 'none',
               }}
             />
-        </Paper>
+        </div>
     )
             }

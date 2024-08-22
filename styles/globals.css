@@ -48,4 +48,7 @@
     .dashboard-menu-item{
       @apply px-8 py-2 text-sm  hover:bg-gray-700  /*font-semibold*/
     }
+    .form-bg-and-text{
+      @apply text-black dark:text-white bg-white dark:bg-customGray-950/85
+    }
   }

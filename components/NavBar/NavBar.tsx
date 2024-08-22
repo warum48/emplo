@@ -14,6 +14,9 @@ import { LinksGroup } from './NavbarLinksGroup';
 import classes from './NavbarNested.module.css';
 import { Routes } from '@/global/ROUTES';
 import { CollapseButton } from './CollapseButton';
+import { STYLES } from '@/global/CONSTS';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/rtk/store/store';
 
 /*
 const mockdata = [
@@ -54,11 +57,13 @@ const mockdata = [
 */
 
 export function NavbarNested() {
+  const leftSideMenuCollapsed = useSelector((state: RootState) => state.UISettings.leftSideMenuCollapsed);
   const links = Routes.DASHBOARD.pages.map((item) => <LinksGroup {...item} key={item.label} />);
   const isMobile = false;
 
   return (
-    <nav className={classes.navbar}>
+    
+    <nav className={classes.navbar + ' transition-all ' +(  leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.navBarInnerWidth_collapsed : STYLES.LEFT_SIDE_NAVBAR.navBarInnerWidth_expanded)}>
       {/*<div className={classes.header}>
         <Group justify="space-between">
           logo
@@ -66,6 +71,7 @@ export function NavbarNested() {
         </Group>
       </div> */}
       {!isMobile && <CollapseButton />}
+     
 
       <ScrollArea className={classes.links}>
         <div className={classes.linksInner}>{links}</div>
@@ -74,6 +80,8 @@ export function NavbarNested() {
   {/*}    <div className={classes.footer}>
         user but
       </div>*/}
+
+      
     </nav>
   );
 }

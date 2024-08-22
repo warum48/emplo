@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation'; //'next/router';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { GlobalContext } from '@/global/context/ContextGlobal';
 import React from 'react';
+import { RootState } from '@/rtk/store/store';
+import { useSelector } from 'react-redux';
 
 interface LinksGroupProps {
   icon: React.FC<any>;
@@ -31,7 +33,8 @@ export function LinksGroup({
   const [opened, setOpened] = useState(initiallyOpened || false);
   const router = useRouter();
   const pathname = usePathname();
-  const navBarCollapsed = false; //React.useContext(GlobalContext);
+  const navBarCollapsed =  useSelector((state: RootState) => state.UISettings.leftSideMenuCollapsed);//false; //React.useContext(GlobalContext);
+
   const theme = useMantineTheme();
 
   const items = (hasLinks ? links : []).map((link, index) => (

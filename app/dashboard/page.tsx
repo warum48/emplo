@@ -1,6 +1,7 @@
 'use client';
+import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
-import DataDisplay from '@/components/_dashboard/profile/HHMe';
+//import DataDisplay from '@/components/_dashboard/profile/HHMe';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';

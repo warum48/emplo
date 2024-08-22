@@ -14,7 +14,7 @@ import { ResultList } from '@/components/ResultList/ResultList';
 
 import Head from 'next/head';
 
-const Settings = () => {
+const Settings = ({ params }: { params: { slug: string } }) => {
   const vacancies = [
     { name: 'UX/UI дизайнер', employees: [] },
     { name: 'Старший дизайнер проектов', employees: [] },
@@ -50,15 +50,12 @@ const Settings = () => {
     <div
       className="w-[300px]
             min-w-64
-            
-            bg-gray-300 
-            text-black dark:text-white
-            dark:bg-customGray-950/85
+            form-bg-and-text
             shadow
-            bg-white
             relative
             text-sm
             "
+            //bg-gray-300 
             //flex flex-col
             //p-4
     >
@@ -76,7 +73,7 @@ const Settings = () => {
         "
         //
     >
-      <CandidatesTable vacancyId='0'/>
+      <CandidatesTable vacancyId={params.slug}/>
       
     </div>
   </main>

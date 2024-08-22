@@ -2,6 +2,12 @@
 export const STYLES = {
     FORM: {
         labelMargin: '4px',
+    },
+    LEFT_SIDE_NAVBAR: {
+        navBarInnerWidth_expanded: "w-[255px]",
+        navBarInnerWidth_collapsed: "w-[63px]",
+        contentMarginLeft_expanded: "ml-64",
+        contentMarginLeft_collapsed: "ml-40",
     }
     
 }

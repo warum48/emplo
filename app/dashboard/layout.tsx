@@ -14,11 +14,14 @@ import { RootState } from '@/rtk/store/store';
 import { useSelector } from 'react-redux';
 import { LogoHorizontal } from '@/components/Header/Logos/LogoHorizontal';
 import { NavbarNested } from '@/components/NavBar/NavBar';
+import { LogoNoText } from '@/components/Header/Logos/LogoNoText';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-    const { colorScheme, setColorScheme } = useMantineColorScheme();
-    const compactLayout = useSelector((state: RootState) => state.UISettings.compactLayout);
-    const leftSideMenuCollapsed = useSelector((state: RootState) => state.UISettings.leftSideMenuCollapsed);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const compactLayout = useSelector((state: RootState) => state.UISettings.compactLayout);
+  const leftSideMenuCollapsed = useSelector(
+    (state: RootState) => state.UISettings.leftSideMenuCollapsed
+  );
   return (
     <>
       <Head>
@@ -27,12 +30,10 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-     
       <DashBoardHeader />
 
-
-
-      <div className="min-w-64 
+      <div
+        className="
       bg-gradient-to-t
       
 
@@ -46,23 +47,32 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       gradient-border
       z-10
       "
-     // from-gray-100 via-gray-50 to-gray-50/100 
+        //min-w-16
+        // from-gray-100 via-gray-50 to-gray-50/100
 
-      //from-pink-600/65 via-gray-100 to-gray-100 
-     // bg-gray-100
+        //from-pink-600/65 via-gray-100 to-gray-100
+        // bg-gray-100
       >
-        <div className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[url('/images/menubg.png')] bg-cover dark:bg-none z-100"  
-        // dark:bg-none
+        <div
+          className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[url('/images/menubg.png')] bg-cover dark:bg-none z-100"
+          // dark:bg-none
         ></div>
-        <div className="w-full py-4 px-8 flex items-center justify-center z-100 relative">
-        <Link href="/" className="w-full">{ compactLayout ? <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8"/> : <LogoVertical colorScheme={
-          //colorScheme
-          'dark'
-          }/>}</Link> 
+        <div className="w-full py-4 px-8 flex items-center justify-center z-100 relative ">
+          <Link href="/" className="w-full ">
+            {compactLayout ? (
+              leftSideMenuCollapsed ? <LogoNoText/> : <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8" />
+            ) : (
+              leftSideMenuCollapsed ? <LogoNoText/> : <LogoVertical
+                colorScheme={
+                  //colorScheme
+                  'dark'
+                }
+              />
+            )}
+          </Link>
         </div>
 
-
-{/*
+        {/*
         <nav className={` ${compactLayout ?"mt-2" : "mt-5"} text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative`}>        
             <div className="dashboard-menu-item">
               <Link href="/dashboard" className="flex gap-4 items-center"><IconUser/> Профиль</Link>
@@ -84,43 +94,39 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
         </nav> */}
 
-
-
-       <NavbarNested/>
+        <NavbarNested />
       </div>
 
-     {/*} <div className="fixed left-0 bottom-0 h-1/2  overflow-hidden w-56 m-4">
+      {/*} <div className="fixed left-0 bottom-0 h-1/2  overflow-hidden w-56 m-4">
         <ParticlesComponent/>
       </div>*/}
-      
+
       {/*<div className="h-[70px] ml-64 p-0 bg-gray-100">
       
       </div>*/}
-      <div className=" h-full flex-1 ml-64 p-0 
+      <div
+        className={` ${leftSideMenuCollapsed ? 'ml-16' : 'ml-64'}   h-full flex-1  p-0 transition-all
       bg-gradient-to-br
        from-gray-100/100 via-gray-100 to-customGray-200
 relative
        dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
       overflow-x-hidden
-
-       
-       "
-       //
-       //dark:bg-customGray-900
-       //bg-gray-100 
-       >
-     {/*   <div className="absolute right-0 top-0 w-1/4 h-[40vh] ">
+`}
+        //
+        //dark:bg-customGray-900
+        //bg-gray-100
+      >
+        {/*   <div className="absolute right-0 top-0 w-1/4 h-[40vh] ">
       <div className="-mt-96 -mr-96 absolute scale-x-150 left-0 top-0 right-0 bottom-0 
           bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-pink-200/50 via-pink-600/0 to-blue-600/0
           dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-pink-800/30 dark:via-pink-800/0 dark:to-blue-600/0
           "></div>
           </div>*/}
-         
+
         {/*} <header className="bg-white p-4 shadow">
           <h1 className="text-xl font-bold">Main Content</h1>
         </header>*/}
         {children}
-        
       </div>
     </>
   );

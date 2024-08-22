@@ -2,6 +2,10 @@ import { Table, Checkbox, Button, Badge, Menu, ActionIcon, Group, Text } from '@
 import { useState } from 'react';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { StyledButton } from '@/components/__atoms/Buttons/StyledButton';
+import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/features/vacancy/vacancySliceHHReal';
+import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
+//import DataDisplay from '@/components/_dashboard/profile/HHMe';
 
 interface Candidate {
   id: number;
@@ -115,7 +119,15 @@ const candidates: Candidate[] = [
   },
 ];
 
-export function CandidatesTable() { //default 
+type TProps = {
+  vacancyId:string;
+}
+
+export function CandidatesTable({vacancyId}:TProps) { //default 
+
+  const { data: data_vacancies, error, isLoading } = useGetVacancyByIdQuery(vacancyId);
+  const { data: data_neg, error:error_neg, isLoading:isLoading_neg } = useGetVacancyNegotiationsByIdQuery(vacancyId);
+
   return (
     <div className="p-4 text-black dark:text-white"
     //w-full max-w-full 
@@ -126,7 +138,7 @@ export function CandidatesTable() { //default
         <Text size="xl" 
        // weight={700}
         >UX/UI дизайнер</Text>
-        <Button className="bg-green-600 text-white">Добавить кандидата</Button>
+        <Button className="bg-green-600 text-white">Добавить кандидата</Button> <JSONViewer data={data_vacancies} />
       </Group>
       <Table striped highlightOnHover className="mt-4">
         <Table.Thead>
@@ -174,6 +186,10 @@ export function CandidatesTable() { //default
           ))}
         </tbody>
       </Table>
+      <br/><br/>
+      <DataDisplay data={data_vacancies} />
+      <br/><br/>
+      <DataDisplay data={data_neg} />
     </div>
   );
 }

@@ -46,6 +46,7 @@ import { GlobalProvider } from '@/global/context/ContextGlobal';
 import { useCookies } from 'react-cookie';
 import { setAuthToken } from '@/rtk/features/authSlice';
 import { AuthProvider } from '@/global/context/AuthProvider';
+import { TailwindClassesGenerator } from '@/components/__atoms/TailwindClassesGeneraor/TailwindClassesGenerator';
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -100,6 +101,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           </Provider>
         </MantineProvider>
         </GlobalProvider>
+        <TailwindClassesGenerator/>
       </body>
     </html>
   );
