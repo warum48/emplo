@@ -76,8 +76,12 @@ export function LinksGroup({
         <UnstyledButton onClick={() => setOpened((o) => !o)} className={classes.control}>
           <Group justify="space-between" gap={0} wrap="nowrap" className="relative">
             <Box style={{ display: 'flex', alignItems: 'center' }}>
-              <ThemeIcon variant="light" size={30} radius="xl" p={'0.1rem'}>
-                <Icon style={{ width: rem(18), height: rem(18), color: navBarCollapsed ? theme.colors.myCustomPink[0] :theme.colors.myCustomPink[3] }} className="transition-all duration-700"/>
+              <ThemeIcon 
+              variant="light" 
+              size={30} radius="xl" p={'0.1rem'}>
+                <Icon style={{ width: rem(18), height: rem(18), 
+                  color: navBarCollapsed ? theme.colors.myCustomPink[0] :theme.colors.myCustomPink[3] 
+                  }} className="transition-all duration-700"/>
               </ThemeIcon>
               {!navBarCollapsed && (
                 <Box ml="md" style={{ textDecoration: 'none !important' }}>
