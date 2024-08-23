@@ -1,4 +1,123 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { TextInput, Button, Group, ActionIcon, Loader } from '@mantine/core';
+import { useClickOutside } from '@mantine/hooks';
+import { IconPencil } from '@tabler/icons-react';
+import { useForm } from '@mantine/form';
+import { useGetMeQuery } from '@/rtk/features/vacancy/vacancySliceHHReal';
+import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+
+interface UserProfile {
+  first_name: string;
+  last_name: string;
+  email: string;
+}
+
+const ProfileForm: React.FC = () => {
+  const { data: data_hhme, error: error_hhme, isLoading: isLoading_hhme } = useGetMeQuery();
+  const [isEditing, setIsEditing] = useState<Record<keyof UserProfile, boolean>>({
+    first_name: false,
+    last_name: false,
+    email: false,
+  });
+  const [hasChanges, setHasChanges] = useState(false);
+
+  const form = useForm<UserProfile>({
+    initialValues: {
+      first_name: '',
+      last_name: '',
+      email: '',
+    },
+  });
+
+  const fields: Array<keyof UserProfile> = ['first_name', 'last_name', 'email'];
+  const clickOutsideRefs = useRef<Record<keyof UserProfile, HTMLInputElement | null>>({
+    first_name: null,
+    last_name: null,
+    email: null,
+  });
+
+  fields.forEach((field) => {
+    useClickOutside(() => handleBlur(field)); //, clickOutsideRefs.current[field]
+  });
+
+  const handleBlur = (field: keyof UserProfile) => {
+    setIsEditing((prev) => ({ ...prev, [field]: false }));
+  };
+
+  const handleEdit = (field: keyof UserProfile) => {
+    setIsEditing((prev) => ({ ...prev, [field]: true }));
+  };
+
+  const handleChange = (field: keyof UserProfile, value: string) => {
+    form.setFieldValue(field, value);
+    setHasChanges(true);
+  };
+
+  const handleSubmit = (values: UserProfile) => {
+    const updatedValues: Partial<UserProfile> = {};
+    fields.forEach((field) => {
+      if (values[field] !== data_hhme?.[field]) {
+        updatedValues[field] = values[field];
+      }
+    });
+    console.log('Submitting updated values:', updatedValues);
+    // Submit updated values logic goes here
+    setHasChanges(false);
+  };
+
+  useEffect(() => {
+    if (data_hhme) {
+      form.setValues({
+        first_name: data_hhme.first_name || '',
+        last_name: data_hhme.last_name || '',
+        email: data_hhme.email || '',
+      });
+    }
+  }, [data_hhme]);
+
+  if (isLoading_hhme) return <Loader />;
+  if (error_hhme) return <div>Error loading profile data</div>;
+
+  return (
+    <>
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        {fields.map((field) => (
+          <div key={field}>
+            {!isEditing[field] ? (
+              <Group align="center">
+                <div>{form.values[field] || data_hhme?.[field]}</div>
+                <ActionIcon onClick={() => handleEdit(field)} radius="xl" variant="light" >
+                  <IconPencil size={18} />
+                </ActionIcon>
+              </Group>
+            ) : (
+              <TextInput
+              ref={(el) => {
+                clickOutsideRefs.current[field] = el;
+              }}
+                value={form.values[field]}
+                onChange={(event) => handleChange(field, event.currentTarget.value)}
+                onBlur={() => handleBlur(field)}
+                autoFocus
+              />
+            )}
+          </div>
+        ))}
+
+        {hasChanges && (
+          <Button type="submit" mt="md">
+            Save
+          </Button>
+        )}
+      </form>
+      <JSONViewer data={form.values} />
+    </>
+  );
+};
+
+export default ProfileForm;
+
+/*import React, { useState, useRef } from 'react';
 import { TextInput, Button, Group, ActionIcon, Loader } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import { IconPencil, IconCheck } from '@tabler/icons-react';
@@ -116,3 +235,4 @@ const ProfileForm: React.FC = () => {
 };
 
 export default ProfileForm;
+*/
