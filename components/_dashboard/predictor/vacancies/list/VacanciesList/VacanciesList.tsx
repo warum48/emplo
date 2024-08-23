@@ -24,7 +24,7 @@ export const VacancyListComponent: React.FC<VacancyProps> = ({ vacancies }) => {
       
       {data_vacancies?.items?.map((vacancy:any, index:number) => (
         
-        <Link href={Routes.DASHBOARD.MAIN + '/vacancies/' + vacancy.id} className="hover:bg-slate-200  dark:hover:bg-slate-700 block px-4 py-2">
+        <Link href={Routes.DASHBOARD.MAIN + '/vacancies/' + vacancy.id} className="hover:bg-slate-200  dark:hover:bg-slate-700 block px-8 py-2">
           {vacancy.name}
         </Link>
       
@@ -32,7 +32,7 @@ export const VacancyListComponent: React.FC<VacancyProps> = ({ vacancies }) => {
       <Divider/>
       {vacancies.map((vacancy, index) => (
         
-        <Link href='' className="hover:bg-slate-200  dark:hover:bg-slate-700 block px-4 py-2">
+        <Link href='' className="hover:bg-slate-200  dark:hover:bg-slate-700 block px-8 py-2">
           {vacancy.name}
         </Link>
       

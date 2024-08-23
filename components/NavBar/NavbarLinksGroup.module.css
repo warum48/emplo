@@ -123,7 +123,7 @@
 width: 5px;
 height:5px;
 border-radius: 10px;
-background-color: var(--mantine-color-my-custom-pink-1);
+background-color: white;  /*var(--mantine-color-my-custom-pink-1);*/
 /*margin-left: -10px;*/
   }
   

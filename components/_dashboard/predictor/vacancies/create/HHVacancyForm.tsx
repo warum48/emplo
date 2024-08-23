@@ -249,3 +249,8 @@ const NewVacancyForm = () => {
 };
 
 export default NewVacancyForm;
+
+
+/*
+I need to make a new form that will be based on current user profile data, it should have 3 fileds (now for test development only, later I will add more fields)  - first name, last name, email, fields should look like a simple text first (data comes from server using rtk-query) , every field should have edit button (as icon with pencil), when user presses edit button simple texts hides and appears input with filled current value, if text input looses foces (user clicks any place on the site besides input) input replaces back with text with new value, 'save' button appears (it was hidden previously) . code should use mantine
+*/
