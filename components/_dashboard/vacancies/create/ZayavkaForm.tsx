@@ -14,10 +14,10 @@ import {
 } from '@mantine/core';
 import { STYLES } from '@/global/CONSTS';
 import { useDispatch } from 'react-redux';
-import { createVacancyHH } from '@/rtk/features/vacancy/vacancySliceHH';
+import { createVacancyHH } from '@/rtk/slices/vacancy/vacancySliceHH';
 import { AppDispatch } from '@/rtk/store/store';
 import { VacancyZayavka } from '@/types/Vacancy';
-import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyZayavkaSlice';
+import { useCreateVacancyMutation } from '@/rtk/slices/vacancy/vacancyZayavkaSlice';
 import { RelocationType } from '@/types/CandidateSearchForm';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyApiSlice';
 

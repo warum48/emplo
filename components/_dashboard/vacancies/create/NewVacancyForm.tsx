@@ -15,7 +15,7 @@ import { STYLES } from '@/global/CONSTS';
 import { useDispatch } from 'react-redux';
 //import { createVacancy } from '@/rtk/features/vacancy/vacancySlice';
 import { DateInput } from '@mantine/dates';
-import { createVacancy } from '@/rtk/features/vacancy/vacancySlice';
+import { createVacancy } from '@/rtk/slices/vacancy/vacancySlice';
 
 const VacancyForm = () => {
   const dispatch = useDispatch();

@@ -5,9 +5,9 @@ import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import './styles.css'; // Ensure your custom CSS for the animation is imported
 import { ParticlesComponent } from '../Particles/Particles';
 import { useRouter } from 'next/navigation';
-import { useLazyMeQuery, useLoginMutation,  } from '@/rtk/services/authApi'; //useMeQuery
+import { useLazyMeQuery, useLoginMutation,  } from '@/rtk/queries/authApi'; //useMeQuery
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthState, setAuthToken } from '@/rtk/features/authSlice';
+import { setAuthState, setAuthToken } from '@/rtk/slices/authSlice';
 import { useCookies } from 'react-cookie';
 import { RootState } from '@/rtk/store/store';
 import { Debugger } from '../__atoms/Debugger/Debugger';

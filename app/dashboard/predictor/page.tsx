@@ -2,7 +2,7 @@
 
 'use client';
 import React from 'react';
-import { useGetCandidatesQuery } from '@/rtk/services/api';
+import { useGetCandidatesQuery } from '@/rtk/queries/candidates';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 

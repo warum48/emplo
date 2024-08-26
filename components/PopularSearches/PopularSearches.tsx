@@ -1,26 +1,39 @@
-import { useSearchCandidatesMutation } from "@/rtk/services/api";
+import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from "@/rtk/queries/candidates";
 import { LinkButton } from "../__atoms/Buttons/LinkButton";
 import { useDispatch } from "react-redux";
-import { setSearchResults, clearSearchResults } from '@/rtk/features/search/searchSlice';
+import { setSearchResults, clearSearchResults } from '@/rtk/slices/search/searchSlice';
 import { useMantineColorScheme } from "@mantine/core";
+import { setSearchHHResults } from "@/rtk/slices/search/searchHHSlice";
 
 type TProps = {
   onSearch: () => void;
   gridCols?: number;
+  searchType?: 'inner' | 'ai';
 }
 
-export const PopularSearches = ({onSearch, gridCols=3}:TProps) => {
+export const PopularSearches = ({onSearch, gridCols=3, searchType='inner'}:TProps) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
+  const [searchAICandidates, { data:data_ai, error:error_ai, isLoading:isLoading_ai }] = useSearchHHCandidatesMutation();
   const dispatch = useDispatch();
 
   const handleSearch = async (specialty:string, area:string[]) => {
     try {
      // await searchCandidates({ specialty, area }).unwrap();
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      const results = await searchCandidates({ specialty, area }).unwrap();
-      if (Array.isArray(results?.candidates)) {
-        dispatch(setSearchResults(results));
+      //const results = await searchCandidates({ specialty, area }).unwrap();
+      const results =
+        searchType === 'inner'
+          ? await searchCandidates({ specialty, area }).unwrap()
+          : await searchAICandidates({ specialty, area }).unwrap();
+
+      if (Array.isArray(results?.items)) {
+        if(searchType === 'inner') {
+          dispatch(setSearchResults(results));
+        }else{
+          dispatch(setSearchHHResults(results));
+        }
+        
         onSearch();
       } else {
         console.error('Failed to search candidates: results is not an array');

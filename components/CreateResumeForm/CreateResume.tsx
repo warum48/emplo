@@ -15,7 +15,7 @@ import {
  // DateInput,
 } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
-import { updateResumeForm } from '@/rtk/features/resumeForm';
+import { updateResumeForm } from '@/rtk/slices/resumeForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';

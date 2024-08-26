@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Divider, Text } from '@mantine/core';
 import Link from 'next/link';
-import { useGetMeQuery, useGetVacanciesQuery } from '@/rtk/features/vacancy/vacancySliceHHReal';
+//import { useGetMeQuery, useGetVacanciesQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import { Routes } from '@/global/ROUTES';
+import { useGetVacanciesQuery } from '@/rtk/queries/vacancy';
 
 type VacanciesList = {
   name: string;

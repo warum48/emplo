@@ -1,4 +1,4 @@
-import { customBaseQuery } from '@/rtk/services/customBaseQuery';
+import { customBaseQuery } from '@/rtk/queries/_customBaseQuery';
 import { NewVacancyFormValues } from '@/types/HHVacancy';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 //import type { NewVacancyFormValues } from '@/types/formTypes';

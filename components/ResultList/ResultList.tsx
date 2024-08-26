@@ -18,7 +18,7 @@ export const ResultList: React.FC = () => {
         <JSONViewer data={results} /></Debugger>
         {/*} <ParticlesComponent /> */}
         <div className={classes.container}>
-            {results.candidates.map((employee:any) => (
+            {results.items.map((employee:any) => (
                 <Employee employee={employee}/>
             ))}
             

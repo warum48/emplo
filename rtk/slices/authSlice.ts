@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../services/authApi';
+import { User } from '../queries/authApi';
 import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
 //import { User } from './authApi';
 

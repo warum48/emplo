@@ -3,28 +3,29 @@ import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
-import { api } from '../services/api';
-import { authApi } from '../services/authApi';
-import someSlice from '../features/someFeature/someSlice';
-import tempSlice from '../features/tempFeature/tempSlice';
-import candidateSearchSlice from '../features/searchCandidateForm/searchCandidate';
-import resumeFormSlice from '../features/resumeForm';
-import createVacancySlice from '../features/vacancy/vacancySlice';
-import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
+import { api } from '../queries/candidates';
+import { authApi } from '../queries/authApi';
+import someSlice from '../slices/someFeature_unused/someSlice';
+import tempSlice from '../slices/tempFeature_unused/tempSlice';
+import candidateSearchSlice from '../slices/searchCandidateForm/searchCandidate';
+import resumeFormSlice from '../slices/resumeForm';
+import createVacancySlice from '../slices/vacancy/vacancySlice';
+import createVacancyHHSlice from '../slices/vacancy/vacancySliceHH';
 //import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
-import UISettingsSlice from '../features/UISettings';
-import searchReducer from '../features/search/searchSlice';
-import authReducer from '../features/authSlice';
-import { predictorApi } from '@/rtk/services/predictorApi';
+import UISettingsSlice from '../slices/UISettings';
+import searchReducer from '../slices/search/searchSlice';
+import searchAIReducer from '../slices/search/searchHHSlice';
+import authReducer from '../slices/authSlice';
+import { predictorApi } from '@/rtk/queries/predictorApi';
 import thunk from 'redux-thunk';
 
 //import { configureStore, createAsyncThunk, createSlice, MiddlewareArray } from '@reduxjs/toolkit';
 import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
-import UISettings from '../features/UISettings';
+import UISettings from '../slices/UISettings';
 import { listenerMiddleware } from './listenerMidleware';
 //import { vacancyApi } from '../features/vacancy/vacancyZayavkaSlice';
-import { vacancyApi } from '../features/vacancy/vacancySliceHHReal';
+import { vacancyApi } from '../queries/vacancy';
 //import thunk from 'redux-thunk';
 //import { tempSlice } from './features/tempFeature/tempSlice'; // Adjust the path as necessary
 
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   createVacancyHH: persistReducer({ key: 'createVacancyHH', storage }, createVacancyHHSlice),
   auth: authReducer,
   search: searchReducer,
+  searchAI: searchAIReducer,
   someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
   jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),

@@ -1,6 +1,6 @@
 // store/searchSlice.ts
 
-import { SearchResponse } from '@/rtk/services/api';
+import { SearchResponse } from '@/rtk/queries/candidates';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {
@@ -10,7 +10,7 @@ interface SearchState {
 const initialState: SearchState = {
   results:  {
     found: 0,
-    candidates: []
+    items: []
   }//[],
 };
 

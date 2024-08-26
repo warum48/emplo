@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const results = useSelector((state: RootState) => state.search.results);
 
-  const hasCandidates = React.useMemo(() => !!results?.candidates && results?.candidates.length > 0, [results?.candidates]);
+  const hasCandidates = React.useMemo(() => !!results?.items && results?.items.length > 0, [results?.items]);
 
   return (
     <>
@@ -25,7 +25,7 @@ const Dashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <DashBoardPageContainer header="Поиск" hasLeftMenu={(results?.candidates && results?.candidates.length > 0)}>
+      <DashBoardPageContainer header="Поиск" hasLeftMenu={(results?.items && results?.items.length > 0)}>
    {/*   <div className="text-sm text-gray-700 dark:text-white my-2">Панель управления / Поиск</div>  
      <h2 className="page-header"
       //page-header-sm
@@ -37,7 +37,7 @@ const Dashboard = () => {
        
         <div
           className={`
-            ${ (results?.candidates && results?.candidates.length > 0) ? " w-1/4 " : "w-full max-w-screen-lg"  }
+            ${ (results?.items && results?.items.length > 0) ? " w-1/4 " : "w-full max-w-screen-lg"  }
            
             
             min-w-64
@@ -51,7 +51,7 @@ const Dashboard = () => {
           //bg-gradient-to-b from-fuchsia-950/95 via-rose-500/95 to-rose-900/95
         >
           {!hasCandidates && <h3 className="dashboard-section-header ml-8 mt-4">Расширенный поиск</h3>}
-          <JobSearchForm gridCols={(results?.candidates && results?.candidates.length > 0) ? 1 : 3}/>
+          <JobSearchForm gridCols={(results?.items && results?.items.length > 0) ? 1 : 3}/>
             
           {/*<div className="px-8">
           <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1} />
@@ -75,7 +75,7 @@ const Dashboard = () => {
         >
           <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1}/>
         </div>*/}
-        {(results?.candidates && results?.candidates.length > 0)  && 
+        {(results?.items && results?.items.length > 0)  && 
         <div className="flex-grow w-full flex-1 px-4 =py-16">
           <ResultList />
         </div>

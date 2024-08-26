@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer/Footer"
 import Header from "@/components/Header/Header"
 import ResumeCard from "@/components/ResumeCard/ResumeCard"
-import { useGetCandidatesQuery } from "@/rtk/services/api"
+import { useGetCandidatesQuery } from "@/rtk/queries/candidates"
 import Head from "next/head"
 
 const ResumePage = ({ params }: { params: { slug: string } }) => {

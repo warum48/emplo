@@ -1,10 +1,10 @@
 import { Button, Input } from "@mantine/core";
 import { useState } from "react";
 
-import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from '@/rtk/services/api';
+import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from '@/rtk/queries/candidates';
 import { useDispatch } from "react-redux";
-import { setSearchResults, clearSearchResults } from '@/rtk/features/search/searchSlice';
-import { setSearchHHResults } from "@/rtk/features/searchHHSlice";
+import { setSearchResults, clearSearchResults } from '@/rtk/slices/search/searchSlice';
+import { setSearchHHResults } from "@/rtk/slices/searchHHSlice";
 
 
 type TProps = {
@@ -25,7 +25,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       //const results = await searchCandidates({ specialty, area }).unwrap();
       const results = await searchCandidates({ specialty, area: [area] }).unwrap();
-      if (Array.isArray(results?.candidates)) {
+      if (Array.isArray(results?.items)) {
         dispatch(setSearchResults(results));
         onSearch();
       } else {
@@ -42,7 +42,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       //const results = await searchCandidates({ specialty, area }).unwrap();
       const results = await searchHHCandidates({ specialty, area: [area] }).unwrap();
-      if (Array.isArray(results?.candidates)) {
+      if (Array.isArray(results?.items)) {
         dispatch(setSearchHHResults(results));
         onSearch();
       } else {

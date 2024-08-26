@@ -2,7 +2,7 @@
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
 import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
-import { CandidatesTable } from '@/components/_dashboard/predictor/vacancies/list/VacanciesList/CandidatesTable';
+import { CandidatesTable } from '@/components/_dashboard/vacancies/list/VacanciesList/CandidatesTable';
 //import VacanciesList from '@/components/_dashboard/predictor/vacancies/list/VacanciesList/VacanciesList';
 import { XY } from '@/components/_dashboard/predictor/XY';
 import ResumeForm from '@/components/CreateResumeForm/CreateResume';

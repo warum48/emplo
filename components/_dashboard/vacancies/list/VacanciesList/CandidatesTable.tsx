@@ -2,7 +2,7 @@ import { Table, Checkbox, Button, Badge, Menu, ActionIcon, Group, Text } from '@
 import { useState } from 'react';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { StyledButton } from '@/components/__atoms/Buttons/StyledButton';
-import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/features/vacancy/vacancySliceHHReal';
+import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
 //import DataDisplay from '@/components/_dashboard/profile/HHMe';

@@ -1,6 +1,6 @@
 import { apiPath } from '@/global/CONSTS';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { customBaseQuery } from './customBaseQuery';
+import { customBaseQuery } from './_customBaseQuery';
 
 export interface SearchRequest {
   specialty: string;
@@ -12,7 +12,7 @@ export interface SearchResponse {
   //data: string;
  // data: {
     found: number,
-    candidates: any//any[];
+    items: any//any[];
  // }
 }
 

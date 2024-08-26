@@ -3,8 +3,8 @@ import { TextInfo, TitleLabel } from '@/components/__atoms/TextBlocks/TextBlocks
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
 import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
-import VacancyCreationFormHH from '@/components/_dashboard/predictor/vacancies/create/HHBasedVacancyForm';
-import { VacancyCreationFormZayavka } from '@/components/_dashboard/predictor/vacancies/create/ZayavkaForm';
+import VacancyCreationFormHH from '@/components/_dashboard/vacancies/create/HHBasedVacancyForm';
+import { VacancyCreationFormZayavka } from '@/components/_dashboard/vacancies/create/ZayavkaForm';
 import { XY } from '@/components/_dashboard/predictor/XY';
 import ResumeForm from '@/components/CreateResumeForm/CreateResume';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';

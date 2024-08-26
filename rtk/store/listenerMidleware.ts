@@ -1,5 +1,5 @@
 import {  createListenerMiddleware } from '@reduxjs/toolkit'
-import {setAuthState, setUser}  from '../features/authSlice';
+import {setAuthState, setUser}  from '../slices/authSlice';
 
 export const listenerMiddleware = createListenerMiddleware();
 

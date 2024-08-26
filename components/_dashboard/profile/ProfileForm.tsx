@@ -3,8 +3,9 @@ import { TextInput, Button, Group, ActionIcon, Loader } from '@mantine/core';
 import { useClickOutside } from '@mantine/hooks';
 import { IconPencil } from '@tabler/icons-react';
 import { useForm } from '@mantine/form';
-import { useGetMeQuery } from '@/rtk/features/vacancy/vacancySliceHHReal';
+//import { useGetMeQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+import { useGetMeQuery } from '@/rtk/queries/vacancy';
 
 interface UserProfile {
   first_name: string;

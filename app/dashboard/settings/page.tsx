@@ -7,7 +7,7 @@ import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
-import { setCompactLayout } from '@/rtk/features/UISettings';
+import { setCompactLayout } from '@/rtk/slices/UISettings';
 import { RootState } from '@/rtk/store/store';
 import { Switch } from '@mantine/core';
 import Head from 'next/head';

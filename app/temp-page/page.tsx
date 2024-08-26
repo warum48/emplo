@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/rtk/store/store'; // Update with the correct path to your store
-import { setTemporaryValue } from '@/rtk/features/tempFeature/tempSlice'; // Update with the correct path to your slice
+import { setTemporaryValue } from '@/rtk/slices/tempFeature_unused/tempSlice'; // Update with the correct path to your slice
 import { Button, TextInput, Container } from '@mantine/core';
 
 const TempPage = () => {

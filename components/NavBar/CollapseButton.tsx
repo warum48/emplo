@@ -5,7 +5,7 @@ import React from "react";
 import classes from "./CollapseButton.module.css"
 import { RootState } from "@/rtk/store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { setLeftSideMenuCollapsed } from '@/rtk/features/UISettings';
+import { setLeftSideMenuCollapsed } from '@/rtk/slices/UISettings';
 
 export const CollapseButton = () => {
    // const {navBarCollapsed, setNavBarCollapsed} = React.useContext(GlobalContext);

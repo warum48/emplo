@@ -14,14 +14,18 @@ import {
   Box,
   InputLabel,
 } from '@mantine/core';
-import { updateJobSearchForm } from '@/rtk/features/searchCandidateForm/searchCandidate';
+import { updateJobSearchForm } from '@/rtk/slices/searchCandidateForm/searchCandidate';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';
-import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from '@/rtk/services/api';
-import { setSearchResults } from '@/rtk/features/search/searchSlice';
+import {
+  useSearchCandidatesMutation,
+  useSearchHHCandidatesMutation,
+} from '@/rtk/queries/candidates';
+import { setSearchResults } from '@/rtk/slices/search/searchSlice';
 import { Preloader } from '../__atoms/Preloader/Preloader';
 import ErrorList, { ErrorDetail } from '../Errors/ErrorList';
+import { setSearchHHResults } from '@/rtk/slices/search/searchHHSlice';
 
 type TProps = {
   gridCols?: number;
@@ -29,15 +33,16 @@ type TProps = {
   searchType?: 'inner' | 'outer';
 };
 
-const JobSearchForm = ({ gridCols = 1, onSearch = ()=>{} , searchType = 'inner'}: TProps) => {
+const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner' }: TProps) => {
   //const dispatch = useDispatch();
   //const formState = useSelector((state: RootState) => state.jobSearch);
-const [errors, setErrors] = useState<ErrorDetail[]>();
+  const [errors, setErrors] = useState<ErrorDetail[]>();
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.jobSearch);
   //const [searchCandidates] = useSearchCandidatesMutation();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
-  const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] = useSearchHHCandidatesMutation();
+  const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] =
+    useSearchHHCandidatesMutation();
 
   //const form = useForm({
   //  initialValues: formState,
@@ -47,32 +52,26 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
   const handleSubmit = async (values: typeof form.values) => {
     console.log('submit', values);
     try {
-     // const candidates = await searchHHCandidates(values).unwrap();
-      const candidates =  searchType === 'inner' ? await searchCandidates(values).unwrap() : await searchHHCandidates(values).unwrap();
-      console.log('Candidates:', candidates);
-      //@ts-ignore
-      console.log('candidates?.items', candidates?.items);
-      if (Array.isArray(candidates?.candidates)) {
-      dispatch(setSearchResults(candidates));
-      onSearch();
-      }else
-      
-      //@ts-ignore
+      // const candidates = await searchHHCandidates(values).unwrap();
+      const candidates =
+        searchType === 'inner'
+          ? await searchCandidates(values).unwrap()
+          : await searchHHCandidates(values).unwrap();
       if (Array.isArray(candidates?.items)) {
-        //@ts-ignore
-        dispatch(setSearchResults(candidates?.items));
+        if (searchType === 'inner') {
+          dispatch(setSearchResults(candidates));
+        } else {
+          dispatch(setSearchHHResults(candidates));
+        }
         onSearch();
-        }else
-      
-      {
+      } else {
         console.error('Failed to search candidates: results is not an array');
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.error('Failed to search candidates:', error);
-     // setErrors(error);
-      if(error?.data?.detail){
+      if (error?.data?.detail) {
         setErrors(error.data.detail);
-        }
+      }
     }
   };
 
@@ -82,7 +81,7 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
     // Add validation rules for the form fields
     validate: {
       specialty: (value) => (value ? null : 'Please select a position'),
-     /* experience: (value) => (value ? null : 'Please select your experience level'),
+      /* experience: (value) => (value ? null : 'Please select your experience level'),
       gender: (value) => (value ? null : 'Please select your gender'),
       age: (value) => (value >= 14 && value <= 90 ? null : 'Please enter a valid age (14-90)'),
       salary: (value) => (value >= 10000 ? null : 'Please enter a valid salary (min 10000)'),
@@ -90,9 +89,13 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
     },
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+ /* const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     dispatch(updateJobSearchForm({ [name]: value }));
+  };*/
+
+  const handleChange = (field: string, value: any) => {
+    dispatch(updateJobSearchForm({ [field]: value }));
   };
 
   const customLabelStyle = {
@@ -109,7 +112,7 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
         })}
         className={`text-left grid ${gridCols === 3 ? 'grid-cols-3' : 'grid-cols-1'} gap-6 w-full max-w-full relative`}
       >
-        <div className='flex flex-col gap-6 w-full max-w-full'>
+        <div className="flex flex-col gap-6 w-full max-w-full">
           {/* Specialty */}
           <Select
             label="Должность *"
@@ -139,15 +142,12 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
             </Group>
           </div>*/}
 
-          <Checkbox.Group
-            label="Регион *"
-            {...form.getInputProps('area', { type: 'checkbox' })}
+          <Checkbox.Group label="Регион *" {...form.getInputProps('area', { type: 'checkbox' })} 
+          onChange={(value) => handleChange('area', value)}
+          value={form.values.area}
           >
-            <Checkbox mt="xs" label="Москва"
-                value="Москва" />
-            <Checkbox mt="xs" label="Санкт-Петербург"
-                value="Санкт-Петербург" />
-
+            <Checkbox mt="xs" label="Москва" value="Москва" />
+            <Checkbox mt="xs" label="Санкт-Петербург" value="Санкт-Петербург" />
           </Checkbox.Group>
 
           {/* Relocation Type */}
@@ -169,6 +169,8 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
           <Checkbox.Group
             label="График работы *"
             {...form.getInputProps('schedule', { type: 'checkbox' })}
+            value={form.values.schedule}
+          onChange={(value) => handleChange('schedule', value)}
           >
             <Checkbox value="fullDay" label="Полный день" mt={STYLES.FORM.labelMargin} />
             <Checkbox value="shift" label="Сменный график" mt="xs" />
@@ -177,18 +179,18 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
             <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
           </Checkbox.Group>
         </div>
-        <div className='flex flex-col gap-6'>
+        <div className="flex flex-col gap-6">
           {/* Skills */}
           <div className="flex flex-col ">
-           {/* <InputLabel htmlFor="skills">Навыки</InputLabel>
+            {/* <InputLabel htmlFor="skills">Навыки</InputLabel>
              Populate dynamically */}
             <Checkbox.Group
               label="Навыки *"
               {...form.getInputProps('skills', { type: 'checkbox' })}
-              >
-              
-              <Checkbox label="Мерчендайзинг"
-              value="merchandising"  mt={STYLES.FORM.labelMargin}/>
+              value={form.values.skills}
+          onChange={(value) => handleChange('skills', value)}
+            >
+              <Checkbox label="Мерчендайзинг" value="merchandising" mt={STYLES.FORM.labelMargin} />
               <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
             </Checkbox.Group>
           </div>
@@ -234,7 +236,7 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
             {...form.getInputProps('age')}
           />
         </div>
-        <div className='flex flex-col gap-6 w-full max-w-full'>
+        <div className="flex flex-col gap-6 w-full max-w-full">
           {/* Salary */}
           <NumberInput
             labelProps={{ style: customLabelStyle }}
@@ -247,8 +249,14 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
           <Checkbox.Group
             label="Статус поиска работы"
             {...form.getInputProps('job_search_status', { type: 'checkbox' })}
+            value={form.values.job_search_status}
+          onChange={(value) => handleChange('job_search_status', value)}
           >
-            <Checkbox mt={STYLES.FORM.labelMargin} value="active_search" label="Активно ищет работу" />
+            <Checkbox
+              mt={STYLES.FORM.labelMargin}
+              value="active_search"
+              label="Активно ищет работу"
+            />
             <Checkbox mt="xs" value="looking_for_offers" label="Рассматривает предложения" />
             <Checkbox mt="xs" value="has_job_offer" label="Предложили работу, решает" />
             <Checkbox mt="xs" value="not_looking_for_job" label="Не ищет работу" />
@@ -262,18 +270,24 @@ const [errors, setErrors] = useState<ErrorDetail[]>();
             {...form.getInputProps('limit')}
           />
 
-{errors  && 
-
-<ErrorList errors={errors} />
-
-
-}
+          {errors && <ErrorList errors={errors} />}
 
           {/* Submit button */}
-          <Button mt="md" type="submit" className='w-full max-w-full' disabled={
-            //!form.isDirty() || !form.isValid() || 
-            isLoading}>
-            Искать {isLoading && <span className="-mt-1"><Preloader /></span> }
+          <Button
+            mt="md"
+            type="submit"
+            className="w-full max-w-full"
+            disabled={
+              //!form.isDirty() || !form.isValid() ||
+              isLoading
+            }
+          >
+            Искать{' '}
+            {isLoading && (
+              <span className="-mt-1">
+                <Preloader />
+              </span>
+            )}
           </Button>
         </div>
       </form>

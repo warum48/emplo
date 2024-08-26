@@ -14,7 +14,7 @@ import {
 } from '@mantine/core';
 import { STYLES } from '@/global/CONSTS';
 import { useDispatch } from 'react-redux';
-import { createVacancyHH, Vacancy } from '@/rtk/features/vacancy/vacancySliceHH';
+import { createVacancyHH, Vacancy } from '@/rtk/slices/vacancy/vacancySliceHH';
 import { AppDispatch } from '@/rtk/store/store';
 //import { createVacancy } from '@/rtk/features/vacancies/vacanciesSlice';
 //import { createVacancy } from '@/rtk/features/vacancy/vacancySliceHH';

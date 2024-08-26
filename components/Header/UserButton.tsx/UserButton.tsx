@@ -2,10 +2,10 @@ import { Avatar, Button } from '@mantine/core';
 import { RootState } from '@/rtk/store/store';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLogoutMutation, User } from '@/rtk/services/authApi';
+import { useLogoutMutation, User } from '@/rtk/queries/authApi';
 import { ButtonWithPreloader } from '@/components/__atoms/Buttons/ButtonWithPreloader';
 import { useCookies } from 'react-cookie';
-import { setAuthState, setAuthToken } from '@/rtk/features/authSlice';
+import { setAuthState, setAuthToken } from '@/rtk/slices/authSlice';
 
 export const UserButton = () => {
   const photo = null;

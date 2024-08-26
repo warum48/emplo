@@ -8,7 +8,8 @@ import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
-import { useGetMeQuery } from '@/rtk/features/vacancy/vacancySliceHHReal';
+import { useGetMeQuery } from '@/rtk/queries/vacancy';
+//import { useGetMeQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import Head from 'next/head';
 
 const Dashboard = () => {

@@ -44,7 +44,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { GlobalProvider } from '@/global/context/ContextGlobal';
 import { useCookies } from 'react-cookie';
-import { setAuthToken } from '@/rtk/features/authSlice';
+import { setAuthToken } from '@/rtk/slices/authSlice';
 import { AuthProvider } from '@/global/context/AuthProvider';
 import { TailwindClassesGenerator } from '@/components/__atoms/TailwindClassesGeneraor/TailwindClassesGenerator';
 //import '../styles/globals.css';

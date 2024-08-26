@@ -12,13 +12,14 @@ import {
   Divider,
 } from '@mantine/core';
 import { useDispatch } from 'react-redux';
-import { createVacancy } from '@/rtk/features/vacancy/vacancySlice';
+import { createVacancy } from '@/rtk/slices/vacancy/vacancySlice';
 import { NewVacancyFormValues } from '@/types/HHVacancy';
-import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancySliceHHReal';
+//import { useCreateVacancyMutation } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import { STYLES } from '@/global/CONSTS';
 import ErrorList, { ErrorDetail } from '@/components/Errors/ErrorList';
 import React from 'react';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+import { useCreateVacancyMutation } from '@/rtk/queries/vacancy';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyZayavkaSlice';
 
 const testDescription = "Ищем опытного специалиста по тестированию программного обеспечения для присоединения к нашей команде. Обязанности: разработка тестовой документации, выполнение функционального и нефункционального тестирования, анализ результатов тестирования, написание дефектов и их отслеживание, участие в планировании и оценке тестирования. Требования: опыт работы в тестировании ПО от 2 лет, знание методологий тестирования, опыт работы с инструментами автоматизации тестирования, навыки написания тестовой документации, умение работать в команде. Будет преимуществом: опыт работы в сфере финансов, знание английского языка. Мы предлагаем: конкурентную заработную плату, возможность профессионального роста, работу в дружном коллективе, гибкий график работы. Если вы заинтересованы в этой вакансии, пожалуйста, отправьте свое резюме на адрес "

@@ -1,6 +1,6 @@
 import { apiPath } from '@/global/CONSTS';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { customBaseQuery } from './customBaseQuery';
+import { customBaseQuery } from './_customBaseQuery';
 
 //const [cookiesToken, setCookieToken] = useCookies(['mednekot']);
 

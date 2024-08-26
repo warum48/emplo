@@ -7,8 +7,8 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { GlobalProvider } from '@/global/context/ContextGlobal';
 import { useCookies } from 'react-cookie';
-import { setAuthState, setAuthToken, setUser } from '@/rtk/features/authSlice';
-import { useLazyMeQuery } from '@/rtk/services/authApi';
+import { setAuthState, setAuthToken, setUser } from '@/rtk/slices/authSlice';
+import { useLazyMeQuery } from '@/rtk/queries/authApi';
 
 const AuthContext = createContext(null);
 

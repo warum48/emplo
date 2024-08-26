@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authApi } from '../services/authApi';
-import { setAuthState } from '../features/authSlice';
+import { authApi } from '../queries/authApi';
+import { setAuthState } from '../slices/authSlice';
 //import { setAuthState } from './authSlice';
 //import { authApi } from './authApi';
 
