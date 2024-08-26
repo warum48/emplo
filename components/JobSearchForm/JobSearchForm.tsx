@@ -144,9 +144,13 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
 
           <Checkbox.Group label="Регион *" {...form.getInputProps('area', { type: 'checkbox' })} 
           onChange={(value) => handleChange('area', value)}
-          value={form.values.area}
+          defaultValue={form.values.area}
           >
-            <Checkbox mt="xs" label="Москва" value="Москва" />
+            
+            <Checkbox mt="xs" label="Москва" value="Москва" 
+            //@ts-ignore
+            //checked={form.values.area.includes("Москва")}
+            />
             <Checkbox mt="xs" label="Санкт-Петербург" value="Санкт-Петербург" />
           </Checkbox.Group>
 
@@ -169,7 +173,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
           <Checkbox.Group
             label="График работы *"
             {...form.getInputProps('schedule', { type: 'checkbox' })}
-            value={form.values.schedule}
+            defaultValue={form.values.schedule}
           onChange={(value) => handleChange('schedule', value)}
           >
             <Checkbox value="fullDay" label="Полный день" mt={STYLES.FORM.labelMargin} />
@@ -187,7 +191,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             <Checkbox.Group
               label="Навыки *"
               {...form.getInputProps('skills', { type: 'checkbox' })}
-              value={form.values.skills}
+              defaultValue={form.values.skills}
           onChange={(value) => handleChange('skills', value)}
             >
               <Checkbox label="Мерчендайзинг" value="merchandising" mt={STYLES.FORM.labelMargin} />
@@ -249,7 +253,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
           <Checkbox.Group
             label="Статус поиска работы"
             {...form.getInputProps('job_search_status', { type: 'checkbox' })}
-            value={form.values.job_search_status}
+            defaultValue={form.values.job_search_status}
           onChange={(value) => handleChange('job_search_status', value)}
           >
             <Checkbox
