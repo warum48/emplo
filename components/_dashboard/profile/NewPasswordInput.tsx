@@ -1,6 +1,7 @@
 'use client'
 
-import { Button, PasswordInput, Stack } from '@mantine/core';
+import { STYLES } from '@/global/CONSTS';
+import { Button, PasswordInput, Stack, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import * as React from 'react';
 
@@ -9,8 +10,12 @@ type TProps = {
 }
 
 export const NewPasswordInput = ({ onSuccess = () => {} }: TProps) => {
+  const { colorScheme }= useMantineColorScheme();
 
-   
+  const customLabelStyle = {
+    marginBottom: STYLES.FORM.labelMargin,
+    color: colorScheme === 'dark' ? 'var(--mantine-color-custom-grey-3)' : 'var(--mantine-color-custom-grey-5)',
+  };
 
     const form = useForm({
         initialValues: {
@@ -66,7 +71,7 @@ export const NewPasswordInput = ({ onSuccess = () => {} }: TProps) => {
             <PasswordInput
            // form={form}
            {...form.getInputProps('password')}
-
+           labelProps={{ style: customLabelStyle }}
           //  formField="password"
               label="Новый пароль (минимум 8 символов)"
               placeholder="Новый пароль"

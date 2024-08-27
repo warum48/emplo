@@ -2,9 +2,10 @@ import { Table, Checkbox, Button, Badge, Menu, ActionIcon, Group, Text } from '@
 import { useState } from 'react';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { StyledButton } from '@/components/__atoms/Buttons/StyledButton';
-import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
+//import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
+import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/queries/vacancy';
 //import DataDisplay from '@/components/_dashboard/profile/HHMe';
 
 interface Candidate {
@@ -208,3 +209,4 @@ function getStatusColor(status: string) {
       return 'gray';
   }
 }
+

@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from '@/rtk/queries/candidates';
 import { useDispatch } from "react-redux";
 import { setSearchResults, clearSearchResults } from '@/rtk/slices/search/searchSlice';
-import { setSearchHHResults } from "@/rtk/slices/searchHHSlice";
+import { setSearchHHResults } from "@/rtk/slices/search/searchHHSlice";
+//import { setSearchHHResults } from "@/rtk/slices/searchHHSlice";
 
 
 type TProps = {

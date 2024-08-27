@@ -20,7 +20,7 @@
         @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85; //dark:bg-customGray-950/85 
     }
     .page-header{
-      @apply text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-0 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+      @apply text-neutral-700 dark:text-neutral-50 text-3xl  mb-0 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
     } 
 
     .page-header-compact{
@@ -28,10 +28,16 @@
     }
 
     .dashboard-section-header{
-      @apply text-neutral-700 dark:text-neutral-50 text-xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+      @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+    }
+    .card-white-header{
+      @apply text-white text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+    }
+    .form-header{
+      @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light ;
     }
     .dashboard-section-header_sm{
-      @apply text-neutral-700 dark:text-neutral-50 text-md font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+      @apply text-neutral-700 dark:text-neutral-50 text-md  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
     }
     .dashboard-page-container{
       @apply flex flex-col space-y-8 px-8 mt-16 py-4;
@@ -50,5 +56,11 @@
     }
     .form-bg-and-text{
       @apply text-black dark:text-white bg-white dark:bg-customGray-950/85
+    }
+    .link-default{
+      @apply hover:text-pink-500 hover:underline
+    }
+    .error-container{
+      @apply border border-red-500 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs
     }
   }

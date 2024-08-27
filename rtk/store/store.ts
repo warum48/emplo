@@ -16,6 +16,7 @@ import UISettingsSlice from '../slices/UISettings';
 import searchReducer from '../slices/search/searchSlice';
 import searchAIReducer from '../slices/search/searchHHSlice';
 import authReducer from '../slices/authSlice';
+import authFormSlice from '../slices/authForm';
 import { predictorApi } from '@/rtk/queries/predictorApi';
 import thunk from 'redux-thunk';
 
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
   [vacancyApi.reducerPath]: vacancyApi.reducer,
+
   //vacancyForm: vacancyFormReducer,
 
   createVacancy: persistReducer({ key: 'createVacancyHH', storage }, createVacancySlice),
@@ -42,11 +44,12 @@ const rootReducer = combineReducers({
   auth: authReducer,
   search: searchReducer,
   searchAI: searchAIReducer,
-  someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
+  //someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
+  authForm: persistReducer({ key: 'authForm', storage }, authFormSlice),
   jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),
   UISettings: persistReducer({ key: 'UISettings', storage }, UISettingsSlice),
-  tempFeature: tempSlice, // Non-persistent slice
+//  tempFeature: tempSlice, // Non-persistent slice
   // Add other slices here
   //temp: tempSlice.reducer, // Add the temp slice reducer here
 });

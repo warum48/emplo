@@ -26,6 +26,7 @@ import { setSearchResults } from '@/rtk/slices/search/searchSlice';
 import { Preloader } from '../__atoms/Preloader/Preloader';
 import ErrorList, { ErrorDetail } from '../Errors/ErrorList';
 import { setSearchHHResults } from '@/rtk/slices/search/searchHHSlice';
+import { HTMLError } from '../Errors/HTMLError';
 
 type TProps = {
   gridCols?: number;
@@ -43,6 +44,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
   const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] =
     useSearchHHCandidatesMutation();
+  const [aiError, setAiError] = useState('');
 
   //const form = useForm({
   //  initialValues: formState,
@@ -65,7 +67,10 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
         }
         onSearch();
       } else {
-        console.error('Failed to search candidates: results is not an array');
+        console.error('Failed to search candidates: results is not an array', candidates);
+        if (candidates?.error) {
+          setAiError(candidates.error);
+        }
       }
     } catch (error: any) {
       console.error('Failed to search candidates:', error);
@@ -89,7 +94,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
     },
   });
 
- /* const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  /* const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     dispatch(updateJobSearchForm({ [name]: value }));
   };*/
@@ -142,15 +147,16 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             </Group>
           </div>*/}
 
-          <Checkbox.Group label="Регион *" {...form.getInputProps('area', { type: 'checkbox' })} 
-          onChange={(value) => handleChange('area', value)}
-          defaultValue={form.values.area}
+          <Checkbox.Group
+            label="Регион *"
+            {...form.getInputProps('area', { type: 'checkbox' })}
+            onChange={(value) => {
+              handleChange('area', value);
+              form.getInputProps('area').onChange(value);
+            }}
+            defaultValue={form.values.area}
           >
-            
-            <Checkbox mt="xs" label="Москва" value="Москва" 
-            //@ts-ignore
-            //checked={form.values.area.includes("Москва")}
-            />
+            <Checkbox mt="xs" label="Москва" value="Москва" />
             <Checkbox mt="xs" label="Санкт-Петербург" value="Санкт-Петербург" />
           </Checkbox.Group>
 
@@ -174,7 +180,10 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             label="График работы *"
             {...form.getInputProps('schedule', { type: 'checkbox' })}
             defaultValue={form.values.schedule}
-          onChange={(value) => handleChange('schedule', value)}
+            onChange={(value) => {
+              handleChange('schedule', value)
+              form.getInputProps('schedule').onChange(value);
+            }}
           >
             <Checkbox value="fullDay" label="Полный день" mt={STYLES.FORM.labelMargin} />
             <Checkbox value="shift" label="Сменный график" mt="xs" />
@@ -192,7 +201,11 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
               label="Навыки *"
               {...form.getInputProps('skills', { type: 'checkbox' })}
               defaultValue={form.values.skills}
-          onChange={(value) => handleChange('skills', value)}
+              onChange={(value) => {
+                handleChange('skills', value)
+                form.getInputProps('skills').onChange(value);
+              }
+              }
             >
               <Checkbox label="Мерчендайзинг" value="merchandising" mt={STYLES.FORM.labelMargin} />
               <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
@@ -254,7 +267,11 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             label="Статус поиска работы"
             {...form.getInputProps('job_search_status', { type: 'checkbox' })}
             defaultValue={form.values.job_search_status}
-          onChange={(value) => handleChange('job_search_status', value)}
+            onChange={(value) => {
+              handleChange('job_search_status', value)
+              form.getInputProps('job_search_status').onChange(value);
+            }
+            }
           >
             <Checkbox
               mt={STYLES.FORM.labelMargin}
@@ -275,24 +292,28 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
           />
 
           {errors && <ErrorList errors={errors} />}
+          {aiError && <HTMLError error={aiError} />}
 
           {/* Submit button */}
-          <Button
-            mt="md"
-            type="submit"
-            className="w-full max-w-full"
-            disabled={
-              //!form.isDirty() || !form.isValid() ||
-              isLoading
-            }
-          >
-            Искать{' '}
-            {isLoading && (
-              <span className="-mt-1">
-                <Preloader />
-              </span>
-            )}
-          </Button>
+          <div>
+            <Button>Сбросить</Button>
+            <Button
+              mt="md"
+              type="submit"
+              className="w-full max-w-full"
+              disabled={
+                //!form.isDirty() || !form.isValid() ||
+                isLoading
+              }
+            >
+              Искать{' '}
+              {isLoading && (
+                <span className="-mt-1">
+                  <Preloader />
+                </span>
+              )}
+            </Button>
+          </div>
         </div>
       </form>
     </div>

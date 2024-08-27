@@ -14,12 +14,18 @@ import { Debugger } from '../__atoms/Debugger/Debugger';
 import Link from 'next/link';
 import { Routes } from '@/global/ROUTES';
 
-const AuthorizationForm = () => {
-  const formState = useSelector((state: RootState) => state.authForm);
+export const RegistrationForm = () => {
+  //const formState = useSelector((state: RootState) => state.authForm);
   const dispatch = useDispatch();
   const router = useRouter();
   const form = useForm({
-    initialValues: formState,
+    initialValues: {
+      email: '',
+      password: '', 
+      first_name: '',
+      last_name: '',
+      password_confirm: '',
+    },
     validate: {}
   });
 
@@ -38,13 +44,13 @@ const AuthorizationForm = () => {
 
   const handleLogin = async () => {
     try {
-      const result = await login(form.values).unwrap(); 
-      console.log('result.jwt_token:', result.jwt_token);
-      setCookieToken('jwt_token', result.jwt_token, { path: '/' });
-      setToken(result.jwt_token);
-      dispatch(setAuthToken({ token: result.jwt_token }));
-      router.push('/dashboard');
-      //fetchMe();
+      //const result = await login(form.values).unwrap(); 
+      //console.log('result.jwt_token:', result.jwt_token);
+      //setCookieToken('jwt_token', result.jwt_token, { path: '/' });
+      //setToken(result.jwt_token);
+      //dispatch(setAuthToken({ token: result.jwt_token }));
+      //router.push('/dashboard');
+
     } catch (err) {
       console.error('Failed to login:', err);
     }
@@ -82,15 +88,33 @@ const AuthorizationForm = () => {
     
         <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
           <TextInput
-            label="Логин"
-            placeholder="Введите ваш логин"
-            {...form.getInputProps('username')}
+            label="Имя"
+            placeholder="Ваше имя"
+            {...form.getInputProps('first_name')}
+            className="mb-4 "
+          />
+          <TextInput
+            label="Фамилия"
+            placeholder="Ваша фамилия"
+            {...form.getInputProps('last_name')}
+            className="mb-4 "
+          />
+          <TextInput
+            label="E-mail"
+            placeholder="Ваш e-mail"
+            {...form.getInputProps('email')}
             className="mb-4 "
           />
           <PasswordInput
-            label="Пароль"
+            label="Пароль (не менее 8 символов)"
             placeholder="Введите пароль"
             {...form.getInputProps('password')}
+            className="mb-4"
+          />
+          <PasswordInput
+            label="Повторите пароль"
+            placeholder="Повторите пароль"
+            {...form.getInputProps('password_confirm')}
             className="mb-4"
           />
           <Button
@@ -100,19 +124,18 @@ const AuthorizationForm = () => {
             // bg-purple-600 hover:bg-purple-700
             //!!onClick={() => router.push('/dashboard')}
           >
-            Войти
+            Зарегистрироваться
           </Button>
-          <div className="flex justify-between">
-            <Text component="a" href="#" size="sm">
-              Забыли пароль?
-            </Text>
-            <Link href={Routes.REGISTRATION} className='link-default'><Text  size="sm">
-              Зарегистрироваться
+          <div className="flex justify-start">
+            
+            <Link href={Routes.AUTH} className='link-default'><Text  size="sm">
+              Войти в аккаунт
             </Text></Link>
           </div>
+          
         </form>
 
   );
 };
 
-export default AuthorizationForm;
+//export default AuthorizationForm;

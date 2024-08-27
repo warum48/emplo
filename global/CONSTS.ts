@@ -9,7 +9,7 @@ export const STYLES = {
         navBarWidth_expanded: "w-[256px]",
         navBarWidth_collapsed: "w-[96px]",
         contentMarginLeft_expanded: "ml-64",
-        contentMarginLeft_collapsed: "ml-24",
+        contentMarginLeft_collapsed: "ml-[96px]",
     }
     
 }

@@ -7,14 +7,14 @@ export interface SearchRequest {
   area: string[];
 }
 
-export interface SearchResponse {
+export type SearchResponse ={
   // Define the shape of your response data here
   //data: string;
  // data: {
     found: number,
     items: any//any[];
  // }
-}
+} & { error: string }
 
 export const api = createApi({
   reducerPath: 'api',

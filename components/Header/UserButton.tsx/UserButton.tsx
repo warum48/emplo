@@ -1,3 +1,4 @@
+'use client';
 import { Avatar, Button } from '@mantine/core';
 import { RootState } from '@/rtk/store/store';
 import Link from 'next/link';
@@ -6,6 +7,10 @@ import { useLogoutMutation, User } from '@/rtk/queries/authApi';
 import { ButtonWithPreloader } from '@/components/__atoms/Buttons/ButtonWithPreloader';
 import { useCookies } from 'react-cookie';
 import { setAuthState, setAuthToken } from '@/rtk/slices/authSlice';
+import { Routes } from '@/global/ROUTES';
+import { redirect, useRouter } from 'next/navigation';
+//import {useRouter} from 'next/router'
+//import { redirect } from 'next/navigation';
 
 export const UserButton = () => {
   const photo = null;
@@ -14,6 +19,7 @@ export const UserButton = () => {
   const [cookiesToken, setCookieToken, removeCookie] = useCookies(['jwt_token']);
   const [logout, { isLoading: isLogoutLoading, error: logoutError, data: logoutData }] = useLogoutMutation();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleLogout = async () => {
     try {
@@ -23,6 +29,9 @@ export const UserButton = () => {
       removeCookie('jwt_token', { path: '/' });
      // dispatch(setAuthToken({ token: cookiesToken.jwt_token }));  
       dispatch(setAuthState({ isAuthenticated: false, token: '' })); 
+      console.log('Routes.MAIN', Routes.MAIN);
+      //redirect(Routes.MAIN);
+      router.push(Routes.MAIN);
 
     } catch (err) {
       console.error('Failed to logiout:', err);
