@@ -5,7 +5,7 @@ import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
 import { XY } from '@/components/_dashboard/predictor/XY';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { setCompactLayout } from '@/rtk/slices/UISettings';
 import { RootState } from '@/rtk/store/store';

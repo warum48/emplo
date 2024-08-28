@@ -18,9 +18,15 @@ export const LinkButton = ({ children, onClick, colorScheme = 'light', disabled,
     <Group gap={'xs'}>
     <Anchor
       // mt='lg'
-      className={`${colorScheme == 'light' ? 'text-black enabled:hover:text-pink-800' : 'text-white enabled:hover:text-pink-200'}   text-md
-      ${disabled ? 'cursor-not-allowed opacity-50 no-underline hover:no-underline' : 'cursor-pointer'}
-      `}
+      
+      className={
+        `text-md
+       ${colorScheme == 'light' ? 'text-black enabled:hover:text-pink-800' : 'text-white enabled:hover:text-pink-200'} 
+        ${disabled ? 'cursor-not-allowed opacity-50 no-underline hover:no-underline' : 'cursor-pointer'}
+      `
+      // link-default
+      //
+    }
       component="button"
       size="sm"
       onClick={onClick}

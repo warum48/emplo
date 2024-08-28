@@ -7,17 +7,18 @@ import ProfileForm from '@/components/_dashboard/profile/ProfileForm';
 //import DataDisplay from '@/components/_dashboard/profile/HHMe';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { useGetMeQuery } from '@/rtk/queries/vacancy';
 //import { useGetMeQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import Head from 'next/head';
+import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
 
 const Dashboard = () => {
   const { data: data_hhme, error: error_hhme, isLoading: isLoading_hhme } = useGetMeQuery();
   return (
     <>
-      <div className="absolute -left-[250px] -top-[100px]  w-full h-full ">
+      <div className="absolute -left-[100px] -top-[20px]  w-full h-full ">
         <div
           className="absolute scale-y-100 scale-x-150 left-0 top-0 h-[1000px] w-2/3
           bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-300/30 via-cyan-300/0 to-blue-600/0
@@ -36,10 +37,11 @@ const Dashboard = () => {
         ></div>
       </div>
 
-      <div className="dashboard-page-container relative">
+    {/*}  <div className="dashboard-page-container relative">
         <div>
           <h2 className="page-header">Профиль</h2>
-        </div>
+        </div>*/}
+        <DashBoardPageContainer header="Профиль">
         <div className="flex justify-center space-x-4">
           <div className="bg-pink-500/80 text-white text-center rounded-lg shadow-lg p-4 flex-1 flex flex-col items-center pt-12 =justify-center min-h-[260px]">
             <div className="card-white-header">Открытых вакансий</div>
@@ -77,7 +79,8 @@ const Dashboard = () => {
           <h3 className="dashboard-section-header ">hh/me:</h3>
           <DataDisplay data={data_hhme} />
         </div>
-      </div>
+        </DashBoardPageContainer>
+      {/*</div>*/}
     </>
   );
 };

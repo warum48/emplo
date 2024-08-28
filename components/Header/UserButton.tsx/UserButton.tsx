@@ -40,13 +40,13 @@ export const UserButton = () => {
 
   return (
     <div
-      className="flex gap-4 items-center"
+      className="flex gap-0 md:gap-4 items-center"
       // border p-0 px-4 border-default rounded-sm shadow-sm
     >
       <Link href="/dashboard">
         <Avatar src={photo} size={50} radius="xl" />
       </Link>
-      <div>
+      <div className='hidden md:block'>
         <div className="text-xs">{isAuthenticated && user ? user?.username : 'Гость'}</div>
        
         {!isAuthenticated ? (

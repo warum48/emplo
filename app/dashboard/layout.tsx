@@ -1,21 +1,17 @@
 'use client';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
-import Header from '@/components/Header/Header';
 import { LogoVertical } from '@/components/Header/Logos/LogoVertical';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
-import { ParticlesComponent } from '@/components/Particles/Particles';
-import { ResultList } from '@/components/ResultList/ResultList';
-import { useMantineColorScheme } from '@mantine/core';
+import { Burger, Drawer, useMantineColorScheme } from '@mantine/core';
 import Head from 'next/head';
 import Link from 'next/link';
-import { IconSettings, IconUser, IconCommand } from '@tabler/icons-react';
-import { IconSearch } from '@tabler/icons-react';
 import { RootState } from '@/rtk/store/store';
 import { useSelector } from 'react-redux';
 import { LogoHorizontal } from '@/components/Header/Logos/LogoHorizontal';
 import { NavbarNested } from '@/components/NavBar/NavBar';
 import { LogoNoText } from '@/components/Header/Logos/LogoNoText';
 import { STYLES } from '@/global/CONSTS';
+import { LeftSideMenu } from '@/components/_dashboard/LeftSideMenu';
+import React from 'react';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
@@ -23,6 +19,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const leftSideMenuCollapsed = useSelector(
     (state: RootState) => state.UISettings.leftSideMenuCollapsed
   );
+  const [drawerOpened, setDrawerOpened] = React.useState(false);
   return (
     <>
       <Head>
@@ -31,103 +28,38 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Burger opened={drawerOpened} onClick={() => setDrawerOpened(!drawerOpened)} className="md:hidden z-30 fixed ml-2 mt-[22px]" />
       <DashBoardHeader />
 
-      <div
-        className={`
-      bg-gradient-to-t
-      
-
-      bg-customGray-900
-      bg-gradient-to-t
-      from-pink-950/25 via-customGray-800/50   to-customGray-900
-      
-      dark:bg-gradient-to-t
-      dark:from-pink-950/25 dark:via-customGray-800/50   dark:to-customGray-900
-      text-white h-screen fixed  
-      gradient-border
-      z-10
-      ${leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.navBarWidth_collapsed : STYLES.LEFT_SIDE_NAVBAR.navBarWidth_expanded}
-      `}
-        //min-w-16
-        // from-gray-100 via-gray-50 to-gray-50/100
-
-        //from-pink-600/65 via-gray-100 to-gray-100
-        // bg-gray-100
-      >
-        <div
-          className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-[url('/images/menubg.png')] bg-cover dark:bg-none z-100"
-          // dark:bg-none
-        ></div>
-        <div className="w-full py-4 px-8 flex items-center justify-center z-100 relative ">
-          <Link href="/" className="w-full ">
-            {compactLayout ? (
-              leftSideMenuCollapsed   ? <LogoNoText/> : <LogoHorizontal colorScheme={'dark'} className="h-[45px] w-full m-0.5 -ml-8" />
-            ) : (
-              leftSideMenuCollapsed ? <LogoNoText/> : <LogoVertical
-                colorScheme={
-                  //colorScheme
-                  'dark'
-                }
-              />
-            )}
-          </Link>
-        </div>
-
-        {/*
-        <nav className={` ${compactLayout ?"mt-2" : "mt-5"} text-black text-white  dark:text-white flex flex-col gap-2 z-10 relative`}>        
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard" className="flex gap-4 items-center"><IconUser/> Профиль</Link>
-            </div>
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard/search" className="flex gap-4 items-center"><IconSearch/>Поиск</Link>
-            </div>
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard/settings"  className="flex gap-4 items-center"><IconSettings/>Настройки</Link>
-            </div>
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard/resume"  className="flex gap-4 items-center"><IconCommand/>Создать резюме</Link>
-            </div>
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard/vacancies"  className="flex gap-4 items-center"><IconCommand/>Вакансии</Link>
-            </div>
-            <div className="dashboard-menu-item">
-              <Link href="/dashboard/vacancies/create"  className="flex gap-4 items-center"><IconCommand/>Создать вакансию</Link>
-            </div>
-        </nav> */}
-
-        <NavbarNested />
+      <div className=" hidden md:block">
+        <LeftSideMenu/>
       </div>
-
-      {/*} <div className="fixed left-0 bottom-0 h-1/2  overflow-hidden w-56 m-4">
-        <ParticlesComponent/>
-      </div>*/}
-
-      {/*<div className="h-[70px] ml-64 p-0 bg-gray-100">
-      
-      </div>*/}
-      <div
-        className={` ${leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_collapsed : STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_expanded}   h-full flex-1  p-0 transition-all
-      bg-gradient-to-br
-       from-gray-100/100 via-gray-100 to-customGray-200
-relative
-       dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
-      overflow-x-hidden
-`}
-        //
-        //dark:bg-customGray-900
-        //bg-gray-100
+      <Drawer
+        opened={drawerOpened}
+        onClose={() => setDrawerOpened(false)}
+        withCloseButton={false}
+      //  title="Меню"
+      //  padding="md"
+      //  size="md"
+        size={256}
+        padding="0"
+        position="left"
+        className="md:hidden block relative"
       >
-        {/*   <div className="absolute right-0 top-0 w-1/4 h-[40vh] ">
-      <div className="-mt-96 -mr-96 absolute scale-x-150 left-0 top-0 right-0 bottom-0 
-          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-pink-200/50 via-pink-600/0 to-blue-600/0
-          dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-pink-800/30 dark:via-pink-800/0 dark:to-blue-600/0
-          "></div>
-          </div>*/}
+        <LeftSideMenu alwaysExpanded={true}/>
+      </Drawer>
 
-        {/*} <header className="bg-white p-4 shadow">
-          <h1 className="text-xl font-bold">Main Content</h1>
-        </header>*/}
+      <div
+        className={` 
+        ${leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_collapsed : STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_expanded}   
+        h-full flex-1  p-0 transition-all
+        bg-gradient-to-br
+        from-gray-100/100 via-gray-100 to-customGray-200
+        relative
+        dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
+        overflow-x-hidden
+        `}
+      >
         {children}
       </div>
     </>

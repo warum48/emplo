@@ -8,7 +8,7 @@ import Link from 'next/link';
 import React from 'react';
 import { ResultList } from '@/components/ResultList/ResultList';
 import './anim.css';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);

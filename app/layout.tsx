@@ -75,7 +75,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-roboto bg-white dark:bg-adjGray-900 h-full">
+      <body className="font-roboto bg-white dark:bg-adjGray-900 h-full overflow-x-hidden">
       <GlobalProvider>
         <MantineProvider
           theme={theme}

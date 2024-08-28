@@ -16,10 +16,10 @@ const Header = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white dark:bg-customGray-950 shadow-sm z-50 h-[80px]">
-      <div className="container mx-auto flex items-center justify-between px-1 py-1 h-full">
+      <div className="=container mx-auto flex items-center justify-between px-8 py-1 h-full">
         <div className="flex items-center">
           <Link href="/">
-          <LogoHorizontal colorScheme={colorScheme} className="h-[45px]"/>
+          <LogoHorizontal colorScheme={colorScheme} className="h-[45px] -ml-[58px] -mr-[28px]"/>
             {/*<span className="text-xl font-bold text-gray-700 dark:text-gray-200">sotrudnik.ru</span>*/}
           </Link>
         </div>
@@ -28,9 +28,10 @@ const Header = () => {
           <a href="#" className="hover:text-blue-500">Ресурсы</a>
           <a href="#" className="hover:text-blue-500">Разместить вакансию</a>
         </nav>
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
         <ColorSchemeButton />
-          <Button onClick={() => setDrawerOpened(true)} className="md:hidden">Меню</Button>
+
+          <Burger opened={drawerOpened} onClick={() => setDrawerOpened(!drawerOpened)} className="md:hidden" />
         {/*}  <Button onClick={() => toggleColorScheme()} variant="outline">
             {colorScheme === 'dark' ? 'Светлая тема' : 'Тёмная тема'}
           </Button> 

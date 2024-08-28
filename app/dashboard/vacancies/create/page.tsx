@@ -9,17 +9,19 @@ import { XY } from '@/components/_dashboard/predictor/XY';
 import ResumeForm from '@/components/CreateResumeForm/CreateResume';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { Stepper } from '@mantine/core';
 
 import Head from 'next/head';
 import React from 'react';
+import { useMediaQuery } from '@mantine/hooks';
 
 const Settings = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [formData, setFormData] = React.useState({ field1: '', field2: '' });
-  const stepNames = ["Основная информация","Критерии", "Настройки и администрирование"] //"Этапы работы с кандидатами","Параметры поиска","Согласование","История"
+  const stepNames = ['Основная информация', 'Критерии', 'Настройки и администрирование']; //"Этапы работы с кандидатами","Параметры поиска","Согласование","История"
+  const md = useMediaQuery('(min-width: 768px)');
 
   const handleStepChange = (step: number) => {
     setActiveStep(step);
@@ -37,6 +39,7 @@ const Settings = () => {
   return (
     <DashBoardPageContainer header="Создать резюме">
       <div className="flex flex-col items-center w-full ">
+        <div className="hidden md:block">
         <div className="absolute -left-[100px]  top-1/5 w-1/2 h-[400px] ">
           <div
             className="absolute scale-y-150 left-0 top-0 right-0 bottom-0 
@@ -55,28 +58,31 @@ const Settings = () => {
           "
           ></div>
         </div>
-
-        <div className="flex justify-center w-full gap-4">
+        </div>
+        <div className="flex justify-center w-full gap-4 flex-col md:flex-row">
           <div
             className="p-4 w-full relative max-w-full text-black dark:text-white
      bg-white dark:text-white dark:bg-customGray-950/85 max-w-screen-md rounded-2xl
+     order-2 md:order-1
      "
           >
             {/*<VacancyCreationFormHH />*/}
-            <VacancyCreationFormZayavka activeStep={activeStep} onNext={handleNext} stepNames={stepNames} setActiveStep={setActiveStep}/>
+            <VacancyCreationFormZayavka
+              activeStep={activeStep}
+              onNext={handleNext}
+              stepNames={stepNames}
+              setActiveStep={setActiveStep}
+            />
           </div>
 
-          <div className="w-[250px] pt-8 pl-4">
-            {activeStep}
-            <Stepper active={activeStep} onStepClick={setActiveStep} orientation="vertical">
-             {/*} <Stepper.Step label="Шаг 1" description="Основная информация" />
-              <Stepper.Step label="Шаг 2" description="Контактная информация" />
-              <Stepper.Step label="Шаг 3" description="Выбор типа публикации" /> 
-              <Stepper.Step label={name} description={''} />
-              */}
+          <div className="w-full md:w-[196px] lg:w-[250px] pt-8 pl-4 order-1 md:order-2">
+            <Stepper
+              active={activeStep}
+              onStepClick={setActiveStep}
+              orientation={!md ? 'horizontal' : 'vertical'}
+            >
               {stepNames.map((name, index) => (
-                
-                <Stepper.Step label={"Шаг "+(index+1)} description={name} />
+                <Stepper.Step label={'Шаг ' + (index + 1)} description={name} />
               ))}
             </Stepper>
           </div>

@@ -1,4 +1,4 @@
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm'; // Adjust the path as necessary
+import JobSearchForm from '@/components/Search/JobSearchForm'; // Adjust the path as necessary
 
 const SearchPage = () => {
   return (

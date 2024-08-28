@@ -8,7 +8,9 @@ export const TailwindClassesGenerator = () => {
 
 
     return (
-        <div className="w-[63px] w-[95px] w-[255px] ml-64 ml-24 hidden ml-[96px] ">
+        <div className="w-[63px] w-[95px] w-[255px] ml-64 ml-24 hidden ml-[96px] 
+        md:ml-[96px] md:ml-64
+        ">
             <p>
                 TailwindClassesGenerator
             </p>

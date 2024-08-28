@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Header from '@/components/Header/Header';
 import { Input, Button, Paper } from '@mantine/core';
 import Footer from '@/components/Footer/Footer';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 
 const Home = () => {

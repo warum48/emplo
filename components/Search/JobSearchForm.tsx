@@ -14,7 +14,7 @@ import {
   Box,
   InputLabel,
 } from '@mantine/core';
-import { updateJobSearchForm } from '@/rtk/slices/searchCandidateForm/searchCandidate';
+import { updateJobSearchForm, candidateSearchFormInitialState } from '@/rtk/slices/searchCandidateForm/searchCandidate';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';
@@ -27,6 +27,10 @@ import { Preloader } from '../__atoms/Preloader/Preloader';
 import ErrorList, { ErrorDetail } from '../Errors/ErrorList';
 import { setSearchHHResults } from '@/rtk/slices/search/searchHHSlice';
 import { HTMLError } from '../Errors/HTMLError';
+import { ResetFormButton } from '../__atoms/Buttons/ResetFormButton';
+import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
+import { Confirmator } from '../__uiutils/Confirmator';
+import React from 'react';
 
 type TProps = {
   gridCols?: number;
@@ -45,6 +49,8 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
   const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] =
     useSearchHHCandidatesMutation();
   const [aiError, setAiError] = useState('');
+  const [formRenderCount, setFormRenderCount] = useState(0);
+  const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
 
   //const form = useForm({
   //  initialValues: formState,
@@ -52,6 +58,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
   //});
 
   const handleSubmit = async (values: typeof form.values) => {
+
     console.log('submit', values);
     try {
       // const candidates = await searchHHCandidates(values).unwrap();
@@ -82,6 +89,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
 
   // Define the form state using useForm from Mantine
   const form = useForm({
+    //mode: 'uncontrolled',
     initialValues: formState,
     // Add validation rules for the form fields
     validate: {
@@ -107,9 +115,19 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
     marginBottom: STYLES.FORM.labelMargin,
   };
 
+  const resetForm = () => {
+    dispatch(updateJobSearchForm(candidateSearchFormInitialState));
+    form.setValues(candidateSearchFormInitialState);
+    form.reset()
+    setFormRenderCount((prev) => prev + 1);
+    console.log('reseted')
+  };
+
   return (
     <div className="p-4 px-8 pb-8 w-full relative max-w-full text-black dark:text-white">
+      
       <form
+      key={'form_render_'+formRenderCount}
         onSubmit={form.onSubmit((values) => {
           console.log('Form submitted with values:', values);
           dispatch(updateJobSearchForm(values));
@@ -164,7 +182,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
           <div className="flex flex-col gap-4">
             <Select
               label="Готовность к переезду"
-              placeholder="Живет в регионе или готов переехать"
+              placeholder="Готовность к переезду"
               labelProps={{ style: customLabelStyle }}
               data={[
                 { value: 'living_or_relocation', label: 'Живет в регионе или готов переехать' },
@@ -295,10 +313,13 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
           {aiError && <HTMLError error={aiError} />}
 
           {/* Submit button */}
-          <div>
-            <Button>Сбросить</Button>
+          <div className="flex gap-4 mt-4">
+            <ResetFormButton onClick={() => 
+              //resetForm() 
+              setShowConfirmator(true)
+              } />
             <Button
-              mt="md"
+              
               type="submit"
               className="w-full max-w-full"
               disabled={
@@ -316,6 +337,15 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
           </div>
         </div>
       </form>
+      <JSONViewer data={form.values}/>
+      <Confirmator
+        onConfirm={resetForm} //
+        header={'Вы действительно хотите очистить форму?'}
+        showConfirmator={showConfirmator}
+        setShowConfirmator={setShowConfirmator}
+        closeOnConfirm={true}
+        //mutationLoading={loading_cancel_unpaid || loading_cancel_paid}
+      />
     </div>
   );
 };

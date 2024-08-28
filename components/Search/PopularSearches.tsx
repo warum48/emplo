@@ -45,7 +45,7 @@ export const PopularSearches = ({onSearch, gridCols=3, searchType='inner'}:TProp
   return (
   
     
-    <div className={`}=flex =justify-between =gap-4 grid  ${gridCols === 3 ? 'grid-cols-3':'grid-cols-1'} `}>
+    <div className={`}=flex =justify-between =gap-4 grid grid-cols-1 gap-2 ${gridCols === 3 ? 'md:grid-cols-3':'md:grid-cols-1'} `}>
       <ul className="space-y-2">
       <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme={colorScheme} onClick={()=>handleSearch('Водитель-курьер', ['Москва'])}>Москва - Водитель-курьер</LinkButton></li>
         <li>Технологические вакансии </li>

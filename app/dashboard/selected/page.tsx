@@ -2,7 +2,7 @@
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 import Head from 'next/head';
 

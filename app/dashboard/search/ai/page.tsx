@@ -3,7 +3,7 @@ import { BgColors } from '@/components/_dashboard/predictor/BgColors.tsx/BgColor
 import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { RootState } from '@/rtk/store/store';

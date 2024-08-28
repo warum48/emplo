@@ -8,8 +8,8 @@ export const STYLES = {
         navBarInnerWidth_collapsed: "w-[95px]",
         navBarWidth_expanded: "w-[256px]",
         navBarWidth_collapsed: "w-[96px]",
-        contentMarginLeft_expanded: "ml-64",
-        contentMarginLeft_collapsed: "ml-[96px]",
+        contentMarginLeft_expanded: "ml-0 md:ml-64",
+        contentMarginLeft_collapsed: "ml-0 md:ml-[96px]",
     }
     
 }

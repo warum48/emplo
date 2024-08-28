@@ -55,7 +55,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
   };
 
      return(
-       <>
+       <div className="flex gap-4 w-full flex-col md:flex-row">
         <Input
           placeholder="Регион"
           size="lg"
@@ -89,7 +89,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )*/}
-      </>
+      </div>
      )
 }
 

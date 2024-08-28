@@ -8,17 +8,18 @@ import Link from 'next/link';
 import React from 'react';
 import { ResultList } from '@/components/ResultList/ResultList';
 
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ParticlesComponent } from '@/components/Particles/Particles';
-import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
+
 import { About } from '@/components/About/About';
-import { QuickSearch } from '@/components/JobSearchForm/QuickSearch';
+import { QuickSearch } from '@/components/Search/QuickSearch';
 import { IntroText } from '@/components/_main/IntroText';
 import { ExpandSearchButton } from '@/components/_main/ExpandSearchButton';
 import { MainBlockContainer } from '@/components/_main/MainBlockContainer';
 import { InfoBlock } from '@/components/_main/InfoBlock';
 import PerspectiveCards from '@/components/_main/PerspectiveCards.tsx/PerspectiveCards';
 import { Plans } from '@/components/_main/Plans';
+import { PopularSearches } from '@/components/Search/PopularSearches';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
@@ -79,6 +80,7 @@ const Home = () => {
       <div
         className={` 
           pt-20
+          
           transition-all duration-400 grid grid-cols-1 gap-0 
              ${(resultState && isAnimating) || !resultState ? 'md:grid-cols-1' : 'md:grid-cols-3 xl:grid-cols-4'}  `}
       >

@@ -24,6 +24,8 @@ export function ColorSchemeButton() {
       variant="transparent" //"default"
       size="xl"
       aria-label="Toggle color scheme"
+      px={0}
+      mx={0}
      // c={theme.colors.myCustomPink[2]}
     >
       <IconSun className={cx(classes.icon, classes.light)} stroke={1.5} />
