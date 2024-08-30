@@ -27,6 +27,7 @@ export const LeftSideMenu = ({alwaysExpanded = false}: {alwaysExpanded?: boolean
   return (
       <div
         className={`
+         bg-customGray-900
           bg-gradient-to-t
           from-pink-950/25 via-customGray-800/50   to-customGray-900
           dark:bg-gradient-to-t

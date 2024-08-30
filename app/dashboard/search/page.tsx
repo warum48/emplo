@@ -4,7 +4,7 @@ import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBo
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/Search/JobSearchForm';
-import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
+import { PopularSearches } from '@/components/Search/PopularSearches';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { RootState } from '@/rtk/store/store';
 import Head from 'next/head';

@@ -10,6 +10,7 @@ type TProps = {
   miw?: string | number;
   onClick?: () => void;
   hasShadow?: boolean;
+  framed?: boolean;
 };
 
 export const CardContainer = ({
@@ -18,7 +19,7 @@ export const CardContainer = ({
   fitCell = true,
   className = '',
   onClick,
- // framed = true,
+  framed = true,
   hasShadow = false,
 
   ...props
@@ -32,10 +33,11 @@ TProps ) => {
       style={{ position: 'relative', alignSelf: fitCell ? 'stretch' : 'start' }} //!!align-self used to make div not to take 100% height in grid cell
       shadow={(expanded && hasShadow) ? 'lg':"0"}
      // p={expanded ? { base: 'md', md: 'xl' } : 'md'} 
-    //  p={framed? (expanded ? { base: 'md', md: 'xl' } : 'md') : '0'}
+      p={framed? (expanded ? { base: 'md', md: 'xl' } : 'lg') : '0'}
     //  withBorder = {framed}
       className={className}
       onClick={onClick}
+      radius={'lg'}
       //component='button'
       // miw={miw} //{expanded ? '100%' : ((innerPageMaxWidth  / 2 ) -32) }//448}
     >

@@ -24,8 +24,11 @@ export const Routes = {
     DASHBOARD:  {
         MAIN: '/dashboard',
         SEARCH: '/dashboard/search',
-        PROFILE: '/dashboard/profile',
+       // PROFILE: '/dashboard/profile',
         SETTINGS: '/dashboard/settings',
+        CALENDAR: '/dashboard/calendar',
+        RESUME: '/dashboard/resume',
+        VACANCIES: '/dashboard/vacancies',
         pages: [
             { label: 'Профиль', icon: IconUser, link: '/dashboard' },
             {
@@ -48,17 +51,9 @@ export const Routes = {
               ],
             },
             { label: 'Подать резюме', icon: IconPresentationAnalytics, link: '/dashboard/resume' },
-          //  { label: 'Contracts', icon: IconFileAnalytics },
+            { label: 'Календарь', icon: IconGauge, link: '/dashboard/calendar' },
             { label: 'Настройки', icon: IconSettings, link: '/dashboard/settings' },
-            /*{
-              label: 'Security',
-              icon: IconLock,
-              links: [
-                { label: 'Enable 2FA', link: '/' },
-                { label: 'Change password', link: '/' },
-                { label: 'Recovery codes', link: '/' },
-              ],
-            },*/
+            
           ]
     }
 };

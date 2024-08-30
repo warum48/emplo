@@ -16,4 +16,23 @@ const CardPreTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   <span className="text-gray-900">{children}</span>
 );
 
-export { TitleLabel, TextInfo, CardTitle, CardPreTitle };
+const Title1_main : React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-gray-900">{children}</span>
+);
+const Title2_second: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-gray-900">{children}</span>
+);
+const Title4_second: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-gray-900">{children}</span>
+);
+const Card_pretitle : React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-gray-900">{children}</span>
+);
+const Card_title : React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="text-gray-900">{children}</span>
+);
+
+export { TitleLabel, TextInfo, CardTitle, CardPreTitle,   Title1_main,
+  Title2_second,
+  Title4_second, Card_pretitle,
+  Card_title,};
