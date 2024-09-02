@@ -20,6 +20,8 @@ import { InfoBlock } from '@/components/_main/InfoBlock';
 import PerspectiveCards from '@/components/_main/PerspectiveCards.tsx/PerspectiveCards';
 import { Plans } from '@/components/_main/Plans';
 import { PopularSearches } from '@/components/Search/PopularSearches';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/rtk/store/store';
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
@@ -27,6 +29,7 @@ const Home = () => {
   const mainRef = React.useRef<HTMLDivElement>(null);
   const [extendedSearch, setExtendedSearch] = React.useState(false);
   const [smallGradientPadding, setSmallGradientPadding] = React.useState(true);
+  const results = useSelector((state: RootState) => state.search.results);
 
   const onSearch = () => {
     setResultState(!resultState);
@@ -208,7 +211,7 @@ const Home = () => {
             <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
               Результаты поиска
             </h2>
-            <ResultList />
+            <ResultList results={results}/>
           </div>
         )}
       </div>
