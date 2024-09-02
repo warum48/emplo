@@ -59,10 +59,10 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                 {/*<TitleLabel>Опыт работы:</TitleLabel> <TextInfo>12 лет</TextInfo>*/}
               </div>
               <div>
-                  <TitleLabel>Пол:</TitleLabel> <TextInfo>{employee.gender}</TextInfo>
+                  <TitleLabel>Пол:</TitleLabel> {/*<TextInfo>{employee.gender }</TextInfo>*/}
                 </div>
                 <div>
-                  <TitleLabel>Зарплата:</TitleLabel> <TextInfo>{employee.salary}&nbsp;₽</TextInfo>
+                  <TitleLabel>Зарплата:</TitleLabel> <TextInfo>{/*employee.salary*/}&nbsp;₽</TextInfo>
                 </div>
               <br />
               {/*<div className="text-xs">

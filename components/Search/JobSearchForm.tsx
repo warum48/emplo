@@ -118,7 +118,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
   const resetForm = () => {
     dispatch(updateJobSearchForm(candidateSearchFormInitialState));
     form.setValues(candidateSearchFormInitialState);
-    form.reset()
+   // form.reset()
     setFormRenderCount((prev) => prev + 1);
     console.log('reseted')
   };
@@ -193,7 +193,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             />
           </div>
 
-          {/* Schedule */}
+          {/* Schedule 
           <Checkbox.Group
             label="График работы *"
             {...form.getInputProps('schedule', { type: 'checkbox' })}
@@ -208,7 +208,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             <Checkbox value="flexible" label="Гибкий" mt="xs" />
             <Checkbox value="remote" label="Удаленная работа" mt="xs" />
             <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
-          </Checkbox.Group>
+          </Checkbox.Group>*/}
         </div>
         <div className="flex flex-col gap-6">
           {/* Skills */}
@@ -230,7 +230,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
             </Checkbox.Group>
           </div>
 
-          {/* Experience */}
+          {/* Experience 
           <Select
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
@@ -242,14 +242,15 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
               { value: 'moreThan6', label: 'Более 6 лет' },
             ]}
             {...form.getInputProps('experience')}
-          />
-          {/*
+          /> */}
+         
           <NumberInput
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
             placeholder="Введите опыт работы"
             {...form.getInputProps('experience')}
-          />*/}
+          />
+           {/**/}
 
           {/* Gender */}
           <Select

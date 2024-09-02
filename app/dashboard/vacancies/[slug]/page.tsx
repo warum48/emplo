@@ -13,8 +13,12 @@ import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 
 import Head from 'next/head';
+import { Drawer } from '@mantine/core';
+import React from 'react';
+import { IconList } from '@tabler/icons-react';
 
-const Settings = ({ params }: { params: { slug: string } }) => {
+const Page = ({ params }: { params: { slug: string } }) => {
+  const [menuIsOpen, setMenuIsOpen] = React.useState(false);
   const vacancies = [
     { name: 'UX/UI дизайнер', employees: [] },
     { name: 'Старший дизайнер проектов', employees: [] },
@@ -44,41 +48,59 @@ const Settings = ({ params }: { params: { slug: string } }) => {
 
   return (
     <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full">
-  <main className="mt-0 flex flex-row gap-8 h-full relative " 
-  //items-stretch
-  >
-    <div
-      className="w-[300px]
+      <main
+        className="mt-0 flex flex-col md:flex-row gap-4 md:gap-8 h-full relative ml-4 md:ml-0"
+        //items-stretch
+      >
+        <div
+          className={`w-[300px]
             min-w-64
-            form-bg-and-text
+            bg-gray-300 
+            text-black dark:text-white
+            dark:bg-customGray-950/85
             shadow
+            bg-white
             relative
             text-sm
-            "
-            //bg-gray-300 
-            //flex flex-col
-            //p-4
-    >
-     <VacancyListComponent vacancies={vacancies} />
-      
-    </div>
+            hidden md:block
+            `}
+          //flex flex-col
+          //p-4
+        >
+          <VacancyListComponent vacancies={vacancies} />
+        </div>
+        <div
+          className="flex gap-2 text-xs items-center md:hidden"
+          onClick={() => setMenuIsOpen(!menuIsOpen)}
+        >
+          <IconList stroke={2} /> Список вакансий
+        </div>
+        <Drawer
+          className="md:hidden"
+          title="Список вакансий"
+          size="100%"
+          position="top"
+          opened={menuIsOpen}
+          onClose={() => setMenuIsOpen(false)}
+        >
+          <VacancyListComponent vacancies={vacancies} />
+        </Drawer>
 
-    <div
-      className="px-4  
+        <div
+          className="px-4  
         form-bg-and-text
         mr-4
         h-full
         flex
         overflow-auto
         "
-        //
-    >
-      <CandidatesTable vacancyId={params.slug}/>
-      
-    </div>
-  </main>
-</DashBoardPageContainer>
+          //
+        >
+          <CandidatesTable vacancyId={params.slug} />
+        </div>
+      </main>
+    </DashBoardPageContainer>
   );
 };
 
-export default Settings;
+export default Page;

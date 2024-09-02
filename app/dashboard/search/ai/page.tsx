@@ -4,17 +4,20 @@ import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBo
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/Search/JobSearchForm';
-import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
+//import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
 import { ResultList } from '@/components/ResultList/ResultList';
 import { RootState } from '@/rtk/store/store';
 import Head from 'next/head';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { PopularSearches } from '@/components/Search/PopularSearches';
+import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 
 const Dashboard = () => {
 
   const results = useSelector((state: RootState) => state.searchAI.results);
 
+ // const hasCandidates = React.useMemo(() => !!results?.items && results?.items.length > 0, [results?.items]);
   const hasCandidates = React.useMemo(() => !!results?.items && results?.items.length > 0, [results?.items]);
 
   return (
@@ -34,7 +37,7 @@ const Dashboard = () => {
       <BgColors/>
       }
       <main className={` ${hasCandidates ? "flex-row " : "flex-col items-center "} " mt-0 flex  justify-center  z-10  flex-grow`}>
-       
+      
         <div
           className={`
             ${ (results?.items && results?.items.length > 0) ? " w-1/4 " : "w-full max-w-screen-lg"  }
@@ -46,6 +49,7 @@ const Dashboard = () => {
             
             `}
         >
+           
           {!hasCandidates && <h3 className="dashboard-section-header ml-8 mt-4">Расширенный поиск</h3>}
           <JobSearchForm searchType='outer' gridCols={(results?.items && results?.items.length > 0) ? 1 : 3}/>
             
@@ -71,9 +75,11 @@ const Dashboard = () => {
         >
           <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1}/>
         </div>*/}
+        
         {(results?.items && results?.items.length > 0)  && 
         <div className="flex-grow w-full flex-1 px-4 =py-16">
-          <ResultList />
+          <JSONViewer data={results}/>
+          <ResultList results={results}/>
         </div>
 }
         {/*  <div className="p-4 bg-white shadow rounded-lg">

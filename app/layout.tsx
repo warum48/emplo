@@ -7,6 +7,7 @@ import { theme } from '../theme';
 import { useState, useEffect } from 'react';
 //import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
 import { useHotkeys, useLocalStorage } from '@mantine/hooks';
+import { Notifications } from '@mantine/notifications';
 import '@/styles/globals.css';
 import '@/styles/styles.css';
 import '@/styles/gradient_border.css';
@@ -47,6 +48,7 @@ import { useCookies } from 'react-cookie';
 import { setAuthToken } from '@/rtk/slices/authSlice';
 import { AuthProvider } from '@/global/context/AuthProvider';
 import { TailwindClassesGenerator } from '@/components/__atoms/TailwindClassesGeneraor/TailwindClassesGenerator';
+import '@mantine/notifications/styles.css';
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
@@ -83,6 +85,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           // withGlobalStyles
           // withNormalizeCSS
         >
+          
           <Provider store={store}>
             <AuthProvider>
             <PersistGate loading={null} persistor={persistor}>
@@ -96,6 +99,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 {children}
                 
               </div>
+              <Notifications />
             </PersistGate>
             </AuthProvider>
           </Provider>

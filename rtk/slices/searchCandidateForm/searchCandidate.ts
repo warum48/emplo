@@ -4,14 +4,14 @@ export const candidateSearchFormInitialState = {
   specialty: '',
   area: [],
   relocation_type: '',
-  schedule: [], //["fullDay", "shift", "flexible", "remote", "flyInFlyOut"]
+  //schedule: [], //["fullDay", "shift", "flexible", "remote", "flyInFlyOut"]
   skills: [],
-  experience: '',//0,//'', //["noExperience", "between1And3", "between3And6", "moreThan6"]
+  experience: 0,//'',//0,//'', //["noExperience", "between1And3", "between3And6", "moreThan6"]
   gender: '',
   age: 0,
   salary: 0,
   job_search_status: [],
-  limit: 0,
+  limit: null,
 };
 
 const candidateSearchSlice = createSlice({

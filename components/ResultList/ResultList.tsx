@@ -9,9 +9,13 @@ import { RootState } from '@/rtk/store/store';
 import { JSONViewer } from "../__atoms/JSONViewer/JSONViewr";
 import { Debugger } from "../__atoms/Debugger/Debugger";
 
-export const ResultList: React.FC = () => {
-    const results = useSelector((state: RootState) => state.search.results);
-    console.log('results'   , results);
+type TProps = {
+    results: any
+}
+
+export const ResultList = ({results}:TProps) => {
+  //  const results = useSelector((state: RootState) => state.search.results);
+   // console.log('results'   , results);
     return (
         <>
         <Debugger>

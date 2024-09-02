@@ -77,7 +77,7 @@ const Dashboard = () => {
         </div>*/}
         {(results?.items && results?.items.length > 0)  && 
         <div className="flex-grow w-full flex-1 px-4 =py-16">
-          <ResultList />
+          <ResultList results={results}/>
         </div>
 }
         {/*  <div className="p-4 bg-white shadow rounded-lg">

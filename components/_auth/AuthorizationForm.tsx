@@ -3,14 +3,12 @@ import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import './styles.css'; // Ensure your custom CSS for the animation is imported
-import { ParticlesComponent } from '../Particles/Particles';
 import { useRouter } from 'next/navigation';
-import { useLazyMeQuery, useLoginMutation } from '@/rtk/queries/authApi'; //useMeQuery
+import { useLoginMutation } from '@/rtk/queries/authApi'; //useMeQuery
 import { useDispatch, useSelector } from 'react-redux';
-import { setAuthState, setAuthToken } from '@/rtk/slices/authSlice';
+import { setAuthToken } from '@/rtk/slices/authSlice';
 import { useCookies } from 'react-cookie';
 import { RootState } from '@/rtk/store/store';
-import { Debugger } from '../__atoms/Debugger/Debugger';
 import Link from 'next/link';
 import { Routes } from '@/global/ROUTES';
 
@@ -31,10 +29,10 @@ const AuthorizationForm = () => {
   const [token, setToken] = React.useState('');
   const [login, { isLoading: isLoginLoading, error: loginError, data: loginData }] =
     useLoginMutation();
-  const [fetchMe, { isLoading: isMeLoading, error: meError, data: meData }] = useLazyMeQuery();
+  //const [fetchMe, { isLoading: isMeLoading, error: meError, data: meData }] = useLazyMeQuery();
   const [cookiesToken, setCookieToken] = useCookies(['jwt_token']);
 
-  const tokenInStore = useSelector((state: RootState) => state.auth.token);
+  //const tokenInStore = useSelector((state: RootState) => state.auth.token);
 
   const handleLogin = async () => {
     try {
@@ -49,30 +47,7 @@ const AuthorizationForm = () => {
       console.error('Failed to login:', err);
     }
   };
-/*
-  useEffect(() => {
-    console.log('USE EF TOKEN', token);
-    if (token) {
-      console.log('DISpatching');
-      dispatch(setAuthState({ isAuthenticated: true, token: token })); 
-    }
-  }, [token, fetchMe]);
 
-  useEffect(() => {
-    console.log('USE EF TOKEN_in_Store', tokenInStore);
-    if (tokenInStore) {
-      fetchMe();
-    }
-  }, [tokenInStore]); 
-
-  useEffect(() => {
-    console.log('meData', meData);
-    if (meData) {
-      dispatch(setAuthState({ isAuthenticated: true, token: token })); //user: meData,
-      router.push('/dashboard');
-    }
-  }, [meData, dispatch]);
-  */
 
   const onSubmit = (values: any) => {
     handleLogin();
@@ -97,8 +72,6 @@ const AuthorizationForm = () => {
             type="submit"
             fullWidth
             className="mb-4"
-            // bg-purple-600 hover:bg-purple-700
-            //!!onClick={() => router.push('/dashboard')}
           >
             Войти
           </Button>
@@ -116,3 +89,30 @@ const AuthorizationForm = () => {
 };
 
 export default AuthorizationForm;
+
+
+
+/*
+  useEffect(() => {
+    console.log('USE EF TOKEN', token);
+    if (token) {
+      console.log('DISpatching');
+      dispatch(setAuthState({ isAuthenticated: true, token: token })); 
+    }
+  }, [token, fetchMe]);
+
+  useEffect(() => {
+    console.log('USE EF TOKEN_in_Store', tokenInStore);
+    if (tokenInStore) {
+      fetchMe();
+    }
+  }, [tokenInStore]); 
+
+  useEffect(() => {
+    console.log('meData', meData);
+    if (meData) {
+      dispatch(setAuthState({ isAuthenticated: true, token: token })); //user: meData,
+      router.push('/dashboard');
+    }
+  }, [meData, dispatch]);
+  */
