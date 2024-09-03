@@ -12,7 +12,7 @@ const Value = ({ value, postfix='' }: TProps) => {
     return <span>-</span>;
   }
 
-  if (typeof value === 'string') {
+  if (typeof value === 'string' || typeof value === 'number') {
     return <span>{value + postfix}</span>;
   }
 

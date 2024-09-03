@@ -1,6 +1,6 @@
 'use client';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
 import VacancyCreationFormHH from '@/components/_dashboard/vacancies/create/HHBasedVacancyForm';
 import VacancyForm from '@/components/_dashboard/vacancies/create/NewVacancyForm';

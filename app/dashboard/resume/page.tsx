@@ -1,7 +1,7 @@
 'use client';
 import { TextInfo, TitleLabel } from '@/components/__atoms/TextBlocks/TextBlocks';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
 import { XY } from '@/components/_dashboard/predictor/XY';
 import ResumeForm from '@/components/CreateResumeForm/CreateResume';

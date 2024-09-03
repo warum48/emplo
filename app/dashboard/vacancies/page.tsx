@@ -1,6 +1,6 @@
 'use client';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+//import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
 import { CandidatesTable } from '@/components/_dashboard/vacancies/list/VacanciesList/CandidatesTable';
 import { VacancyListComponent } from '@/components/_dashboard/vacancies/list/VacanciesList/VacanciesList';
@@ -16,6 +16,8 @@ import Head from 'next/head';
 import { Drawer } from '@mantine/core';
 import React from 'react';
 import { IconList } from '@tabler/icons-react';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
+import { DrawerWithOpener } from '@/components/_dashboard/PageContainer/DrawerWithOpener';
 
 const Page = () => {
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
@@ -49,34 +51,32 @@ const Page = () => {
   return (
     <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full">
       <main
-        className="mt-0 flex flex-col md:flex-row gap-4 md:gap-8 h-full relative ml-4 md:ml-0"
+        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-8 h-full relative ml-4 lg:ml-0"
         //items-stretch
       >
         <div
           className={`w-[300px]
             min-w-64
-            bg-gray-300 
-            text-black dark:text-white
-            dark:bg-customGray-950/85
+            form-bg-and-text
             shadow
-            bg-white
             relative
             text-sm
-            hidden md:block
+            hidden lg:block
             `}
           //flex flex-col
           //p-4
         >
           <VacancyListComponent vacancies={vacancies} />
         </div>
-        <div
-          className="flex gap-2 text-xs items-center md:hidden"
+
+        {/*} <div
+          className="flex gap-2 text-xs items-center lg:hidden"
           onClick={() => setMenuIsOpen(!menuIsOpen)}
         >
           <IconList stroke={2} /> Список вакансий
         </div>
         <Drawer
-          className="md:hidden"
+          className="lg:hidden"
           title="Список вакансий"
           size="100%"
           position="top"
@@ -84,10 +84,16 @@ const Page = () => {
           onClose={() => setMenuIsOpen(false)}
         >
           <VacancyListComponent vacancies={vacancies} />
-        </Drawer>
+        </Drawer> */}
+        <DrawerWithOpener
+          Icon={<IconList stroke={2} />}
+          MainComponent={<VacancyListComponent vacancies={vacancies} />}
+          title="Список вакансий"
+        />
 
         <div
-          className="px-4  
+          className="
+          ^px-4  
         form-bg-and-text
         mr-4
         h-full

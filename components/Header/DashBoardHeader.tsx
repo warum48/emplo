@@ -19,7 +19,7 @@ const DashBoardHeader = () => {
   return (
     <header
       className={`fixed top-0 right-0 p-2 px-2 md:px-4 w-full flex  items-center justify-end h-[80px] gap-0
-      z-10 shadow-xs
+      z-30 shadow-xs 
       ${compactLayout ? '' : ' bg-gradient-to-r        from-gray-50/0 via-gray-50/0 to-white        dark:bg-gradient-to-r  dark:from-customGray-900/0 dark:via-customGray-950/0 dark:to-customGray-950'}
     `}
     >

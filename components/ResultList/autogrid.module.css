@@ -6,11 +6,17 @@
     justify-content: center;*/
 }
 
+@media (max-width: 640px) {
+    .container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+}
+
 
 
 .gridItem {
     position: relative;
-    min-width: 400px;
+    min-width: 300px;
     max-width: 100%;
     flex: 1;
   

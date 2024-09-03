@@ -59,7 +59,7 @@ const mockdata = [
 export function NavbarNested() {
   const leftSideMenuCollapsed = useSelector((state: RootState) => state.UISettings.leftSideMenuCollapsed);
   const links = Routes.DASHBOARD.pages.map((item) => <LinksGroup {...item} key={item.label} />);
-  const isMobile = false;
+ // const isMobile = false;
 
   return (
     
@@ -70,7 +70,7 @@ export function NavbarNested() {
           <Code fw={700}>v3.1.2</Code>
         </Group>
       </div> */}
-      {!isMobile && <CollapseButton />}
+       <CollapseButton />
      
 
       <ScrollArea className={classes.links}>

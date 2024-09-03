@@ -40,7 +40,7 @@ export const UserButton = () => {
 
   return (
     <div
-      className="flex gap-0 md:gap-4 items-center"
+      className="flex gap-0 md:gap-4 items-center z-20"
       // border p-0 px-4 border-default rounded-sm shadow-sm
     >
       <Link href="/dashboard">

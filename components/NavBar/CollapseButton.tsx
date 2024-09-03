@@ -13,7 +13,7 @@ export const CollapseButton = () => {
    const dispatch = useDispatch();
     
     return(
-        <div className={classes.but + ' bg-customGray-900 border border-customGray-500'} onClick={() => //{}
+        <div className={classes.but + ' bg-customGray-900 border border-customGray-500 hidden relative md:block z-50'} onClick={() => //{}
        // setNavBarCollapsed(!navBarCollapsed)
        dispatch(setLeftSideMenuCollapsed(!leftSideMenuCollapsed))}
         >

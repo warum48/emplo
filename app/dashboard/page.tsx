@@ -12,7 +12,7 @@ import { ResultList } from '@/components/ResultList/ResultList';
 import { useGetMeQuery } from '@/rtk/queries/vacancy';
 //import { useGetMeQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import Head from 'next/head';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 
 const Dashboard = () => {
   const { data: data_hhme, error: error_hhme, isLoading: isLoading_hhme } = useGetMeQuery();

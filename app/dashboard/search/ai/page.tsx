@@ -1,6 +1,6 @@
 'use client';
 import { BgColors } from '@/components/_dashboard/predictor/BgColors.tsx/BgColors';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/Search/JobSearchForm';
@@ -14,11 +14,11 @@ import { PopularSearches } from '@/components/Search/PopularSearches';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 
 const Dashboard = () => {
-
   const results = useSelector((state: RootState) => state.searchAI.results);
-
- // const hasCandidates = React.useMemo(() => !!results?.items && results?.items.length > 0, [results?.items]);
-  const hasCandidates = React.useMemo(() => !!results?.items && results?.items.length > 0, [results?.items]);
+  const hasCandidates = React.useMemo(
+    () => !!results?.items && results?.items.length > 0,
+    [results?.items]
+  );
 
   return (
     <>
@@ -28,42 +28,55 @@ const Dashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <DashBoardPageContainer header="Поиск" hasLeftMenu={(results?.items && results?.items.length > 0)}>
-   {/*   <div className="text-sm text-gray-700 dark:text-white my-2">Панель управления / Поиск</div>  
+      <DashBoardPageContainer
+        header="Поиск"
+        hasLeftMenu={results?.items && results?.items.length > 0}
+      >
+        {/*   <div className="text-sm text-gray-700 dark:text-white my-2">Панель управления / Поиск</div>  
      <h2 className="page-header"
       //page-header-sm
       >Профиль</h2>*/}
-      {!hasCandidates &&
-      <BgColors/>
-      }
-      <main className={` ${hasCandidates ? "flex-row " : "flex-col items-center "} " mt-0 flex  justify-center  z-10  flex-grow`}>
-      
-        <div
-          className={`
-            ${ (results?.items && results?.items.length > 0) ? " w-1/4 " : "w-full max-w-screen-lg"  }
+        {!hasCandidates && <BgColors />}
+        <main
+          className={` ${hasCandidates ? 'flex-row ' : 'flex-col items-center '} " mt-0 flex z-0 justify-center   flex-grow`}
+        >
+          <div
+            className={`
+            ${results?.items && results?.items.length > 0 ? ' w-1/4 ' : 'w-full max-w-screen-lg'}
            
             
             min-w-64
             bg-gray-300 dark:text-white dark:bg-customGray-950/85
-            bg-white shadow mb-8
+            bg-white shadow ^mb-8
             
             `}
-        >
-           
-          {!hasCandidates && <h3 className="dashboard-section-header ml-8 mt-4">Расширенный поиск</h3>}
-          <JobSearchForm searchType='outer' gridCols={(results?.items && results?.items.length > 0) ? 1 : 3}/>
-            
-          {/*<div className="px-8">
+          >
+            {!hasCandidates && (
+              <h3 className="dashboard-section-header ml-8 mt-4">Расширенный поиск</h3>
+            )}
+            <JobSearchForm
+              searchType="outer"
+              gridCols={results?.items && results?.items.length > 0 ? 1 : 3}
+            />
+
+            {/*<div className="px-8">
           <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1} />
           </div>*/}
-        </div>
-        {!hasCandidates && 
-        <div className='w-full max-w-screen-lg bg-gray-300 dark:text-white dark:bg-customGray-950/85
-            bg-white shadow mb-8 px-8 pt-4 pb-8'>
+          </div>
+          {!hasCandidates && (
+            <div
+              className="w-full max-w-screen-lg bg-gray-300 dark:text-white dark:bg-customGray-950/85
+            bg-white shadow mb-8 px-8 pt-4 pb-8"
+            >
               <h3 className="dashboard-section-header pb-4">История поиска</h3>
-        <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={3} searchType="ai"/>
-        </div>}
-       {/*} <div
+              <PopularSearches
+                onSearch={() => console.log('popsearch')}
+                gridCols={3}
+                searchType="ai"
+              />
+            </div>
+          )}
+          {/*} <div
           className="w-1/4 
             min-w-64
             =mt-16
@@ -75,17 +88,17 @@ const Dashboard = () => {
         >
           <PopularSearches onSearch={()=>console.log('popsearch')} gridCols={1}/>
         </div>*/}
-        
-        {(results?.items && results?.items.length > 0)  && 
-        <div className="flex-grow w-full flex-1 px-4 =py-16">
-          <JSONViewer data={results}/>
-          <ResultList results={results}/>
-        </div>
-}
-        {/*  <div className="p-4 bg-white shadow rounded-lg">
+
+          {results?.items && results?.items.length > 0 && (
+            <div className="flex-grow w-full flex-1 px-4 py-16">
+              {/*<JSONViewer data={results}/>*/}
+              <ResultList results={results} />
+            </div>
+          )}
+          {/*  <div className="p-4 bg-white shadow rounded-lg">
             <p>Welcome to the dashboard!</p>
           </div>*/}
-      </main>
+        </main>
       </DashBoardPageContainer>
     </>
   );

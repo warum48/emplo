@@ -28,7 +28,7 @@ import { GlobalContext } from '@/global/context/ContextGlobal';
 import { DateUtils } from '@/utils/DateUtils';
 import { mock } from './mock';
 import { EventsCalendar } from '@/components/_dashboard/_calendar/types';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { BgColors } from '@/components/_dashboard/predictor/BgColors.tsx/BgColors';
 
 export default function CalendarPage() {
