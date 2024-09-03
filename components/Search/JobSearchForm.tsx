@@ -31,14 +31,15 @@ import { ResetFormButton } from '../__atoms/Buttons/ResetFormButton';
 import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
 import { Confirmator } from '../__uiutils/Confirmator';
 import React from 'react';
+import { SearchType } from '@/types/local/SearchType';
 
 type TProps = {
   gridCols?: number;
   onSearch?: () => void;
-  searchType?: 'inner' | 'outer';
+  searchType?: SearchType;
 };
 
-const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner' }: TProps) => {
+const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'internal' }: TProps) => {
   //const dispatch = useDispatch();
   //const formState = useSelector((state: RootState) => state.jobSearch);
   const [errors, setErrors] = useState<ErrorDetail[]>();
@@ -63,11 +64,11 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'inner'
     try {
       // const candidates = await searchHHCandidates(values).unwrap();
       const candidates =
-        searchType === 'inner'
+        searchType === 'internal'
           ? await searchCandidates(values).unwrap()
           : await searchHHCandidates(values).unwrap();
       if (Array.isArray(candidates?.items)) {
-        if (searchType === 'inner') {
+        if (searchType === 'internal') {
           dispatch(setSearchResults(candidates));
         } else {
           dispatch(setSearchHHResults(candidates));

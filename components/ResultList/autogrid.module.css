@@ -1,22 +1,18 @@
 .container {
     display: grid;
     gap:16px;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
 /*  center last row doesn't work grid-template-rows: repeat(auto-fill, minmax(1fr, 80px));
     justify-content: center;*/
 }
 
-@media (max-width: 640px) {
-    .container {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-}
+
 
 
 
 .gridItem {
     position: relative;
-    min-width: 300px;
+    min-width: 280px;
     max-width: 100%;
     flex: 1;
   
@@ -30,6 +26,18 @@
     flex: 1;
    /* border: 1px solid black;*/
     grid-column:  1 /  -1;
+}
+
+@media (max-width: 320px) {
+    .container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .container {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
 
 

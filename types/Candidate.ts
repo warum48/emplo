@@ -21,6 +21,7 @@ export interface Experience {
     };
     position: string;
     description: string;
+    
   }
   
   export interface Candidate {
@@ -41,4 +42,7 @@ export interface Experience {
     resume_status: string;
     professional_roles: string;
     total_experience: number;
+    updated_at: string;
+    created_at: string;
+    photo: string;
   }

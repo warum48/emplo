@@ -1,6 +1,5 @@
 import React from 'react';
-import { JSONViewer } from '../JSONViewer/JSONViewr';
-//import JSONViewer from '@/components/__atoms/JSONViewer'; // Adjust the import path to where your JSONViewer component is located
+import {JSONViewer} from '@/components/__atoms/JSONViewer/JSONViewr'; 
 
 type TProps = {
     value: any;
@@ -9,11 +8,15 @@ type TProps = {
 
 const Value = ({ value, postfix='' }: TProps) => {
   if (value === undefined || value === null) {
-    return <span>-</span>;
+    return <>-</>;
   }
 
   if (typeof value === 'string' || typeof value === 'number') {
-    return <span>{value + postfix}</span>;
+    return <>{value + postfix}</>;
+  }
+
+  if (Array.isArray(value)) {
+    return <>{value.join(', ') + postfix}</>;
   }
 
   if (typeof value === 'object') {
@@ -21,11 +24,11 @@ const Value = ({ value, postfix='' }: TProps) => {
       return <JSONViewer data={value} />;
     } catch (error) {
       console.error('Error rendering JSONViewer:', error);
-      return <span>Invalid object</span>;
+      return <>Invalid object</>;
     }
   }
 
-  return <span>Unsupported value</span>;
+  return <>Unsupported value</>;
 };
 
 export default Value;

@@ -51,12 +51,15 @@ const Page = () => {
   return (
     <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full">
       <main
-        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-8 h-full relative ml-4 lg:ml-0"
+        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-4 h-full relative ml-4 lg:ml-0"
         //items-stretch
       >
         <div
-          className={`w-[300px]
-            min-w-64
+          className={`
+           
+            w-[300px] 
+            min-w-[300px] 
+            ^min-w-64
             form-bg-and-text
             shadow
             relative

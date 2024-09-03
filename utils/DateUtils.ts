@@ -46,5 +46,16 @@ export const DateUtils = {
         }else{
           return ''
         }
-      } 
+      } ,
+      formatDateToRussian(dateString:string | undefined | null ) {
+        if (!dateString) {
+          return 'Не указано';
+        }
+        const date = new Date(dateString);
+        return new Intl.DateTimeFormat('ru-RU', {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+        }).format(date);
+      }
 }

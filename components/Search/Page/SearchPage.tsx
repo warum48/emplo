@@ -1,56 +1,58 @@
 'use client';
 import { BgColors } from '@/components/_dashboard/predictor/BgColors.tsx/BgColors';
 import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
-import DashBoardHeader from '@/components/Header/DashBoardHeader';
-import Header from '@/components/Header/Header';
 import JobSearchForm from '@/components/Search/JobSearchForm';
 import { PopularSearches } from '@/components/Search/PopularSearches';
 import { ResultList } from '@/components/ResultList/ResultList';
-import { RootState } from '@/rtk/store/store';
-import Head from 'next/head';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { DrawerWithOpener } from '@/components/_dashboard/PageContainer/DrawerWithOpener';
 import { IconList } from '@tabler/icons-react';
-import { SearchPage } from '@/components/Search/Page/SearchPage';
+import { SearchType } from '@/types/local/SearchType';
 
-
-const Dashboard = () => {
-  const [menuIsOpen, setMenuIsOpen] = React.useState(false);
-  const results = useSelector((state: RootState) => state.search.results);
-
-  const hasCandidates = React.useMemo(
-    () => !!results?.items && results?.items.length > 0,
-    [results?.items]
-  );
-
-  return (
-    <SearchPage hasCandidates={hasCandidates} results={results} searchType='internal'/>
-  );
+type TProps = {
+    hasCandidates: boolean;
+    results: any;
+    searchType?: SearchType
 };
 
-export default Dashboard;
-
-/*
-<DashBoardPageContainer header="Поиск" hasLeftMenu={hasCandidates}>
+export const SearchPage = ({hasCandidates, results, searchType='internal'} :TProps) => {
+  return (
+    <DashBoardPageContainer header="Поиск" hasLeftMenu={hasCandidates}>
       {!hasCandidates && <BgColors />}
       <main
-        className={` ${hasCandidates ? 'flex-col lg:flex-row ' : 'flex-col items-center '} " mt-0  ml-4 lg:ml-0 flex  justify-center  z-10  flex-grow gap-4 lg:gap-8`}
+        className={` ${hasCandidates ? 'flex-col lg:flex-row ' : 'flex-col items-center '} " mt-0  ml-4 lg:ml-0 flex  justify-center  relative  h-full ^z-10  flex-grow gap-x-4 gap-y-8`}
       >
+        {hasCandidates && (
+            
+        <>
+        <div
+          className="absolute scale-y-100 scale-x-150 left-0 bottom-0 h-[1000px] w-2/3 -z-1
+          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-300/30 via-cyan-300/0 to-blue-600/0
+          dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-blue-800/30 dark:via-cyan-800/0 dark:to-blue-600/0
+          "
+        ></div>
+        <div
+          className="absolute scale-y-120 scale-x-150 -right-64 bottom-0  h-[1000px] w-2/3 -z-0
+          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-fuchsia-200/30 via-purple-600/0 to-blue-600/0
+          dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-pink-500/10 dark:via-pink-700/0 dark:to-pink-600/0
+          "
+        ></div>
+        </>
+    )}
         <div
           className={`
-            ${hasCandidates ? ' w-1/4 hidden lg:block' : 'w-full max-w-screen-lg'}
-            min-w-64
+            ${hasCandidates ? ' w-[300px] hidden lg:block' : 'w-full max-w-screen-lg'}
+            ^min-w-64
             form-bg-and-text 
             shadow 
             ^mb-8
-            
+            z-10
             `}
         >
           {!hasCandidates && (
             <h3 className="dashboard-section-header ml-8 mt-4">Расширенный поиск</h3>
           )}
-          <JobSearchForm gridCols={hasCandidates ? 1 : 3} />
+          <JobSearchForm gridCols={hasCandidates ? 1 : 3} searchType={searchType}/>
         </div>
         {hasCandidates &&
         <DrawerWithOpener
@@ -76,4 +78,7 @@ export default Dashboard;
         )}
       </main>
     </DashBoardPageContainer>
-    */
+  );
+};
+
+

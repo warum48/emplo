@@ -6,6 +6,7 @@ import { StyledButton } from '@/components/__atoms/Buttons/StyledButton';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
 import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/queries/vacancy';
+import { UIUtils } from '@/utils/UIUtils';
 //import DataDisplay from '@/components/_dashboard/profile/HHMe';
 
 interface Candidate {
@@ -162,7 +163,7 @@ export function CandidatesTable({vacancyId}:TProps) { //default
               <Table.Td><Checkbox size="sm" /></Table.Td>
               <Table.Td>{`${candidate.last_name} ${candidate.first_name} ${candidate.middle_name}`}</Table.Td>
               <Table.Td>
-                <Badge color={getStatusColor(candidate.resume_status)}>{candidate.resume_status}</Badge>
+                <Badge color={UIUtils.getStatusColor(candidate.resume_status)}>{candidate.resume_status}</Badge>
               </Table.Td>
               <Table.Td>{candidate.alternate_url ? candidate.alternate_url : 'Не указан'}</Table.Td>
               <Table.Td>{candidate.area}</Table.Td>
@@ -195,18 +196,4 @@ export function CandidatesTable({vacancyId}:TProps) { //default
   );
 }
 
-function getStatusColor(status: string) {
-  switch (status) {
-    case 'Собеседование':
-      return 'green';
-    case 'На рассмотрении':
-      return 'blue';
-    case 'Новый':
-      return 'orange';
-    case 'Тестовое задание':
-      return 'cyan';
-    default:
-      return 'gray';
-  }
-}
 
