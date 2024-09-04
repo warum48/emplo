@@ -20,7 +20,7 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
     <DashBoardPageContainer header="Поиск" hasLeftMenu={hasCandidates}>
       {!hasCandidates && <BgColors />}
       <main
-        className={` ${hasCandidates ? 'flex-col lg:flex-row ' : 'flex-col items-center '} " mt-0  ml-4 lg:ml-0 flex  justify-center  relative  h-full ^z-10  flex-grow gap-x-4 gap-y-8`}
+        className={` ${hasCandidates ? 'flex-col lg:flex-row ' : 'flex-col items-center '} " mt-0  ^ml-4 lg:ml-0 flex  justify-center  relative  h-full ^z-10  flex-grow gap-x-4 gap-y-4`}
       >
         {hasCandidates && (
             
@@ -59,6 +59,7 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
           Icon={<IconList stroke={2} />}
           MainComponent={<JobSearchForm gridCols={hasCandidates ? 1 : 3} />}
           title="Расширенный поиск"
+          className='px-4'
         />
 }
         {!hasCandidates && (
@@ -72,7 +73,7 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
         )}
 
         {hasCandidates && (
-          <div className="flex-grow w-full flex-1 pr-4 ^py-16">
+          <div className="flex-grow w-full flex-1 px-4 ^py-16">
             <ResultList results={results} />
           </div>
         )}

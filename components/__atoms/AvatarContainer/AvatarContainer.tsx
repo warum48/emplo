@@ -18,7 +18,7 @@ export const DoctorAvatarContainer: React.FC<DoctorAvatarContainerProps> = ({
 }) => {
   return (
     <Box className={(expanded && !isMobile)  ? classes.container_expanded : classes.container}>
-      <Avatar src={photo} size={expanded && !isMobile ? 130 : 80} radius="md" />
+      <Avatar src={photo} size={expanded && !isMobile ? 130 : 80} radius="md" className='transition-all'/>
       <div className={classes.info_button}>
       <StyledButton appearance="info_circle" onClick={() => {setExpanded(!expanded)}} ></StyledButton>
       </div>

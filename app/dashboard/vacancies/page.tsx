@@ -51,7 +51,7 @@ const Page = () => {
   return (
     <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full">
       <main
-        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-4 h-full relative ml-4 lg:ml-0"
+        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-4 h-full relative ^ml-4 lg:ml-0"
         //items-stretch
       >
         <div
@@ -61,6 +61,7 @@ const Page = () => {
             min-w-[300px] 
             ^min-w-64
             form-bg-and-text
+            ^bg-gray-200
             shadow
             relative
             text-sm
@@ -92,13 +93,15 @@ const Page = () => {
           Icon={<IconList stroke={2} />}
           MainComponent={<VacancyListComponent vacancies={vacancies} />}
           title="Список вакансий"
+          className="px-4"
         />
 
         <div
           className="
           ^px-4  
+          mx-4
         form-bg-and-text
-        mr-4
+       ^mr-4
         h-full
         flex
         overflow-auto

@@ -3,13 +3,15 @@ import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
 import { Preloader } from '../__atoms/Preloader/Preloader';
 import { Candidate } from '@/types/Candidate';
 import { Mock } from '../Mock/Mock';
+import { DeepNullable } from '@/types/utils/DeepNullable';
 
 type TProps = {
   candidateId?: string;
-  candidate: Candidate;// | null;
+  candidate: DeepNullable<Candidate>;
+  showTopInfo?: boolean;
 }
 
-const ResumeCard = ({candidateId, candidate}:TProps) => {
+const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
 
  
   
@@ -28,7 +30,10 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
     "декабря",
   ];
   
-  function getAgeSuffix(age: number): string {
+  function getAgeSuffix(age: number | undefined | null): string {
+    if (!age) {
+      return "";
+    }
     const lastDigit = age % 10;
     const lastTwoDigits = age % 100;
   
@@ -47,7 +52,10 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
     return "лет";
   }
   
-  function formatDateString(dateString: string): string {
+  function formatDateString(dateString: string | undefined | null): string {
+    if (!dateString) {
+      return "";
+    }
     const date = new Date(dateString);
     const day = date.getDate();
     const month = date.getMonth(); // getMonth() returns month index from 0 to 11
@@ -56,7 +64,10 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
     return `${day} ${months[month]} ${year}`;
   }
 
-  function formatGender(gender: string): string {
+  function formatGender(gender: string | undefined | null): string {
+    if (!gender) {
+      return "";
+    }
     if (gender === "Мужской") {
       return "Мужчина";
     } else if (gender === "Женской") {
@@ -66,7 +77,7 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
     }
   }
 
-  function formatBorn(gender: string): string {
+  function formatBorn(gender: string | undefined | null): string {
     if (gender === "Мужской") {
       return "родился";
     } else if (gender === "Женской") {
@@ -90,6 +101,10 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
     >
       
       {candidate ? (<>
+
+      {showTopInfo && (
+        
+     
       <div className="flex border-b border-default ">
         <div className="flex justify-between items-center w-3/4 p-4 pl-0 ">
           <div>
@@ -112,6 +127,9 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
 
         <div className="w-1/4  border-l p-6 border-default">buts</div>
       </div>
+
+)}
+
       <div className="flex ">
         <div className="flex justify-between items-center w-3/4 p-4 pl-0 ">
           <div>
@@ -181,7 +199,7 @@ const ResumeCard = ({candidateId, candidate}:TProps) => {
             </div>
           </div>
         </div>
-        <div className="w-1/4 bg-gray-100 dark:bg-customGray-950 border-l border-default p-6 ">lala</div>
+        <div className="w-1/4 bg-gray-100 dark:bg-customGray-950 border-l border-default p-6 ">Комментарии</div>
       </div>
       </>) : <div className='flex justify-center items-center w-full h-full'><Preloader /></div>}
       <JSONViewer data={candidate}/>

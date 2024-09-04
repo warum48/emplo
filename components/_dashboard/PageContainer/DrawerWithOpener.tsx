@@ -5,16 +5,17 @@ type TProps = {
     Icon:  React.ReactElement; //React.FC<any> 
     MainComponent: React.ReactElement; 
     title: string;
+    className?: string
 }
 
 
-export const DrawerWithOpener = ({Icon, MainComponent, title}: TProps ) => {
+export const DrawerWithOpener = ({Icon, MainComponent, title, className}: TProps ) => {
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
 
   return (
     <>
       <div
-        className="flex gap-2 text-sm items-center lg:hidden cursor-pointer"
+        className={"flex gap-2 text-sm items-center lg:hidden cursor-pointer" + ' ' + className}
         onClick={() => setMenuIsOpen(!menuIsOpen)}
       >
         {Icon} {title}

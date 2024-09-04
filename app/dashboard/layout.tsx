@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Burger opened={drawerOpened} onClick={() => setDrawerOpened(!drawerOpened)} className="md:hidden z-30 fixed ml-2 mt-[22px] bg-white dark:bg-customGray-950 rounded" />
+      <Burger opened={drawerOpened} onClick={() => setDrawerOpened(!drawerOpened)} className="md:hidden z-40 fixed ml-2 mt-[22px] bg-white dark:bg-customGray-950 rounded" />
       <DashBoardHeader />
 
       <div className=" hidden md:block z-50">
