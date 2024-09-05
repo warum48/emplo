@@ -54,11 +54,13 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         ${leftSideMenuCollapsed ? STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_collapsed : STYLES.LEFT_SIDE_NAVBAR.contentMarginLeft_expanded}   
         h-full flex-1  p-0 transition-all
         bg-gradient-to-br
-        from-gray-100/100 via-gray-100 to-customGray-200
+        from-gray-50/100 via-gray-100 to-slate-100
         relative
         dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
         overflow-x-hidden
-        `}
+        `
+      //to-customGray-200
+      }
       >
         {children}
       </div>

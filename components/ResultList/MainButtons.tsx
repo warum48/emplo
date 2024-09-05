@@ -44,7 +44,9 @@ export const MainButtons = ({employee}:TProps) => {
     return (
         <>
         <a href={'/resume/' + employee?.id} target="_blank">
-                    <Button className="my-0 mx-0 xs:my-2" size="xs" onClick={() => {}}>
+                    <Button className="my-0 mx-0 xs:my-2" size="xs" onClick={() => {}} 
+                   // color="#14b8a6"
+                    >
                       Пригласить
                     </Button>
                   </a>

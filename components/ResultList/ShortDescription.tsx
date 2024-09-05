@@ -9,7 +9,7 @@ type TProps = {
 export const ShortDescription = ({employee}:TProps) => {
     return (
         <div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 font-bold mb-2">
+                  <div className="text-lg text-gray-500 dark:text-gray-400 font-bold mb-2">
                     <Value value={employee?.professional_roles} />
                     {/*} Руководитель отдела продаж, специалист ВЭД, ведущий менеджер по работе с клиентами, КАМ */}
                   </div>

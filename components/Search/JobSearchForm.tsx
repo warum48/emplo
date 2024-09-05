@@ -14,7 +14,10 @@ import {
   Box,
   InputLabel,
 } from '@mantine/core';
-import { updateJobSearchForm, candidateSearchFormInitialState } from '@/rtk/slices/searchCandidateForm/searchCandidate';
+import {
+  updateJobSearchForm,
+  candidateSearchFormInitialState,
+} from '@/rtk/slices/searchCandidateForm/searchCandidate';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';
@@ -59,7 +62,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
   //});
 
   const handleSubmit = async (values: typeof form.values) => {
-
     console.log('submit', values);
     try {
       // const candidates = await searchHHCandidates(values).unwrap();
@@ -119,24 +121,29 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
   const resetForm = () => {
     dispatch(updateJobSearchForm(candidateSearchFormInitialState));
     form.setValues(candidateSearchFormInitialState);
-   // form.reset()
+    // form.reset()
     setFormRenderCount((prev) => prev + 1);
-    console.log('reseted')
+    console.log('reseted');
   };
 
   return (
     <div className="p-4 px-8 pb-8 w-full relative max-w-full text-black dark:text-white">
-      
       <form
-      key={'form_render_'+formRenderCount}
+        key={'form_render_' + formRenderCount}
         onSubmit={form.onSubmit((values) => {
           console.log('Form submitted with values:', values);
           dispatch(updateJobSearchForm(values));
           handleSubmit(values);
         })}
-        className={`text-left grid ${gridCols === 3 ? 'grid-cols-3' : 'grid-cols-1'} gap-6 w-full max-w-full relative`}
+        className={`text-left grid ${gridCols === 3 ? 'grid-cols-1 lg:grid-cols-3' : 'grid-cols-1'} gap-x-12 gap-y-6 w-full max-w-full relative`}
       >
-        <div className="flex flex-col gap-6 w-full max-w-full">
+        <div
+          className={`flex flex-col gap-6 
+            ${gridCols === 3
+            ? "relative flex-1 after:content-[''] after:absolute after:-right-6 after:top-1/2 after:transform after:-translate-y-1/2 after:w-px after:h-0 lg:after:h-full after:bg-gray-200 dark:after:bg-gray-800"
+            : ''}`}
+          //w-full max-w-full
+        >
           {/* Specialty */}
           <Select
             label="Должность *"
@@ -180,7 +187,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           </Checkbox.Group>
 
           {/* Relocation Type */}
-          <div className="flex flex-col gap-4">
+          
             <Select
               label="Готовность к переезду"
               placeholder="Готовность к переезду"
@@ -192,7 +199,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
               ]}
               {...form.getInputProps('relocation_type')}
             />
-          </div>
+          
 
           {/* Schedule 
           <Checkbox.Group
@@ -211,7 +218,13 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
           </Checkbox.Group>*/}
         </div>
-        <div className="flex flex-col gap-6">
+        <div
+          className={`flex flex-col gap-6 
+            ${gridCols === 3
+            ? "relative flex-1 after:content-[''] after:absolute after:-right-6 after:top-1/2 after:transform after:-translate-y-1/2 after:w-px after:h-0 lg:after:h-full after:bg-gray-200 dark:after:bg-gray-800"
+            : ''}`}
+          //line 2 is border
+        >
           {/* Skills */}
           <div className="flex flex-col ">
             {/* <InputLabel htmlFor="skills">Навыки</InputLabel>
@@ -221,10 +234,9 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
               {...form.getInputProps('skills', { type: 'checkbox' })}
               defaultValue={form.values.skills}
               onChange={(value) => {
-                handleChange('skills', value)
+                handleChange('skills', value);
                 form.getInputProps('skills').onChange(value);
-              }
-              }
+              }}
             >
               <Checkbox label="Мерчендайзинг" value="merchandising" mt={STYLES.FORM.labelMargin} />
               <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
@@ -244,14 +256,14 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             ]}
             {...form.getInputProps('experience')}
           /> */}
-         
+
           <NumberInput
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
             placeholder="Введите опыт работы"
             {...form.getInputProps('experience')}
           />
-           {/**/}
+          {/**/}
 
           {/* Gender */}
           <Select
@@ -288,10 +300,9 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             {...form.getInputProps('job_search_status', { type: 'checkbox' })}
             defaultValue={form.values.job_search_status}
             onChange={(value) => {
-              handleChange('job_search_status', value)
+              handleChange('job_search_status', value);
               form.getInputProps('job_search_status').onChange(value);
-            }
-            }
+            }}
           >
             <Checkbox
               mt={STYLES.FORM.labelMargin}
@@ -316,12 +327,13 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
 
           {/* Submit button */}
           <div className="flex gap-4 mt-4">
-            <ResetFormButton onClick={() => 
-              //resetForm() 
-              setShowConfirmator(true)
-              } />
+            <ResetFormButton
+              onClick={() =>
+                //resetForm()
+                setShowConfirmator(true)
+              }
+            />
             <Button
-              
               type="submit"
               className="w-full max-w-full"
               disabled={
@@ -339,7 +351,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           </div>
         </div>
       </form>
-      <JSONViewer data={form.values}/>
+      <JSONViewer data={form.values} />
       <Confirmator
         onConfirm={resetForm} //
         header={'Вы действительно хотите очистить форму?'}

@@ -86,7 +86,7 @@ export function LinksGroup({
                   }} className="transition-all duration-700"/>
               </ThemeIcon>
               {!navBarCollapsed && (
-                <Box ml="md" style={{ textDecoration: 'none !important' }}>
+                <Box ml="md" style={{ textDecoration: 'none !important' }} className="linktext">
                   {label}
                 </Box>
               )}

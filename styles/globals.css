@@ -13,22 +13,16 @@
         background-size: 50% auto;
         background-repeat: no-repeat;
       }
+    /*------------------------borders-------------------*/
       .border-default{
         @apply  border-neutral-400/15
       }
-    .form-paper{
-        @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85; //dark:bg-customGray-950/85 
-    }
+    /*------------------------texts-------------------*/
     .page-header{
       @apply text-neutral-700 dark:text-neutral-50 text-3xl  mb-0 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
     } 
-
     .page-header-compact{
       @apply text-neutral-700 dark:text-neutral-50 text-base font-light mt-3 mb-2 text-left  [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
-    }
-
-    .dashboard-section-header{
-      @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
     }
     .card-white-header{
       @apply text-white text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
@@ -36,9 +30,14 @@
     .form-header{
       @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light ;
     }
+    /*----dashboard texts-------------------*/
+    .dashboard-section-header{
+      @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+    }
     .dashboard-section-header_sm{
       @apply text-neutral-700 dark:text-neutral-50 text-md  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
     }
+    /*------------------------containers-------------------*/
     .dashboard-page-container{
       @apply flex flex-col space-y-8 px-2 md:px-8 mt-16 py-4;
     }
@@ -51,16 +50,22 @@
     .dashboard-page-container-compact-nopadding{
       @apply flex flex-col space-y-6 md:space-y-8 pl-0 pr-0 mt-3 py-1 ; /*6*/
     }
-    .dashboard-menu-item{
+    /*------------------------links-------------------*/
+    .dashboard-menu-item{  /* check wtf */
       @apply px-8 py-2 text-sm  hover:bg-gray-700  /*font-semibold*/
-    }
-    .form-bg-and-text{
-      @apply text-black dark:text-white bg-white dark:bg-customGray-950/85
     }
     .link-default{
       @apply hover:text-pink-800 hover:underline dark:hover:text-pink-200
     }
+    /*------------------------forms-------------------*/
+    .form-paper{ /* check where it's used and replace with new one*/
+      @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85; //dark:bg-customGray-950/85 
+  }
+    .form-bg-and-text{
+      @apply text-black dark:text-white bg-white dark:bg-customGray-950/85
+    }
+    /*------------------------errors-------------------*/
     .error-container{
-      @apply border border-red-500 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs
+      @apply border border-red-500 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs break-words
     }
   }

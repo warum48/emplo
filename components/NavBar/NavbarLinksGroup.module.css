@@ -8,7 +8,7 @@
     font-size: var(--mantine-font-size-sm);
   
     @mixin hover {
-      background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
+     background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-7));
       color: light-dark(var(--mantine-color-black), var(--mantine-color-dark-0));
     }
   }
@@ -64,19 +64,36 @@
    /* font-weight: 700;*/
   /*  color: black !important;*/
     pointer-events: none;
-    border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
+  /*  border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;*/
+    
+  }
+
+  .active_with_link button div div .linktext {
+    color: var(--mantine-color-my-custom-pink-4) !important;
   }
 
   .active_with_link button  {
    /* font-weight: 700;*/
-    
-    
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
+    color: var(--mantine-color-my-custom-pink-4);
+    /*@mixin hover {
+      background-color: none !important;
+    }*/
   }
+  .active_with_link button:hover  {
+    background-color: transparent !important;
+    cursor: default;
+    color: var(--mantine-color-my-custom-pink-4) !important;
+  }
+  /*.active_with_link button:hover  {
+    background-color: none !important;
+   }*/
 
   .link.active_with_link  {
    /* font-weight: 700; */
    color: light-dark(var(--mantine-color-dark-2), var(--mantine-color-dark-2));
+   color: var(--mantine-color-my-custom-pink-4) !important;
+   font-weight: 700;
     padding-left: 29px ;
     border-left: 4px solid var(--mantine-color-my-custom-pink-5) !important;
   }

@@ -33,8 +33,8 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
         ></div> 
         <div
         //fuchsia dar:pink
-          className="absolute scale-y-120 scale-x-150 -right-64 top-0  h-[500px] w-2/3 -z-0
-          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-200/30 via-purple-600/0 to-blue-600/0
+          className="absolute scale-y-120 scale-x-150 -right-64 top-[250px]  h-[500px] w-2/3 -z-0
+          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-fuchsia-200/30 via-purple-600/0 to-blue-600/0
           dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-indigo-500/10 dark:via-pink-700/0 dark:to-pink-600/0
           "
         ></div>

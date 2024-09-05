@@ -44,10 +44,31 @@ interface EmployeeProps {
 
 const Employee: React.FC<EmployeeProps> = ({ employee }) => {
   const [expanded, setExpanded] = useState(false);
+  const [width, setWidth] = useState(0);
+  const componentRef = React.useRef<HTMLDivElement>(null);
+
+  const updateWidth = () => {
+    if (componentRef.current) {
+      setWidth(componentRef.current.offsetWidth);
+    }
+  };
+
+  React.useEffect(() => {
+    // Update width on initial load
+    updateWidth();
+    // Update width on window resize
+    window.addEventListener('resize', updateWidth);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, []);
+
   return (
     <Paper
       // p={expanded ? { base: 'md', sm: 'xl' } : 'md'}
       shadow="xs"
+      radius={'lg'}
       //withBorder
       //bg-neutral-50/90
       className={`bg-white dark:bg-customGray-950/90  ${classes.gridItem} ${
@@ -55,67 +76,64 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
       }`}
     >
       <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
-    
-          <div>
-            <div className={`${!expanded ? 'h-full' : ''} flex flex-col sm:flex-row`}>
-              <div
-                className="flex w-full sm:w-3/4 bg-red-400/0 p-4  gap-4 border-default border-b"
-               
-              >
-                <DoctorAvatarContainer
-                  photo={employee?.photo}
-                  expanded={expanded}
-                  isMobile={false}
-                  setExpanded={setExpanded}
-                />
 
-                <div
-                  className="w-full h-full flex flex-col  bg-green-400/0 gap-4"
-                  //
-                >
-                  <ShortDescription employee={employee} />
-                  <div className="text-xs dark:text-gray-400 text-gray-800 bg-blue-400/0">
-                    {employee?.experience
-                      ?.filter((item) => item?.company && item?.position)
-                      .map((item, index) => (
-                        <div key={index}>
-                          <b>
-                            <Value value={item?.company} />
-                          </b>{' '}
-                          - <Value value={item?.position} />
-                        </div>
-                      ))}
-                  </div>
-                </div>
+      <div>
+        <div className={`${!expanded ? 'h-full' : ''} flex flex-col sm:flex-row`}>
+          <div className="flex w-full sm:w-3/4 bg-red-400/0 p-4  gap-4 border-default border-b">
+            <DoctorAvatarContainer
+              photo={employee?.photo}
+              expanded={expanded}
+              isMobile={false}
+              setExpanded={setExpanded}
+            />
+
+            <div
+              className="w-full h-full flex flex-col  bg-green-400/0 gap-4"
+              //
+            >
+              <ShortDescription employee={employee} />
+              <div className="text-xs dark:text-gray-400 text-gray-800 bg-blue-400/0">
+                {employee?.experience
+                  ?.filter((item) => item?.company && item?.position)
+                  .map((item, index) => (
+                    <div key={index}>
+                      <b>
+                        <Value value={item?.company} />
+                      </b>{' '}
+                      - <Value value={item?.position} />
+                    </div>
+                  ))}
               </div>
+            </div>
+          </div>
 
-              <div
-                className="flex flex-col items-start sm:items-end sm:text-right bg-yellow-400/0
+          <div
+            className="flex flex-col items-start sm:items-end sm:text-right bg-yellow-400/0
               p-4
               w-full sm:w-1/4  border-l border-default border-b
               gap-1 sm:gap-2
                 "
-                // mt-0 sm:mt-0
-              >
-                <StatusBlock employee={employee} />
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row p-4 gap-4">
-              <ActionButtons employee={employee} setExpanded={setExpanded} expanded={expanded}/>
-              {(!expanded || true) && (
-                <div className="flex flex-wrap items-center w-full gap-3 ^mt-auto bg-yellow-400/0">
-                  <MainButtons employee={employee} />
-                </div>
-              )}
-            </div>
+            // mt-0 sm:mt-0
+          >
+            <StatusBlock employee={employee} />
           </div>
-          
-          {/*--------------------------------------------------------------------------------*/}
+        </div>
+        <div className="flex flex-col sm:flex-row p-4 gap-4">
+          <ActionButtons employee={employee} setExpanded={setExpanded} expanded={expanded} />
+          {(!expanded || true) && (
+            <div className="flex flex-wrap items-center w-full gap-3 ^mt-auto bg-yellow-400/0">
+              <MainButtons employee={employee} />
+            </div>
+          )}
+        </div>
+      </div>
 
-          {expanded && (
-            <>
-               <ResumeCard candidate={employee} showTopInfo={false} />  
-   {/*    
+      {/*--------------------------------------------------------------------------------*/}
+
+      {expanded && (
+        <>
+          <ResumeCard candidate={employee} showTopInfo={false} />
+          {/*    
 <Divider/>
               <SpaceYMain />
               <div className="space-y-1">
@@ -304,12 +322,11 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
               <Center>
                 <Button onClick={() => {}}>Пригласить</Button>
               </Center>
-          */}          
-            </>
-          )}
-     
+          */}
+        </>
+      )}
 
-       {/*} <JSONViewer data={employee} />*/}
+      {/*} <JSONViewer data={employee} />*/}
     </Paper>
   );
 };
