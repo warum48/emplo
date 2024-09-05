@@ -43,7 +43,7 @@ type TProps = {
 }
 export const ActionButtons = ({employee, setExpanded, expanded}:TProps) => {
     return (
-        <div className="^mt-auto flex ^flex-wrap items-center gap-2 ">
+        <div className="^mt-auto flex ^flex-wrap items-start gap-2 ">
                   <ActionIcon
                     variant="light"
                     loading={false}

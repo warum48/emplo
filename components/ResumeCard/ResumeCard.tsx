@@ -134,8 +134,8 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
 
 )}
 
-      <div className="flex ">
-        <div className="flex justify-between items-center w-3/4 p-8 
+      <div className="flex flex-col md:flex-row">
+        <div className="flex justify-between items-center w-full md:w-3/4 p-8 
         border-t border-default
         "
        // pl-0 
@@ -207,7 +207,7 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
             </div>
           </div>
         </div>
-        <div className="w-1/4 bg-gray-100 dark:bg-customGray-950 border-l border-default border-t
+        <div className="w-full md:w-1/4 bg-gray-100 dark:bg-customGray-950 border-l border-default border-t
         p-6
         "
         //p-6 

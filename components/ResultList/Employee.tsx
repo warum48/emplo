@@ -46,7 +46,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <Paper
-      // p={expanded ? { base: 'md', md: 'xl' } : 'md'}
+      // p={expanded ? { base: 'md', sm: 'xl' } : 'md'}
       shadow="xs"
       //withBorder
       //bg-neutral-50/90
@@ -57,9 +57,9 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
       <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
     
           <div>
-            <div className={`${!expanded ? 'h-full' : ''} flex`}>
+            <div className={`${!expanded ? 'h-full' : ''} flex flex-col sm:flex-row`}>
               <div
-                className="flex  w-3/4 bg-red-400/0 p-4  gap-4 border-default border-b"
+                className="flex w-full sm:w-3/4 bg-red-400/0 p-4  gap-4 border-default border-b"
                
               >
                 <DoctorAvatarContainer
@@ -90,17 +90,17 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
               </div>
 
               <div
-                className="flex flex-col items-start md:items-end md:text-right bg-yellow-400/0
+                className="flex flex-col items-start sm:items-end sm:text-right bg-yellow-400/0
               p-4
-              w-1/4  border-l border-default border-b
-              gap-1 md:gap-2
+              w-full sm:w-1/4  border-l border-default border-b
+              gap-1 sm:gap-2
                 "
-                // mt-0 md:mt-0
+                // mt-0 sm:mt-0
               >
                 <StatusBlock employee={employee} />
               </div>
             </div>
-            <div className="flex flex-col md:flex-row p-4 gap-4">
+            <div className="flex flex-col sm:flex-row p-4 gap-4">
               <ActionButtons employee={employee} setExpanded={setExpanded} expanded={expanded}/>
               {(!expanded || true) && (
                 <div className="flex flex-wrap items-center w-full gap-3 ^mt-auto bg-yellow-400/0">
