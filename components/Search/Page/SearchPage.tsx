@@ -25,16 +25,17 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
         {hasCandidates && (
             
         <>
-        <div
+       {/* */} <div
           className="absolute scale-y-100 scale-x-150 left-0 bottom-0 h-[1000px] w-2/3 -z-1
           bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-300/30 via-cyan-300/0 to-blue-600/0
           dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-blue-800/30 dark:via-cyan-800/0 dark:to-blue-600/0
           "
-        ></div>
+        ></div> 
         <div
-          className="absolute scale-y-120 scale-x-150 -right-64 bottom-0  h-[1000px] w-2/3 -z-0
-          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-fuchsia-200/30 via-purple-600/0 to-blue-600/0
-          dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-pink-500/10 dark:via-pink-700/0 dark:to-pink-600/0
+        //fuchsia dar:pink
+          className="absolute scale-y-120 scale-x-150 -right-64 top-0  h-[500px] w-2/3 -z-0
+          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-200/30 via-purple-600/0 to-blue-600/0
+          dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-indigo-500/10 dark:via-pink-700/0 dark:to-pink-600/0
           "
         ></div>
         </>

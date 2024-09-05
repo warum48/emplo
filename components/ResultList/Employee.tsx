@@ -33,18 +33,20 @@ import { IconResize } from '@tabler/icons-react';
 import { GrNewWindow } from 'react-icons/gr';
 import ResumeCard from '../ResumeCard/ResumeCard';
 import { DeepNullable } from '@/types/utils/DeepNullable';
+import { ShortDescription } from './ShortDescription';
+import { StatusBlock } from './StatusBlock';
+import { MainButtons } from './MainButtons';
+import { ActionButtons } from './ActionButtons';
 
 interface EmployeeProps {
   employee: DeepNullable<Candidate>;
 }
 
-
-
 const Employee: React.FC<EmployeeProps> = ({ employee }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <Paper
-      p={expanded ? { base: 'md', md: 'xl' } : "md"}
+      // p={expanded ? { base: 'md', md: 'xl' } : 'md'}
       shadow="xs"
       //withBorder
       //bg-neutral-50/90
@@ -53,162 +55,67 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
       }`}
     >
       <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
-      <Grid>
-        <Grid.Col span="auto" maw="100%">
-          <Group wrap="nowrap" align="flex-start" className={`${!expanded ? "h-full" : ''}`}>
-            <div className="flex flex-col gap-4 h-full ">
-              <div className="flex flex-col justify-between h-full gap-4">
+    
+          <div>
+            <div className={`${!expanded ? 'h-full' : ''} flex`}>
+              <div
+                className="flex  w-3/4 bg-red-400/0 p-4  gap-4 border-default border-b"
+               
+              >
                 <DoctorAvatarContainer
                   photo={employee?.photo}
                   expanded={expanded}
                   isMobile={false}
                   setExpanded={setExpanded}
                 />
-                <div className="mt-auto flex flex-wrap items-center gap-2">
-                  <ActionIcon variant="light" loading={false} size="32px" onClick={()=>setExpanded(true)}>
-                    <IconResize size={20} stroke={1.5} />
-                  </ActionIcon>
-                  <a href={'/resume/' + employee?.id || ''} target="_blank" rel="noreferrer">
-                  <ActionIcon variant="light" loading={false} size="32px">
-                    <GrNewWindow
-                    //size={20} stroke={'1.5'}
-                    />
-                    
-                  </ActionIcon>
-                  </a>
-                  <div className="h-[32px] w-[32px] block md:hidden">
-                    <a href={employee?.alternate_url || ''} target="_blank" rel="noreferrer">
-                  <Image
-                    src={'/images/external_logos/hh.ru__min_.svg'}
-                    alt={''}
-                    width={32}
-                    height={32}
-                  /></a>
+
+                <div
+                  className="w-full h-full flex flex-col  bg-green-400/0 gap-4"
+                  //
+                >
+                  <ShortDescription employee={employee} />
+                  <div className="text-xs dark:text-gray-400 text-gray-800 bg-blue-400/0">
+                    {employee?.experience
+                      ?.filter((item) => item?.company && item?.position)
+                      .map((item, index) => (
+                        <div key={index}>
+                          <b>
+                            <Value value={item?.company} />
+                          </b>{' '}
+                          - <Value value={item?.position} />
+                        </div>
+                      ))}
                   </div>
                 </div>
+              </div>
+
+              <div
+                className="flex flex-col items-start md:items-end md:text-right bg-yellow-400/0
+              p-4
+              w-1/4  border-l border-default border-b
+              gap-1 md:gap-2
+                "
+                // mt-0 md:mt-0
+              >
+                <StatusBlock employee={employee} />
               </div>
             </div>
-
-            <div className="w-full h-full flex flex-col gap-4  ">
-              <div className="flex ^items-center justify-between w-full flex-col md:flex-row gap-4 
-              ^w-3/4
-              ">
-                <div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 font-bold mb-2">
-                    <Value value={employee?.professional_roles} />
-                    {/*} Руководитель отдела продаж, специалист ВЭД, ведущий менеджер по работе с клиентами, КАМ */}
-                  </div>
-                  {(employee.last_name || employee.first_name || employee.middle_name) && (
-                    <CardTitle>
-                      <Value value={employee.last_name} /> <Value value={employee.first_name} />{' '}
-                      <Value value={employee.middle_name} />
-                    </CardTitle>
-                  )}
-                  <div>
-                    <TitleLabel>Возраст:</TitleLabel>{' '}
-                    <TextInfo>
-                      <Value value={employee.age} />
-                    </TextInfo>
-                  </div>
-                  <div>
-                    <TitleLabel>Пол:</TitleLabel>{' '}
-                    <TextInfo>
-                      <Value value={employee.gender} />
-                    </TextInfo>
-                  </div>
-                  <div>
-                    <TitleLabel>Зарплата:</TitleLabel>{' '}
-                    <TextInfo>
-                      <Value value={employee.salary} />
-                    </TextInfo>
-                  </div>
-                </div>
-
-                <div className="flex flex-col items-start md:items-end md:text-right gap-1 md:gap-2 mt-0 md:mt-0
-                
-                "
-                //w-1/4  border-l border-default
-                >
-                  <Badge
-                    color={UIUtils.getStatusColor(employee?.resume_status)}
-                    className="hidden ^md:block"
-                  >
-                    {employee.resume_status}
-                  </Badge>
-                  <div
-                    className={`block ^md:hidden text-xs 
-                 
-                  text-${UIUtils.getStatusColor(employee?.resume_status)}-500
-                  `}
-                    // dark:text-gray-400 text-gray-800
-                  >
-                    <Value value={employee.resume_status} />
-                  </div>
-                  <div className={`text-xs dark:text-gray-400 text-gray-800 `}>
-                    Обновлено: <Value value={DateUtils.formatDateToRussian(employee?.updated_at)} />
-                  </div>
-                  <Center className='hidden md:block'>
-                  <Image
-                    src={'/images/external_logos/hh.ru__min_.svg'}
-                    alt={''}
-                    width={48}
-                    height={48}
-                  />
-                </Center>
-                </div>
-              </div>
-
-              <div className="text-xs dark:text-gray-400 text-gray-800">
-                {employee?.experience
-                  ?.filter((item) => item?.company && item?.position)
-                  .map((item, index) => (
-                    <div key={index}>
-                      <b>
-                        <Value value={item?.company} />
-                      </b>{' '}
-                      - <Value value={item?.position} />
-                    </div>
-                  ))}
-              </div>
-
-              {!expanded && (
-                <div className="flex flex-wrap items-center w-full gap-3 mt-auto">
-                  <a href={'/resume/' + employee?.id} target="_blank">
-                    <Button className="my-0 mx-0 xs:my-2" size="xs" onClick={() => {}}>
-                      Пригласить
-                    </Button>
-                  </a>
-                  <Button
-                    className="my-0 mx-0 xs:my-2"
-                    size="xs"
-                    variant="outline"
-                    onClick={() => {}}
-                  >
-                    Сообщения
-                  </Button>
-                  <Button
-                    className="my-0 mx-0 xs:my-2"
-                    size="xs"
-                    variant="outline"
-                    onClick={() => {}}
-                  >
-                    Комментарии
-                  </Button>
-                  <div className="ml-auto">
-                    <ActionIcon variant="light" loading={false} size="lg" radius={'xl'}>
-                      <IconHeart size={18} stroke={1.5} />
-                    </ActionIcon>
-                  </div>
+            <div className="flex flex-col md:flex-row p-4 gap-4">
+              <ActionButtons employee={employee} setExpanded={setExpanded} expanded={expanded}/>
+              {(!expanded || true) && (
+                <div className="flex flex-wrap items-center w-full gap-3 ^mt-auto bg-yellow-400/0">
+                  <MainButtons employee={employee} />
                 </div>
               )}
             </div>
-          </Group>
-{/*--------------------------------------------------------------------------------*/}
+          </div>
+          
+          {/*--------------------------------------------------------------------------------*/}
 
           {expanded && (
             <>
-<ResumeCard candidate={employee} showTopInfo={false}/>
-{/*
+               <ResumeCard candidate={employee} showTopInfo={false} />  
+   {/*    
 <Divider/>
               <SpaceYMain />
               <div className="space-y-1">
@@ -391,17 +298,18 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
                   </ul>
                 </div>
               </div>
-              <JSONViewer data={employee} />
+            
 
               <Space h="xxs" />
               <Center>
                 <Button onClick={() => {}}>Пригласить</Button>
               </Center>
-              */}
+          */}          
             </>
           )}
-        </Grid.Col>
-      </Grid>
+     
+
+       {/*} <JSONViewer data={employee} />*/}
     </Paper>
   );
 };

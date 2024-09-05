@@ -96,7 +96,7 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
   return (
     
     <div
-      className="=dark:bg-customGray-800   text-gray-900 dark:text-gray-100 text-sm h-full "
+      className="=dark:bg-customGray-800   text-gray-900 dark:text-gray-100 text-sm ^h-full "
       //shadow-lg
     >
       
@@ -106,7 +106,11 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
         
      
       <div className="flex border-b border-default ">
-        <div className="flex justify-between items-center w-3/4 p-4 pl-0 ">
+        <div className="flex justify-between items-center w-3/4 
+        p-4 pl-0 
+        "
+        //!!
+        >
           <div>
             <div>
               <h2 className="text-2xl font-bold">Легина Анна</h2>
@@ -131,7 +135,11 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
 )}
 
       <div className="flex ">
-        <div className="flex justify-between items-center w-3/4 p-4 pl-0 ">
+        <div className="flex justify-between items-center w-3/4 p-8 
+        border-t border-default
+        "
+       // pl-0 
+        >
           <div>
             <div className="mt-0">
               <h3 className="text-xl font-semibold">
@@ -199,10 +207,14 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
             </div>
           </div>
         </div>
-        <div className="w-1/4 bg-gray-100 dark:bg-customGray-950 border-l border-default p-6 ">Комментарии</div>
+        <div className="w-1/4 bg-gray-100 dark:bg-customGray-950 border-l border-default border-t
+        p-6
+        "
+        //p-6 
+        >Комментарии</div>
       </div>
-      </>) : <div className='flex justify-center items-center w-full h-full'><Preloader /></div>}
-      <JSONViewer data={candidate}/>
+      </>) : <div className='flex justify-center items-center w-full ^h-full'><Preloader /></div>}
+    {/*  <JSONViewer data={candidate}/> */}
     </div>
   );
 };
