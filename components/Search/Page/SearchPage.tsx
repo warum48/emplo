@@ -27,7 +27,7 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
         <>
        {/* */} <div
           className="absolute scale-y-100 scale-x-150 left-0 bottom-0 h-[1000px] w-2/3 -z-1
-          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-300/30 via-cyan-300/0 to-blue-600/0
+          bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sky-300/30 via-cyan-300/0 to-blue-600/0
           dark:bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] dark:from-blue-800/30 dark:via-cyan-800/0 dark:to-blue-600/0
           "
         ></div> 
