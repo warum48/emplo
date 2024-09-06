@@ -5,7 +5,7 @@ import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import './styles.css'; // Ensure your custom CSS for the animation is imported
 import { ParticlesComponent } from '../Particles/Particles';
 import { useRouter } from 'next/navigation';
-import { useLazyMeQuery, useLoginMutation } from '@/rtk/queries/authApi'; //useMeQuery
+import { RegisterRequest, useLazyMeQuery, useLoginMutation, useRegisterMutation } from '@/rtk/queries/authApi'; //useMeQuery
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthState, setAuthToken } from '@/rtk/slices/authSlice';
 import { useCookies } from 'react-cookie';
@@ -18,15 +18,16 @@ export const RegistrationForm = () => {
   //const formState = useSelector((state: RootState) => state.authForm);
   const dispatch = useDispatch();
   const router = useRouter();
-  const form = useForm({
+  const form = useForm<RegisterRequest & { password_confirm: string }>({
     initialValues: {
+      username: '',
+      password: '',
       email: '',
-      password: '', 
       first_name: '',
       last_name: '',
       password_confirm: '',
     },
-    validate: {}
+    validate: {},
   });
 
   useEffect(() => {
@@ -35,8 +36,8 @@ export const RegistrationForm = () => {
   }, []);
 
   const [token, setToken] = React.useState('');
-  const [login, { isLoading: isLoginLoading, error: loginError, data: loginData }] =
-    useLoginMutation();
+  const [register, { isLoading: isRegisterLoading, error: registerError, data: registerData }] =
+    useRegisterMutation();
   const [fetchMe, { isLoading: isMeLoading, error: meError, data: meData }] = useLazyMeQuery();
   const [cookiesToken, setCookieToken] = useCookies(['jwt_token']);
 
@@ -44,18 +45,19 @@ export const RegistrationForm = () => {
 
   const handleLogin = async () => {
     try {
-      //const result = await login(form.values).unwrap(); 
+      const { password_confirm, ...actualFormValues } = form.values;
+      const result = await register(actualFormValues).unwrap();
+      //const result = await login(form.values).unwrap();
       //console.log('result.jwt_token:', result.jwt_token);
       //setCookieToken('jwt_token', result.jwt_token, { path: '/' });
       //setToken(result.jwt_token);
       //dispatch(setAuthToken({ token: result.jwt_token }));
       //router.push('/dashboard');
-
     } catch (err) {
-      console.error('Failed to login:', err);
+      console.error('Failed to register:', err);
     }
   };
-/*
+  /*
   useEffect(() => {
     console.log('USE EF TOKEN', token);
     if (token) {
@@ -85,56 +87,58 @@ export const RegistrationForm = () => {
   };
 
   return (
-    
-        <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
-          <TextInput
-            label="Имя"
-            placeholder="Ваше имя"
-            {...form.getInputProps('first_name')}
-            className="mb-4 "
-          />
-          <TextInput
-            label="Фамилия"
-            placeholder="Ваша фамилия"
-            {...form.getInputProps('last_name')}
-            className="mb-4 "
-          />
-          <TextInput
-            label="E-mail"
-            placeholder="Ваш e-mail"
-            {...form.getInputProps('email')}
-            className="mb-4 "
-          />
-          <PasswordInput
-            label="Пароль (не менее 8 символов)"
-            placeholder="Введите пароль"
-            {...form.getInputProps('password')}
-            className="mb-4"
-          />
-          <PasswordInput
-            label="Повторите пароль"
-            placeholder="Повторите пароль"
-            {...form.getInputProps('password_confirm')}
-            className="mb-4"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            className="mb-4"
-            // bg-purple-600 hover:bg-purple-700
-            //!!onClick={() => router.push('/dashboard')}
-          >
-            Зарегистрироваться
-          </Button>
-          <div className="flex justify-start">
-            
-            <Link href={Routes.AUTH} className='link-default'><Text  size="sm">
-              Войти в аккаунт
-            </Text></Link>
-          </div>
-          
-        </form>
-
+    <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
+      <TextInput
+        label="Псевдоним"
+        placeholder="Ваш псевдоним"
+        {...form.getInputProps('username')}
+        className="mb-4 "
+      />
+      <TextInput
+        label="Имя"
+        placeholder="Ваше имя"
+        {...form.getInputProps('first_name')}
+        className="mb-4 "
+      />
+      <TextInput
+        label="Фамилия"
+        placeholder="Ваша фамилия"
+        {...form.getInputProps('last_name')}
+        className="mb-4 "
+      />
+      <TextInput
+        label="E-mail"
+        placeholder="Ваш e-mail"
+        {...form.getInputProps('email')}
+        className="mb-4 "
+      />
+      <PasswordInput
+        label="Пароль (не менее 8 символов)"
+        placeholder="Введите пароль"
+        {...form.getInputProps('password')}
+        className="mb-4"
+      />
+      <PasswordInput
+        label="Повторите пароль"
+        placeholder="Повторите пароль"
+        {...form.getInputProps('password_confirm')}
+        className="mb-4"
+      />
+      <Button
+        type="submit"
+        fullWidth
+        className="mb-4"
+        // bg-purple-600 hover:bg-purple-700
+        //!!onClick={() => router.push('/dashboard')}
+      >
+        Зарегистрироваться
+      </Button>
+      <div className="flex justify-start">
+        <Link href={Routes.AUTH} className="link-default">
+          <Text size="sm">Войти в аккаунт</Text>
+        </Link>
+      </div>
+    </form>
   );
 };
 

@@ -40,20 +40,20 @@ export const authApi = createApi({
       query: () => 'user/me',
     }),
 
-  /*
-    register: builder.mutation<RegisterResponse, RegisterRequest>({
+  
+    register: builder.mutation<any, RegisterRequest>({ //<RegisterResponse, RegisterRequest>
       query: (newUser) => ({
-        url: 'auth/register',
+        url: 'user/login',
         method: 'POST',
         body: newUser,
       }),
-    }),*/
+    }),
   }),
 });
 
 export const { useLoginMutation, 
   useLogoutMutation,
-  //useRegisterMutation, 
+  useRegisterMutation, 
   useLazyMeQuery , useMeQuery} = authApi;
 
 // Define types for the requests and responses
@@ -68,13 +68,15 @@ export interface LoginResponse {
   msg:string;
 }
 
-/*
-export interface RegisterRequest {
+
+export type RegisterRequest = {
   username: string;
   password: string;
   email: string;
+  first_name: string;
+  last_name: string;
 }
-
+/*
 export interface RegisterResponse {
   id: string;
   username: string;
