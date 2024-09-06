@@ -3,7 +3,7 @@ import JobSearchForm from '@/components/Search/JobSearchForm'; // Adjust the pat
 const SearchPage = () => {
   return (
     <div>
-      <JobSearchForm searchType='outer'/>
+      <JobSearchForm searchType='external'/>
     </div>
   );
 };

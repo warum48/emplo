@@ -10,7 +10,7 @@ import { JSONViewer } from "../__atoms/JSONViewer/JSONViewr";
 import { Debugger } from "../__atoms/Debugger/Debugger";
 
 type TProps = {
-    results: any
+    results?: any
 }
 
 export const ResultList = ({results}:TProps) => {

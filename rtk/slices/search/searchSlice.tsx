@@ -4,7 +4,7 @@ import { SearchResponse } from '@/rtk/queries/candidates';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {
-  results: SearchResponse;//any; //any;//
+  results: any//!!SearchResponse;//any; //any;//
 }
 
 const initialState: SearchState = {

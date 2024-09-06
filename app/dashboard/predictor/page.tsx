@@ -9,7 +9,7 @@ import { RootState } from '@/rtk/store/store';
 
 const CandidatesPage: React.FC = () => {
   const { data: posts, error, isLoading } = useGetCandidatesQuery();
-  const value = useSelector((state: RootState) => state.someFeature.value);
+
   const dispatch = useDispatch();
 
   if (isLoading) return <div>Loading...</div>;
