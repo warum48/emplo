@@ -133,7 +133,11 @@ const Home = () => {
                                       z-10`}
                         >
                           {extendedSearch ? (
-                            <JobSearchForm gridCols={3} key={'extendedSearch'} onSearch={onSearch} />
+                            <JobSearchForm
+                              gridCols={3}
+                              key={'extendedSearch'}
+                              onSearch={onSearch}
+                            />
                           ) : (
                             <QuickSearch onSearch={onSearch} />
                           )}
@@ -178,7 +182,6 @@ const Home = () => {
                         // mx-1 -my-16
                       }
                     >
-                      
                       {resultState && (
                         <>
                           <JobSearchForm />
@@ -211,7 +214,7 @@ const Home = () => {
             <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
               Результаты поиска
             </h2>
-            <ResultList results={results}/>
+            <ResultList results={results} />
           </div>
         )}
       </div>

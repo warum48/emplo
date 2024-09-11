@@ -26,7 +26,7 @@ const Header = () => {
         <nav className="hidden md:flex space-x-8 text-gray-700 dark:text-gray-200">
           <a href="#" className="hover:text-blue-500">Найти работу</a>
           <a href="#" className="hover:text-blue-500">Ресурсы</a>
-          <a href="#" className="hover:text-blue-500">Разместить вакансию</a>
+          <a href="#" className="hover:text-blue-500">Разместить вакансию_</a>
         </nav>
         <div className="flex items-center space-x-2 md:space-x-4">
         <ColorSchemeButton />
