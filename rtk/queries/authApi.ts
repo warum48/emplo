@@ -43,7 +43,7 @@ export const authApi = createApi({
   
     register: builder.mutation<any, RegisterRequest>({ //<RegisterResponse, RegisterRequest>
       query: (newUser) => ({
-        url: 'user/login', // /
+        url: 'user/login/', // /
         method: 'POST',
         body: newUser,
       }),
