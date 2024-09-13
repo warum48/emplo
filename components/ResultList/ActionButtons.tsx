@@ -53,7 +53,7 @@ export const ActionButtons = ({employee, setExpanded, expanded}:TProps) => {
                   >
                     <IconResize size={20} stroke={1.5} />
                   </ActionIcon>
-                  <a href={'/resume/' + employee?.id || ''} target="_blank" rel="noreferrer">
+                  <a href={'/resume/' + employee?.candidate_id || ''} target="_blank" rel="noreferrer">
                     <ActionIcon variant="light" loading={false} size="32px">
                       <GrNewWindow
                       //size={20} stroke={'1.5'}

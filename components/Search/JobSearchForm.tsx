@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 import { STYLES } from '@/global/CONSTS';
 import {
+  useGetSpecialitiesQuery,
   useSearchCandidatesMutation,
   useSearchHHCandidatesMutation,
 } from '@/rtk/queries/candidates';
@@ -55,6 +56,17 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
   const [aiError, setAiError] = useState('');
   const [formRenderCount, setFormRenderCount] = useState(0);
   const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
+  const { data: specialities, error: specialitiesError, isLoading: specialitiesIsLoading } = useGetSpecialitiesQuery();
+
+  function convertArrayToData(array: string[]): { value: string; label: string }[] {
+    return array.map((item) => {
+     // const decodedItem = decodeURIComponent(item);
+      return {
+        value: item,
+        label: item
+      };
+    });
+  }
 
   //const form = useForm({
   //  initialValues: formState,
@@ -145,16 +157,18 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           //w-full max-w-full
         >
           {/* Specialty */}
+          {specialities ?
           <Select
             label="Должность *"
             placeholder="--------"
             labelProps={{ style: customLabelStyle }}
-            data={[
+            data={ specialities/*[
               { value: 'Водитель-курьер', label: 'Водитель-курьер' },
               { value: 'designer', label: 'Designer' },
-            ]}
+            ]*/}
             {...form.getInputProps('specialty')}
-          />
+          /> : <Preloader />}
+          
 
           {/* Area */}
           {/*<div>

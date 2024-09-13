@@ -1,6 +1,7 @@
 import { apiPath } from '@/global/CONSTS';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { customBaseQuery } from './_customBaseQuery';
+import { Candidate } from '@/types/Candidate';
 
 export interface SearchRequest {
   specialty: string;
@@ -33,12 +34,18 @@ export const api = createApi({
     getCandidates: builder.query<any[], void>({ //
       query: () => 'api/candidates/',
     }),
+    getSpecialities: builder.query<any[], void>({ //
+      query: () => '/api/candidates/specialities',
+    }),
     searchCandidates: builder.mutation<SearchResponse, SearchRequest>({
       query: (body) => ({
         url: 'api/candidates/search',
         method: 'POST',
         body,
       }),
+    }),
+    getCandidateById:builder.query<Candidate[], string | number>({
+      query: (id) => `api/candidates?cand_id=${id}`,
     }),
     searchHHCandidates: builder.mutation<SearchResponse, SearchRequest>({
       query: (body) => ({
@@ -61,7 +68,9 @@ export const api = createApi({
 
 export const { useGetCandidatesQuery,
    useSearchCandidatesMutation,
-   useSearchHHCandidatesMutation  
+   useSearchHHCandidatesMutation  ,
+   useGetCandidateByIdQuery,
+   useGetSpecialitiesQuery
   //, useGetPostByIdQuery
  } = api;
 

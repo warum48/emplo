@@ -16,8 +16,12 @@ import Head from 'next/head';
 import { Drawer } from '@mantine/core';
 import React from 'react';
 import { IconList } from '@tabler/icons-react';
+import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
+import { useGetVacancyByIdQuery } from '@/rtk/queries/vacancy';
+import { Preloader } from '@/components/__atoms/Preloader/Preloader';
 
 const Page = ({ params }: { params: { slug: string } }) => {
+  const { data: data_vacancy, error, isLoading } = useGetVacancyByIdQuery(params.slug);
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
   const vacancies = [
     { name: 'UX/UI дизайнер', employees: [] },
@@ -86,17 +90,27 @@ const Page = ({ params }: { params: { slug: string } }) => {
           <VacancyListComponent vacancies={vacancies} />
         </Drawer>
 
-        <div
-          className="px-4  
+        <div className="flex flex-col gap-4 overflow-auto "
+        //flex flex-col gap-4 
+        //px-4 w-full bg-red-100 mr-4
+        //basis-auto shrink-1
+        >
+          <h2 className='dashboard-section-header'>{data_vacancy?.name}</h2>
+         
+          {data_vacancy ? <VacancyCard data={data_vacancy} /> : <Preloader />}
+
+          <div
+            className="  
         form-bg-and-text
         mr-4
-        h-full
-        flex
+       
+       
         overflow-auto
         "
-          //
-        >
-          <CandidatesTable vacancyId={params.slug} />
+            //flex  h-full  w-full
+          >
+            <CandidatesTable vacancyId={params.slug} />{/* */}
+          </div>
         </div>
       </main>
     </DashBoardPageContainer>

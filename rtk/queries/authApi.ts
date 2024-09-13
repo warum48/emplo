@@ -2,6 +2,8 @@ import { apiPath } from '@/global/CONSTS';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { customBaseQuery } from './_customBaseQuery';
 
+import {components} from '@/types';
+
 //const [cookiesToken, setCookieToken] = useCookies(['mednekot']);
 
 export const authApi = createApi({
@@ -41,7 +43,7 @@ export const authApi = createApi({
     }),
 
   
-    register: builder.mutation<any, RegisterRequest>({ //<RegisterResponse, RegisterRequest>
+    register: builder.mutation<any, components['schemas']['AppUserRegisterSchema'] >({ //<RegisterResponse, RegisterRequest> //  RegisterRequest
       query: (newUser) => ({
         url: 'user/login/', // /
         method: 'POST',

@@ -7,6 +7,8 @@ import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
 import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/queries/vacancy';
 import { UIUtils } from '@/utils/UIUtils';
+import CandidateCard from '../../CandidateCard';
+import { CandidateTableRow } from './CandidateTableRow';
 //import DataDisplay from '@/components/_dashboard/profile/HHMe';
 
 interface Candidate {
@@ -139,7 +141,7 @@ export function CandidatesTable({vacancyId}:TProps) { //default
       >
         <Text size="xl" 
        // weight={700}
-        >UX/UI дизайнер</Text>
+        >Список кандидатов</Text>
         <Button className="bg-green-600 text-white">Добавить кандидата</Button> <JSONViewer data={data_vacancies} />
       </Group>
       <Table striped highlightOnHover className="mt-4">
@@ -158,40 +160,23 @@ export function CandidatesTable({vacancyId}:TProps) { //default
           </Table.Tr>
         </Table.Thead>
         <tbody>
-          {candidates.map((candidate) => (
-            <Table.Tr key={candidate.id}>
-              <Table.Td><Checkbox size="sm" /></Table.Td>
-              <Table.Td>{`${candidate.last_name} ${candidate.first_name} ${candidate.middle_name}`}</Table.Td>
-              <Table.Td>
-                <Badge color={UIUtils.getStatusColor(candidate.resume_status)}>{candidate.resume_status}</Badge>
-              </Table.Td>
-              <Table.Td>{candidate.alternate_url ? candidate.alternate_url : 'Не указан'}</Table.Td>
-              <Table.Td>{candidate.area}</Table.Td>
-              <Table.Td>{candidate.gender}</Table.Td>
-              <Table.Td>{candidate.skills}</Table.Td>
-              <Table.Td>{candidate.total_experience}</Table.Td>
-              <Table.Td><StyledButton appearance="info_circle" onClick={() => {}} ></StyledButton></Table.Td>
-              <Table.Td>
-                <Menu>
-                  <Menu.Target>
-                    <ActionIcon>
-                      <IconDotsVertical size={16} />
-                    </ActionIcon>
-                  </Menu.Target>
-                  <Menu.Dropdown>
-                    <Menu.Item>Изменить</Menu.Item>
-                    <Menu.Item>Удалить</Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
-              </Table.Td>
-            </Table.Tr>
+          {data_neg?.items?.map((candidate:any) => (
+            <CandidateTableRow key={candidate.id} candidate_={candidate} />
           ))}
         </tbody>
       </Table>
       <br/><br/>
-      <DataDisplay data={data_vacancies} />
-      <br/><br/>
-      <DataDisplay data={data_neg} />
+      {/*}
+      <DataDisplay data={data_vacancies} /> */}
+      
+    {/*  <DataDisplay data={data_neg} /> */}
+     
+      {/*data_neg?.items?.[0] &&
+      <>
+       <JSONViewer data={data_neg?.items[0]}/>
+      <CandidateCard data={data_neg?.items[0]} />
+      </>
+*/}
     </div>
   );
 }

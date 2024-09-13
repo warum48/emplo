@@ -7,11 +7,12 @@ import { DeepNullable } from '@/types/utils/DeepNullable';
 
 type TProps = {
   candidateId?: string;
-  candidate: DeepNullable<Candidate>;
+  candidate: DeepNullable<Candidate> | undefined;
   showTopInfo?: boolean;
+  placed?: 'onpage' | 'incard'
 }
 
-const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
+const ResumeCard = ({candidateId, candidate, showTopInfo=true, placed='incard'}:TProps) => {
 
  
   
@@ -96,7 +97,7 @@ const ResumeCard = ({candidateId, candidate, showTopInfo=true}:TProps) => {
   return (
     
     <div
-      className="=dark:bg-customGray-800   text-gray-900 dark:text-gray-100 text-sm ^h-full "
+      className={` text-gray-900 dark:text-gray-100 text-sm ${placed == 'onpage' ? 'h-full' : ''}`}
       //shadow-lg
     >
       
