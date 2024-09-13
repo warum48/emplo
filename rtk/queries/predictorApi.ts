@@ -7,10 +7,10 @@ export const predictorApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: apiPath }),
   endpoints: (builder) => ({
     getPredictors: builder.query<TPredictorResponse, void>({
-        query: () => 'predictor/models',
+        query: () => 'api/predictor/models',
       }),
     getXY: builder.query<string & { status:string}, void>({
-        query: () => 'predictor/xy',
+        query: () => 'api/predictor/xy',
       }),  
   }),
 });
