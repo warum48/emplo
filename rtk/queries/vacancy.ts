@@ -10,22 +10,22 @@ export const vacancyApi = createApi({
   endpoints: (builder) => ({
     createVacancy: builder.mutation<void, NewVacancyFormValues>({
       query: (vacancy) => ({
-        url: 'hhru/vacancies',
+        url: 'api/hhru/vacancies',
         method: 'POST',
         body: vacancy,
       }),
     }),
     getVacancies: builder.query<any, void>({ //<UserDetails, void>
-      query: () => 'hhru/vacancies',
+      query: () => 'api/hhru/vacancies',
     }),
     getMe: builder.query<any, void>({ //<UserDetails, void>
-      query: () => 'hhru/me',
+      query: () => 'api/hhru/me',
     }),
     getVacancyById:builder.query<any, string>({
-      query: (id) => `hhru/vacancies/${id}`,
+      query: (id) => `api/hhru/vacancies/${id}`,
     }),
     getVacancyNegotiationsById:builder.query<any, string>({
-      query: (id) => `hhru/vacancies/negotiations/${id}`,
+      query: (id) => `api/hhru/vacancies/negotiations/${id}`,
     }),
   }),
 });

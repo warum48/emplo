@@ -31,25 +31,25 @@ export const api = createApi({
   baseQuery: customBaseQuery,
   endpoints: (builder) => ({
     getCandidates: builder.query<any[], void>({ //
-      query: () => 'candidates/',
+      query: () => 'api/candidates/',
     }),
     searchCandidates: builder.mutation<SearchResponse, SearchRequest>({
       query: (body) => ({
-        url: 'candidates/search',
+        url: 'api/candidates/search',
         method: 'POST',
         body,
       }),
     }),
     searchHHCandidates: builder.mutation<SearchResponse, SearchRequest>({
       query: (body) => ({
-        url: 'hhru/search',
+        url: 'api/hhru/search',
         method: 'POST',
         body,
       }),
     }),
     getHHCandidateById: builder.query<any, number>({
       query: (body) => ({
-      url:  `hhru/hh_user_info`,
+      url:  `api/hhru/hh_user_info`,
       method: 'POST',
       body,
       }),
