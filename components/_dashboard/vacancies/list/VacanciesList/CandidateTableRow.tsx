@@ -8,6 +8,7 @@ import {
   Group,
   Text,
   Collapse,
+  Anchor,
 } from '@mantine/core';
 import { useState } from 'react';
 import { IconDotsVertical } from '@tabler/icons-react';
@@ -31,25 +32,29 @@ export const CandidateTableRow = ({ candidate_ }: TProps) => {
   return (
     <>
       {/*<JSONViewer data={candidate} />*/}
-      <Table.Tr key={candidate?.id}>
+      <Table.Tr key={candidate?.id} className={`${opened ? 'border-b-0' : ''}`} >
         <Table.Td>
           <Checkbox size="sm" />
         </Table.Td>
         <Table.Td>{`${candidate?.last_name} ${candidate?.first_name} ${candidate?.middle_name}`}</Table.Td>
         <Table.Td>
-          <Badge color={UIUtils.getStatusColor(candidate?.resume_status)}>
+          {/*<Badge color={UIUtils.getStatusColor(candidate?.resume_status)}>
             {candidate?.resume_status}
-          </Badge>
+          </Badge>*/}
+          <Badge color={candidate_?.state?.id === 'response' ? 'green' : 'red'}>{candidate_?.state?.name}</Badge>
         </Table.Td>
         <Table.Td>
           {/*<Value value={candidate?.alternate_url ? candidate?.alternate_url : 'Не указан'} />*/}
-          <Link href="candidate?.alternate_url ">ХХ Ссылка</Link>
+         {/*} <Link href="candidate?.alternate_url ">ХХ Ссылка</Link>*/}
+          <Anchor href={candidate?.alternate_url} target="_blank" className="text-blue-500" size='sm'>
+                                    HH ссылка
+                                </Anchor>
         </Table.Td>
         <Table.Td>
-          <Value value={candidate?.area} />
+          <Value value={candidate?.area?.name} />
         </Table.Td>
         <Table.Td>
-          <Value value={candidate?.gender} />
+          <Value value={candidate?.gender?.name} />
         </Table.Td>
         <Table.Td>
           <Value value={candidate?.skills} />
@@ -75,11 +80,17 @@ export const CandidateTableRow = ({ candidate_ }: TProps) => {
         </Table.Td>
       </Table.Tr>
 
-     
-        <Table.Tr key={candidate?.id}>
-          <Table.Td colSpan={8}> more info <JSONViewer data={candidate} /></Table.Td>
+      {opened &&
+        <Table.Tr key={candidate?.id} className='p-0 m-0'>
+          <Table.Td colSpan={10} className='p-0 m-0'> 
+          
+          <CandidateCard data={candidate_} />
+
+
+          </Table.Td>
           
         </Table.Tr>
+}
         
     </>
   );

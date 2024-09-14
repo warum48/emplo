@@ -136,14 +136,13 @@ export function CandidatesTable({vacancyId}:TProps) { //default
     <div className="p-4 text-black dark:text-white"
     //w-full max-w-full 
     >
-      <Group 
-      //position="apart"
-      >
+      <div className="justify-between flex  items-center gap-4">
+      
         <Text size="xl" 
        // weight={700}
         >Список кандидатов</Text>
-        <Button className="bg-green-600 text-white">Добавить кандидата</Button> <JSONViewer data={data_vacancies} />
-      </Group>
+        <Button className="bg-teal-500 text-white">Добавить кандидата</Button> 
+      </div>
       <Table striped highlightOnHover className="mt-4">
         <Table.Thead>
           <Table.Tr>
