@@ -3,12 +3,14 @@ import {JSONViewer} from '@/components/__atoms/JSONViewer/JSONViewr';
 
 type TProps = {
     value: any;
+    prefix?: string;
     postfix?: string;
+    missing?: string;
 }
 
-const Value = ({ value, postfix='' }: TProps) => {
+const Value = ({ value, prefix='',postfix='', missing='—' }: TProps) => {
   if (value === undefined || value === null) {
-    return <>-</>;
+    return missing ;
   }
 
   if (typeof value === 'string' || typeof value === 'number') {

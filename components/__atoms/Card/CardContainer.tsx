@@ -1,48 +1,53 @@
-//import { TAnyFields } from '@/types/types';
+import React, { useState } from 'react';
+// Adjust the import path as necessary
 import { Paper } from '@mantine/core';
-import * as React from 'react';
 
-type TProps = {
-  children: React.ReactNode;
-  fitCell?: boolean;
-  className?: string;
-  expanded?: boolean;
-  miw?: string | number;
-  onClick?: () => void;
-  hasShadow?: boolean;
-  framed?: boolean;
-};
+//import { CardExpandButton } from '../__atoms/Card/CardExpandButton';
 
-export const CardContainer = ({
-  children,
-  expanded = false,
-  fitCell = true,
-  className = '',
-  onClick,
-  framed = true,
-  hasShadow = false,
+//import classes from './autogrid.module.css';
+import { Candidate } from '@/types/Candidate';
 
-  ...props
-}: // miw="100%"
-TProps ) => {
-  //React.PropsWithChildren
+import { DeepNullable } from '@/types/utils/DeepNullable';
+import { CardExpandButton } from './CardExpandButton';
+
+export const CardContainer = ({ children }: { children: React.ReactNode }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [width, setWidth] = useState(0);
+  const componentRef = React.useRef<HTMLDivElement>(null);
+
+  const updateWidth = () => {
+    if (componentRef.current) {
+      setWidth(componentRef.current.offsetWidth);
+    }
+  };
+
+  React.useEffect(() => {
+    // Update width on initial load
+    updateWidth();
+    // Update width on window resize
+    window.addEventListener('resize', updateWidth);
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, []);
 
   return (
     <Paper
-      {...props}
-      style={{ position: 'relative', alignSelf: fitCell ? 'stretch' : 'start' }} //!!align-self used to make div not to take 100% height in grid cell
-      shadow={(expanded && hasShadow) ? 'lg':"0"}
-     // p={expanded ? { base: 'md', md: 'xl' } : 'md'} 
-      p={framed? (expanded ? { base: 'md', md: 'xl' } : 'lg') : '0'}
-    //  withBorder = {framed}
-      className={className}
-      onClick={onClick}
       radius={'lg'}
-      //component='button'
-      // miw={miw} //{expanded ? '100%' : ((innerPageMaxWidth  / 2 ) -32) }//448}
+      className={`bg-white dark:bg-customGray-950/90  
+        gridItem relative max-w-full flex-1 min-w-[280px] transition-[width] duration-400 ease self-start
+        ${
+        expanded ? "gridItem w-full col-span-full" : ''
+      }
+      shadow hover:shadow-lg trsition-all duration-500
+      `}
     >
-      {/*className*/}
-      {children}
+      <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
+
+      <div className="p-4">
+        {children}
+      </div>
     </Paper>
   );
 };

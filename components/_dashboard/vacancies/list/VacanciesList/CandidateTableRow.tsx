@@ -36,7 +36,9 @@ export const CandidateTableRow = ({ candidate_ }: TProps) => {
         <Table.Td>
           <Checkbox size="sm" />
         </Table.Td>
-        <Table.Td>{`${candidate?.last_name} ${candidate?.first_name} ${candidate?.middle_name}`}</Table.Td>
+        <Table.Td>
+            <Value value={candidate?.last_name} />{' '}<Value value={candidate?.first_name} missing=''/>{' '}  <Value value={candidate?.middle_name} missing='' />  
+            </Table.Td>
         <Table.Td>
           {/*<Badge color={UIUtils.getStatusColor(candidate?.resume_status)}>
             {candidate?.resume_status}

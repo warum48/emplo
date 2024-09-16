@@ -15,6 +15,8 @@ import { format, parseISO } from 'date-fns';
 import { IconDownload } from '@tabler/icons-react';
 import { LinkButton } from '@/components/__atoms/Buttons/LinkButton';
 import { useDisclosure } from '@mantine/hooks';
+import Value from '@/components/__atoms/Value/Value';
+//import Value from '@/components/Value'; // Import your Value component
 
 const VacancyCard = ({ data }: any) => {
   const [opened, { toggle }] = useDisclosure(false);
@@ -77,35 +79,34 @@ const VacancyCard = ({ data }: any) => {
   return (
     <div className="w-full p-4">
       <div className="grid grid-cols-2 gap-8">
-  <div className="flex flex-col justify-between h-full">
-    <div>
-      <div className="flex gap-4 justify-between">
+        <div className="flex flex-col justify-between h-full">
+          <div>
+            <div className="flex gap-4 justify-between">
+              <Text className="text-sm">
+                <b>Идентификатор вакансии:</b> <Value value={id} />
+              </Text>
+              <Badge c={premium ? 'white' : 'white'}>
+                {premium ? 'Премиум' : 'Стандарт'}
+              </Badge>
+            </div>
+            <Text className="text-sm">
+              <b>Название:</b> <Value value={name} />
+            </Text>
+          </div>
+          <LinkButton className="text-sm mt-auto" color="gray" onClick={toggle}>
+            Подробнее
+          </LinkButton>
+        </div>
         <Text className="text-sm">
-          <b>Идентификатор вакансии:</b> {id}
+          <b>Описание:</b> <Value value={description} />
         </Text>
-        <Badge c={premium ? 'white' : 'white'}>
-          {premium ? 'Премиум' : 'Стандарт'}
-        </Badge>
       </div>
-      <Text className="text-sm">
-        <b>Название:</b> {name}
-      </Text>
-    </div>
-    <LinkButton className="text-sm mt-auto" color="gray" onClick={toggle}>
-      Подробнее
-    </LinkButton>
-  </div>
-  <Text className="text-sm">
-    <b>Описание:</b> {description}
-  </Text>
-</div>
-
 
       <Collapse in={opened}>
         <Divider mt="xs" />
         <div className="p-4 grid grid-cols-2 gap-x-8">
           <Text size="xs" c="dimmed">
-            Тип оплаты: {billing_type.name}
+            Тип оплаты: <Value value={billing_type?.name} />
           </Text>
           {can_upgrade_billing_type && (
             <Text size="xs" c="dimmed">
@@ -119,44 +120,43 @@ const VacancyCard = ({ data }: any) => {
             Требуется ответное письмо: {response_letter_required ? 'Да' : 'Нет'}
           </Text>
           <Text size="xs" c="dimmed">
-            Местоположение: {area.name}
+            Местоположение: <Value value={area?.name} />
           </Text>
           <Text size="xs" c="dimmed">
-            Зарплата: {salary.to} {salary.currency} {salary.gross ? '(брутто)' : '(нетто)'}
+            Зарплата: <Value value={`${salary?.to} ${salary?.currency} ${salary?.gross ? '(брутто)' : '(нетто)'}`} />
           </Text>
           <Text size="xs" c="dimmed">
-            Тип: {type.name}
+            Тип: <Value value={type?.name} />
           </Text>
           <Text size="xs" c="dimmed">
-            Адрес: {address.show_metro_only ? 'Показать только метро' : 'Указан'}
+            Адрес: {address?.show_metro_only ? 'Показать только метро' : 'Указан'}
           </Text>
           <Text size="xs" c="dimmed">
             Разрешены сообщения: {allow_messages ? 'Да' : 'Нет'}
           </Text>
           <Text size="xs" c="dimmed">
-            Опыт: {experience.name}
+            Опыт: <Value value={experience?.name} />
           </Text>
           <Text size="xs" c="dimmed">
-            График: {schedule.name}
+            График: <Value value={schedule?.name} />
           </Text>
           <Text size="xs" c="dimmed">
-            Занятость: {employment.name}
+            Занятость: <Value value={employment?.name} />
           </Text>
           <Text size="xs" c="dimmed">
-            Отдел: {department || 'Не указан'}
+            Отдел: <Value value={department || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Контакты: {contacts || 'Не указаны'}
-          </Text>
-
-          <Text size="xs" c="dimmed">
-            Брендированное описание: {branded_description || 'Не указано'}
+            Контакты: <Value value={contacts || 'Не указаны'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Шаблон конструктора вакансии: {vacancy_constructor_template || 'Не указан'}
+            Брендированное описание: <Value value={branded_description || 'Не указано'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Ключевые навыки: {key_skills.length > 0 ? key_skills.join(', ') : 'Нет'}
+            Шаблон конструктора вакансии: <Value value={vacancy_constructor_template || 'Не указан'} />
+          </Text>
+          <Text size="xs" c="dimmed">
+            Ключевые навыки: <Value value={key_skills?.length > 0 ? key_skills?.join(', ') : 'Нет'} />
           </Text>
           <Text size="xs" c="dimmed">
             Принимаются инвалиды: {accept_handicapped ? 'Да' : 'Нет'}
@@ -168,16 +168,16 @@ const VacancyCard = ({ data }: any) => {
             Архивировано: {archived ? 'Да' : 'Нет'}
           </Text>
           <Text size="xs" c="dimmed">
-            URL для ответа: {response_url || 'Не указан'}
+            URL для ответа: <Value value={response_url || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Специализации: {specializations.length > 0 ? specializations.join(', ') : 'Нет'}
+            Специализации: <Value value={specializations?.length > 0 ? specializations?.join(', ') : 'Нет'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Профессиональные роли: {professional_roles.map((role: any) => role.name).join(', ')}
+            Профессиональные роли: <Value value={professional_roles?.map((role: any) => role.name).join(', ')} />
           </Text>
           <Text size="xs" c="dimmed">
-            Код: {code || 'Не указан'}
+            Код: <Value value={code || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
             Скрыто: {hidden ? 'Да' : 'Нет'}
@@ -186,32 +186,31 @@ const VacancyCard = ({ data }: any) => {
             Быстрые ответы разрешены: {quick_responses_allowed ? 'Да' : 'Нет'}
           </Text>
           <Text size="xs" c="dimmed">
-            Брендированный шаблон: {branded_template || 'Не указан'}
+            Брендированный шаблон: <Value value={branded_template || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Типы водительских прав:{' '}
-            {driver_license_types.length > 0 ? driver_license_types.join(', ') : 'Нет'}
+            Типы водительских прав: <Value value={driver_license_types?.length > 0 ? driver_license_types?.join(', ') : 'Нет'} />
           </Text>
           <Text size="xs" c="dimmed">
             Принимаются неполные резюме: {accept_incomplete_resumes ? 'Да' : 'Нет'}
           </Text>
           <Text size="xs" c="dimmed">
-            Работодатель: {employer.name}
+            Работодатель: <Value value={employer?.name} />
           </Text>
           <Text size="xs" c="dimmed">
-            Дата публикации: {format(parseISO(published_at), 'dd MMM yyyy')}
+            Дата публикации: <Value value={published_at ? format(parseISO(published_at), 'dd MMM yyyy') : 'Не указана'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Дата создания: {format(parseISO(created_at), 'dd MMM yyyy')}
+            Дата создания: <Value value={created_at ? format(parseISO(created_at), 'dd MMM yyyy') : 'Не указана'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Дата первоначального создания: {format(parseISO(initial_created_at), 'dd MMM yyyy')}
+            Дата первоначального создания: <Value value={initial_created_at ? format(parseISO(initial_created_at), 'dd MMM yyyy') : 'Не указана'} />
           </Text>
           <Text size="xs" c="dimmed">
-            URL для переговоров: {negotiations_url || 'Не указан'}
+            URL для переговоров: <Value value={negotiations_url || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
-            URL для подходящих резюме: {suitable_resumes_url || 'Не указан'}
+            URL для подходящих резюме: <Value value={suitable_resumes_url || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
             URL для отклика:{' '}
@@ -223,57 +222,10 @@ const VacancyCard = ({ data }: any) => {
             Тест: {has_test ? 'Да' : 'Нет'}
           </Text>
           <Text size="xs" c="dimmed">
-            Альтернативный URL:{' '}
-            <Anchor href={alternate_url} target="_blank">
-              Посмотреть вакансию
-            </Anchor>
+            URL на тест: <Value value={test?.url || 'Не указан'} />
           </Text>
           <Text size="xs" c="dimmed">
-            Ответы: {counters.responses}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Просмотры: {counters.views}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Приглашения: {counters.invitations}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Непрочитанные ответы: {counters.unread_responses}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Резюме в процессе: {counters.resumes_in_progress}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Приглашения и ответы: {counters.invitations_and_responses}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Дата истечения: {format(parseISO(expires_at), 'dd MMM yyyy')}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Менеджер: {manager.id}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Уведомления о ответах: {response_notifications ? 'Да' : 'Нет'}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Рабочие дни: {working_days.length > 0 ? working_days.join(', ') : 'Не указаны'}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Интервалы рабочего времени:{' '}
-            {working_time_intervals.length > 0 ? working_time_intervals.join(', ') : 'Не указаны'}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Режимы рабочего времени:{' '}
-            {working_time_modes.length > 0 ? working_time_modes.join(', ') : 'Не указаны'}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Принимаются временные сотрудники: {accept_temporary ? 'Да' : 'Нет'}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Языки: {languages.length > 0 ? languages.join(', ') : 'Не указаны'}
-          </Text>
-          <Text size="xs" c="dimmed">
-            Одобрено: {approved ? 'Да' : 'Нет'}
+            Альтернативный URL: <Value value={alternate_url || 'Не указан'} />
           </Text>
         </div>
       </Collapse>

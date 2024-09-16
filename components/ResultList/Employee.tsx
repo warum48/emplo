@@ -66,11 +66,7 @@ const Employee: React.FC<EmployeeProps> = ({ employee }) => {
 
   return (
     <Paper
-      // p={expanded ? { base: 'md', sm: 'xl' } : 'md'}
-     // shadow="xs"
       radius={'lg'}
-      //withBorder
-      //bg-neutral-50/90
       className={`bg-white dark:bg-customGray-950/90  ${classes.gridItem} ${
         expanded ? classes.expanded : ''
       }
