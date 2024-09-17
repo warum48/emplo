@@ -133,7 +133,7 @@ export function CandidatesTable({vacancyId}:TProps) { //default
   const { data: data_neg, error:error_neg, isLoading:isLoading_neg } = useGetVacancyNegotiationsByIdQuery(vacancyId);
 
   return (
-    <div className="p-4 text-black dark:text-white"
+    <div className="p-4 text-black dark:text-white rounded"
     //w-full max-w-full 
     >
       <div className="justify-between flex  items-center gap-4">

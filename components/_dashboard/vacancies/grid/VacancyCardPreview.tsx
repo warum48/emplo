@@ -16,9 +16,11 @@ import { IconDownload } from '@tabler/icons-react';
 import { LinkButton } from '@/components/__atoms/Buttons/LinkButton';
 import { useDisclosure } from '@mantine/hooks';
 import Value from '@/components/__atoms/Value/Value';
+import dayjs from 'dayjs';
+import Link from 'next/link';
 //import Value from '@/components/Value'; // Import your Value component
 
-const VacancyCard = ({ data }: any) => {
+export const VacancyCardPreview = ({ data }: any) => {
   const [opened, { toggle }] = useDisclosure(false);
   const {
     id,
@@ -78,28 +80,42 @@ const VacancyCard = ({ data }: any) => {
 
   return (
     <div className="w-full p-4">
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 gap-8">
         <div className="flex flex-col justify-between h-full">
           <div>
-            <div className="flex gap-4 justify-between">
-              <Text className="text-sm">
+            <div className="flex gap-4 justify-between mb-4">
+              {/*<Text className="text-sm">
                 <b>Идентификатор вакансии:</b> <Value value={id} />
-              </Text>
+              </Text>*/}
+              <Text className="text-sm">
+              <b>Название:</b> <Value value={name} />
+            </Text>
               <Badge c={premium ? 'white' : 'white'} className="bg-cyan-600">
                 {premium ? 'Премиум' : 'Стандарт'}
               </Badge>
             </div>
+            
             <Text className="text-sm">
-              <b>Название:</b> <Value value={name} />
-            </Text>
+            <b>Дата публикации:</b> {published_at ? dayjs(published_at).format('DD MMM YYYY') : 'не указана'}
+          </Text>
+          <Text className="text-sm">
+          <b>Ответы:</b>  <span className="text-red-500 font-bold">{counters?.unread_responses} </span>/ {counters?.responses}
+          </Text>
+          <Text className="text-sm">
+          <b>Резюме в процессе:</b> {counters?.resumes_in_progress}
+          </Text>
           </div>
-          <LinkButton className="text-sm mt-auto" color="gray" onClick={toggle}>
-            Подробнее
+          <div className="flex gap-4 justify-between items-end">
+          <LinkButton className="text-sm mt-4" color="gray" onClick={toggle}>
+            Развернуть подробности
           </LinkButton>
+          <Link href={'/dashboard/vacancies/' + id} >
+          <Button size="compact-sm" >Перейти к вакансии</Button></Link>
+          </div>
         </div>
-        <Text className="text-sm">
+        {/*<Text className="text-sm">
           <b>Описание:</b> <Value value={description} />
-        </Text>
+        </Text>*/}
       </div>
 
       <Collapse in={opened}>
@@ -233,4 +249,4 @@ const VacancyCard = ({ data }: any) => {
   );
 };
 
-export default VacancyCard;
+

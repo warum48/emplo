@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-// Adjust the import path as necessary
 import { Paper } from '@mantine/core';
-
-//import { CardExpandButton } from '../__atoms/Card/CardExpandButton';
-
-//import classes from './autogrid.module.css';
-import { Candidate } from '@/types/Candidate';
-
-import { DeepNullable } from '@/types/utils/DeepNullable';
 import { CardExpandButton } from './CardExpandButton';
 
 export const CardContainer = ({ children }: { children: React.ReactNode }) => {
@@ -41,8 +33,19 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
         expanded ? "gridItem w-full col-span-full" : ''
       }
       shadow hover:shadow-lg trsition-all duration-500
+      bg-gradient-to-r from-transparent to-purple-400/0
+      relative
       `}
     >
+{/* Vector or symbol background */}
+<div className="absolute bottom-0 right-0 w-auto  opacity-20 dark:opacity-20 text-purple-400 -mt-10 overflow-hidden">
+        {/* UTF arrow symbol or a vector icon */}
+        <div className="relative   top-[116px]  text-[12rem]" style={{
+      WebkitMaskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
+      maskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
+    }}>➔</div>
+      </div>
+
       <CardExpandButton expanded={expanded} setExpanded={setExpanded} showWhenCollapsed={false} />
 
       <div className="p-4">

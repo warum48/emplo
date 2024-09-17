@@ -103,7 +103,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
             className="  
         form-bg-and-text
         mr-4
-       
+       rounded
        
         overflow-auto
         "
