@@ -21,7 +21,7 @@ export const VacanciesGrid = ({ results }: TProps) => {
       <Debugger>
         <JSONViewer data={results} />
       </Debugger>
-      <div className="container grid gap-4 grid-cols-[repeat(auto-fit,minmax(480px,1fr))] transition-all duration-400 ease-out">
+      <div className="container grid gap-4 grid-cols-[repeat(auto-fit,minmax(480px,1fr))] transition-all duration-400 ease-out overflow-hidden">
       {data_vacancies?.items?.map((vacancy:any, index:number) => (
           <CardContainer>
             <VacancyCardPreview data={vacancy} />

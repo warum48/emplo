@@ -34,11 +34,11 @@ export const CardContainer = ({ children }: { children: React.ReactNode }) => {
       }
       shadow hover:shadow-lg trsition-all duration-500
       bg-gradient-to-r from-transparent to-purple-400/0
-      relative
+      relative overflow-hidden
       `}
     >
 {/* Vector or symbol background */}
-<div className="absolute bottom-0 right-0 w-auto  opacity-20 dark:opacity-20 text-purple-400 -mt-10 overflow-hidden">
+<div className="absolute bottom-0 right-0 w-auto  opacity-20 dark:opacity-20 text-purple-400 -mt-10 overflow-hidden pointer-events-none">
         {/* UTF arrow symbol or a vector icon */}
         <div className="relative   top-[116px]  text-[12rem]" style={{
       WebkitMaskImage: 'linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)',
