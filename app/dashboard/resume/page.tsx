@@ -11,10 +11,11 @@ import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 
 import Head from 'next/head';
+import { IconUpload } from '@tabler/icons-react';
 
 const Settings = () => {
   return (
-    <DashBoardPageContainer header="Создать резюме">
+    <DashBoardPageContainer header="Создать резюме" Icon={IconUpload}>
       <div className="flex flex-col items-center w-full ">
         <div className="absolute -left-[100px]  top-1/5 w-1/2 h-1/2 ">
           <div

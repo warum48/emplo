@@ -15,7 +15,7 @@ import { ResultList } from '@/components/ResultList/ResultList';
 import Head from 'next/head';
 import { Drawer } from '@mantine/core';
 import React from 'react';
-import { IconList } from '@tabler/icons-react';
+import { IconList, IconRobot } from '@tabler/icons-react';
 import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
 import { useGetVacancyByIdQuery } from '@/rtk/queries/vacancy';
 import { Preloader } from '@/components/__atoms/Preloader/Preloader';
@@ -51,7 +51,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
   ];
 
   return (
-    <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full">
+    <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full" Icon={IconRobot} >
       <main
         className="mt-0 flex flex-col md:flex-row gap-4 md:gap-8 h-full relative ml-4 md:ml-0"
         //items-stretch

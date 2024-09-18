@@ -6,7 +6,7 @@ import { PopularSearches } from '@/components/Search/PopularSearches';
 import { ResultList } from '@/components/ResultList/ResultList';
 import React from 'react';
 import { DrawerWithOpener } from '@/components/_dashboard/PageContainer/DrawerWithOpener';
-import { IconList } from '@tabler/icons-react';
+import { IconList, IconSearch } from '@tabler/icons-react';
 import { SearchType } from '@/types/local/SearchType';
 
 type TProps = {
@@ -17,7 +17,7 @@ type TProps = {
 
 export const SearchPage = ({hasCandidates, results, searchType='internal'} :TProps) => {
   return (
-    <DashBoardPageContainer header="Поиск" hasLeftMenu={hasCandidates}>
+    <DashBoardPageContainer header="Поиск" hasLeftMenu={hasCandidates} Icon={IconSearch}>
       {!hasCandidates && <BgColors />}
       <main
         className={` ${hasCandidates ? 'flex-col lg:flex-row ' : 'flex-col items-center '} " mt-0  ^ml-4 lg:ml-0 flex  justify-center  relative  h-full ^z-10  flex-grow gap-x-4 gap-y-4`}

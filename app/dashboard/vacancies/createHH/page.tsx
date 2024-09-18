@@ -14,10 +14,11 @@ import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
 
 import Head from 'next/head';
+import { IconRobot } from '@tabler/icons-react';
 
 const Settings = () => {
   return (
-    <DashBoardPageContainer header="Создать вакансию">
+    <DashBoardPageContainer header="Создать вакансию" Icon={IconRobot} >
       <div className="flex flex-col items-center w-full ">
         <div className="absolute -left-[10px]  top-1/5 w-1/2 h-1/2 ">
           <div

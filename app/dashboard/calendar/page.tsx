@@ -30,6 +30,7 @@ import { mock } from './mock';
 import { EventsCalendar } from '@/components/_dashboard/_calendar/types';
 import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { BgColors } from '@/components/_dashboard/predictor/BgColors.tsx/BgColors';
+import { IconCalendar } from '@tabler/icons-react';
 
 export default function CalendarPage() {
   const [cookieToken, setCookieToken, removeCookieToken] = useCookies(['mednekot']);
@@ -152,7 +153,7 @@ export default function CalendarPage() {
   };
 
   return (
-    <DashBoardPageContainer header="Календарь">
+    <DashBoardPageContainer header="Календарь" Icon={IconCalendar} >
       <Box
         mx="auto"
         w={'100%'}

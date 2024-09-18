@@ -15,7 +15,7 @@ import { ResultList } from '@/components/ResultList/ResultList';
 import Head from 'next/head';
 import { Drawer } from '@mantine/core';
 import React from 'react';
-import { IconList } from '@tabler/icons-react';
+import { IconList, IconRobot } from '@tabler/icons-react';
 import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { DrawerWithOpener } from '@/components/_dashboard/PageContainer/DrawerWithOpener';
 import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
@@ -51,9 +51,9 @@ const Page = () => {
   ];
 
   return (
-    <DashBoardPageContainer header="Вакансии"  className="h-full">
+    <DashBoardPageContainer header="Вакансии" Icon={IconRobot} className="min-h-full">
       <main
-        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-4 h-full relative ^ml-4 lg:ml-0 w-full">
+        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-4 min-h-full relative ^ml-4 lg:ml-0 w-full">
         <VacanciesGrid />
       </main>
     </DashBoardPageContainer>

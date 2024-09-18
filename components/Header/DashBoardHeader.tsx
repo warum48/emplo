@@ -10,8 +10,18 @@ const DashBoardHeader = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    //const dbPageCont = document.getElementById('dashboardPageContainer');
+    //const dbPageContFull = document.getElementById('dashboardPageContainerFull');
+    const dbPageContFullLayout = document.getElementById('dashboardPageContainerFullLayout');
+    //console.log('dbPageCont ', dbPageCont );
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      //const scrollTop = dbPageCont?.scrollTop ?? 0;
+      //const scrollTopFull = dbPageContFull?.scrollTop ?? 0;
+      const scrollTopFullLayout = dbPageContFullLayout?.scrollTop ?? 0;
+      //console.log('scrollTop', scrollTop);
+      if (window.scrollY > 50 
+       // || scrollTop > 50 || scrollTopFull > 50 
+        || scrollTopFullLayout > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -19,6 +29,9 @@ const DashBoardHeader = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
+    //dbPageCont?.addEventListener('scroll', handleScroll);
+    //dbPageContFull?.addEventListener('scroll', handleScroll);
+    dbPageContFullLayout?.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

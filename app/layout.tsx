@@ -57,7 +57,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang="en" 
-    //className='h-full'
+    className='h-full'
     >
       <head>
         <ColorSchemeScript />

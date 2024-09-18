@@ -39,16 +39,16 @@
     }
     /*------------------------containers-------------------*/
     .dashboard-page-container{
-      @apply flex flex-col space-y-8 px-2 md:px-8 mt-16 py-4;
+      @apply flex flex-col space-y-8 px-2 md:px-8 mt-16 py-4;/* */
     }
     .dashboard-page-container-compact{
-      @apply flex flex-col space-y-8 px-4 md:px-8 mt-3 py-1; /*6*/
+      @apply flex flex-col space-y-8 px-4 md:px-8  py-1 pt-4; /*6*//* mt-3 !!!!margin adds scroll if h-full */
     }
     .dashboard-page-container-nopadding{
-      @apply flex flex-col space-y-4 md:space-y-8 pl-0 pr-0 mt-16 py-5;
+      @apply flex flex-col space-y-4 md:space-y-8 pl-0 pr-0 mt-16 py-5;/* */
     }
     .dashboard-page-container-compact-nopadding{
-      @apply flex flex-col space-y-6 md:space-y-8 pl-0 pr-0 mt-3 py-1 ; /*6*/
+      @apply flex flex-col space-y-6 md:space-y-8 pl-0 pr-0 mt-3 py-1 ; /*6*//* */
     }
     /*------------------------links-------------------*/
     .dashboard-menu-item{  /* check wtf */
