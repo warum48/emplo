@@ -1,26 +1,30 @@
-import { useSearchCandidatesMutation, useSearchHHCandidatesMutation } from "@/rtk/queries/candidates";
-import { LinkButton } from "../__atoms/Buttons/LinkButton";
-import { useDispatch } from "react-redux";
+import {
+  useSearchCandidatesMutation,
+  useSearchHHCandidatesMutation,
+} from '@/rtk/queries/candidates';
+import { LinkButton } from '../__atoms/Buttons/LinkButton';
+import { useDispatch } from 'react-redux';
 import { setSearchResults, clearSearchResults } from '@/rtk/slices/search/searchSlice';
-import { useMantineColorScheme } from "@mantine/core";
-import { setSearchHHResults } from "@/rtk/slices/search/searchHHSlice";
+import { useMantineColorScheme } from '@mantine/core';
+import { setSearchHHResults } from '@/rtk/slices/search/searchHHSlice';
 
 type TProps = {
   onSearch: () => void;
   gridCols?: number;
   searchType?: 'inner' | 'ai';
-}
+};
 
-export const PopularSearches = ({onSearch, gridCols=3, searchType='inner'}:TProps) => {
+export const PopularSearches = ({ onSearch, gridCols = 3, searchType = 'inner' }: TProps) => {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
-  const [searchAICandidates, { data:data_ai, error:error_ai, isLoading:isLoading_ai }] = useSearchHHCandidatesMutation();
+  const [searchAICandidates, { data: data_ai, error: error_ai, isLoading: isLoading_ai }] =
+    useSearchHHCandidatesMutation();
   const dispatch = useDispatch();
 
-  const handleSearch = async (specialty:string, area:string[]) => {
+  const handleSearch = async (specialty: string, area: string[]) => {
     try {
-     // await searchCandidates({ specialty, area }).unwrap();
-    //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
+      // await searchCandidates({ specialty, area }).unwrap();
+      //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       //const results = await searchCandidates({ specialty, area }).unwrap();
       const results =
         searchType === 'inner'
@@ -28,12 +32,12 @@ export const PopularSearches = ({onSearch, gridCols=3, searchType='inner'}:TProp
           : await searchAICandidates({ specialty, area }).unwrap();
 
       if (Array.isArray(results?.items)) {
-        if(searchType === 'inner') {
+        if (searchType === 'inner') {
           dispatch(setSearchResults(results));
-        }else{
+        } else {
           dispatch(setSearchHHResults(results));
         }
-        
+
         onSearch();
       } else {
         console.error('Failed to search candidates: results is not an array');
@@ -43,31 +47,101 @@ export const PopularSearches = ({onSearch, gridCols=3, searchType='inner'}:TProp
     }
   };
   return (
-  
-    
-    <div className={`}=flex =justify-between =gap-4 grid grid-cols-1 gap-12 ${gridCols === 3 ? 'lg:grid-cols-3':'md:grid-cols-1'} `}>
+    <div
+      className={`}=flex =justify-between =gap-4 grid grid-cols-1 gap-12 ${gridCols === 3 ? 'lg:grid-cols-3' : 'md:grid-cols-1'} `}
+    >
       <ul className="space-y-2">
-      <li><LinkButton disabled={isLoading} loading={isLoading} colorScheme={colorScheme} onClick={()=>handleSearch('Водитель-курьер', ['Москва'])}>Москва - Водитель-курьер</LinkButton></li>
-        <li>Технологические вакансии </li>
-        <li>Вакансии в сфере продаж </li>
-        {/*<li>Менеджеры проектов </li>
-<li>Менеджеры проектов </li>*/}
+        <li>
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Водитель-курьер', ['Москва'])}
+          >
+            Москва - Водитель-курьер
+          </LinkButton>
+        </li>
+        
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Продавец', ['Москва'])}
+          >
+            Москва - Продавец
+          </LinkButton>
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Мерчандайзер', ['Москва'])}
+          >
+            Москва - Мерчандайзер
+          </LinkButton>
       </ul>
       <ul className="space-y-2">
-        <li>Финансовые директора </li>
-        <li>Технологические вакансии </li>
-        <li>Вакансии в сфере продаж </li>
-        {/*<li>Менеджеры проектов </li>
-<li>Менеджеры проектов </li>*/}
+      <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Водитель-курьер', ['Санкт-Петербург'])}
+          >
+            Санкт-Петербург - Водитель-курьер
+          </LinkButton>
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+          >
+            Санкт-Петербург - Продавец
+          </LinkButton>
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+          >
+            Санкт-Петербург - Мерчандайзер
+          </LinkButton>
+
       </ul>
       <ul className="space-y-2">
-        <li>Финансовые директора </li>
-        <li>Технологические вакансии </li>
-        <li>Вакансии в сфере продаж </li>
-        {/*<li>Менеджеры проектов </li>
-<li>Менеджеры проектов </li>*/}
+      <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Водитель-курьер', ['Санкт-Петербург'])}
+          >
+            Санкт-Петербург - Водитель-курьер
+          </LinkButton>
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+          >
+            Санкт-Петербург - Продавец
+          </LinkButton>
+          <LinkButton
+            disabled={isLoading}
+            loading={isLoading}
+           // colorScheme={colorScheme}
+            colorScheme='dark'
+            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+          >
+            Санкт-Петербург - Мерчандайзер
+          </LinkButton>
+
       </ul>
     </div>
-  
-)
-}
+  );
+};

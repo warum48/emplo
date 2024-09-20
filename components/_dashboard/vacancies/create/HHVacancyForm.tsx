@@ -27,6 +27,8 @@ import { BasicError } from '@/components/Errors/BasicError';
 import { isNetworkError, isSerializedError } from '@/components/Errors/isNetworkError';
 import { QueryStateDisplay } from '@/components/__atoms/QueryStateDisplay/QueryStateDisplay';
 import { customLabelStyle } from '@/styles/mantine_styles';
+import {  RegionsSelect } from '@/components/DynamicFormFields/Regions';
+import { SpecialitiesSelect } from '@/components/DynamicFormFields/Specialities';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyZayavkaSlice';
 
 const testDescription =
@@ -131,7 +133,8 @@ const NewVacancyForm = () => {
       >
         {/* Job Name */}
         <TextInput
-          label="Название вакансии *"
+          label="Название вакансии"
+          required
           labelProps={{ style: customLabelStyle }}
           placeholder="Введите название вакансии"
           {...form.getInputProps('name')}
@@ -145,7 +148,7 @@ const NewVacancyForm = () => {
         {...form.getInputProps('professional_roles')}
       />*/}
 
-        {specialities ? (
+        {/*specialities ? (
           <Select
             label="Должность *"
             placeholder="--------"
@@ -165,11 +168,13 @@ const NewVacancyForm = () => {
               <Button onClick={() => refetchSpecialities()}>Попробовать снова</Button>
             )}
           </>
-        )}
+        )*/}
+        <SpecialitiesSelect form={form}/>
 
         {/* Employment Type */}
         <Select
-          label="Тип занятости *"
+          label="Тип занятости"
+          required
           labelProps={{ style: customLabelStyle }}
           placeholder="Выберите тип занятости"
           data={[
@@ -213,7 +218,7 @@ const NewVacancyForm = () => {
           </>
         )*/}
 
-{regions ? (
+{/*regions ? (
           <Select
             label="Регион поиска *"
             placeholder="--------"
@@ -228,25 +233,30 @@ const NewVacancyForm = () => {
             onRetry={refetchRegions}
             //isNetworkError={isNetworkError} // Pass the isNetworkError function
           />
-        )}
+        )*/}
+        <RegionsSelect form={form}/>
 
         <Divider />
         {/* Salary */}
         <div className="grid grid-cols-1 gap-4">
           <Group>
             <NumberInput
+
               label="Нижняя граница ЗП"
+              required
               labelProps={{ style: customLabelStyle }}
               placeholder="Введите минимальную зарплату"
               {...form.getInputProps('salary.bottom')}
             />
             <NumberInput
               label="Верхняя граница ЗП"
+              required
               labelProps={{ style: customLabelStyle }}
               placeholder="Введите максимальную зарплату"
               {...form.getInputProps('salary.to')}
             />
             <TextInput
+            disabled
               label="Валюта"
               labelProps={{ style: customLabelStyle }}
               placeholder="Введите код валюты"
@@ -262,7 +272,8 @@ const NewVacancyForm = () => {
 
         {/* Vacancy Type */}
         <Select
-          label="Тип вакансии *"
+          label="Тип вакансии"
+          required
           labelProps={{ style: customLabelStyle }}
           placeholder="Выберите тип вакансии"
           data={[
@@ -276,7 +287,8 @@ const NewVacancyForm = () => {
 
         {/* Description */}
         <Textarea
-          label="Описание вакансии *"
+          label="Описание вакансии"
+          required
           labelProps={{ style: customLabelStyle }}
           placeholder="Опишите вакансию"
           autosize
@@ -287,7 +299,8 @@ const NewVacancyForm = () => {
 
         {/* Billing Type */}
         <Select
-          label="Система биллинга *"
+          label="Система биллинга"
+          required
           labelProps={{ style: customLabelStyle }}
           placeholder="Выберите систему биллинга"
           data={[

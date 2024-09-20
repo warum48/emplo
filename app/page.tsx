@@ -12,7 +12,7 @@ import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ParticlesComponent } from '@/components/Particles/Particles';
 
 import { About } from '@/components/About/About';
-import { QuickSearch } from '@/components/Search/QuickSearch';
+import { QuickSearch } from '@/components/Search/QuickSearchForm';
 import { IntroText } from '@/components/_main/IntroText';
 import { ExpandSearchButton } from '@/components/_main/ExpandSearchButton';
 import { MainBlockContainer } from '@/components/_main/MainBlockContainer';
@@ -70,17 +70,8 @@ const Home = () => {
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Button
-        className="fixed z-50 bottom-5 right-5"
-        onClick={() => {
-          setResultState(!resultState);
-          setIsAnimating(true);
-        }}
-      >
-        switch view
-      </Button>
 
-      <div
+      <div id='search'
         className={` 
           pt-20
           
@@ -215,9 +206,20 @@ const Home = () => {
               Результаты поиска
             </h2>
             <ResultList results={results} />
+            <div className="flex justify-end mt-8">
+    <Button
+      onClick={() => {
+        setResultState(!resultState);
+        setIsAnimating(true);
+      }}
+    >
+      Назад
+    </Button>
+  </div>
           </div>
         )}
       </div>
+      <div id='about'></div>
       <InfoBlock />
       <About />
       {/* <Plans/>*/}

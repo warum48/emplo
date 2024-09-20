@@ -36,6 +36,8 @@ import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
 import { Confirmator } from '../__uiutils/Confirmator';
 import React from 'react';
 import { SearchType } from '@/types/local/SearchType';
+import { SpecialitiesSelect } from '../DynamicFormFields/Specialities';
+import { RegionsSelect } from '../DynamicFormFields/Regions';
 
 type TProps = {
   gridCols?: number;
@@ -159,17 +161,16 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           //w-full max-w-full
         >
           {/* Specialty */}
-          {specialities ?
+          {/*specialities ?
           <Select
             label="Должность *"
             placeholder="--------"
             labelProps={{ style: customLabelStyle }}
-            data={ specialities/*[
-              { value: 'Водитель-курьер', label: 'Водитель-курьер' },
-              { value: 'designer', label: 'Designer' },
-            ]*/}
+            data={ specialities}
             {...form.getInputProps('specialty')}
-          /> : <Preloader />}
+          /> : <Preloader />*/}
+
+          <SpecialitiesSelect form={form}/>
           
 
           {/* Area */}
@@ -189,7 +190,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             </Group>
           </div>*/}
 
-          <Checkbox.Group
+        {/*}  <Checkbox.Group
             label="Регион *"
             {...form.getInputProps('area', { type: 'checkbox' })}
             onChange={(value) => {
@@ -200,7 +201,9 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           >
             <Checkbox mt="xs" label="Москва" value="Москва" />
             <Checkbox mt="xs" label="Санкт-Петербург" value="Санкт-Петербург" />
-          </Checkbox.Group>
+          </Checkbox.Group> */}
+
+          <RegionsSelect form={form}/>
 
           {/* Relocation Type */}
           

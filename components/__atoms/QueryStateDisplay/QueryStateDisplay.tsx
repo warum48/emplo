@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Text } from '@mantine/core';
 import { isNetworkError, isSerializedError } from '@/components/Errors/isNetworkError';
+import { Preloader } from '../Preloader/Preloader';
 
 interface ErrorDisplayProps {
   isLoading: boolean;
@@ -13,7 +14,7 @@ export const QueryStateDisplay: React.FC<ErrorDisplayProps> = ({ isLoading, erro
    // isNetworkError
  }) => {
   if (isLoading) {
-    return <div>Loading...</div>; // Replace with your Preloader component if needed
+    return <Preloader />; // Replace with your Preloader component if needed
   }
 
   return (
