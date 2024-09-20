@@ -58,6 +58,8 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
   const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
   const { data: specialities, error: specialitiesError, isLoading: specialitiesIsLoading } = useGetSpecialitiesQuery();
 
+  
+
   function convertArrayToData(array: string[]): { value: string; label: string }[] {
     return array.map((item) => {
      // const decodedItem = decodeURIComponent(item);

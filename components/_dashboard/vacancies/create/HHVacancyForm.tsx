@@ -10,6 +10,7 @@ import {
   Select,
   Checkbox,
   Divider,
+  Text,
 } from '@mantine/core';
 import { useDispatch } from 'react-redux';
 import { createVacancy } from '@/rtk/slices/vacancy/vacancySlice';
@@ -20,28 +21,49 @@ import ErrorList, { ErrorDetail } from '@/components/Errors/ErrorList';
 import React from 'react';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import { useCreateVacancyMutation } from '@/rtk/queries/vacancy';
+import { useGetRegionsQuery, useGetSpecialitiesQuery } from '@/rtk/queries/candidates';
+import { Preloader } from '@/components/__atoms/Preloader/Preloader';
+import { BasicError } from '@/components/Errors/BasicError';
+import { isNetworkError, isSerializedError } from '@/components/Errors/isNetworkError';
+import { QueryStateDisplay } from '@/components/__atoms/QueryStateDisplay/QueryStateDisplay';
+import { customLabelStyle } from '@/styles/mantine_styles';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyZayavkaSlice';
 
-const testDescription = "Ищем опытного специалиста по тестированию программного обеспечения для присоединения к нашей команде. Обязанности: разработка тестовой документации, выполнение функционального и нефункционального тестирования, анализ результатов тестирования, написание дефектов и их отслеживание, участие в планировании и оценке тестирования. Требования: опыт работы в тестировании ПО от 2 лет, знание методологий тестирования, опыт работы с инструментами автоматизации тестирования, навыки написания тестовой документации, умение работать в команде. Будет преимуществом: опыт работы в сфере финансов, знание английского языка. Мы предлагаем: конкурентную заработную плату, возможность профессионального роста, работу в дружном коллективе, гибкий график работы. Если вы заинтересованы в этой вакансии, пожалуйста, отправьте свое резюме на адрес "
+const testDescription =
+  'ВНИМАНИЕ! Это тестовая вакансия! Не откликаться! Ищем опытного специалиста по тестированию программного обеспечения для присоединения к нашей команде. Обязанности: разработка тестовой документации, выполнение функционального и нефункционального тестирования, анализ результатов тестирования, написание дефектов и их отслеживание, участие в планировании и оценке тестирования. Требования: опыт работы в тестировании ПО от 2 лет, знание методологий тестирования, опыт работы с инструментами автоматизации тестирования, навыки написания тестовой документации, умение работать в команде. Будет преимуществом: опыт работы в сфере финансов, знание английского языка. Мы предлагаем: конкурентную заработную плату, возможность профессионального роста, работу в дружном коллективе, гибкий график работы. Если вы заинтересованы в этой вакансии, пожалуйста, отправьте свое резюме на адрес ';
 
 const NewVacancyForm = () => {
   const [errors, setErrors] = React.useState<ErrorDetail[]>();
+  const [showError, setShowError] = React.useState(false);
+  const {
+    data: specialities,
+    error: specialitiesError,
+    isLoading: specialitiesIsLoading,
+    refetch: refetchSpecialities,
+  } = useGetSpecialitiesQuery();
+
+  const {
+    data: regions,
+    error: regionsError,
+    isLoading: regionsIsLoading,
+    refetch: refetchRegions,
+  } = useGetRegionsQuery();
   //const dispatch = useDispatch();
 
   // Define the form state using useForm from Mantine
   const form = useForm<NewVacancyFormValues>({
     initialValues: {
-      name: 'Тестовая вакансия (не откликаться)',//'',
-      professional_roles: "Мерчендайзер",//'',
+      name: 'Тестовая вакансия 2 (не откликаться)', //'',
+      professional_roles: '', //'',
       employment: 'full', //null,
-      area: 'Санкт-Петербург',//'',
+      area: 'Санкт-Петербург', //'',
       salary: {
         currency: 'RUR',
         bottom: 10000,
         gross: true,
         to: 200000,
       },
-      type: 'open',//'',
+      type: 'open', //'',
       description: testDescription, //'',
       billing_type: 'free', //'',
       accept_handicapped: false,
@@ -50,7 +72,7 @@ const NewVacancyForm = () => {
       allow_messages: true,
     },
     validate: {
-   /*!!   name: (value) => (value ? null : 'Пожалуйста, укажите название вакансии'),
+      /*!!   name: (value) => (value ? null : 'Пожалуйста, укажите название вакансии'),
       professional_roles: (value) =>
         value ? null : 'Пожалуйста, укажите должность',
       area: (value) => (value ? null : 'Пожалуйста, укажите регион поиска'),
@@ -65,9 +87,14 @@ const NewVacancyForm = () => {
         value ? null : 'Пожалуйста, укажите тип занятости',
       */
     },
+    onValuesChange: (values) => {
+      console.log(values);
+      setShowError(false);
+      setErrors(undefined);
+    },
   });
 
- /* const handleSubmit = (values: NewVacancyFormValues) => {
+  /* const handleSubmit = (values: NewVacancyFormValues) => {
     console.log('Form submitted with values:', values);
    // useCreateVacancyMutation 
    // dispatch(createVacancy(values));
@@ -76,182 +103,240 @@ const NewVacancyForm = () => {
   const [createVacancy, { isLoading, error }] = useCreateVacancyMutation();
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values:NewVacancyFormValues) => {
+  const handleSubmit = async (values: NewVacancyFormValues) => {
     try {
       const response = await createVacancy(values).unwrap();
       //dispatch(resetForm());
       // Handle success (e.g., show notification)
       console.log('suc', response);
-    } catch (err:any) {
+      setShowError(false);
+    } catch (err: any) {
       // Handle error
+      setShowError(true);
       console.error('Failed to create vacancy:', err);
       console.error('err.data.detail', err.data.detail);
-      if(err.data.detail){
-      setErrors(err.data.detail);
+      if (err.data.detail) {
+        setErrors(err.data.detail);
       }
     }
   };
 
-  const customLabelStyle = {
-    marginBottom: STYLES.FORM.labelMargin,
-  };
+
 
   return (
     <div className="p-4 w-full relative max-w-full text-black dark:text-white">
-    <form onSubmit={form.onSubmit((values) => handleSubmit(values))}
-    className="text-left grid grid-cols-1 gap-6 w-full max-w-full relative"
-    >
-      {/* Job Name */}
-      <TextInput
-        label="Название вакансии *"
-        labelProps={{ style: customLabelStyle }}
-        placeholder="Введите название вакансии"
-        {...form.getInputProps('name')}
-      />
+      <form
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
+        className="text-left grid grid-cols-1 gap-6 w-full max-w-full relative"
+      >
+        {/* Job Name */}
+        <TextInput
+          label="Название вакансии *"
+          labelProps={{ style: customLabelStyle }}
+          placeholder="Введите название вакансии"
+          {...form.getInputProps('name')}
+        />
 
-      {/* Professional Roles */}
+        {/* Professional Roles 
       <TextInput
         label="Должность *"
         labelProps={{ style: customLabelStyle }}
         placeholder="Введите должность"
         {...form.getInputProps('professional_roles')}
-      />
+      />*/}
 
-      {/* Employment Type */}
-      <Select
-        label="Тип занятости *"
-        labelProps={{ style: customLabelStyle }}
-        placeholder="Выберите тип занятости"
-        data={[
-          { value: 'full', label: 'Полная занятость' },
-          { value: 'part', label: 'Частичная занятость' },
-          { value: 'project', label: 'Проектная работа' },
-          { value: 'probation', label: 'Стажировка' },
-          { value: 'volunteer', label: 'Волонтерство' },
-        ]}
-        {...form.getInputProps('employment')}
-      />
+        {specialities ? (
+          <Select
+            label="Должность *"
+            placeholder="--------"
+            labelProps={{ style: customLabelStyle }}
+            data={specialities}
+            {...form.getInputProps('professional_roles')}
+          />
+        ) : specialitiesIsLoading ? (
+          <Preloader />
+        ) : (
+          <>
+            <Text c="red">
+              {(isSerializedError(specialitiesError) && specialitiesError?.message) ||
+                'Произошла ошибка при загрузке данных.'}
+            </Text>
+            {isNetworkError(specialitiesError) && (
+              <Button onClick={() => refetchSpecialities()}>Попробовать снова</Button>
+            )}
+          </>
+        )}
 
-      {/* Area */}
-      <TextInput
-        label="Регион поиска *"
-        labelProps={{ style: customLabelStyle }}
-        placeholder="Введите регион"
-        {...form.getInputProps('area')}
-      />
+        {/* Employment Type */}
+        <Select
+          label="Тип занятости *"
+          labelProps={{ style: customLabelStyle }}
+          placeholder="Выберите тип занятости"
+          data={[
+            { value: 'full', label: 'Полная занятость' },
+            { value: 'part', label: 'Частичная занятость' },
+            { value: 'project', label: 'Проектная работа' },
+            { value: 'probation', label: 'Стажировка' },
+            { value: 'volunteer', label: 'Волонтерство' },
+          ]}
+          {...form.getInputProps('employment')}
+        />
 
-<Divider/>
-      {/* Salary */}
-      <div className="grid grid-cols-1 gap-4">
-       
-        <Group>
-        <NumberInput
-          label="Нижняя граница ЗП"
+        {/* Area 
+        <TextInput
+          label="Регион поиска *"
           labelProps={{ style: customLabelStyle }}
-          placeholder="Введите минимальную зарплату"
-          {...form.getInputProps('salary.bottom')}
+          placeholder="Введите регион"
+          {...form.getInputProps('area')}
         />
-        <NumberInput
-          label="Верхняя граница ЗП"
+        */}
+
+        {/*regions ? (
+          <Select
+            label="Регион поиска *"
+            placeholder="--------"
+            labelProps={{ style: customLabelStyle }}
+            data={regions}
+            {...form.getInputProps('area')}
+          />
+        ) : regionsIsLoading ? (
+          <Preloader />
+        ) : (
+          <>
+            <Text c="red">
+              {(isSerializedError(regionsError) && regionsError?.message) ||
+                'Произошла ошибка при загрузке данных.'}
+            </Text>
+            {isNetworkError(regionsError) && (
+              <Button onClick={() => refetchRegions()}>Попробовать снова</Button>
+            )}
+          </>
+        )*/}
+
+{regions ? (
+          <Select
+            label="Регион поиска *"
+            placeholder="--------"
+            labelProps={{ style: customLabelStyle }}
+            data={regions}
+            {...form.getInputProps('area')}
+          />
+        ) :  (
+          <QueryStateDisplay
+            isLoading={regionsIsLoading}
+            error={regionsError}
+            onRetry={refetchRegions}
+            //isNetworkError={isNetworkError} // Pass the isNetworkError function
+          />
+        )}
+
+        <Divider />
+        {/* Salary */}
+        <div className="grid grid-cols-1 gap-4">
+          <Group>
+            <NumberInput
+              label="Нижняя граница ЗП"
+              labelProps={{ style: customLabelStyle }}
+              placeholder="Введите минимальную зарплату"
+              {...form.getInputProps('salary.bottom')}
+            />
+            <NumberInput
+              label="Верхняя граница ЗП"
+              labelProps={{ style: customLabelStyle }}
+              placeholder="Введите максимальную зарплату"
+              {...form.getInputProps('salary.to')}
+            />
+            <TextInput
+              label="Валюта"
+              labelProps={{ style: customLabelStyle }}
+              placeholder="Введите код валюты"
+              {...form.getInputProps('salary.currency')}
+            />
+          </Group>
+          <Checkbox
+            label="С вычетом налога"
+            {...form.getInputProps('salary.gross', { type: 'checkbox' })}
+          />
+        </div>
+        <Divider />
+
+        {/* Vacancy Type */}
+        <Select
+          label="Тип вакансии *"
           labelProps={{ style: customLabelStyle }}
-          placeholder="Введите максимальную зарплату"
-          {...form.getInputProps('salary.to')}
+          placeholder="Выберите тип вакансии"
+          data={[
+            { value: 'open', label: 'Открытая' },
+            { value: 'closed', label: 'Закрытая' },
+            { value: 'anonymous', label: 'Анонимная' },
+            { value: 'direct', label: 'Рекламная' },
+          ]}
+          {...form.getInputProps('type')}
         />
-         <TextInput
-          label="Валюта"
+
+        {/* Description */}
+        <Textarea
+          label="Описание вакансии *"
           labelProps={{ style: customLabelStyle }}
-          placeholder="Введите код валюты"
-          {...form.getInputProps('salary.currency')}
+          placeholder="Опишите вакансию"
+          autosize
+          minRows={3}
+          maxRows={10}
+          {...form.getInputProps('description')}
         />
-        </Group>
+
+        {/* Billing Type */}
+        <Select
+          label="Система биллинга *"
+          labelProps={{ style: customLabelStyle }}
+          placeholder="Выберите систему биллинга"
+          data={[
+            { value: 'free', label: 'Бесплатная' },
+            { value: 'standard', label: 'Стандарт' },
+            { value: 'standard_plus', label: 'Стандарт плюс' },
+            { value: 'premium', label: 'Премиум' },
+          ]}
+          {...form.getInputProps('billing_type')}
+        />
+
+        <Divider />
+
+        {/* Checkboxes */}
         <Checkbox
-          label="С вычетом налога"
-          
-          {...form.getInputProps('salary.gross', { type: 'checkbox' })}
+          label="Соискатель с инвалидностью"
+          {...form.getInputProps('accept_handicapped', { type: 'checkbox' })}
         />
-      </div>
-      <Divider/>
+        <Checkbox
+          label="Соискатель старше 14"
+          {...form.getInputProps('accept_kids', { type: 'checkbox' })}
+        />
+        <Checkbox
+          label="Временное трудоустройство"
+          {...form.getInputProps('accept_temporary', { type: 'checkbox' })}
+        />
+        <Checkbox
+          label="Разрешение на сообщения"
+          {...form.getInputProps('allow_messages', { type: 'checkbox' })}
+        />
 
-      {/* Vacancy Type */}
-      <Select
-        label="Тип вакансии *"
-        labelProps={{ style: customLabelStyle }}
-        placeholder="Выберите тип вакансии"
-        data={[
-          { value: 'open', label: 'Открытая' },
-          { value: 'closed', label: 'Закрытая' },
-          { value: 'anonymous', label: 'Анонимная' },
-          { value: 'direct', label: 'Рекламная' },
-        ]}
-        {...form.getInputProps('type')}
-      />
+        {showError && errors && <ErrorList errors={errors} />}
+        {showError && specialitiesError && <BasicError error={specialitiesError} />}
+        {showError && error && <BasicError error={error} />}
 
-      {/* Description */}
-      <Textarea
-        label="Описание вакансии *"
-        labelProps={{ style: customLabelStyle }}
-        placeholder="Опишите вакансию"
-        autosize
-        minRows={3}
-        maxRows={10}
-        {...form.getInputProps('description')}
-      />
-
-      {/* Billing Type */}
-      <Select
-        label="Система биллинга *"
-        labelProps={{ style: customLabelStyle }}
-        placeholder="Выберите систему биллинга"
-        data={[
-          { value: 'free', label: 'Бесплатная' },
-          { value: 'standard', label: 'Стандарт' },
-          { value: 'standard_plus', label: 'Стандарт плюс' },
-          { value: 'premium', label: 'Премиум' },
-        ]}
-        {...form.getInputProps('billing_type')}
-      />
-
-<Divider/>
-
-      {/* Checkboxes */}
-      <Checkbox
-        label="Соискатель с инвалидностью"
-        {...form.getInputProps('accept_handicapped', { type: 'checkbox' })}
-      />
-      <Checkbox
-        label="Соискатель старше 14"
-        {...form.getInputProps('accept_kids', { type: 'checkbox' })}
-      />
-      <Checkbox
-        label="Временное трудоустройство"
-        {...form.getInputProps('accept_temporary', { type: 'checkbox' })}
-      />
-      <Checkbox
-        label="Разрешение на сообщения"
-        {...form.getInputProps('allow_messages', { type: 'checkbox' })}
-      />
-
-{errors  && 
-
-      <ErrorList errors={errors} />
-   
-      
-}
-
-      {/* Submit Button */}
-      <Group 
-      //position="center" 
-      mt="md">
-        <Button type="submit">Создать вакансию</Button>
-      </Group>
-    </form>
+        {/* Submit Button */}
+        <Group
+          //position="center"
+          mt="md"
+        >
+          <Button type="submit">Создать вакансию</Button>
+        </Group>
+      </form>
     </div>
   );
 };
 
 export default NewVacancyForm;
 
-
 /*
-I need to make a new form that will be based on current user profile data, it should have 3 fileds (now for test development only, later I will add more fields)  - first name, last name, email, fields should look like a simple text first (data comes from server using rtk-query) , every field should have edit button (as icon with pencil), when user presses edit button simple texts hides and appears input with filled current value, if text input looses foces (user clicks any place on the site besides input) input replaces back with text with new value, 'save' button appears (it was hidden previously) . code should use mantine
+{"description":"Forbidden","errors":[{"value":"bad_authorization","type":"oauth"}],"request_id":"17267567637611355b694d9a997f496a"}
 */

@@ -1,4 +1,81 @@
+// components/AuthorizationForm.tsx
 'use client';
+import React, { useEffect } from 'react';
+import { useForm } from '@mantine/form';
+import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
+import './styles.css'; 
+import { useLoginMutation } from '@/rtk/queries/authApi';
+import Link from 'next/link';
+import { Routes } from '@/global/ROUTES';
+import { useAuthTokenHandler } from './useAuthTokenHandler ';
+//import { useAuthTokenHandler } from '@/hooks/useAuthTokenHandler'; // Import the custom hook
+
+const AuthorizationForm = () => {
+  const form = useForm({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validate: {},
+  });
+
+  useEffect(() => {
+    const formElement = document.getElementById('auth-form');
+    formElement?.classList.add('animate-form');
+  }, []);
+
+  const [login, { isLoading: isLoginLoading, error: loginError, data: loginData }] =
+    useLoginMutation();
+  
+  // Use the custom hook to handle the token
+  const { handleToken } = useAuthTokenHandler();
+
+  const handleLogin = async () => {
+    try {
+      const result = await login(form.values).unwrap();
+      handleToken(result.jwt_token); // Use the hook to handle the token logic
+    } catch (err) {
+      console.error('Failed to login:', err);
+    }
+  };
+
+  const onSubmit = (values: any) => {
+    handleLogin();
+  };
+
+  return (
+    <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
+      <TextInput
+        label="Логин"
+        placeholder="Введите ваш логин"
+        {...form.getInputProps('username')}
+        className="mb-4"
+      />
+      <PasswordInput
+        label="Пароль"
+        placeholder="Введите пароль"
+        {...form.getInputProps('password')}
+        className="mb-4"
+      />
+      <Button type="submit" fullWidth className="mb-4">
+        Войти
+      </Button>
+      <div className="flex justify-between">
+        <Text component="a" href="#" size="sm">
+          Забыли пароль?
+        </Text>
+        <Link href={Routes.REGISTRATION} className="link-default">
+          <Text size="sm">Зарегистрироваться</Text>
+        </Link>
+      </div>
+    </form>
+  );
+};
+
+export default AuthorizationForm;
+
+
+/*'use client';
 import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
@@ -29,10 +106,7 @@ const AuthorizationForm = () => {
   const [token, setToken] = React.useState('');
   const [login, { isLoading: isLoginLoading, error: loginError, data: loginData }] =
     useLoginMutation();
-  //const [fetchMe, { isLoading: isMeLoading, error: meError, data: meData }] = useLazyMeQuery();
   const [cookiesToken, setCookieToken] = useCookies(['jwt_token']);
-
-  //const tokenInStore = useSelector((state: RootState) => state.auth.token);
 
   const handleLogin = async () => {
     try {
@@ -42,12 +116,10 @@ const AuthorizationForm = () => {
       setToken(result.jwt_token);
       dispatch(setAuthToken({ token: result.jwt_token }));
       router.push('/dashboard');
-      //fetchMe();
     } catch (err) {
       console.error('Failed to login:', err);
     }
   };
-
 
   const onSubmit = (values: any) => {
     handleLogin();
@@ -90,7 +162,7 @@ const AuthorizationForm = () => {
 
 export default AuthorizationForm;
 
-
+*/
 
 /*
   useEffect(() => {

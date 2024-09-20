@@ -3,21 +3,18 @@ import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
 import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import './styles.css'; // Ensure your custom CSS for the animation is imported
-import { ParticlesComponent } from '../Particles/Particles';
-import { useRouter } from 'next/navigation';
-import { RegisterRequest, useLazyMeQuery, useLoginMutation, useRegisterMutation } from '@/rtk/queries/authApi'; //useMeQuery
-import { useDispatch, useSelector } from 'react-redux';
-import { setAuthState, setAuthToken } from '@/rtk/slices/authSlice';
-import { useCookies } from 'react-cookie';
-import { RootState } from '@/rtk/store/store';
-import { Debugger } from '../__atoms/Debugger/Debugger';
+import { RegisterRequest, useRegisterMutation } from '@/rtk/queries/authApi'; //useMeQuery
 import Link from 'next/link';
 import { Routes } from '@/global/ROUTES';
+import { HTMLError } from '../Errors/HTMLError';
+import { BasicError } from '../Errors/BasicError';
+import { isFetchBaseQueryError } from '@/types/_typeguards/isFetchBaseQueryError';
+import { isExtendedFetchBaseQueryError } from '@/types/_typeguards/isExtendedFetchBaseQueryError';
+import { useAuthTokenHandler } from './useAuthTokenHandler ';
 
 export const RegistrationForm = () => {
-  //const formState = useSelector((state: RootState) => state.authForm);
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [showError, setShowError] = React.useState(false);
+  const { handleToken } = useAuthTokenHandler();
   const form = useForm<RegisterRequest & { password_confirm: string }>({
     initialValues: {
       username: '',
@@ -28,6 +25,10 @@ export const RegistrationForm = () => {
       password_confirm: '',
     },
     validate: {},
+    onValuesChange: (values) => {
+      console.log(values);
+      setShowError(false);
+    },
   });
 
   useEffect(() => {
@@ -35,56 +36,36 @@ export const RegistrationForm = () => {
     formElement?.classList.add('animate-form');
   }, []);
 
-  const [token, setToken] = React.useState('');
   const [register, { isLoading: isRegisterLoading, error: registerError, data: registerData }] =
     useRegisterMutation();
-  const [fetchMe, { isLoading: isMeLoading, error: meError, data: meData }] = useLazyMeQuery();
-  const [cookiesToken, setCookieToken] = useCookies(['jwt_token']);
-
-  const tokenInStore = useSelector((state: RootState) => state.auth.token);
 
   const handleLogin = async () => {
     try {
       const { password_confirm, ...actualFormValues } = form.values;
       const result = await register(actualFormValues).unwrap();
-      //const result = await login(form.values).unwrap();
-      //console.log('result.jwt_token:', result.jwt_token);
-      //setCookieToken('jwt_token', result.jwt_token, { path: '/' });
-      //setToken(result.jwt_token);
-      //dispatch(setAuthToken({ token: result.jwt_token }));
-      //router.push('/dashboard');
+      //setShowError(false);
+      console.log('result', result);
+      if (result?.jwt_token) {
+        handleToken(result?.jwt_token);
+      }
+      if (result?.data?.error) {
+        setShowError(true);
+      } else {
+        setShowError(false);
+      }
     } catch (err) {
       console.error('Failed to register:', err);
+      setShowError(true);
     }
   };
-  /*
-  useEffect(() => {
-    console.log('USE EF TOKEN', token);
-    if (token) {
-      console.log('DISpatching');
-      dispatch(setAuthState({ isAuthenticated: true, token: token })); 
-    }
-  }, [token, fetchMe]);
-
-  useEffect(() => {
-    console.log('USE EF TOKEN_in_Store', tokenInStore);
-    if (tokenInStore) {
-      fetchMe();
-    }
-  }, [tokenInStore]); 
-
-  useEffect(() => {
-    console.log('meData', meData);
-    if (meData) {
-      dispatch(setAuthState({ isAuthenticated: true, token: token })); //user: meData,
-      router.push('/dashboard');
-    }
-  }, [meData, dispatch]);
-  */
 
   const onSubmit = (values: any) => {
     handleLogin();
   };
+
+  React.useEffect(() => {
+    setShowError(false);
+  }, [form.values]);
 
   return (
     <form onSubmit={form.onSubmit((values) => onSubmit(values))}>
@@ -124,15 +105,21 @@ export const RegistrationForm = () => {
         {...form.getInputProps('password_confirm')}
         className="mb-4"
       />
-      <Button
-        type="submit"
-        fullWidth
-        className="mb-4"
-        // bg-purple-600 hover:bg-purple-700
-        //!!onClick={() => router.push('/dashboard')}
-      >
+      <Button type="submit" fullWidth className="mb-4">
         Зарегистрироваться
       </Button>
+      {showError && registerData && registerData?.error && (
+        <HTMLError error={registerData?.error} />
+      )}
+      {showError &&
+        registerError &&
+        isFetchBaseQueryError(registerError) &&
+        isExtendedFetchBaseQueryError(registerError) && (
+          <BasicError
+            error={registerError?.data?.error || registerError?.data || registerError}
+            className="mb-4"
+          />
+        )}
       <div className="flex justify-start">
         <Link href={Routes.AUTH} className="link-default">
           <Text size="sm">Войти в аккаунт</Text>
@@ -142,4 +129,9 @@ export const RegistrationForm = () => {
   );
 };
 
-//export default AuthorizationForm;
+/* SUCC RESPONSE 
+{
+    "msg": "\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c wa_rum \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0430\u0432\u0442\u043e\u0440\u0438\u0437\u043e\u0432\u0430\u043d",
+    "jwt_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo2LCJ1c2VybmFtZSI6IndhX3J1bSIsImV4cCI6MTcyNjc2MTgyNX0.Pm4_wmWNzsTnAQhFhNXpLzIe8Nh6lEGnv7dEdlpR_s8"
+}
+    */

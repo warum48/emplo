@@ -45,7 +45,7 @@ export const authApi = createApi({
   
     register: builder.mutation<any, components['schemas']['AppUserRegisterSchema'] >({ //<RegisterResponse, RegisterRequest> //  RegisterRequest
       query: (newUser) => ({
-        url: 'user/login/', // /
+        url: 'user/register', // /
         method: 'POST',
         body: newUser,
       }),

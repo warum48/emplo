@@ -37,6 +37,9 @@ export const api = createApi({
     getSpecialities: builder.query<any[], void>({ //
       query: () => '/api/candidates/specialities',
     }),
+    getRegions: builder.query<any[], void>({ //
+      query: () => '/api/candidates/regions',
+    }),
     searchCandidates: builder.mutation<SearchResponse, SearchRequest>({
       query: (body) => ({
         url: 'api/candidates/search',
@@ -70,7 +73,8 @@ export const { useGetCandidatesQuery,
    useSearchCandidatesMutation,
    useSearchHHCandidatesMutation  ,
    useGetCandidateByIdQuery,
-   useGetSpecialitiesQuery
+   useGetSpecialitiesQuery,
+   useGetRegionsQuery,
   //, useGetPostByIdQuery
  } = api;
 
