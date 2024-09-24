@@ -14,8 +14,9 @@ export type SearchResponse ={
  // data: {
     found: number,
     items: any//any[];
+    
  // }
-} & { error: string }
+} & { error: string } & {msg: string}
 
 export const api = createApi({
   reducerPath: 'api',

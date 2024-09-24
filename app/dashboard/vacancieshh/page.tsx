@@ -20,7 +20,6 @@ import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/Da
 import { DrawerWithOpener } from '@/components/_dashboard/PageContainer/DrawerWithOpener';
 import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
 import { VacanciesGrid } from '@/components/_dashboard/vacancies/grid/VacanciesGrid';
-import { VacanciesTable } from '@/components/_dashboard/vacancies_1c/VacanciesTable';
 
 const Page = () => {
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
@@ -53,9 +52,10 @@ const Page = () => {
 
   return (
     <DashBoardPageContainer header="Вакансии" Icon={IconRobot} className="min-h-full">
-      <div className="form-bg-and-text mr-2 p-8 rounded overflow-auto">
-      <VacanciesTable/>
-      </div>
+      <main
+        className="mt-0 flex flex-col lg:flex-row gap-4 lg:gap-4 min-h-full relative ^ml-4 lg:ml-0 w-full">
+        <VacanciesGrid />
+      </main>
     </DashBoardPageContainer>
   );
 };

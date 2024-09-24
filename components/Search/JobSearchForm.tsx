@@ -2,17 +2,10 @@
 import { useState } from 'react';
 import { useForm } from '@mantine/form';
 import {
-  TextInput,
-  Text,
   Checkbox,
   Select,
   NumberInput,
   Button,
-  Group,
-  Container,
-  Title,
-  Box,
-  InputLabel,
 } from '@mantine/core';
 import {
   updateJobSearchForm,
@@ -46,41 +39,21 @@ type TProps = {
 };
 
 const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'internal' }: TProps) => {
-  //const dispatch = useDispatch();
-  //const formState = useSelector((state: RootState) => state.jobSearch);
   const [errors, setErrors] = useState<ErrorDetail[]>();
   const dispatch = useDispatch();
   const formState = useSelector((state: RootState) => state.jobSearch);
-  //const [searchCandidates] = useSearchCandidatesMutation();
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
   const [searchHHCandidates, { data: hhData, error: hhError, isLoading: hhIsLoading }] =
     useSearchHHCandidatesMutation();
   const [aiError, setAiError] = useState('');
   const [formRenderCount, setFormRenderCount] = useState(0);
   const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
-  const { data: specialities, error: specialitiesError, isLoading: specialitiesIsLoading } = useGetSpecialitiesQuery();
 
-  
 
-  function convertArrayToData(array: string[]): { value: string; label: string }[] {
-    return array.map((item) => {
-     // const decodedItem = decodeURIComponent(item);
-      return {
-        value: item,
-        label: item
-      };
-    });
-  }
-
-  //const form = useForm({
-  //  initialValues: formState,
-  //  validate: { /* Your validation logic here */ },
-  //});
 
   const handleSubmit = async (values: typeof form.values) => {
     console.log('submit', values);
     try {
-      // const candidates = await searchHHCandidates(values).unwrap();
       const candidates =
         searchType === 'internal'
           ? await searchCandidates(values).unwrap()
@@ -121,10 +94,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
     },
   });
 
-  /* const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    dispatch(updateJobSearchForm({ [name]: value }));
-  };*/
+
 
   const handleChange = (field: string, value: any) => {
     dispatch(updateJobSearchForm({ [field]: value }));
@@ -155,99 +125,38 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
       >
         <div
           className={`flex flex-col gap-6 
-            ${gridCols === 3
-            ? "relative flex-1 after:content-[''] after:absolute after:-right-6 after:top-1/2 after:transform after:-translate-y-1/2 after:w-px after:h-0 lg:after:h-full after:bg-gray-200 dark:after:bg-gray-800"
-            : ''}`}
-          //w-full max-w-full
+            ${
+              gridCols === 3
+                ? "relative flex-1 after:content-[''] after:absolute after:-right-6 after:top-1/2 after:transform after:-translate-y-1/2 after:w-px after:h-0 lg:after:h-full after:bg-gray-200 dark:after:bg-gray-800"
+                : ''
+            }`}
         >
-          {/* Specialty */}
-          {/*specialities ?
+          <SpecialitiesSelect form={form} />
+
+          <RegionsSelect form={form} />
+
           <Select
-            label="Должность *"
-            placeholder="--------"
+            label="Готовность к переезду"
+            placeholder="Готовность к переезду"
             labelProps={{ style: customLabelStyle }}
-            data={ specialities}
-            {...form.getInputProps('specialty')}
-          /> : <Preloader />*/}
-
-          <SpecialitiesSelect form={form}/>
-          
-
-          {/* Area */}
-          {/*<div>
-            <InputLabel htmlFor="area" style={customLabelStyle}>Регион</InputLabel>
-            <Group>
-              <Checkbox
-                label="Москва"
-                value="moscow"
-                {...form.getInputProps('area', { type: 'checkbox' })}
-              />
-              <Checkbox
-                label="Санкт-Петербург"
-                value="spb"
-                {...form.getInputProps('area', { type: 'checkbox' })}
-              />
-            </Group>
-          </div>*/}
-
-        {/*}  <Checkbox.Group
-            label="Регион *"
-            {...form.getInputProps('area', { type: 'checkbox' })}
-            onChange={(value) => {
-              handleChange('area', value);
-              form.getInputProps('area').onChange(value);
-            }}
-            defaultValue={form.values.area}
-          >
-            <Checkbox mt="xs" label="Москва" value="Москва" />
-            <Checkbox mt="xs" label="Санкт-Петербург" value="Санкт-Петербург" />
-          </Checkbox.Group> */}
-
-          <RegionsSelect form={form}/>
-
-          {/* Relocation Type */}
-          
-            <Select
-              label="Готовность к переезду"
-              placeholder="Готовность к переезду"
-              labelProps={{ style: customLabelStyle }}
-              data={[
-                { value: 'living_or_relocation', label: 'Живет в регионе или готов переехать' },
-                { value: 'living', label: 'Живет в регионе' },
-                { value: 'relocation', label: 'Не живет, но готов переехать' },
-              ]}
-              {...form.getInputProps('relocation_type')}
-            />
-          
-
-          {/* Schedule 
-          <Checkbox.Group
-            label="График работы *"
-            {...form.getInputProps('schedule', { type: 'checkbox' })}
-            defaultValue={form.values.schedule}
-            onChange={(value) => {
-              handleChange('schedule', value)
-              form.getInputProps('schedule').onChange(value);
-            }}
-          >
-            <Checkbox value="fullDay" label="Полный день" mt={STYLES.FORM.labelMargin} />
-            <Checkbox value="shift" label="Сменный график" mt="xs" />
-            <Checkbox value="flexible" label="Гибкий" mt="xs" />
-            <Checkbox value="remote" label="Удаленная работа" mt="xs" />
-            <Checkbox value="flyInFlyOut" label="Вахта" mt="xs" />
-          </Checkbox.Group>*/}
+            data={[
+              { value: 'living_or_relocation', label: 'Живет в регионе или готов переехать' },
+              { value: 'living', label: 'Живет в регионе' },
+              { value: 'relocation', label: 'Не живет, но готов переехать' },
+            ]}
+            {...form.getInputProps('relocation_type')}
+          />
         </div>
         <div
           className={`flex flex-col gap-6 
-            ${gridCols === 3
-            ? "relative flex-1 after:content-[''] after:absolute after:-right-6 after:top-1/2 after:transform after:-translate-y-1/2 after:w-px after:h-0 lg:after:h-full after:bg-gray-200 dark:after:bg-gray-800"
-            : ''}`}
-          //line 2 is border
+            ${
+              gridCols === 3
+                ? "relative flex-1 after:content-[''] after:absolute after:-right-6 after:top-1/2 after:transform after:-translate-y-1/2 after:w-px after:h-0 lg:after:h-full after:bg-gray-200 dark:after:bg-gray-800"
+                : ''
+            }`}
         >
-          {/* Skills */}
+
           <div className="flex flex-col ">
-            {/* <InputLabel htmlFor="skills">Навыки</InputLabel>
-             Populate dynamically */}
             <Checkbox.Group
               label="Навыки *"
               {...form.getInputProps('skills', { type: 'checkbox' })}
@@ -262,29 +171,13 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             </Checkbox.Group>
           </div>
 
-          {/* Experience 
-          <Select
-            label="Опыт работы (лет) *"
-            labelProps={{ style: customLabelStyle }}
-            placeholder="Нет опыта"
-            data={[
-              { value: 'noExperience', label: 'Нет опыта' },
-              { value: 'between1And3', label: 'От 1 года до 3 лет' },
-              { value: 'between3And6', label: 'От 3 до 6 лет' },
-              { value: 'moreThan6', label: 'Более 6 лет' },
-            ]}
-            {...form.getInputProps('experience')}
-          /> */}
-
           <NumberInput
             label="Опыт работы (лет) *"
             labelProps={{ style: customLabelStyle }}
             placeholder="Введите опыт работы"
             {...form.getInputProps('experience')}
           />
-          {/**/}
 
-          {/* Gender */}
           <Select
             label="Пол *"
             placeholder="Мужской"
@@ -296,7 +189,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             {...form.getInputProps('gender')}
           />
 
-          {/* Age */}
           <NumberInput
             labelProps={{ style: customLabelStyle }}
             label="Возраст (от) *"
@@ -305,7 +197,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           />
         </div>
         <div className="flex flex-col gap-6 w-full max-w-full">
-          {/* Salary */}
           <NumberInput
             labelProps={{ style: customLabelStyle }}
             label="Зарплата (до) *"
@@ -313,7 +204,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             {...form.getInputProps('salary')}
           />
 
-          {/* Job search status */}
           <Checkbox.Group
             label="Статус поиска работы"
             {...form.getInputProps('job_search_status', { type: 'checkbox' })}
@@ -333,7 +223,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
             <Checkbox mt="xs" value="not_looking_for_job" label="Не ищет работу" />
           </Checkbox.Group>
 
-          {/* Limit */}
           <NumberInput
             label="Требуемое кол-во резюме (до) *"
             labelProps={{ style: customLabelStyle }}
@@ -344,11 +233,9 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           {errors && <ErrorList errors={errors} />}
           {aiError && <HTMLError error={aiError} />}
 
-          {/* Submit button */}
           <div className="flex gap-4 mt-4">
             <ResetFormButton
               onClick={() =>
-                //resetForm()
                 setShowConfirmator(true)
               }
             />
@@ -356,7 +243,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
               type="submit"
               className="w-full max-w-full"
               disabled={
-                //!form.isDirty() || !form.isValid() ||
                 isLoading
               }
             >
@@ -377,7 +263,6 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
         showConfirmator={showConfirmator}
         setShowConfirmator={setShowConfirmator}
         closeOnConfirm={true}
-        //mutationLoading={loading_cancel_unpaid || loading_cancel_paid}
       />
     </div>
   );

@@ -71,7 +71,8 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div id='search'
+      <div
+        id="search"
         className={` 
           pt-20
           
@@ -133,10 +134,14 @@ const Home = () => {
                             <QuickSearch onSearch={onSearch} />
                           )}
                         </div>
-                        <ExpandSearchButton
-                          extendedSearch={extendedSearch}
-                          setExtendedSearch={setExtendedSearch}
-                        />
+                        <div className="flex justify-between items-center z-20">
+                        <div>&nbsp;</div>
+                          
+                          <ExpandSearchButton
+                            extendedSearch={extendedSearch}
+                            setExtendedSearch={setExtendedSearch}
+                          />
+                        </div>
                         <div className="mt-8 text-white text-left w-full">
                           <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] mb-4">
                             Популярные запросы
@@ -207,22 +212,23 @@ const Home = () => {
             </h2>
             <ResultList results={results} />
             <div className="flex justify-end mt-8">
-    <Button
-      onClick={() => {
-        setResultState(!resultState);
-        setIsAnimating(true);
-      }}
-    >
-      Назад
-    </Button>
-  </div>
+              <Button
+                onClick={() => {
+                  setResultState(!resultState);
+                  setIsAnimating(true);
+                }}
+              >
+                Назад
+              </Button>
+            </div>
           </div>
         )}
       </div>
-      <div id='about'></div>
+      <div id="about"></div>
       <InfoBlock />
       <About />
       {/* <Plans/>*/}
+      <div id="contacts"></div>
       <Footer />
     </>
   );

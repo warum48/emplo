@@ -44,10 +44,11 @@ export const VacancyListComponent: React.FC<VacancyProps> = ({ vacancies }) => {
           <Text size="xs" c="dimmed">
           <b>Резюме в процессе:</b> {vacancy.counters?.resumes_in_progress}
           </Text>
+          <Divider/>
         </ListWrapper>  
       
     ))}
-      <Divider/>
+     
       {vacancies.map((vacancy, index) => (
         <ListWrapper>
         <Link href='' className="mb-2 block">

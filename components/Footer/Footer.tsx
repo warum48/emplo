@@ -4,7 +4,8 @@ const Footer = () => (
      max-w-5xl
       "
       // p-4 
-      >
+      > 
+      {/*}
         <div>
           <h4 className="font-bold mb-2">О нас</h4>
           <ul>
@@ -29,6 +30,8 @@ const Footer = () => (
             <li><a href="#" className="hover:text-blue-500">Помощь и поддержка.</a></li>
           </ul>
         </div>
+        */}
+        <div className="text-sm text-gray-500">ООО "УК "БИЗНЕС РЕШЕНИЯ"</div>
       </div>
     </footer>
   );

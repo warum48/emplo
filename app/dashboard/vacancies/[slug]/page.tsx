@@ -2,7 +2,7 @@
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
 import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
-import { CandidatesTable } from '@/components/_dashboard/vacancies/list/VacanciesList/CandidatesTable';
+//import { CandidatesTable } from '@/components/_dashboard/vacancies/list/VacanciesList/CandidatesTable';
 import { VacancyListComponent } from '@/components/_dashboard/vacancies/list/VacanciesList/VacanciesList';
 //import VacanciesList from '@/components/_dashboard/predictor/vacancies/list/VacanciesList/VacanciesList';
 import { XY } from '@/components/_dashboard/predictor/XY';
@@ -19,6 +19,10 @@ import { IconList, IconRobot } from '@tabler/icons-react';
 import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
 import { useGetVacancyByIdQuery } from '@/rtk/queries/vacancy';
 import { Preloader } from '@/components/__atoms/Preloader/Preloader';
+import { PageWithListAndTable } from '@/components/PageWithListAndTable/PageWithListAndTable';
+import { VacanciesTable } from '@/components/_dashboard/vacancies_1c/VacanciesTable';
+import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+import { CandidatesTable } from '@/components/_dashboard/vacancies_1c/CandidatesTable';
 
 const Page = ({ params }: { params: { slug: string } }) => {
   const { data: data_vacancy, error, isLoading } = useGetVacancyByIdQuery(params.slug);
@@ -34,7 +38,7 @@ const Page = ({ params }: { params: { slug: string } }) => {
     { name: 'Директор по продукту', employees: [] },
     { name: 'UX/UI дизайнер', employees: [] },
     { name: 'Старший дизайнер проектов', employees: [] },
-    { name: 'Backend разработчик', employees: [] },
+   /* { name: 'Backend разработчик', employees: [] },
     { name: 'Head of sales', employees: [] },
     { name: 'Ведущий экономист', employees: [] },
     { name: 'Аналитик', employees: [] },
@@ -47,10 +51,18 @@ const Page = ({ params }: { params: { slug: string } }) => {
     { name: 'Ведущий экономист', employees: [] },
     { name: 'Аналитик', employees: [] },
     { name: 'Системный администратор', employees: [] },
-    { name: 'Директор по продукту', employees: [] },
+    { name: 'Директор по продукту', employees: [] }, */
   ];
 
+  const LeftComponent = <VacancyListComponent vacancies={vacancies} />
+
   return (
+    <DashBoardPageContainer header="Вакансии" hasLeftMenu  Icon={IconRobot} >
+    <PageWithListAndTable leftSideComponent={LeftComponent} rightSideComponent={<CandidatesTable />} rightSideTopComponent={<JSONViewer data={{a:'b'} }/>} />
+    </DashBoardPageContainer>
+  )
+
+  /*return (
     <DashBoardPageContainer header="Вакансии" hasLeftMenu className="h-full" Icon={IconRobot} >
       <main
         className="mt-0 flex flex-col md:flex-row gap-4 md:gap-8 h-full relative ml-4 md:ml-0"
@@ -91,9 +103,6 @@ const Page = ({ params }: { params: { slug: string } }) => {
         </Drawer>
 
         <div className="flex flex-col gap-4 overflow-auto "
-        //flex flex-col gap-4 
-        //px-4 w-full bg-red-100 mr-4
-        //basis-auto shrink-1
         >
           <h2 className='dashboard-section-header'>{data_vacancy?.name}</h2>
          
@@ -104,17 +113,15 @@ const Page = ({ params }: { params: { slug: string } }) => {
         form-bg-and-text
         mr-4
        rounded
-       
         overflow-auto
         "
-            //flex  h-full  w-full
           >
-            <CandidatesTable vacancyId={params.slug} />{/* */}
+            <CandidatesTable vacancyId={params.slug} />
           </div>
         </div>
       </main>
     </DashBoardPageContainer>
-  );
+  );*/
 };
 
 export default Page;

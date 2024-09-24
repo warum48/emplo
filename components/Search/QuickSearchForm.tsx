@@ -8,6 +8,7 @@ import { setSearchHHResults } from "@/rtk/slices/search/searchHHSlice";
 import { useForm } from "@mantine/form";
 import { RegionsSelect } from "../DynamicFormFields/Regions";
 import { SpecialitiesSelect } from "../DynamicFormFields/Specialities";
+import { JSONViewer } from "../__atoms/JSONViewer/JSONViewr";
 //import { setSearchHHResults } from "@/rtk/slices/searchHHSlice";
 
 
@@ -66,22 +67,27 @@ export const QuickSearch = ({onSearch}:TProps) => {
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       //const results = await searchCandidates({ specialty, area }).unwrap();
       const results = await searchCandidates({ specialty: values.specialty, area: [values.area] }).unwrap();
+      console.log('===results', results);
       if (Array.isArray(results?.items)) {
         dispatch(setSearchResults(results));
         onSearch();
+        setShowError(false);
       } else {
         console.error('Failed to search candidates: results is not an array');
+        setShowError(true);
       }
     } catch (err) {
       console.error('Failed to search candidates:', err);
+      setShowError(true);
     }
   };
 
 
 
      return(
-      
-        <form className="flex gap-4 w-full flex-col md:flex-row  justify-between items-center"
+      <div className='w-full relative flex items-center flex-col'>
+       
+        <form className="flex gap-4 w-full flex-col md:flex-row  justify-between items-center "
         onSubmit={form.onSubmit((values) => {
           console.log('Form submitted with values:', values);
         //  dispatch(updateJobSearchForm(values));
@@ -124,8 +130,12 @@ export const QuickSearch = ({onSearch}:TProps) => {
           <pre>{JSON.stringify(data, null, 2)}</pre>
         </div>
       )*/}
+     
       </form>
-      
+      {showError && data?.msg &&
+      <div className="form-bg-and-text  text-xs  p-2 px-4 absolute top-20 rounded-xl ">{data?.msg}</div>
+}
+      </div>
      )
 }
 

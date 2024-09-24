@@ -64,6 +64,15 @@
     .form-bg-and-text{
       @apply text-black dark:text-white bg-white dark:bg-customGray-950/85
     }
+    .dashboard-single-col-form{
+      @apply p-4 w-full relative max-w-full max-w-screen-md rounded-2xl form-bg-and-text
+    }
+    .filters-over-table{
+      @apply justify-between flex items-stretch gap-4 rounded-xl bg-gray-300/25 dark:bg-gray-700/15 mt-4 p-0 overflow-hidden shadow-inner shadow-[0_1px_2px_0_rgba(0,0,0,0.22)_inset]
+    }
+    .vert-divider{
+      @apply  dark:border-gray-500 border-gray-300
+    }
     /*------------------------errors-------------------*/
     .error-container{
       @apply border border-red-500 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs break-words

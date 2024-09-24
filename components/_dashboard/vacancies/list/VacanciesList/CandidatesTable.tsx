@@ -159,7 +159,9 @@ export function CandidatesTable({vacancyId}:TProps) { //default
           </Table.Tr>
         </Table.Thead>
         <tbody>
-          {data_neg?.items?.map((candidate:any) => (
+          {
+         // data_neg?.items?.map((candidate:any) => (
+        candidates?.map((candidate:any) => (  
             <CandidateTableRow key={candidate.id} candidate_={candidate} />
           ))}
         </tbody>

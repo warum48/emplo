@@ -62,8 +62,12 @@ const Settings = () => {
         </div>
         <div className="flex justify-center w-full gap-4 flex-col md:flex-row">
           <div
-            className="p-4 w-full relative max-w-full text-black dark:text-white
-     bg-white dark:text-white dark:bg-customGray-950/85 max-w-screen-md rounded-2xl
+            className="p-4 w-full relative max-w-full 
+            
+            text-black dark:text-white
+     bg-white dark:text-white dark:bg-customGray-950/85 
+
+     max-w-screen-md rounded-2xl
      order-2 md:order-1
      "
           >

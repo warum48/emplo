@@ -35,9 +35,9 @@ export const LinkButton = ({ children, onClick, colorScheme = 'light', disabled,
     >
       {children} 
     </Anchor>
-    {loading &&
+    {/*loading &&
     <Preloader/>
-}
+*/}
     </Group>
   );
 };

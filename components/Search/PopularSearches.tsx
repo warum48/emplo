@@ -97,7 +97,7 @@ export const PopularSearches = ({ onSearch, gridCols = 3, searchType = 'inner' }
             loading={isLoading}
            // colorScheme={colorScheme}
             colorScheme='dark'
-            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+            onClick={() => handleSearch('Продавец', ['Санкт-Петербург'])}
           >
             Санкт-Петербург - Продавец
           </LinkButton>
@@ -106,7 +106,7 @@ export const PopularSearches = ({ onSearch, gridCols = 3, searchType = 'inner' }
             loading={isLoading}
            // colorScheme={colorScheme}
             colorScheme='dark'
-            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+            onClick={() => handleSearch('Мерчандайзер', ['Санкт-Петербург'])}
           >
             Санкт-Петербург - Мерчандайзер
           </LinkButton>
@@ -127,7 +127,7 @@ export const PopularSearches = ({ onSearch, gridCols = 3, searchType = 'inner' }
             loading={isLoading}
            // colorScheme={colorScheme}
             colorScheme='dark'
-            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+            onClick={() => handleSearch('Продавец', ['Санкт-Петербург'])}
           >
             Санкт-Петербург - Продавец
           </LinkButton>
@@ -136,9 +136,9 @@ export const PopularSearches = ({ onSearch, gridCols = 3, searchType = 'inner' }
             loading={isLoading}
            // colorScheme={colorScheme}
             colorScheme='dark'
-            onClick={() => handleSearch('Санкт-Петербург', ['Москва'])}
+            onClick={() => handleSearch('Мерчандайзер', ['Ленинградская область'])}
           >
-            Санкт-Петербург - Мерчандайзер
+            Ленинградская область - Мерчандайзер
           </LinkButton>
 
       </ul>
