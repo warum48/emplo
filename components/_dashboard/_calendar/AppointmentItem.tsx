@@ -93,10 +93,10 @@ export function AppointmentItem({
 
   return (
     <CardContainer
-      fitCell={false}
-      expanded={expanded}
+     // fitCell={false}
+    //  expanded={expanded}
     //  framed={framed}
-      hasShadow={hasShadow}
+   //   hasShadow={hasShadow}
 
       //miw={expanded ? '100%' : ((innerPageMaxWidth  / 2 ) -40) }//448} //-32
     >

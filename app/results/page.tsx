@@ -119,7 +119,7 @@ const Home = () => {
         <h2 className="text-pink-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                 Результаты поиска
               </h2>
-            <ResultList/></div>
+           {/*} <ResultList/> */}</div>
         </div>
 
         <Footer />
