@@ -75,7 +75,7 @@ export const SearchPage = ({hasCandidates, results, searchType='internal'} :TPro
 
         {hasCandidates && (
           <div className="flex-grow w-full flex-1 px-4 ^py-16">
-            <ResultList results={results} />
+            <ResultList results={results} candidates={results?.items}/>
           </div>
         )}
       </main>

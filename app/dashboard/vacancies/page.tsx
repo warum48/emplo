@@ -21,9 +21,12 @@ import { DrawerWithOpener } from '@/components/_dashboard/PageContainer/DrawerWi
 import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
 import { VacanciesGrid } from '@/components/_dashboard/vacancies/grid/VacanciesGrid';
 import { VacanciesTable } from '@/components/_dashboard/vacancies_1c/VacanciesTable';
+import { useGetVacanciesQuery } from '@/rtk/queries/joborder';
+import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 
 const Page = () => {
   const [menuIsOpen, setMenuIsOpen] = React.useState(false);
+  const { data: data_vacancies, error, isLoading } = useGetVacanciesQuery();
   const vacancies = [
     { name: 'UX/UI дизайнер', employees: [] },
     { name: 'Старший дизайнер проектов', employees: [] },
@@ -55,6 +58,7 @@ const Page = () => {
     <DashBoardPageContainer header="Вакансии" Icon={IconRobot} className="min-h-full">
       <div className="form-bg-and-text mr-2 p-8 rounded overflow-auto">
       <VacanciesTable/>
+      <JSONViewer data={data_vacancies} />
       </div>
     </DashBoardPageContainer>
   );

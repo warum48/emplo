@@ -2,15 +2,16 @@
 import React from 'react';
 import { ActionIcon, Divider, Input, Menu, Select, Table, Text } from '@mantine/core';
 import { Button } from '@mantine/core';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { FiltersOverTableContainer } from '@/components/FiltersOverTable/FiltersOberTableContainer';
-import { useGetProfilesQuery } from '@/rtk/queries/joborder';
-import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
-import { Debugger } from '@/components/__atoms/Debugger/Debugger';
-import dayjs from 'dayjs';
 
+
+
+// Sample data based on your CSV
+// Complete tableData array
 const tableData = [
   {
     subdivision: 'Отдел установки и эксплуатации оборудования',
@@ -96,14 +97,14 @@ const tableData = [
 
 const mockFilter = ['все'];
 
-export const ProfilesTable = () => {
+export const VacanciesTable = () => {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
-  const {data, error, isLoading} = useGetProfilesQuery();
   return (
     <div
-      className="min-w-full inline-block"
-      //text-black dark:text-white rounded   inline-block
+      className=""
+      //text-black dark:text-white rounded  min-w-full inline-block
+      //w-full max-w-full
     >
       <div className="justify-between flex  items-center gap-4">
         
@@ -122,7 +123,7 @@ export const ProfilesTable = () => {
           >
             <Select data={mockFilter} placeholder="Все" />
           </Input.Wrapper>
-          <Divider orientation="vertical" className=" vert-divider" />
+         {/*} <Divider orientation="vertical" className=" vert-divider" /> */}
           <Input.Wrapper
             label="Наименование:"
             labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
@@ -133,7 +134,7 @@ export const ProfilesTable = () => {
           >
             <Select data={mockFilter} placeholder="Все" />
           </Input.Wrapper>
-          <Divider orientation="vertical" className=" vert-divider" />
+        {/*}  <Divider orientation="vertical" className=" vert-divider" /> */}
           <Input.Wrapper
             label="Город:"
             labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
@@ -150,36 +151,36 @@ export const ProfilesTable = () => {
       <Table
         // striped highlightOnHover
         //Наименование 	Должность	Подразделение	Желаемая дата закрытия
-        className="mt-4  min-w-full ^rounded-t-lg overflow-hidden ^bg-purple-400/10 ^dark:bg-purple-900/20"
+        className="mt-4  min-w-full  overflow-hidden "
       >
         <Table.Thead
          className=""
           //bg-gray-200 dark:bg-gray-700
         >
-          <Table.Tr  className="bg-purple-400/10 dark:bg-purple-900/15 ^bg-violet-300 ^text-white rounded-t-lg">
-            <Table.Th className="px-4 py-2">Наименование<Debugger>row.org_job_name</Debugger></Table.Th>
-            <Table.Th className="px-4 py-2">Должность<Debugger>row.org_job_name</Debugger></Table.Th>
-            <Table.Th className="px-4 py-2">Подразделение<Debugger>row.org_job_name</Debugger></Table.Th>
-            <Table.Th className="px-4 py-2">Желаемая дата закрытия<Debugger>row.org_job_name</Debugger></Table.Th>
+          <Table.Tr  className="bg-purple-400/10 dark:bg-purple-900/15 rounded-t-lg">
+          <Table.Th className="px-4 py-2">Подразделение </Table.Th>
+            <Table.Th className="px-4 py-2">Вакансия</Table.Th>
+            <Table.Th className="px-4 py-2">Ответсвенный</Table.Th>
+            <Table.Th className="px-4 py-2">Ожидаемая дата</Table.Th>
+            <Table.Th className="px-4 py-2">Номер</Table.Th>
+            <Table.Th className="px-4 py-2">Кандидаты</Table.Th>
             <Table.Th className="px-4 py-2">...</Table.Th>
-            {/*} <Table.Th>Ответственный</Table.Th> */}
-            {/*  <Table.Th>Номер</Table.Th>
-            <Table.Th>Вакансия</Table.Th>
-            <Table.Th>Комментарий</Table.Th>*/}
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          
-          {data?.data?.map((row:any, index:number) => (
+          {tableData.map((row, index) => (
             <Table.Tr
               key={index}
             //  onClick={() => router.push('/dashboard/profiles/23')}
               className="cursor-pointer hover:bg-gray-400/10"
             >
-              <Table.Td className="px-4 py-2">{row.org_job_name}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.speciality}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.org_unit}</Table.Td>
-              <Table.Td className="px-4 py-2">{dayjs(row.created_at).format('DD.MM.YYYY')}</Table.Td> 
+                <Table.Td className="px-4 py-2">{row.subdivision}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.profile}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.responsible}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.date}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.number}</Table.Td>
+              
+              <Table.Td className="px-4 py-2">7</Table.Td>
               <Table.Td>
           <Menu>
             <Menu.Target >
@@ -189,28 +190,15 @@ export const ProfilesTable = () => {
             </Menu.Target>
             <Menu.Dropdown>
               <Menu.Item onClick={()=> {toggle(); router.push('/dashboard/profiles/23') }}>Редактировать</Menu.Item>
-              <Menu.Item onClick={()=> {toggle(); router.push('/dashboard/vacancies/create') }}>Создать вакансию</Menu.Item>
+              <Menu.Item onClick={()=> {toggle(); router.push('/dashboard/vacancies/create') }}>Показать кандидатов</Menu.Item>
               <Menu.Item>Удалить</Menu.Item>
             </Menu.Dropdown>
           </Menu>
         </Table.Td>
-              {/*} <Table.Td className="px-2 py-1">{row.responsible}</Table.Td>*/}
-              {/*   <Table.Td className="px-2 py-1">{row.number}</Table.Td>
-              <Table.Td className="px-2 py-1">{row.vacancy}</Table.Td>
-              <Table.Td className="px-2 py-1">{row.comment || '-'}</Table.Td> */}
             </Table.Tr>
           ))}
         </Table.Tbody>
       </Table>
-      <Debugger>
-      <JSONViewer data={data}/>
-      </Debugger>
     </div>
   );
 };
-
-/*
-org_unit - Подразделение
-org_department - Отдел
-org_project - Проект
-*/

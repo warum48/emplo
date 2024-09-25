@@ -92,6 +92,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/user/change_password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Change Password Appuser */
+        post: operations["applications_users_api_change_password_appuser"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/candidates/": {
         parameters: {
             query?: never;
@@ -219,10 +236,298 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Get Specialities List */
+        /**
+         * Get Specialities List
+         * @description Список доступных Должностей в БД
+         */
         get: operations["applications_candidates_api_get_specialities_list"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/candidates/regions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Regions List
+         * @description Список доступных Регионов в БД
+         */
+        get: operations["applications_candidates_api_get_regions_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Job Orders
+         * @description Список заявок на подбор персонала
+         */
+        get: operations["applications_joborders_api_get_job_orders"];
+        put?: never;
+        /**
+         * Add Job Orders
+         * @description Добавить новую заявку на подбор
+         */
+        post: operations["applications_joborders_api_add_job_orders"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/search_crits": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Search Crits
+         * @description Список критериев парсинга
+         */
+        get: operations["applications_joborders_api_get_search_crits"];
+        put?: never;
+        /**
+         * Add Search Crits
+         * @description Добавить новый критерией парсинга
+         */
+        post: operations["applications_joborders_api_add_search_crits"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/job_profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Job Profiles
+         * @description Список Профилей Должности
+         */
+        get: operations["applications_joborders_api_get_job_profiles"];
+        put?: never;
+        /**
+         * Add Job Profiles
+         * @description Добавить новый Профиль Должности
+         */
+        post: operations["applications_joborders_api_add_job_profiles"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/vacancies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Vacancies
+         * @description Список Документов Вакансий
+         */
+        get: operations["applications_joborders_api_get_vacancies"];
+        put?: never;
+        /**
+         * Add Vacancies
+         * @description Добавить новый документ Вакансии
+         */
+        post: operations["applications_joborders_api_add_vacancies"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/cand_info": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Cand Info By Id
+         * @description Информация о кандидате с hh.ru по его resume_id
+         */
+        get: operations["api_hhru_api_get_cand_info_by_id"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Hh User Info
+         * @description Информация по текущему аккаунту клиента
+         */
+        get: operations["api_hhru_api_get_hh_user_info"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/me/permissions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Hh User Permissions
+         * @description Проверка доступа текущего пользователя к платным методам
+         */
+        get: operations["api_hhru_api_get_hh_user_permissions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Search Candidates
+         * @description Поиск кандидатов посредством парсинга
+         */
+        post: operations["api_hhru_api_search_candidates"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/vacancies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Employer Vacancies
+         * @description Просмотр опубликованных вакансий выбранным работодателем
+         */
+        get: operations["api_hhru_api_get_employer_vacancies"];
+        put?: never;
+        /** Publish Vacancy */
+        post: operations["api_hhru_api_publish_vacancy"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/vacancies/{vacancy_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Vacancy Info
+         * @description Просмотр данных выбранной вакансии
+         */
+        get: operations["api_hhru_api_get_vacancy_info"];
+        /**
+         * Edit Vacancy
+         * @description Редактирование выбранной вакансии
+         */
+        put: operations["api_hhru_api_edit_vacancy"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/vacancies/negotiations/{vacancy_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Negotiations
+         * @description Просмотр откликов по выбранной вакансии
+         */
+        get: operations["api_hhru_api_get_negotiations"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/connect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Check Connect Hh Account
+         * @description Статус подключения аккаунта hh.ru к текущему пользователю
+         */
+        get: operations["api_hhru_api_check_connect_hh_account"];
+        put?: never;
+        /**
+         * Connect Hh Account
+         * @description Подключение аккаунт hh.ru к текущему пользователю
+         */
+        post: operations["api_hhru_api_connect_hh_account"];
         delete?: never;
         options?: never;
         head?: never;
@@ -409,171 +714,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/hhru/cand_info": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Cand Info By Id
-         * @description Информация о кандидате с hh.ru по его resume_id
-         */
-        get: operations["api_hhru_api_get_cand_info_by_id"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/me": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Hh User Info
-         * @description Информация по текущему аккаунту клиента
-         */
-        get: operations["api_hhru_api_get_hh_user_info"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/me/permissions": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Hh User Permissions
-         * @description Проверка доступа текущего пользователя к платным методам
-         */
-        get: operations["api_hhru_api_get_hh_user_permissions"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Search Candidates
-         * @description Поиск кандидатов посредством парсинга
-         */
-        post: operations["api_hhru_api_search_candidates"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/vacancies": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Employer Vacancies
-         * @description Просмотр опубликованных вакансий выбранным работодателем
-         */
-        get: operations["api_hhru_api_get_employer_vacancies"];
-        put?: never;
-        /** Publish Vacancy */
-        post: operations["api_hhru_api_publish_vacancy"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/vacancies/{vacancy_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Vacancy Info
-         * @description Просмотр данных выбранной вакансии
-         */
-        get: operations["api_hhru_api_get_vacancy_info"];
-        /**
-         * Edit Vacancy
-         * @description Редактирование выбранной вакансии
-         */
-        put: operations["api_hhru_api_edit_vacancy"];
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/vacancies/negotiations/{vacancy_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Get Negotiations
-         * @description Просмотр откликов по выбранной вакансии
-         */
-        get: operations["api_hhru_api_get_negotiations"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/api/hhru/connect": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Connect Hh Account
-         * @description Подключение аккаунт hh.ru к текущему
-         */
-        post: operations["api_hhru_api_connect_hh_account"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/api/bitrix/send": {
         parameters: {
             query?: never;
@@ -588,6 +728,28 @@ export interface paths {
          * @description Отправка списка кандидатов в Bitrix
          */
         post: operations["api_bitrix_api_send_to_bitrix"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/debug/form": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Debug Form
+         * @description Эндпоинт, который принимает любую форму и параметр error
+         *     - error: если True, вернуть 401 Unauthorized; если False, вернуть 200 OK
+         *     - data: любая форма
+         */
+        post: operations["api_debug_api_debug_form"];
         delete?: never;
         options?: never;
         head?: never;
@@ -610,6 +772,13 @@ export interface components {
             first_name: string;
             /** Last Name */
             last_name: string;
+        };
+        /** AppUserChangePasswordSchema */
+        AppUserChangePasswordSchema: {
+            /** New Password */
+            new_password: string;
+            /** Confirm Password */
+            confirm_password: string;
         };
         /**
          * MainPageSearchSchema
@@ -638,6 +807,76 @@ export interface components {
             job_search_status?: string[] | null;
             /** Limit */
             limit?: number | null;
+        };
+        /** JobOrderAddSchema */
+        JobOrderAddSchema: {
+            /** Job Profile */
+            job_profile: number;
+            /** Vacancy */
+            vacancy: number;
+            /**
+             * Deadline
+             * Format: date
+             */
+            deadline: string;
+            /** Description */
+            description: string;
+            /** Responsible */
+            responsible: number;
+        };
+        /** SearchCritAddSchema */
+        SearchCritAddSchema: {
+            /** Speciality */
+            speciality: string | null;
+            /** Area */
+            area: string | null;
+            /** Metro */
+            metro?: string | null;
+            /** Schedule */
+            schedule?: string | null;
+            /** Relocation Type */
+            relocation_type?: string | null;
+            /** Experience */
+            experience: number | null;
+            /** Gender */
+            gender?: string | null;
+            /** Age */
+            age: number | null;
+            /** Salary */
+            salary: number | null;
+            /** Job Search Status */
+            job_search_status: string | null;
+            /** Search Limit Target */
+            search_limit_target: number | null;
+            /** Created By */
+            created_by: null;
+        };
+        /** JobProfileAddSchema */
+        JobProfileAddSchema: {
+            /** Speciality */
+            speciality: string;
+            /** Org */
+            org: string;
+            /** Org Job Name */
+            org_job_name: string;
+            /** Criteria */
+            criteria: number;
+            /** Description */
+            description: string;
+        };
+        /** VacancyAddSchema */
+        VacancyAddSchema: {
+            /** Name */
+            name: string;
+            /** Job Profile */
+            job_profile: number;
+            /**
+             * Deadline
+             * Format: date
+             */
+            deadline: string;
+            /** Responsible */
+            responsible: number;
         };
         /**
          * CandidateSearchSchema
@@ -921,6 +1160,28 @@ export interface operations {
             };
         };
     };
+    applications_users_api_change_password_appuser: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AppUserChangePasswordSchema"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     applications_candidates_api_get_all_candidates: {
         parameters: {
             query?: {
@@ -1059,7 +1320,7 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_export_all_candidates_train: {
+    applications_candidates_api_get_regions_list: {
         parameters: {
             query?: never;
             header?: never;
@@ -1077,7 +1338,7 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_get_available_models_list: {
+    applications_joborders_api_get_job_orders: {
         parameters: {
             query?: never;
             header?: never;
@@ -1095,7 +1356,29 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_check_current_model: {
+    applications_joborders_api_add_job_orders: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobOrderAddSchema"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_joborders_api_get_search_crits: {
         parameters: {
             query?: never;
             header?: never;
@@ -1113,16 +1396,18 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_change_model_conf: {
+    applications_joborders_api_add_search_crits: {
         parameters: {
-            query: {
-                modelName: string;
-            };
+            query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SearchCritAddSchema"];
+            };
+        };
         responses: {
             /** @description OK */
             200: {
@@ -1133,7 +1418,7 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_push_candidates_to_train: {
+    applications_joborders_api_get_job_profiles: {
         parameters: {
             query?: never;
             header?: never;
@@ -1151,7 +1436,29 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_get_df_from_cand_train: {
+    applications_joborders_api_add_job_profiles: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["JobProfileAddSchema"];
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_joborders_api_get_vacancies: {
         parameters: {
             query?: never;
             header?: never;
@@ -1169,52 +1476,18 @@ export interface operations {
             };
         };
     };
-    applications_predictor_api_get_xy_train: {
+    applications_joborders_api_add_vacancies: {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VacancyAddSchema"];
             };
         };
-    };
-    applications_predictor_api_train_preditor: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description OK */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content?: never;
-            };
-        };
-    };
-    applications_predictor_api_classify_cand: {
-        parameters: {
-            query: {
-                resume_id: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
         responses: {
             /** @description OK */
             200: {
@@ -1409,9 +1682,193 @@ export interface operations {
             };
         };
     };
+    api_hhru_api_check_connect_hh_account: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     api_hhru_api_connect_hh_account: {
         parameters: {
             query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_export_all_candidates_train: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_get_available_models_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_check_current_model: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_change_model_conf: {
+        parameters: {
+            query: {
+                modelName: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_push_candidates_to_train: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_get_df_from_cand_train: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_get_xy_train: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_train_preditor: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_predictor_api_classify_cand: {
+        parameters: {
+            query: {
+                resume_id: string;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -1441,6 +1898,27 @@ export interface operations {
                 "application/json": string[] | null;
             };
         };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    api_debug_api_debug_form: {
+        parameters: {
+            query: {
+                error: boolean;
+                data?: Record<string, never>;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
         responses: {
             /** @description OK */
             200: {

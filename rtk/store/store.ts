@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { api } from '../queries/candidates';
+import { joborder} from '../queries/joborder';
 import { authApi } from '../queries/authApi';
 import someSlice from '../slices/someFeature_unused/someSlice';
 import tempSlice from '../slices/tempFeature_unused/tempSlice';
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
   [vacancyApi.reducerPath]: vacancyApi.reducer,
+  [joborder.reducerPath]: joborder.reducer,
 
   //vacancyForm: vacancyFormReducer,
 
@@ -44,14 +46,11 @@ const rootReducer = combineReducers({
   auth: authReducer,
   search: searchReducer,
   searchAI: searchAIReducer,
-  //someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
   authForm: persistReducer({ key: 'authForm', storage }, authFormSlice),
   jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
+ // jobSearch: candidateSearchSlice,
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),
   UISettings: persistReducer({ key: 'UISettings', storage }, UISettingsSlice),
-//  tempFeature: tempSlice, // Non-persistent slice
-  // Add other slices here
-  //temp: tempSlice.reducer, // Add the temp slice reducer here
 });
 
 const store = configureStore({
@@ -62,7 +61,7 @@ const store = configureStore({
       thunk: {
         extraArgument: loginAndFetchUser//authApi
       }
-    }).concat(api.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)//.concat(thunk),
+    }).concat(api.middleware, joborder.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)//.concat(thunk),
   //middleware: (getDefaultMiddleware) =>
   //  getDefaultMiddleware().concat(authApi.middleware).concat(thunk),
     

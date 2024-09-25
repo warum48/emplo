@@ -6,6 +6,8 @@ import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import { FiltersOverTableContainer } from '../FiltersOverTable/FiltersOberTableContainer';
+import { useGetOrdersQuery } from '@/rtk/queries/joborder';
+import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
 
 const mockFilter = ['все'];
 
@@ -95,6 +97,7 @@ const tableData = [
 export const RequestTable = () => {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
+  const {data, error, isLoading} = useGetOrdersQuery();
   return (
     <div
       className="text-black dark:text-white rounded  min-w-full inline-block"
@@ -182,7 +185,7 @@ export const RequestTable = () => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {tableData.map((row, index) => (
+          {data?.data?.map((row:any, index:number) => (
             <Table.Tr key={index}>
               <Table.Td className="px-4 py-2">{row.subdivision}</Table.Td>
               <Table.Td className="px-4 py-2">{row.profile}</Table.Td>
@@ -217,6 +220,10 @@ export const RequestTable = () => {
           ))}
         </Table.Tbody>
       </Table>
+      { data?.msg && 
+      <div className="full p-4 text-xs">{data?.msg}</div>
+      }
+      <JSONViewer data={data} />
     </div>
   );
 };

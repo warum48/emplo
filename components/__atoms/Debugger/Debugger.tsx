@@ -8,5 +8,5 @@ export const Debugger = ({ children }: { children: React.ReactNode }) => {
   const searchParams = useSearchParams();
   const _searchMCenter = searchParams.get('mcenter');
 
-  return <> {isDebug && <div style={{backgroundColor:'#66666633'}}>{children}</div>}</>;
+  return <> {isDebug && <div style={{backgroundColor:'#66666633', opacity:.5}}>{children}</div>}</>;
 };

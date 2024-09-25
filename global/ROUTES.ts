@@ -42,7 +42,7 @@ export const Routes = {
               links: [
                 { label: 'По внутренней базе данных', link: '/dashboard/search' },
                 { label: 'Внешний поиск', link: '/dashboard/search/ai' },
-                { label: 'Все кандидаты', link: '/dashboard/search/ai' },
+                { label: 'Все кандидаты', link: '/dashboard/search/all' },
               ],
             },
             {

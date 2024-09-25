@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  MultiSelect,
   Select,
 } from '@mantine/core';
 //import { useCreateVacancyMutation } from '@/rtk/slices/vacancy/vacancySliceHHReal';
@@ -26,7 +27,7 @@ export const RegionsSelect = ({form, size='md', showLabel=true, className=''}: T
     return (
         <>
         {regions ? (
-            <Select
+            <MultiSelect
               label={showLabel ? "Регион поиска" : null} //"Регион поиска"
               size={size}
               className={className}
@@ -34,6 +35,7 @@ export const RegionsSelect = ({form, size='md', showLabel=true, className=''}: T
               labelProps={{ style: customLabelStyle }}
               required
               data={regions}
+            
               
               {...form.getInputProps('area')}
             />

@@ -7,92 +7,50 @@ import { useRouter } from 'next/navigation';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { FiltersOverTableContainer } from '@/components/FiltersOverTable/FiltersOberTableContainer';
+import { useGetVacanciesQuery } from '@/rtk/queries/joborder';
 
 
 
 // Sample data based on your CSV
 // Complete tableData array
 const tableData = [
-  {
-    subdivision: 'Отдел установки и эксплуатации оборудования',
-    profile: 'Инженер, 1 категория /Отдел установки и эксплуатации оборудования/',
-    responsible: 'Голихина Надежда Олеговна',
-    position: 'Инженер',
-    date: '6/9/2016',
-    number: 1,
-    vacancy: 'Инженер, 1 категория /Отдел установки и эксплуатации оборудования/',
-    comment: '',
-  },
-  {
-    subdivision: 'Отдел установки и эксплуатации оборудования',
-    profile: 'Ведущий инженер /Отдел установки и эксплуатации оборудования/',
-    responsible: 'Шариппе Елена',
-    position: 'Ведущий инженер',
-    date: '6/9/2016',
-    number: 2,
-    vacancy: '',
-    comment: '',
-  },
-  {
-    subdivision: 'Отдел расчетов по оплате труда',
-    profile: 'Начальник отдела /Отдел расчетов по оплате труда/',
-    responsible: 'Голихина Надежда Олеговна',
-    position: 'Начальник отдела',
-    date: '6/9/2016',
-    number: 3,
-    vacancy: 'Начальник отдела /Отдел расчетов по оплате труда/',
-    comment: '',
-  },
-  {
-    subdivision: 'Сметно-штатный отдел',
-    profile: 'Начальник отдела – заместитель начальника управления /Сметно-штатный отдел/',
-    responsible: 'Плахотина Антонина',
-    position: 'Начальник отдела – заместитель начальника управления',
-    date: '6/20/2016',
-    number: 4,
-    vacancy: 'Начальник отдела – заместитель начальника управления /Сметно-штатный отдел/',
-    comment: '',
-  },
-  {
-    subdivision: 'Хозяйственный отдел',
-    profile: 'Сторож /Хозяйственный отдел/',
-    responsible: 'Голихина Надежда Олеговна',
-    position: 'Сторож',
-    date: '6/20/2016',
-    number: 6,
-    vacancy: 'Сторож /Хозяйственный отдел/',
-    comment: '',
-  },
-  {
-    subdivision: 'Отдел по работе с персоналом',
-    profile: 'Эксперт, 1 категория /Отдел по работе с персоналом/',
-    responsible: 'Шариппе Елена',
-    position: 'Эксперт',
-    date: '6/20/2016',
-    number: 7,
-    vacancy: 'Эксперт, 1 категория /Отдел по работе с персоналом/',
-    comment: '',
-  },
-  {
-    subdivision: 'Отдел автоматизированных систем и системного ПО',
-    profile: 'Системный администратор /Отдел автоматизированных систем и системного ПО/',
-    responsible: 'Голихина Надежда Олеговна',
-    position: 'Системный администратор',
-    date: '6/20/2016',
-    number: 8,
-    vacancy: '',
-    comment: '',
-  },
-  {
-    subdivision: 'Управление маркетинга и обслуживания клиентов',
-    profile: 'Начальник управления /Управление маркетинга и обслуживания клиентов/',
-    responsible: 'Голихина Надежда Олеговна',
-    position: 'Начальник управления',
-    date: '6/20/2016',
-    number: 5,
-    vacancy: 'Начальник управления /Управление маркетинга и обслуживания клиентов/',
-    comment: '',
-  },
+    {
+        "id": 1,
+        "name": "Тестовая вакансия 1",
+        "job_profile": {
+          "id": 1,
+          "speciality": "Мерчандайзер",
+          "org": "Чистая Линия",
+          "org_unit": "Не указано",
+          "org_department": "Не указано",
+          "org_job_name": "Мерчандайзер",
+          "org_project": "",
+          "org_area_of_business": "",
+          "criteria": {
+            "id": 1,
+            "speciality": "Мерчандайзер",
+            "area": "Санкт-Петербург",
+            "metro": "Автово",
+            "schedule": "",
+            "relocation_type": "",
+            "experience": 2,
+            "gender": "",
+            "age": 20,
+            "salary": 50000,
+            "job_search_status": "",
+            "search_limit_target": 5,
+            "created_by": "root"
+          },
+          "description": "Тест",
+          "created_at": "2024-09-19 07:45:12.844000+00:00",
+          "created_by": "root"
+        },
+        "is_opened": true,
+        "deadline": "2024-09-20 08:04:49+00:00",
+        "responsible": "root",
+        "created_by": "root",
+        "created_at": "2024-09-19 08:04:56.794000+00:00"
+      }
 ];
 
 const mockFilter = ['все'];
@@ -100,6 +58,7 @@ const mockFilter = ['все'];
 export const VacanciesTable = () => {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
+  const {data, error, isLoading} = useGetVacanciesQuery();
   return (
     <div
       className=""
@@ -158,7 +117,7 @@ export const VacanciesTable = () => {
           //bg-gray-200 dark:bg-gray-700
         >
           <Table.Tr  className="bg-purple-400/10 dark:bg-purple-900/15 rounded-t-lg">
-          <Table.Th className="px-4 py-2">Подразделение</Table.Th>
+          <Table.Th className="px-4 py-2">Подразделение </Table.Th>
             <Table.Th className="px-4 py-2">Вакансия</Table.Th>
             <Table.Th className="px-4 py-2">Ответсвенный</Table.Th>
             <Table.Th className="px-4 py-2">Ожидаемая дата</Table.Th>
@@ -168,17 +127,17 @@ export const VacanciesTable = () => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          {tableData.map((row, index) => (
+          {data?.data?.map((vacancy:any, index:number) => (
             <Table.Tr
               key={index}
             //  onClick={() => router.push('/dashboard/profiles/23')}
               className="cursor-pointer hover:bg-gray-400/10"
             >
-                <Table.Td className="px-4 py-2">{row.subdivision}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.profile}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.responsible}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.date}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.number}</Table.Td>
+              <Table.Td className="px-4 py-2">{vacancy?.job_profile?.org_unit}</Table.Td>
+              <Table.Td className="px-4 py-2">{vacancy?.name}</Table.Td>
+              <Table.Td className="px-4 py-2">{vacancy?.responsible}</Table.Td>
+              <Table.Td className="px-4 py-2">{vacancy?.deadline}</Table.Td>
+              <Table.Td className="px-4 py-2">{vacancy?.id}</Table.Td>
               
               <Table.Td className="px-4 py-2">7</Table.Td>
               <Table.Td>
@@ -202,3 +161,49 @@ export const VacanciesTable = () => {
     </div>
   );
 };
+/*
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Тестовая вакансия 1",
+      "job_profile": [
+        {
+          "id": 1,
+          "speciality": "Мерчандайзер",
+          "org": "Чистая Линия",
+          "org_unit": "Не указано",
+          "org_department": "Не указано",
+          "org_job_name": "Мерчандайзер",
+          "org_project": "",
+          "org_area_of_business": "",
+          "criteria": [
+            {
+              "id": 1,
+              "speciality": "Мерчандайзер",
+              "area": "Санкт-Петербург",
+              "metro": "Автово",
+              "schedule": "",
+              "relocation_type": "",
+              "experience": 2,
+              "gender": "",
+              "age": 20,
+              "salary": 50000,
+              "job_search_status": "",
+              "search_limit_target": 5,
+              "created_by": "root"
+            }
+          ],
+          "description": "Тест",
+          "created_at": "2024-09-19 07:45:12.844000+00:00",
+          "created_by": "root"
+        }
+      ],
+      "is_opened": true,
+      "deadline": "2024-09-20 08:04:49+00:00",
+      "responsible": "root",
+      "created_by": "root",
+      "created_at": "2024-09-19 08:04:56.794000+00:00"
+    }
+  ]
+}*/

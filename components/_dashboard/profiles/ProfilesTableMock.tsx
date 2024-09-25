@@ -8,8 +8,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { FiltersOverTableContainer } from '@/components/FiltersOverTable/FiltersOberTableContainer';
 import { useGetProfilesQuery } from '@/rtk/queries/joborder';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
-import { Debugger } from '@/components/__atoms/Debugger/Debugger';
-import dayjs from 'dayjs';
 
 const tableData = [
   {
@@ -157,10 +155,10 @@ export const ProfilesTable = () => {
           //bg-gray-200 dark:bg-gray-700
         >
           <Table.Tr  className="bg-purple-400/10 dark:bg-purple-900/15 ^bg-violet-300 ^text-white rounded-t-lg">
-            <Table.Th className="px-4 py-2">Наименование<Debugger>row.org_job_name</Debugger></Table.Th>
-            <Table.Th className="px-4 py-2">Должность<Debugger>row.org_job_name</Debugger></Table.Th>
-            <Table.Th className="px-4 py-2">Подразделение<Debugger>row.org_job_name</Debugger></Table.Th>
-            <Table.Th className="px-4 py-2">Желаемая дата закрытия<Debugger>row.org_job_name</Debugger></Table.Th>
+            <Table.Th className="px-4 py-2">Наименование</Table.Th>
+            <Table.Th className="px-4 py-2">Должность</Table.Th>
+            <Table.Th className="px-4 py-2">Подразделение</Table.Th>
+            <Table.Th className="px-4 py-2">Желаемая дата закрытия</Table.Th>
             <Table.Th className="px-4 py-2">...</Table.Th>
             {/*} <Table.Th>Ответственный</Table.Th> */}
             {/*  <Table.Th>Номер</Table.Th>
@@ -169,17 +167,16 @@ export const ProfilesTable = () => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>
-          
-          {data?.data?.map((row:any, index:number) => (
+          {tableData.map((row, index) => (
             <Table.Tr
               key={index}
             //  onClick={() => router.push('/dashboard/profiles/23')}
               className="cursor-pointer hover:bg-gray-400/10"
             >
-              <Table.Td className="px-4 py-2">{row.org_job_name}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.speciality}</Table.Td>
-              <Table.Td className="px-4 py-2">{row.org_unit}</Table.Td>
-              <Table.Td className="px-4 py-2">{dayjs(row.created_at).format('DD.MM.YYYY')}</Table.Td> 
+              <Table.Td className="px-4 py-2">{row.profile}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.position}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.subdivision}</Table.Td>
+              <Table.Td className="px-4 py-2">{row.date}</Table.Td>
               <Table.Td>
           <Menu>
             <Menu.Target >
@@ -202,15 +199,7 @@ export const ProfilesTable = () => {
           ))}
         </Table.Tbody>
       </Table>
-      <Debugger>
       <JSONViewer data={data}/>
-      </Debugger>
     </div>
   );
 };
-
-/*
-org_unit - Подразделение
-org_department - Отдел
-org_project - Проект
-*/

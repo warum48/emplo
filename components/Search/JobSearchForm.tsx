@@ -6,6 +6,7 @@ import {
   Select,
   NumberInput,
   Button,
+  MultiSelect,
 } from '@mantine/core';
 import {
   updateJobSearchForm,
@@ -85,12 +86,18 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
     initialValues: formState,
     // Add validation rules for the form fields
     validate: {
-      specialty: (value) => (value ? null : 'Please select a position'),
+     // specialty: (value) => (value ? null : 'Please select a position'),
       /* experience: (value) => (value ? null : 'Please select your experience level'),
       gender: (value) => (value ? null : 'Please select your gender'),
       age: (value) => (value >= 14 && value <= 90 ? null : 'Please enter a valid age (14-90)'),
       salary: (value) => (value >= 10000 ? null : 'Please enter a valid salary (min 10000)'),
       limit: (value) => (value >= 1 && value <= 200 ? null : 'Please enter a valid number of resumes (1-200)'),*/
+    },
+    onValuesChange: (values) => {
+      console.log(values);
+     // setShowError(false);
+      setErrors(undefined);
+      setAiError('');
     },
   });
 
@@ -158,7 +165,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
 
           <div className="flex flex-col ">
             <Checkbox.Group
-              label="Навыки *"
+              label="Навыки"
               {...form.getInputProps('skills', { type: 'checkbox' })}
               defaultValue={form.values.skills}
               onChange={(value) => {
@@ -172,7 +179,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           </div>
 
           <NumberInput
-            label="Опыт работы (лет) *"
+            label="Опыт работы (лет)"
             labelProps={{ style: customLabelStyle }}
             placeholder="Введите опыт работы"
             {...form.getInputProps('experience')}
@@ -180,7 +187,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
 
           <Select
             label="Пол *"
-            placeholder="Мужской"
+            placeholder="Пол кандидата"
             labelProps={{ style: customLabelStyle }}
             data={[
               { value: 'male', label: 'Мужской' },
@@ -191,7 +198,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
 
           <NumberInput
             labelProps={{ style: customLabelStyle }}
-            label="Возраст (от) *"
+            label="Возраст (от)"
             placeholder="Введите возраст"
             {...form.getInputProps('age')}
           />
@@ -199,7 +206,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
         <div className="flex flex-col gap-6 w-full max-w-full">
           <NumberInput
             labelProps={{ style: customLabelStyle }}
-            label="Зарплата (до) *"
+            label="Зарплата (до)"
             placeholder="Введите зарплату"
             {...form.getInputProps('salary')}
           />
@@ -224,7 +231,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
           </Checkbox.Group>
 
           <NumberInput
-            label="Требуемое кол-во резюме (до) *"
+            label="Требуемое кол-во резюме (до)"
             labelProps={{ style: customLabelStyle }}
             placeholder="Введите количество резюме"
             {...form.getInputProps('limit')}

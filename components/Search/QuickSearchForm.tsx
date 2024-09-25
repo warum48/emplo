@@ -18,7 +18,7 @@ type TProps = {
 
 type TFormValues = {
   specialty: string;
-  area: string;//[];
+  area: string[];//[];
 }
 
 export const QuickSearch = ({onSearch}:TProps) => {
@@ -36,7 +36,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
   const form = useForm({
     initialValues: {
       specialty: '', //'',
-      area: '',//[], //'',
+      area: [],//[], //'',
     },
     validate: {
       /*!!   name: (value) => (value ? null : 'Пожалуйста, укажите название вакансии'),
@@ -66,7 +66,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
      // await searchCandidates({ specialty, area }).unwrap();
     //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       //const results = await searchCandidates({ specialty, area }).unwrap();
-      const results = await searchCandidates({ specialty: values.specialty, area: [values.area] }).unwrap();
+      const results = await searchCandidates({ specialty: values.specialty, area: values.area }).unwrap();
       console.log('===results', results);
       if (Array.isArray(results?.items)) {
         dispatch(setSearchResults(results));
