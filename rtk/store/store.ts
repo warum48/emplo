@@ -8,7 +8,8 @@ import { joborder} from '../queries/joborder';
 import { authApi } from '../queries/authApi';
 import someSlice from '../slices/someFeature_unused/someSlice';
 import tempSlice from '../slices/tempFeature_unused/tempSlice';
-import candidateSearchSlice from '../slices/searchCandidateForm/searchCandidate';
+//import candidateSearchSlice from '../slices/searchCandidateForm/searchCandidate';
+import candidateSearchReducer from '../slices/searchCandidateForm/searchCandidate';
 import resumeFormSlice from '../slices/resumeForm';
 import createVacancySlice from '../slices/vacancy/vacancySlice';
 import createVacancyHHSlice from '../slices/vacancy/vacancySliceHH';
@@ -47,8 +48,8 @@ const rootReducer = combineReducers({
   search: searchReducer,
   searchAI: searchAIReducer,
   authForm: persistReducer({ key: 'authForm', storage }, authFormSlice),
-  jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
- // jobSearch: candidateSearchSlice,
+  //jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
+  jobSearch: candidateSearchReducer,
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),
   UISettings: persistReducer({ key: 'UISettings', storage }, UISettingsSlice),
 });

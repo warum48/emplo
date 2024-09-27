@@ -106,7 +106,7 @@ export const QuickSearch = ({onSearch}:TProps) => {
           onChange={(e) => setSpecialty(e.target.value)}
         />*/}
         <RegionsSelect form={form} size='lg' showLabel={false} className="flex-grow flex-shrink-0"/>
-        <SpecialitiesSelect form={form} size='lg' showLabel={false} className="flex-grow flex-shrink-0" />
+        <SpecialitiesSelect form={form} formFieldName="speciality" size='lg' showLabel={false} className="flex-grow flex-shrink-0" />
 
         {/*} <Link href={'/results'}>
         <Button size="lg" className="bg-opacity-80 hover:bg-opacity-100">

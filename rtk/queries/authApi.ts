@@ -40,6 +40,21 @@ export const authApi = createApi({
 
     me: builder.query<any, void>({ //<UserDetails, void>
       query: () => 'user/me',
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          // Wait for the query to be completed
+          const { data } = await queryFulfilled;
+          
+          // Handle success, perform any side effects, e.g., dispatch an action
+          console.log('Query successful:', data);
+          // dispatch(yourReduxAction(data));
+        } catch (error) {
+          // Handle error
+          console.error('Query failed:', error);
+          // Perform any side effect in case of error, e.g., dispatch an error action
+          // dispatch(yourErrorHandlingAction(error));
+        }
+      },
     }),
 
   

@@ -138,7 +138,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
                 : ''
             }`}
         >
-          <SpecialitiesSelect form={form} />
+          <SpecialitiesSelect form={form} formFieldName="speciality"/>
 
           <RegionsSelect form={form} />
 

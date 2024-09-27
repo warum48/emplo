@@ -18,14 +18,14 @@ export const QueryStateDisplay: React.FC<ErrorDisplayProps> = ({ isLoading, erro
   }
 
   return (
-    <>
-      <Text c="red">
-        {(isSerializedError(error) && error?.message ) || 'Произошла ошибка при загрузке данных.'}
+    <div>
+      <Text c="red" size='xs' pb='xs'>
+        {(isSerializedError(error) && error?.message ) || 'Ошибка загрузки данных.'}
       </Text>
       {isNetworkError(error) && (
-        <Button onClick={onRetry}>Попробовать снова</Button>
+        <Button onClick={onRetry} size='xs'>Попробовать снова</Button>
       )}
-    </>
+    </div>
   );
 };
 

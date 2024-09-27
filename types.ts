@@ -808,6 +808,16 @@ export interface components {
             /** Limit */
             limit?: number | null;
         };
+        /** ErrorSchema */
+        ErrorSchema: {
+            /** Error */
+            error: string;
+        };
+        /** MessageSchema */
+        MessageSchema: {
+            /** Msg */
+            msg: string;
+        };
         /** JobOrderAddSchema */
         JobOrderAddSchema: {
             /** Job Profile */
@@ -823,6 +833,35 @@ export interface components {
             description: string;
             /** Responsible */
             responsible: number;
+        };
+        /** SearchCritSchema */
+        SearchCritSchema: {
+            /** Id */
+            id: number;
+            /** Speciality */
+            speciality: string;
+            /** Area */
+            area: string;
+            /** Metro */
+            metro: string;
+            /** Schedule */
+            schedule: string;
+            /** Relocation Type */
+            relocation_type: string;
+            /** Experience */
+            experience: number;
+            /** Gender */
+            gender: number;
+            /** Age */
+            age: number;
+            /** Salary */
+            salary: number;
+            /** Job Search Status */
+            job_search_status: string;
+            /** Search Limit Target */
+            search_limit_target: string;
+            /** Created By */
+            created_by: string;
         };
         /** SearchCritAddSchema */
         SearchCritAddSchema: {
@@ -859,8 +898,7 @@ export interface components {
             org: string;
             /** Org Job Name */
             org_job_name: string;
-            /** Criteria */
-            criteria: number;
+            criteria: components["schemas"]["SearchCritSchema"];
             /** Description */
             description: string;
         };
@@ -1347,12 +1385,23 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Bad Request */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
             };
         };
     };
@@ -1392,7 +1441,27 @@ export interface operations {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["SearchCritSchema"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
             };
         };
     };
@@ -1427,12 +1496,23 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Bad Request */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
             };
         };
     };
@@ -1467,12 +1547,23 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description OK */
-            200: {
+            /** @description Bad Request */
+            400: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
             };
         };
     };

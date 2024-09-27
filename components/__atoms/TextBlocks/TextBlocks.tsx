@@ -8,6 +8,10 @@ const TextInfo: React.FC<{ children: React.ReactNode, dimmed?:boolean, className
   <span className={`${dimmed ? "text-gray-500 dark:text-gray-500" : "text-gray-700 dark:text-gray-300 " } + ${className}`}>{children}</span>
 );
 
+const TextHint: React.FC<{ children: React.ReactNode, dimmed?:boolean, className?:string }> = ({ children, dimmed, className }) => (
+  <span className={`text-xs ${dimmed ? "text-gray-500 dark:text-gray-500" : "text-gray-700 dark:text-gray-300 " } + ${className}`}>{children}</span>
+);
+
 const CardTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <span className="font-bold uppercase ">{children}</span>
 );
@@ -32,7 +36,8 @@ const Card_title : React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <span className="text-gray-900">{children}</span>
 );
 
-export { TitleLabel, TextInfo, CardTitle, CardPreTitle,   Title1_main,
+export { TitleLabel, TextInfo, TextHint, 
+  CardTitle, CardPreTitle,   Title1_main,
   Title2_second,
   Title4_second, Card_pretitle,
-  Card_title,};
+  Card_title, };

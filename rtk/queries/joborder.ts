@@ -10,14 +10,26 @@ export const joborder = createApi({
   baseQuery: customBaseQuery,
   endpoints: (builder) => ({
     getVacancies: builder.query<any, void>({ //
-      query: () => '/api/joborder/vacancies',
+      query: () => '/api/joborder/vacancies/',
     }),
     getProfiles: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
-      query: () => '/api/joborder/job_profiles',
+      query: () => '/api/joborder/job_profiles/',
     }),
     getOrders: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
-      query: () => '/api/joborder',
-    })
+      query: () => '/api/joborder/',
+    }),
+    getSearchCrits: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
+      query: () => '/api/joborder/search_crits/',
+    }),
+    
+    createProfile: builder.mutation<void, any>({
+      query: (profile) => ({
+        url: '/api/joborder/job_profiles',
+        method: 'POST',
+        body: profile,
+      }),
+    }),
+
 
 
 }),
@@ -26,6 +38,10 @@ export const joborder = createApi({
 export const { 
     useGetVacanciesQuery,
     useGetProfilesQuery,
-    useGetOrdersQuery
+    useGetOrdersQuery,
+    useGetSearchCritsQuery,
+    useLazyGetSearchCritsQuery,
+    useCreateProfileMutation
+
  } = joborder;
 

@@ -4,7 +4,8 @@ import { useSearchParams } from 'next/navigation';
 import * as React from 'react';
 
 export const Debugger = ({ children }: { children: React.ReactNode }) => {
-  const {isDebug} = React.useContext(GlobalContext);
+ // const {isDebug} =React.useContext(GlobalContext);
+  const isDebug = true;
   const searchParams = useSearchParams();
   const _searchMCenter = searchParams.get('mcenter');
 

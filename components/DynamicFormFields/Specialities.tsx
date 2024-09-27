@@ -33,9 +33,10 @@ type TProps = {
     size?:string;
     showLabel?:boolean;
     className?:string;
+    formFieldName?:string;
 }
 
-export const SpecialitiesSelect = ({form, size='md', showLabel=true, className=''}: TProps) => {
+export const SpecialitiesSelect = ({form, size='md', showLabel=true, className='', formFieldName='professional_roles'}: TProps) => {
     const {
         data: specialities,
         error: specialitiesError,
@@ -54,7 +55,7 @@ export const SpecialitiesSelect = ({form, size='md', showLabel=true, className='
             labelProps={{ style: customLabelStyle }}
             required
             data={specialities}
-            {...form.getInputProps('professional_roles')}
+            {...form.getInputProps(formFieldName)}
           />
         ):  (
             <QueryStateDisplay
