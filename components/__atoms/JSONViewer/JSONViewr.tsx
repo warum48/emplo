@@ -8,15 +8,15 @@ export const JSONViewer: React.FC<{ data: any }> = ({ data }) => {
     <Box className="">
       {isExpanded ? (
         <>
-          <a onClick={()=>{setIsExpanded(false)}}>collapse</a>
+          <a onClick={()=>{setIsExpanded(false)}} className="text-xs text-gray-500 cursor-pointer">Свернуть ▴</a>
           <pre className="overflow-auto">
-            <Text c="dimmed" size="xs" className={"text-wrap"}>
+            <Text c="dimmed" size="xs" className={"text-wrap w-full w-max-xl text-left"}>
               {JSON.stringify(data, null, 2)}
             </Text>
           </pre>
         </>
       ) : (
-        <a onClick={()=>{setIsExpanded(true)}} className="text-xs text-gray-500 cursor-pointer">expand</a>
+        <a onClick={()=>{setIsExpanded(true)}} className="text-xs text-gray-500 cursor-pointer ">Подробнее ▾</a>
       )}
     </Box>
   );

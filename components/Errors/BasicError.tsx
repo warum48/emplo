@@ -11,6 +11,7 @@ export const BasicError: React.FC<BasicErrorDetail> = ({ error, className }) => 
     <div className={className + " error-container" }
     //dangerouslySetInnerHTML={{ __html: error }}
     >
+      <div className="font-bold">Error</div>
       <Value value={error} />
     </div>
   );

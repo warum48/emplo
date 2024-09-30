@@ -11,6 +11,7 @@ import { Notifications } from '@mantine/notifications';
 import '@/styles/globals.css';
 import '@/styles/styles.css';
 import '@/styles/gradient_border.css';
+import '@mantine/notifications/styles.css';
 //
 //type ColorScheme = 'light' | 'dark';
 
@@ -56,7 +57,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
 
   return (
-    <html lang="en" 
+    <html lang="ru" 
     className='h-full'
     >
       <head>
@@ -77,7 +78,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-roboto bg-white dark:bg-adjGray-900 h-full ^overflow-x-hidden">
+      <body className="font-roboto bg-white dark:bg-adjGray-900 min-h-full  ^overflow-x-hidden">
       <GlobalProvider>
         <MantineProvider
           theme={theme}
@@ -92,7 +93,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               <div
                 className="dark:bg-adjGray-900 min-h-screen h-full
                 text-black dark:text-white
-    flex flex-col relative 
+    flex flex-col relative overflow-x-hidden w-full
     "
               >
                

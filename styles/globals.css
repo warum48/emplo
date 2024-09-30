@@ -78,7 +78,7 @@
   }
   /*------------------------errors-------------------*/
   .error-container {
-    @apply border border-red-500 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs break-words;
+    @apply border border-red-500 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs break-words max-h-48 overflow-y-auto;
   }
   
    /* .checkbox-group > div > .mantine-Checkbox-root {

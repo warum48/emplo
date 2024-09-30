@@ -15,7 +15,7 @@ export const DashBoardPageContainer = ({ children, header, className, hasLeftMen
   return (
     <div
     id ='dashboardPageContainerFull' 
-      className={`relative min-h-full overflow-hidden  ${
+      className={`relative min-h-full min-h-screen overflow-hidden  ${
         compactLayout
           ? hasLeftMenu
             ? 'dashboard-page-container-compact-nopadding'

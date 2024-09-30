@@ -59,6 +59,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
        relative
         dark:bg-gradient-to-br  dark:from-customGray-900 dark:to-customGray-950
         overflow-x-hidden
+        min-h-screen
         `
       //to-customGray-200
       //!! 

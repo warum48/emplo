@@ -31,6 +31,8 @@ import { Preloader } from '@/components/__atoms/Preloader/Preloader';
 import React from 'react';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import { TextHint } from '@/components/__atoms/TextBlocks/TextBlocks';
+import { useDebugFormMutation } from '@/rtk/queries/debug';
+import { useMutationNotifications } from '@/hooks/useNotifications';
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyApiSlice';
 
 type TProps = {
@@ -43,8 +45,9 @@ type TProps = {
 
 export const NewProfileForm = ({ activeStep, setActiveStep, onNext, stepNames }: TProps) => {
   const dispatch = useDispatch<AppDispatch>();
-  const [createProfile, { isLoading, isSuccess, isError, error, data, isUninitialized, reset }] =
-    useCreateProfileMutation();
+  const [createProfile,  { isLoading, isSuccess, isError, error, data, isUninitialized, reset }] =
+    //useCreateProfileMutation();
+    useDebugFormMutation();
   const {
     data: data_crits,
     isLoading: loading_crits,
@@ -181,6 +184,33 @@ export const NewProfileForm = ({ activeStep, setActiveStep, onNext, stepNames }:
     },*/
     },
   });
+
+  useMutationNotifications({
+    text: 'Профиль успешно создан',
+    data: data,
+    data_details: data && data?.msg ? data?.msg : 'Вы можете найти его в списке профилей',
+   // data_code: data_req?.requestAvailableDocument?.statusCode,
+   // data_details:
+   //   data_req?.requestAvailableDocument?.detailsRu || data_req?.requestAvailableDocument?.details,
+    error: error,
+  //  traceId: data_req?.requestAvailableDocument?.traceId,
+   // onSuccess: onSuccess,
+  });
+
+  React.useEffect(() => {
+    
+    if (isSuccess) {
+      // Perform action on success, e.g., show a success message or redirect
+      console.log('Profile created successfully:', data);
+      // You can also trigger any additional actions here, like navigating to another page
+      // router.push('/profile');
+    }
+  
+    if (isError) {
+      // Handle error, log, or notify user
+      console.error('Error creating profile:', error);
+    }
+  }, [isSuccess, isError, data, error]);
 
   React.useEffect(() => {
     //  form.setInitialValues({ criteria:data_crits[0]});

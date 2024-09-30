@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { api } from '../queries/candidates';
+import { debug } from '../queries/debug';
 import { joborder} from '../queries/joborder';
 import { authApi } from '../queries/authApi';
 import someSlice from '../slices/someFeature_unused/someSlice';
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
   [vacancyApi.reducerPath]: vacancyApi.reducer,
   [joborder.reducerPath]: joborder.reducer,
+  [debug.reducerPath]: debug.reducer,
 
   //vacancyForm: vacancyFormReducer,
 
@@ -62,7 +64,7 @@ const store = configureStore({
       thunk: {
         extraArgument: loginAndFetchUser//authApi
       }
-    }).concat(api.middleware, joborder.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)//.concat(thunk),
+    }).concat(api.middleware, debug.middleware, joborder.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)//.concat(thunk),
   //middleware: (getDefaultMiddleware) =>
   //  getDefaultMiddleware().concat(authApi.middleware).concat(thunk),
     
