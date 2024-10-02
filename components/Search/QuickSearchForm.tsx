@@ -134,7 +134,7 @@ export const QuickSearch = ({ onSearch }: TProps) => {
           form={form}
           size="lg"
           showLabel={false}
-          className="flex-shrink-0 flex-grow"
+          className="^flex-shrink-0 flex-grow flex-wrap"
         />
         <SpecialitiesSelect
           form={form}
@@ -151,7 +151,7 @@ export const QuickSearch = ({ onSearch }: TProps) => {
       </Link>*/}
         <Button
           size="lg"
-          className="bg-opacity-80 hover:bg-opacity-100"
+          className="bg-opacity-80 hover:bg-opacity-100 min-w-36"
           //onClick={onSearch}
           //onClick={handleSearchHH} disabled={isLoading}
           // onClick={handleSearch} disabled={isLoading}
