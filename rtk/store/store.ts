@@ -3,35 +3,28 @@ import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
+//----------------QUERIES----------------
 import { api } from '../queries/candidates';
 import { debug } from '../queries/debug';
 import { joborder} from '../queries/joborder';
 import { authApi } from '../queries/authApi';
-import someSlice from '../slices/someFeature_unused/someSlice';
-import tempSlice from '../slices/tempFeature_unused/tempSlice';
-//import candidateSearchSlice from '../slices/searchCandidateForm/searchCandidate';
+import { vacancyApi } from '../queries/vacancy';
+import { predictorApi } from '@/rtk/queries/predictorApi';
+//-----------------SLICES----------------
 import candidateSearchReducer from '../slices/searchCandidateForm/searchCandidate';
 import resumeFormSlice from '../slices/resumeForm';
 import createVacancySlice from '../slices/vacancy/vacancySlice';
 import createVacancyHHSlice from '../slices/vacancy/vacancySliceHH';
-//import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
 import UISettingsSlice from '../slices/UISettings';
 import searchReducer from '../slices/search/searchSlice';
+import quickSearchReducer from '../slices/quickSearch';
 import searchAIReducer from '../slices/search/searchHHSlice';
 import authReducer from '../slices/authSlice';
 import authFormSlice from '../slices/authForm';
-import { predictorApi } from '@/rtk/queries/predictorApi';
-import thunk from 'redux-thunk';
 
-//import { configureStore, createAsyncThunk, createSlice, MiddlewareArray } from '@reduxjs/toolkit';
-import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
-import UISettings from '../slices/UISettings';
 import { listenerMiddleware } from './listenerMidleware';
-//import { vacancyApi } from '../features/vacancy/vacancyZayavkaSlice';
-import { vacancyApi } from '../queries/vacancy';
-//import thunk from 'redux-thunk';
-//import { tempSlice } from './features/tempFeature/tempSlice'; // Adjust the path as necessary
+
 
 
 const rootReducer = combineReducers({
@@ -48,9 +41,10 @@ const rootReducer = combineReducers({
   createVacancyHH: persistReducer({ key: 'createVacancyHH', storage }, createVacancyHHSlice),
   auth: authReducer,
   search: searchReducer,
+  quickSearch: quickSearchReducer,
   searchAI: searchAIReducer,
   authForm: persistReducer({ key: 'authForm', storage }, authFormSlice),
-  //jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
+  //!!jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice), //persist form - temporary disabled, form changes offten
   jobSearch: candidateSearchReducer,
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),
   UISettings: persistReducer({ key: 'UISettings', storage }, UISettingsSlice),
@@ -61,12 +55,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Required for persist to work with non-serializable data like promises
-      thunk: {
-        extraArgument: loginAndFetchUser//authApi
-      }
-    }).concat(api.middleware, debug.middleware, joborder.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)//.concat(thunk),
-  //middleware: (getDefaultMiddleware) =>
-  //  getDefaultMiddleware().concat(authApi.middleware).concat(thunk),
+    }).concat(api.middleware, debug.middleware, joborder.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)
+
     
 });
 
@@ -75,7 +65,6 @@ setupListeners(store.dispatch);
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-//export type AppDispatch = typeof store.dispatch;
 
 
 export default store;

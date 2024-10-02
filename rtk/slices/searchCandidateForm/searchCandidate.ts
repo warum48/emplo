@@ -1,6 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const candidateSearchFormInitialState = {
+type CandidateSearchForm = {
+  specialty: string;
+  area: string[];
+  relocation_type: string;
+  //schedule: string[]; //["fullDay", "shift", "flexible", "remote", "flyInFlyOut"]
+  skills: string[];
+  experience: number;//string; //["noExperience", "between1And3", "between3And6", "moreThan6"]
+  gender: string;
+  age: number;
+  salary: number;
+  job_search_status: string[];
+  limit: number | null;
+};
+
+/*
+{
+    specialty: string;
+    area: never[];
+    relocation_type: string;
+    skills: never[];
+    experience: number;
+    gender: string;
+    age: number;
+    salary: number;
+    job_search_status: never[];
+    limit: null;
+}*/
+
+export const candidateSearchFormInitialState:CandidateSearchForm = {
   specialty: '',
   area: [],
   relocation_type: '',

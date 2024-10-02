@@ -78,7 +78,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-roboto bg-white dark:bg-adjGray-900 min-h-full  ^overflow-x-hidden">
+      <body className="font-roboto bg-white dark:bg-adjGray-900  text-black dark:text-white min-h-full  ^overflow-x-hidden">
       <GlobalProvider>
         <MantineProvider
           theme={theme}
@@ -91,8 +91,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <AuthProvider>
             <PersistGate loading={null} persistor={persistor}>
               <div
-                className="dark:bg-adjGray-900 min-h-screen h-full
-                text-black dark:text-white
+                className="^dark:bg-adjGray-900 min-h-screen h-full
+               
     flex flex-col relative overflow-x-hidden w-full
     "
               >

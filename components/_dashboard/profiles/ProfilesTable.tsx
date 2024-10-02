@@ -11,6 +11,7 @@ import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import { Debugger } from '@/components/__atoms/Debugger/Debugger';
 import dayjs from 'dayjs';
 import Link from 'next/link';
+import { BasicError } from '@/components/Errors/BasicError';
 
 const tableData = [
   {
@@ -239,6 +240,7 @@ export const ProfilesTable = () => {
         <Debugger>
           <JSONViewer data={data} />
         </Debugger>
+        {error && <BasicError error={error} className='mt-4'/>}
       </div>
     </>
   );

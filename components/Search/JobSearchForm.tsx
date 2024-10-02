@@ -50,6 +50,8 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
   const [formRenderCount, setFormRenderCount] = useState(0);
   const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
 
+  const quickSearchValues = useSelector((state: RootState) => state.quickSearch);
+
 
 
   const handleSubmit = async (values: typeof form.values) => {
@@ -101,6 +103,12 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
     },
   });
 
+  React.useEffect(() => {
+    if (quickSearchValues) {
+      form.setValues(quickSearchValues);
+    }
+  }, [quickSearchValues, quickSearchValues?.area, quickSearchValues?.specialty]);
+
 
 
   const handleChange = (field: string, value: any) => {
@@ -138,7 +146,7 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
                 : ''
             }`}
         >
-          <SpecialitiesSelect form={form} formFieldName="speciality"/>
+          <SpecialitiesSelect form={form} formFieldName="specialty"/>
 
           <RegionsSelect form={form} />
 
@@ -264,6 +272,8 @@ const JobSearchForm = ({ gridCols = 1, onSearch = () => {}, searchType = 'intern
         </div>
       </form>
       <JSONViewer data={form.values} />
+      <JSONViewer data={quickSearchValues} />
+      {JSON.stringify(quickSearchValues)}
       <Confirmator
         onConfirm={resetForm} //
         header={'Вы действительно хотите очистить форму?'}

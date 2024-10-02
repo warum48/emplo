@@ -17,6 +17,7 @@ import { SpecialitiesSelect } from "../DynamicFormFields/Specialities";
 import { JSONViewer } from "../__atoms/JSONViewer/JSONViewr";
 import { BasicError } from "../Errors/BasicError";
 import { useMutationNotifications } from "@/hooks/useNotifications";
+import quickSearch, { setQuickSearchValues } from "@/rtk/slices/quickSearch";
 //import { setSearchHHResults } from "@/rtk/slices/searchHHSlice";
 
 type TProps = {
@@ -29,8 +30,7 @@ type TFormValues = {
 };
 
 export const QuickSearch = ({ onSearch }: TProps) => {
-  const [specialty, setSpecialty] = useState("");
-  const [area, setArea] = useState("");
+
   const [searchCandidates, { data, error, isLoading }] =
     useSearchCandidatesMutation();
   const [
@@ -86,13 +86,16 @@ export const QuickSearch = ({ onSearch }: TProps) => {
       // await searchCandidates({ specialty, area }).unwrap();
       //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
       //const results = await searchCandidates({ specialty, area }).unwrap();
-      const results = await searchCandidates({
+      const quickSearchValues = {
         specialty: values.specialty,
         area: values.area,
-      }).unwrap();
+      }
+      const results = await searchCandidates(quickSearchValues).unwrap();
       console.log("===results", results);
       if (Array.isArray(results?.items)) {
         dispatch(setSearchResults(results));
+        dispatch(setQuickSearchValues(quickSearchValues));
+        console.log('dispatched');
         onSearch();
         setShowError(false);
       } else {
@@ -135,7 +138,7 @@ export const QuickSearch = ({ onSearch }: TProps) => {
         />
         <SpecialitiesSelect
           form={form}
-          formFieldName="speciality"
+          formFieldName="specialty"
           size="lg"
           showLabel={false}
           className="flex-shrink-0 flex-grow"
