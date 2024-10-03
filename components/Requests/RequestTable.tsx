@@ -5,9 +5,11 @@ import { Button } from '@mantine/core';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import { FiltersOverTableContainer } from '../FiltersOverTable/FiltersOberTableContainer';
+import { FiltersContainer,  } from '../__atoms/Tables/Filters/FiltersContainer';
 import { useGetOrdersQuery } from '@/rtk/queries/joborder';
 import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
+import { FilterItemContainer } from '../__atoms/Tables/Filters/FilterItemContainer';
+import { filterLabelStyle } from '@/styles/mantine_styles';
 
 const mockFilter = ['все'];
 
@@ -110,62 +112,27 @@ export const RequestTable = () => {
         {/*<Button className="bg-teal-500 text-white">Добавить кандидата</Button> */}
       </div>
 
-      <FiltersOverTableContainer>
-          <Input.Wrapper
-            label="Подразделение:"
-            labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
-            styles={{
-              root: { display: 'flex', alignItems: 'center' }, // Flexbox to align label and input
-            }}
-          >
-            <Select data={mockFilter} placeholder="Все" />
-          </Input.Wrapper>
+      <FiltersContainer>
+      <FilterItemContainer>
+            <Select data={mockFilter} placeholder="Все" labelProps={{ style: filterLabelStyle }}/>
+            </FilterItemContainer>
 
-          <Input.Wrapper
-            label="Наименование:"
-            labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
-            styles={{
-              root: { display: 'flex', alignItems: 'center' }, // Flexbox to align label and input
-            }}
-          >
-            <Select data={mockFilter} placeholder="Все" />
-          </Input.Wrapper>
+          <FilterItemContainer>
+            <Select data={mockFilter} placeholder="Все" labelProps={{ style: filterLabelStyle }}/>
+            </FilterItemContainer>
 
-          <Input.Wrapper
-            label="Город:"
-            labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
-            styles={{
-              root: { display: 'flex', alignItems: 'center', justifyItems: 'start' }, // Flexbox to align label and input
-            }}
-          >
-            <Select data={mockFilter} placeholder="Все" />
-          </Input.Wrapper>
+          <FilterItemContainer>
+            <Select data={mockFilter} placeholder="Все" labelProps={{ style: filterLabelStyle }}/>
+            </FilterItemContainer>
 
-          <Input.Wrapper
-            label="Город:"
-            labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
-            styles={{
-              root: {
-                display: 'flex',
-                alignItems: 'center',
-                justifyItems: 'start',
-                minWidth: '250px',
-              }, // Flexbox to align label and input
-            }}
-          >
-            <Select data={mockFilter} placeholder="Все" />
-          </Input.Wrapper>
+          <FilterItemContainer>
+            <Select data={mockFilter} placeholder="Все" labelProps={{ style: filterLabelStyle }}/>
+            </FilterItemContainer>
 
-          <Input.Wrapper
-            label="Город:"
-            labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
-            styles={{
-              root: { display: 'flex', alignItems: 'center', justifyItems: 'start' }, // Flexbox to align label and input
-            }}
-          >
-            <Select data={mockFilter} placeholder="Все" />
-          </Input.Wrapper>
-          </FiltersOverTableContainer>
+          <FilterItemContainer>
+            <Select data={mockFilter} placeholder="Все" labelProps={{ style: filterLabelStyle }}/>
+            </FilterItemContainer>
+          </FiltersContainer>
 
       <Table
         // striped highlightOnHover

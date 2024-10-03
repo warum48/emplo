@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { FiltersOverTableContainer } from '@/components/FiltersOverTable/FiltersOberTableContainer';
+import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
 import { useGetVacanciesQuery } from '@/rtk/queries/joborder';
 
 

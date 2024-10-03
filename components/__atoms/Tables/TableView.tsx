@@ -26,7 +26,189 @@ import { FiltersContainer } from "@/components/__atoms/Tables/Filters/FiltersCon
 
 const mockFilter = ["все"];
 
-export const ProfilesTable = () => {
+type FilterWithSelect = {
+  data: any;
+  placeholder: string;
+  label: string;
+};
+
+type FilterWithComponent = {
+  component: JSX.Element;
+};
+
+type TFilter = FilterWithSelect | FilterWithComponent;
+
+type TCellValue = { value: string; formatter: (value: any) => string } | string;
+
+type TProps = {
+  header: string;
+  addButton: {
+    text: string;
+    link: string;
+  };
+  filters: TFilter[];
+  data: any[];
+  ths: string[];
+  tds: TCellValue[];
+  loading: boolean;
+  error: any;
+  actionsMenu: {
+    text: string;
+    link: string;
+    onClick?: () => void;
+  }[];
+};
+
+export const TableView = ({
+  header,
+  addButton,
+  filters,
+  data,
+  ths,
+  tds,
+  loading,
+  error,
+  actionsMenu,
+}: TProps) => {
+  const router = useRouter();
+  const [opened, { toggle }] = useDisclosure(false);
+  return (
+    <>
+      <div className="flex items-center justify-between gap-4">
+        <div className="form-header">{header}</div>
+        <Link href={addButton.link}>
+          <Button className="bg-teal-600 text-white">{addButton.text}</Button>
+        </Link>
+      </div>
+      <FiltersContainer>
+        {filters.map((filter, index) => (
+          <FilterItemContainer key={index}>
+            {"component" in filter ? ( // Type narrowing using "in" to check if it's a component
+              filter.component
+            ) : (
+              <Select
+                data={filter.data} // Safely access Select props
+                placeholder={filter.placeholder}
+                labelProps={{ style: filterLabelStyle }}
+                label={filter.label}
+              />
+            )}
+          </FilterItemContainer>
+        ))}
+      </FiltersContainer>
+      <div className="inline-block min-w-full">
+        <Table className="mt-4 min-w-full overflow-hidden">
+          <Table.Thead>
+            <Table.Tr className="rounded-t-lg bg-purple-400/10 dark:bg-purple-900/15">
+              <Table.Th className="px-4 py-2">...</Table.Th>
+              {ths.map((th, index) => (
+                <Table.Th className="px-4 py-2" key={index}>
+                  {th}
+                </Table.Th>
+              ))}
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
+            {data?.map((row, index) => (
+              <Table.Tr
+                key={index}
+                className="cursor-pointer"
+                // hover:bg-gray-400/10
+                //  onClick={() => router.push('/dashboard/profiles/23')}
+              >
+                <Table.Td>
+                  <Menu>
+                    <Menu.Target>
+                      <ActionIcon>
+                        <IconDotsVertical size={16} />
+                      </ActionIcon>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                      {actionsMenu.map((action, index) => (
+                        <Menu.Item
+                          onClick={
+                            action.onClick
+                              ? action.onClick
+                              : () => {
+                                  toggle();
+                                  router.push(action.link);
+                                }
+                          }
+                        >
+                          {action.text}
+                        </Menu.Item>
+                      ))}
+                    </Menu.Dropdown>
+                  </Menu>
+                </Table.Td>
+                {tds.map((td, index) => (
+                  <Table.Td className="px-4 py-2" key={index}>
+                    {
+                      typeof td === "string"
+                        ? row[td] // Handle string type
+                        : row[td.value] && td.formatter(row[td.value]) // Handle object with formatter
+                    }
+                  </Table.Td>
+                ))}
+              </Table.Tr>
+            ))}
+          </Table.Tbody>
+        </Table>
+        <Debugger>
+          <JSONViewer data={data} />
+        </Debugger>
+        {error && <BasicError error={error} className="mt-4" />}
+      </div>
+    </>
+  );
+};
+
+const exampleTable = () => {
+  return (
+    <TableView
+      header="Список профилей вакансий"
+      addButton={{
+        text: "Добавить профиль",
+        link: "/dashboard/profiles/create",
+      }}
+      filters={[
+        {
+          data: mockFilter,
+          placeholder: "Все",
+          label: "Подразделение:",
+        },
+        {
+          data: mockFilter,
+          placeholder: "Все",
+          label: "Наименование:",
+        },
+        {
+          data: mockFilter,
+          placeholder: "Все",
+          label: "Город:",
+        },
+      ]}
+      data={[]}
+      ths={["Наименование", "Должность", "Подразделение", "Дата закрытия"]}
+      tds={["org_job_name", "speciality", "org_unit", "created_at"]}
+      loading={false}
+      error={null}
+      actionsMenu={[
+        { text: "Редактировать", link: "/dashboard/profiles/23" },
+        { text: "Создать заявку", link: "/dashboard/vacancies/create" },
+        {
+          text: "Удалить",
+          link: "",
+          onClick: () => {
+            console.log("remove");
+          },
+        },
+      ]}
+    />
+  );
+};
+
+const ProfilesTable = () => {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
   const { data, error, isLoading } = useGetProfilesQuery();
@@ -105,11 +287,7 @@ export const ProfilesTable = () => {
           
         </FiltersOverTableContainer>*/}
 
-        <Table
-          // striped highlightOnHover
-          //Наименование 	Должность	Подразделение	Желаемая дата закрытия
-          className="mt-4 min-w-full overflow-hidden"
-        >
+        <Table className="mt-4 min-w-full overflow-hidden">
           <Table.Thead
             className=""
             //bg-gray-200 dark:bg-gray-700
@@ -138,7 +316,6 @@ export const ProfilesTable = () => {
             {data?.map((row: any, index: number) => (
               <Table.Tr
                 key={index}
-                //  onClick={() => router.push('/dashboard/profiles/23')}
                 className="cursor-pointer hover:bg-gray-400/10"
               >
                 <Table.Td className="px-4 py-2">{row.org_job_name}</Table.Td>
@@ -186,7 +363,7 @@ export const ProfilesTable = () => {
         <Debugger>
           <JSONViewer data={data} />
         </Debugger>
-        {error && <BasicError error={error} className="mt-4" />}
+        {error && <BasicError error={error} className="mt-4 max-w-96" />}
       </div>
     </>
   );

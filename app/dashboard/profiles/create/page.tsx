@@ -1,27 +1,13 @@
 "use client";
-import {
-  TextInfo,
-  TitleLabel,
-} from "@/components/__atoms/TextBlocks/TextBlocks";
-import AuthorizationForm from "@/components/_auth/AuthorizationForm";
 import { DashBoardPageContainer } from "@/components/_dashboard/PageContainer/DashBoardPageContainer";
-import { PredictorsList } from "@/components/_dashboard/predictor/Predictors";
-import VacancyCreationFormHH from "@/components/_dashboard/vacancies/create/HHBasedVacancyForm";
-import { VacancyCreationFormZayavka } from "@/components/_dashboard/vacancies/create/ZayavkaForm";
-import { XY } from "@/components/_dashboard/predictor/XY";
-import ResumeForm from "@/components/CreateResumeForm/CreateResume";
-import DashBoardHeader from "@/components/Header/DashBoardHeader";
-import Header from "@/components/Header/Header";
-import JobSearchForm from "@/components/Search/JobSearchForm";
-import { ResultList } from "@/components/ResultList/ResultList";
 import { Stepper } from "@mantine/core";
 
-import Head from "next/head";
 import React from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import { IconRobot } from "@tabler/icons-react";
-import { NewProfileForm } from "@/components/_dashboard/profiles/create/NewProfileForm";
+//import { NewProfileForm } from "@/components/_dashboard/profiles/create/NewProfileForm";
 import { FormWithStepperBg } from "@/components/BgColors/FormWithStepperBg";
+import { NewProfileForm } from "@/components/_dashboard/profiles/create/NewProfile"; //Form
 
 const Settings = () => {
   const [activeStep, setActiveStep] = React.useState(0);

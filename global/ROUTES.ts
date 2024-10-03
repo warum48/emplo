@@ -50,7 +50,9 @@ export const Routes = {
               icon: IconRobot,
               initiallyOpened: true,
               links: [
+                { label: 'Критерии', link: '/dashboard/criterias' },
                 { label: 'Профили', link: '/dashboard/profiles' },
+                
                 { label: 'Заявки', link: '/dashboard/requests' },
                 { label: 'Вакансии', link: '/dashboard/vacancies' },
                 { label: 'Debug - Новая заявка 1С', link: '/dashboard/vacancies/create' },

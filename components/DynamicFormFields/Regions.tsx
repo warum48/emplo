@@ -11,13 +11,15 @@ import { QueryStateDisplay } from '@/components/__atoms/QueryStateDisplay/QueryS
 import { customLabelStyle } from '@/styles/mantine_styles';
 
 type TProps = {
-    form: any
+    form?: any
+    formFieldName?:string
     size?:string;
     showLabel?:boolean;
     className?:string;
+    onChange?:any;
 }
 
-export const RegionsSelect = ({form, size='md', showLabel=true, className=''}: TProps) => {
+export const RegionsSelect = ({form, formFieldName='area', onChange, size='md', showLabel=true, className=''}: TProps) => {
     const {
         data: regions,
         error: regionsError,
@@ -28,16 +30,21 @@ export const RegionsSelect = ({form, size='md', showLabel=true, className=''}: T
         <>
         {regions ? (
             <MultiSelect
-              label={showLabel ? "Регион поиска" : null} //"Регион поиска"
+              label={showLabel ? "Регион" : null} //"Регион поиска"
               size={size}
               className={className}
-              placeholder="Выберите регион поиска"
+              placeholder="Выберите регион"
               labelProps={{ style: customLabelStyle }}
               required
               data={regions}
-            
-              
-              {...form.getInputProps('area')}
+
+              onChange={(value) => {
+                if(onChange) { onChange(value)};
+                if (form) {
+                  form.getInputProps(formFieldName).onChange(value); // Safely access form if it exists
+                }
+              }}
+              {...(form ? form.getInputProps('formFieldName') : {})} 
             />
           ) :  (
             <QueryStateDisplay

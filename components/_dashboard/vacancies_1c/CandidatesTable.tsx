@@ -5,7 +5,7 @@ import { Button } from '@mantine/core';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import { FiltersOverTableContainer } from '@/components/FiltersOverTable/FiltersOberTableContainer';
+import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
 //import { FiltersOverTableContainer } from '../FiltersOverTable/FiltersOberTableContainer';
 
 const mockFilter = ['все'];
