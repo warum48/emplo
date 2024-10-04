@@ -100,7 +100,9 @@ export const TableView = ({
           </FilterItemContainer>
         ))}
       </FiltersContainer>
-      <div className="inline-block min-w-full">
+      <div className="w-full overflow-x-auto"
+      //className="inline-block min-w-full"
+      >
         <Table className="mt-4 min-w-full overflow-hidden">
           <Table.Thead>
             <Table.Tr className="rounded-t-lg bg-purple-400/10 dark:bg-purple-900/15">
