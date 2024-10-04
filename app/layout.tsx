@@ -12,6 +12,7 @@ import '@/styles/globals.css';
 import '@/styles/styles.css';
 import '@/styles/gradient_border.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
 //
 //type ColorScheme = 'light' | 'dark';
 

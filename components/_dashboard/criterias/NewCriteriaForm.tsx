@@ -107,7 +107,7 @@ export const NewCriteriaForm = ({
         "salary": 30000,
         "job_search_status": "active_search",
         "search_limit_target": 1,
-        "created_by": "string"
+       // "created_by": "string"
       
     
   };
@@ -214,7 +214,7 @@ export const NewCriteriaForm = ({
                 placeholder="Метро/район"
                 // data={[]} // Replace with actual data
                 //  multiple
-                {...form.getInputProps("criteria.metro")}
+                {...form.getInputProps("metro")}
               />
               <Select
                 label="Готовность к переезду"
@@ -227,11 +227,11 @@ export const NewCriteriaForm = ({
                   { value: "living", label: "Проживание" },
                   { value: "relocation", label: "Переезд" },
                 ]}
-                {...form.getInputProps("criteria.relocation_type")}
+                {...form.getInputProps("relocation_type")}
               />
               <Checkbox.Group
                 label="График работы"
-                {...form.getInputProps("criteria.schedule")}
+                {...form.getInputProps("schedule")}
                 className="checkbox-group"
               >
                 <Checkbox value="fullDay" label="Полный день" />
@@ -245,7 +245,7 @@ export const NewCriteriaForm = ({
                 labelProps={{ style: customLabelStyle }}
                 placeholder="Введите количество лет опыта"
                 min={0}
-                {...form.getInputProps("criteria.experience")}
+                {...form.getInputProps("experience")}
               />
               <Select
                 label="Пол"
@@ -254,7 +254,7 @@ export const NewCriteriaForm = ({
                   { value: "male", label: "Муж" },
                   { value: "female", label: "Жен" },
                 ]}
-                {...form.getInputProps("criteria.gender")}
+                {...form.getInputProps("gender")}
               />
               <Group>
                 <NumberInput
@@ -262,7 +262,7 @@ export const NewCriteriaForm = ({
                   labelProps={{ style: customLabelStyle }}
                   placeholder="Введите возраст от"
                   min={0}
-                  {...form.getInputProps("criteria.age")}
+                  {...form.getInputProps("age")}
                 />
 
                 <NumberInput
@@ -270,7 +270,7 @@ export const NewCriteriaForm = ({
                   labelProps={{ style: customLabelStyle }}
                   placeholder="Введите возраст до (не обязательно)"
                   min={0}
-                  {...form.getInputProps("criteria.age.to")}
+                  {...form.getInputProps("age.to")}
                 />
               </Group>
               <NumberInput
@@ -278,7 +278,7 @@ export const NewCriteriaForm = ({
                 labelProps={{ style: customLabelStyle }}
                 placeholder="Введите зарплату до (не обязательно)"
                 min={0}
-                {...form.getInputProps("criteria.salary")}
+                {...form.getInputProps("salary")}
               />
             
           

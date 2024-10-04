@@ -6,7 +6,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
+import { FiltersContainer } from '@/components/__atoms/Tables/Filters/FiltersContainer';
+//import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
 
 
 
@@ -112,7 +113,7 @@ export const VacanciesTable = () => {
         <Button className="bg-teal-500 text-white">Добавить профиль</Button>
       </div>
 
-      <FiltersOverTableContainer>
+      <FiltersContainer>
           <Input.Wrapper
             label="Подразделение:"
             labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
@@ -146,7 +147,7 @@ export const VacanciesTable = () => {
             <Select data={mockFilter} placeholder="Все" />
           </Input.Wrapper>
           
-        </FiltersOverTableContainer>
+        </FiltersContainer>
 
       <Table
         // striped highlightOnHover

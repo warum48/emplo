@@ -5,7 +5,8 @@ import { Button } from '@mantine/core';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
+import { FiltersContainer } from '@/components/__atoms/Tables/Filters/FiltersContainer';
+//import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
 //import { FiltersOverTableContainer } from '../FiltersOverTable/FiltersOberTableContainer';
 
 const mockFilter = ['все'];
@@ -157,7 +158,7 @@ export const CandidatesTable = () => {
         {/*<Button className="bg-teal-500 text-white">Добавить кандидата</Button> */}
       </div>
 
-      <FiltersOverTableContainer>
+      <FiltersContainer>
           <Input.Wrapper
             label="Подразделение:"
             labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
@@ -212,7 +213,7 @@ export const CandidatesTable = () => {
           >
             <Select data={mockFilter} placeholder="Все" />
           </Input.Wrapper>
-          </FiltersOverTableContainer>
+          </FiltersContainer>
 
           <Table className="mt-4 min-w-full">
   <Table.Thead>

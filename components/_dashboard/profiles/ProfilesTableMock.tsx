@@ -5,9 +5,10 @@ import { Button } from '@mantine/core';
 import { useRouter } from 'next/navigation';
 import { IconDotsVertical } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
-import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
+//import { FiltersOverTableContainer } from '@/components/__atoms/Tables/Filters/FiltersOverTable/FiltersOberTableContainer';
 import { useGetProfilesQuery } from '@/rtk/queries/joborder';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+import { FiltersContainer } from '@/components/__atoms/Tables/Filters/FiltersContainer';
 
 const tableData = [
   {
@@ -109,7 +110,7 @@ export const ProfilesTable = () => {
         <Button className="bg-teal-500 text-white">Добавить профиль</Button>
       </div>
 
-      <FiltersOverTableContainer>
+      <FiltersContainer>
           <Input.Wrapper
             label="Подразделение:"
             labelProps={{ style: { marginRight: '8px', whiteSpace: 'nowrap' } }} // Adjust label styling
@@ -143,7 +144,7 @@ export const ProfilesTable = () => {
             <Select data={mockFilter} placeholder="Все" />
           </Input.Wrapper>
           
-        </FiltersOverTableContainer>
+        </FiltersContainer>
 
       <Table
         // striped highlightOnHover

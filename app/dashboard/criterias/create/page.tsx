@@ -9,7 +9,7 @@ import { IconRobot } from '@tabler/icons-react';
 
 const Page = () => {
   return (
-    <DashBoardPageContainer header="Создать вакансию" Icon={IconRobot}>
+    <DashBoardPageContainer header="Новые критерии" Icon={IconRobot}>
       <div className="flex flex-col items-center w-full ">
         
 

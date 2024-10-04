@@ -59,6 +59,10 @@ type TProps = {
   }[];
 };
 
+const getNestedValue = (obj: any, path: string) => {
+  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+};
+
 export const TableView = ({
   header,
   addButton,
@@ -143,11 +147,15 @@ export const TableView = ({
                 </Table.Td>
                 {tds.map((td, index) => (
                   <Table.Td className="px-4 py-2" key={index}>
-                    {
+                    {/*
                       typeof td === "string"
                         ? row[td] // Handle string type
                         : row[td.value] && td.formatter(row[td.value]) // Handle object with formatter
-                    }
+                    */}
+                    {typeof td === "string"
+      ? getNestedValue(row, td)  // Handle string type, possibly nested
+      : getNestedValue(row, td.value) && td.formatter(getNestedValue(row, td.value)) // Handle object with formatter, possibly nested
+    }
                   </Table.Td>
                 ))}
               </Table.Tr>

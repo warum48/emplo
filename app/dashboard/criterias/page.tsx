@@ -12,9 +12,8 @@ const Requests = () => {
   const mockFilter = ["все"];
   const { data, error, isLoading } = useGetSearchCritsQuery();
   return (
-    <DashBoardPageContainer header="Профили" Icon={IconSettings}>
+    <DashBoardPageContainer header="Критерии" Icon={IconSettings}>
       <div className="form-bg-and-text mr-2 overflow-auto rounded p-8">
-        {/*<ProfilesTable/>*/}
         <TableView
           header="Список критериев вакансий"
           addButton={{

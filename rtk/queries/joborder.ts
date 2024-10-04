@@ -29,6 +29,13 @@ export const joborder = createApi({
         body: profile,
       }),
     }),
+    createJobOrder: builder.mutation<void, any>({
+      query: (order) => ({
+        url: '/api/joborder/',
+        method: 'POST',
+        body: order,
+      }),
+    }),
 
     createCriteria: builder.mutation<void, any>({
       query: (crit) => ({
@@ -50,6 +57,8 @@ export const {
     useGetSearchCritsQuery,
     useLazyGetSearchCritsQuery,
     useCreateProfileMutation,
-    useCreateCriteriaMutation
+    useCreateCriteriaMutation,
+    useCreateJobOrderMutation
+
  } = joborder;
 
