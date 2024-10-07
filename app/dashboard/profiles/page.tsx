@@ -16,6 +16,7 @@ const Requests = () => {
       <div className="form-bg-and-text mr-2 overflow-auto rounded p-8">
         {/*<ProfilesTable/>*/}
         <TableView
+        
           header="Список профилей вакансий"
           addButton={{
             text: "Добавить профиль",
@@ -26,14 +27,17 @@ const Requests = () => {
               data: mockFilter,
               placeholder: "Все",
               label: "Подразделение:",
+              fieldName: "org_unit",
             },
             {
               data: mockFilter,
               placeholder: "Все",
               label: "Наименование:",
+              fieldName: "name",
             },
             {
-              component: <RegionsSelect />
+              component: <RegionsSelect />,
+              fieldName:"",
             },
           ]}
           

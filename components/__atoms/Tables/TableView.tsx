@@ -50,8 +50,8 @@ type TProps = {
   };
   filters: TFilter[];
 
-  filterState: any;//Record<string, string>;
-  setFilterState: React.Dispatch<React.SetStateAction<any>>;
+  filterState?: any;//Record<string, string>;
+  setFilterState?: React.Dispatch<React.SetStateAction<any>>;
   data: any[];
   ths: string[];
   tds: TCellValue[];
@@ -71,8 +71,8 @@ const getNestedValue = (obj: any, path: string) => {
 export const TableView = ({
 
   filters,
-  filterState,
-  setFilterState,
+  filterState = {},
+  setFilterState = () => {},
 
   header,
   addButton,

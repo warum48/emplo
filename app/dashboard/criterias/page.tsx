@@ -15,26 +15,33 @@ const Requests = () => {
     <DashBoardPageContainer header="Критерии" Icon={IconSettings}>
       <div className="form-bg-and-text mr-2 overflow-auto rounded p-8">
         <TableView
+       filterState={{}}
+        setFilterState={() => {}}
           header="Список критериев вакансий"
           addButton={{
             text: "Добавить набор критериев",
             link: "/dashboard/criterias/create",
           }}
-          filters={[
+          filters={[]
+          /*  [
             {
               data: mockFilter,
               placeholder: "Все",
               label: "Подразделение:",
+              fieldName: "job_profile.org_unit",
             },
             {
               data: mockFilter,
               placeholder: "Все",
               label: "Наименование:",
+              fieldName: "job_profile.org_job_name",
             },
             {
               component: <RegionsSelect />
+              ,fieldName: "job_profile.area"
             },
-          ]}
+          ]*/
+        }
           
           ths ={ [
             "Наименование",  // name
