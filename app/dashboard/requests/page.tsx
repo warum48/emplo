@@ -6,32 +6,84 @@ import { TableView } from '@/components/__atoms/Tables/TableView';
 import { RegionsSelect } from '@/components/DynamicFormFields/Regions';
 import dayjs from 'dayjs';
 import { useGetOrdersQuery } from '@/rtk/queries/joborder';
+import React from 'react';
 
 const Requests = () => {
   const mockFilter = ["все"];
   const {data, error, isLoading} = useGetOrdersQuery();
+
+ 
+// External filter state
+const [filterState, setFilterState] = React.useState({
+  "job_profile.org_unit": "",
+  "criteria.speciality": "",
+  name: "",
+});
+
+// Generate filter data
+const filterOptions = React.useMemo(() => {
+  if (!data) return {};
+  
+ // const getUniqueValues = (field:any) => [...new Set(data.map((item) => field.split('.').reduce((o, i) => o?.[i], item)))];
+ const getUniqueValues = (field: string) => 
+  [...new Set<string>(data.map((item:any) => field.split('.').reduce((o, i) => o?.[i], item)))];
+ // "target": "es5", - more errors with this setting in tsconfig
+
+
+  return {
+    orgUnits: getUniqueValues("job_profile.org_unit").map((value) => ({
+      value,
+      label: value || "Не указано"
+    })),
+    specialities: getUniqueValues("criteria.speciality").map((value) => ({
+      value,
+      label: value || "Не указано"
+    })),
+    names: getUniqueValues("name").map((value) => ({
+      value,
+      label: value || "Не указано"
+    })),
+  };
+}, [data]);
+
+
+
+
+
   return (
      <DashBoardPageContainer header="Заявки" Icon={IconSettings} >
       <div className="form-bg-and-text mr-2 overflow-auto rounded p-8">
         <TableView
-          header="Список критериев вакансий"
+        filterState={filterState} 
+        setFilterState={setFilterState}
+          header="Список заявок"
           addButton={{
-            text: "Добавить набор критериев",
+            text: "Добавить заявку",
             link: "/dashboard/requests/create",
           }}
           filters={[
             {
-              data: mockFilter,
+              //data: mockFilter,
+              data: filterOptions.orgUnits,
               placeholder: "Все",
               label: "Подразделение:",
+              fieldName: "job_profile.org_unit",
             },
             {
-              data: mockFilter,
+              data: filterOptions.specialities,
               placeholder: "Все",
               label: "Наименование:",
+              fieldName: "criteria.speciality",
             },
             {
-              component: <RegionsSelect />
+              data: filterOptions.names,
+              placeholder: "Все",
+              label: "Название:",
+              fieldName: "name",
+            },
+            {
+              component: <RegionsSelect />,
+              fieldName: "name",
             },
           ]}
           

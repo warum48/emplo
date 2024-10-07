@@ -30,10 +30,12 @@ type FilterWithSelect = {
   data: any;
   placeholder: string;
   label: string;
+  fieldName: string;
 };
 
 type FilterWithComponent = {
   component: JSX.Element;
+  fieldName: string;
 };
 
 type TFilter = FilterWithSelect | FilterWithComponent;
@@ -47,6 +49,9 @@ type TProps = {
     link: string;
   };
   filters: TFilter[];
+
+  filterState: any;//Record<string, string>;
+  setFilterState: React.Dispatch<React.SetStateAction<any>>;
   data: any[];
   ths: string[];
   tds: TCellValue[];
@@ -64,9 +69,14 @@ const getNestedValue = (obj: any, path: string) => {
 };
 
 export const TableView = ({
+
+  filters,
+  filterState,
+  setFilterState,
+
   header,
   addButton,
-  filters,
+
   data,
   ths,
   tds,
@@ -76,6 +86,19 @@ export const TableView = ({
 }: TProps) => {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
+
+
+  const filteredData = React.useMemo(() => {
+    return data?.filter((row) => {
+      return Object.entries(filterState).every(([key, value]) => {
+        if (!value) return true; // Skip filter if no value selected
+        return key.split('.').reduce((o, i) => o?.[i], row) === value;
+      });
+    });
+  }, [data, filterState]);
+
+
+
   return (
     <>
       <div className="flex items-center justify-between gap-4">
@@ -90,13 +113,28 @@ export const TableView = ({
             {"component" in filter ? ( // Type narrowing using "in" to check if it's a component
               filter.component
             ) : (
-              <Select
+              <>
+              {/*<Select
                 data={filter.data} // Safely access Select props
                 placeholder={filter.placeholder}
                 labelProps={{ style: filterLabelStyle }}
                 label={filter.label}
+              />*/}
+              <Select
+                data={filter.data}
+                placeholder={filter.placeholder}
+                label={filter.label}
+                value={filterState[filter.fieldName]}
+                onChange={(value) =>
+                  setFilterState((prev:any) => ({
+                    ...prev,
+                    [filter.fieldName]: value,
+                  }))
+                }
               />
-            )}
+              </>
+            )
+          }
           </FilterItemContainer>
         ))}
       </FiltersContainer>
@@ -115,9 +153,10 @@ export const TableView = ({
             </Table.Tr>
           </Table.Thead>
           <Table.Tbody>
-            {data?.map((row, index) => (
+            {//data?.map((row, index) => (
+            filteredData?.map((row, rowIndex) => (
               <Table.Tr
-                key={index}
+                key={rowIndex}
                 className="cursor-pointer"
                 // hover:bg-gray-400/10
                 //  onClick={() => router.push('/dashboard/profiles/23')}
@@ -173,7 +212,7 @@ export const TableView = ({
   );
 };
 
-const exampleTable = () => {
+/*const exampleTable = () => {
   return (
     <TableView
       header="Список профилей вакансий"
@@ -217,6 +256,7 @@ const exampleTable = () => {
     />
   );
 };
+*/
 
 const ProfilesTable = () => {
   const router = useRouter();
