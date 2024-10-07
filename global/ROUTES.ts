@@ -19,7 +19,7 @@ import {
 
 export const Routes = {
     MAIN: '/',
-    LOGIN: '/login',
+   // LOGIN: '/login',
     AUTH: '/auth',
     REGISTER: '/register',
     REGISTRATION: '/registration',

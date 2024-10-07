@@ -21,6 +21,7 @@ const initialState: AuthState = {
   token: null,
 };
 
+/*
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -52,6 +53,30 @@ const authSlice = createSlice({
      console.log('--thunk--')
     })
   }
+});
+*/
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    setAuthToken: (state, action) => {
+      state.token = action.payload.token;
+      state.isAuthenticated = !!action.payload.token;
+    },
+    setAuthState: (state, action) => {
+      state.token = action.payload.token;
+      state.isAuthenticated = action.payload.isAuthenticated;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    logout: (state) => {
+      state.token = '';
+      state.isAuthenticated = false;
+      state.user = null;
+    },
+  },
 });
 
 export const { setAuthState, setAuthToken, setUser } = authSlice.actions;

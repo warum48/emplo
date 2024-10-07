@@ -4,22 +4,15 @@ import {
   MultiSelect,
   Select,
 } from '@mantine/core';
-//import { useCreateVacancyMutation } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import React from 'react';
 import { useGetRegionsQuery } from '@/rtk/queries/candidates';
 import { QueryStateDisplay } from '@/components/__atoms/QueryStateDisplay/QueryStateDisplay';
 import { customLabelStyle } from '@/styles/mantine_styles';
+import { TDynamicFormFieldProps } from '@/types/formComponents/TDynamicFormFieldProps';
 
-type TProps = {
-    form?: any
-    formFieldName?:string
-    size?:string;
-    showLabel?:boolean;
-    className?:string;
-    onChange?:any;
-}
 
-export const RegionsSelect = ({form, formFieldName='area', onChange, size='md', showLabel=true, className=''}: TProps) => {
+
+export const RegionsSelect = ({form, formFieldName='area', onChange, size='md', showLabel=true, className=''}: TDynamicFormFieldProps) => {
     const {
         data: regions,
         error: regionsError,

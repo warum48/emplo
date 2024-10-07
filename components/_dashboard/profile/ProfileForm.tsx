@@ -6,6 +6,7 @@ import { useForm } from '@mantine/form';
 //import { useGetMeQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
 import { useGetMeQuery } from '@/rtk/queries/vacancy';
+import { useCheckHHConnectQuery } from '@/rtk/queries/authApi';
 
 interface UserProfile {
   first_name: string;
@@ -13,8 +14,13 @@ interface UserProfile {
   email: string;
 }
 
-const ProfileForm: React.FC = () => {
+type TProps = {
+  editEnabled ?: boolean;
+}
+
+const ProfileForm: React.FC<TProps> = ({ editEnabled = false}: TProps) => {
   const { data: data_hhme, error: error_hhme, isLoading: isLoading_hhme } = useGetMeQuery();
+  const { data: data_hhconnect, error: error_hhconnect, isLoading: isLoading_hhconnect } = useCheckHHConnectQuery();
   const [isEditing, setIsEditing] = useState<Record<keyof UserProfile, boolean>>({
     first_name: false,
     last_name: false,
@@ -86,10 +92,13 @@ const ProfileForm: React.FC = () => {
           <div key={field}>
             {!isEditing[field] ? (
               <Group align="center">
-                <div>{form.values[field] || data_hhme?.[field]}</div>
+                <div className='text-xs opacity-75'>{form.values[field] || data_hhme?.[field]}</div>
+                {editEnabled && (
+                  
+               
                 <ActionIcon onClick={() => handleEdit(field)} radius="xl" variant="light" >
                   <IconPencil size={18} />
-                </ActionIcon>
+                </ActionIcon> )}
               </Group>
             ) : (
               <TextInput
@@ -112,6 +121,7 @@ const ProfileForm: React.FC = () => {
         )}
       </form>
       <JSONViewer data={form.values} />
+     
     </>
   );
 };

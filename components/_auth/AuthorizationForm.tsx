@@ -1,4 +1,80 @@
 // components/AuthorizationForm.tsx
+// components/AuthorizationForm.tsx
+'use client';
+import React, { useEffect } from 'react';
+import { useForm } from '@mantine/form';
+import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
+import './styles.css'; 
+import { useLoginMutation } from '@/rtk/queries/authApi';
+import Link from 'next/link';
+import { Routes } from '@/global/ROUTES';
+import { useAuthTokenHandler } from './useAuthTokenHandler ';
+//import { useAuthTokenHandler } from '@/hooks/useAuthTokenHandler'; // Correct hook import
+
+const AuthorizationForm = () => {
+  const form = useForm({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validate: {},
+  });
+
+  useEffect(() => {
+    const formElement = document.getElementById('auth-form');
+    formElement?.classList.add('animate-form');
+  }, []);
+
+  const [login, { isLoading, error, data }] = useLoginMutation();
+  
+  // Use custom hook to handle token
+  const { handleToken } = useAuthTokenHandler();
+
+  const handleLogin = async () => {
+    try {
+      const result = await login(form.values).unwrap();
+      handleToken(result.jwt_token); // Pass token to hook for handling
+    } catch (err) {
+      console.error('Failed to login:', err);
+    }
+  };
+
+  const onSubmit = () => {
+    handleLogin();
+  };
+
+  return (
+    <form onSubmit={form.onSubmit(onSubmit)}>
+      <TextInput
+        label="Логин"
+        placeholder="Введите ваш логин"
+        {...form.getInputProps('username')}
+        className="mb-4"
+      />
+      <PasswordInput
+        label="Пароль"
+        placeholder="Введите пароль"
+        {...form.getInputProps('password')}
+        className="mb-4"
+      />
+      <Button type="submit" fullWidth className="mb-4">
+        Войти
+      </Button>
+      <div className="flex justify-between">
+        <Text component="a" href="#" size="sm">
+          Забыли пароль?
+        </Text>
+        <Link href={Routes.REGISTRATION} className="link-default">
+          <Text size="sm">Зарегистрироваться</Text>
+        </Link>
+      </div>
+    </form>
+  );
+};
+
+export default AuthorizationForm;
+
+/*
 'use client';
 import React, { useEffect } from 'react';
 import { useForm } from '@mantine/form';
@@ -73,6 +149,8 @@ const AuthorizationForm = () => {
 };
 
 export default AuthorizationForm;
+
+*/
 
 
 /*'use client';

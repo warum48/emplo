@@ -1,18 +1,18 @@
-'use client';
-import '@mantine/core/styles.css';
-import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+"use client";
+import "@mantine/core/styles.css";
+import React from "react";
+import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 
-import { theme } from '../theme';
-import { useState, useEffect } from 'react';
+import { theme } from "../theme";
+import { useState, useEffect } from "react";
 //import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
-import { useHotkeys, useLocalStorage } from '@mantine/hooks';
-import { Notifications } from '@mantine/notifications';
-import '@/styles/globals.css';
-import '@/styles/styles.css';
-import '@/styles/gradient_border.css';
-import '@mantine/notifications/styles.css';
-import '@mantine/dates/styles.css';
+import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { Notifications } from "@mantine/notifications";
+import "@/styles/globals.css";
+import "@/styles/styles.css";
+import "@/styles/gradient_border.css";
+import "@mantine/notifications/styles.css";
+import "@mantine/dates/styles.css";
 //
 //type ColorScheme = 'light' | 'dark';
 
@@ -40,27 +40,22 @@ export default function RootLayout({ children }: { children: any }) {
   );
 }*/
 
-import { Provider, useDispatch } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import store, { persistor } from '../rtk/store/store';
-import Header from '@/components/Header/Header';
-import Footer from '@/components/Footer/Footer';
-import { GlobalProvider } from '@/global/context/ContextGlobal';
-import { useCookies } from 'react-cookie';
-import { setAuthToken } from '@/rtk/slices/authSlice';
-import { AuthProvider } from '@/global/context/AuthProvider';
-import { TailwindClassesGenerator } from '@/components/__atoms/TailwindClassesGeneraor/TailwindClassesGenerator';
-import '@mantine/notifications/styles.css';
+import { Provider, useDispatch } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import store, { persistor } from "../rtk/store/store";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import { GlobalProvider } from "@/global/context/ContextGlobal";
+import { useCookies } from "react-cookie";
+import { setAuthToken } from "@/rtk/slices/authSlice";
+import { AuthProvider } from "@/global/context/AuthProvider";
+import { TailwindClassesGenerator } from "@/components/__atoms/TailwindClassesGeneraor/TailwindClassesGenerator";
+import "@mantine/notifications/styles.css";
 //import '../styles/globals.css';
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  
-
-
   return (
-    <html lang="ru" 
-    className='h-full'
-    >
+    <html lang="ru" className="h-full">
       <head>
         <ColorSchemeScript />
         <link rel="shortcut icon" href="/favicon.svg" />
@@ -79,35 +74,27 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           rel="stylesheet"
         ></link>
       </head>
-      <body className="font-roboto bg-white dark:bg-adjGray-900  text-black dark:text-white min-h-full  ^overflow-x-hidden">
-      <GlobalProvider>
-        <MantineProvider
-          theme={theme}
-          //theme={{ colorScheme }}
-          // withGlobalStyles
-          // withNormalizeCSS
-        >
-          
-          <Provider store={store}>
-            <AuthProvider>
-            <PersistGate loading={null} persistor={persistor}>
-              <div
-                className="^dark:bg-adjGray-900 min-h-screen h-full
-               
-    flex flex-col relative overflow-x-hidden w-full
-    "
-              >
-               
-                {children}
-                
-              </div>
-              <Notifications />
-            </PersistGate>
-            </AuthProvider>
-          </Provider>
-        </MantineProvider>
+      <body className="^overflow-x-hidden min-h-full bg-white font-roboto text-black dark:bg-adjGray-900 dark:text-white">
+        <GlobalProvider>
+          <MantineProvider
+            theme={theme}
+            //theme={{ colorScheme }}
+            // withGlobalStyles
+            // withNormalizeCSS
+          >
+            <Provider store={store}>
+              <AuthProvider>
+                <PersistGate loading={null} persistor={persistor}>
+                  <div className="^dark:bg-adjGray-900 relative flex h-full min-h-screen w-full flex-col overflow-x-hidden">
+                    {children}
+                  </div>
+                  <Notifications />
+                </PersistGate>
+              </AuthProvider>
+            </Provider>
+          </MantineProvider>
         </GlobalProvider>
-        <TailwindClassesGenerator/>
+        <TailwindClassesGenerator />
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import { useCreateProfileMutation } from "@/rtk/queries/joborder";
 import { FieldConfig, FormTemplate } from "./FormTemplate";
+import { OrganizationsSelect } from "@/components/DynamicFormFields/Organizations";
 
 export type TFromStepperProps = {
   activeStep: number;
@@ -31,6 +32,11 @@ export const NewProfileForm = ({
         name: "speciality",
         label: "Должность",
         placeholder: "Введите должность",
+      },
+      { 
+       // component: <OrganizationsSelect formFieldName="org" /> 
+        component: OrganizationsSelect,
+        props: {formFieldName:'org'},
       },
 
       {

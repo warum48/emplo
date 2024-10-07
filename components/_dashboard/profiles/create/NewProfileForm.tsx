@@ -16,6 +16,7 @@ import React from "react";
 import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 import { TextHint } from "@/components/__atoms/TextBlocks/TextBlocks";
 import { useMutationNotifications } from "@/hooks/useNotifications";
+import { OrganizationsSelect } from "@/components/DynamicFormFields/Organizations";
 type TProps = {
   activeStep: number;
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
@@ -122,6 +123,7 @@ export const NewProfileForm = ({
                 labelProps={{ style: customLabelStyle }}
                 {...form.getInputProps("speciality")}
               />
+              <OrganizationsSelect form={form} formFieldName="org" />
               <TextInput
                 label="Подразделение"
                 placeholder="Подразделение"

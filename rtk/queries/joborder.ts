@@ -6,7 +6,7 @@ import { components } from '@/types';
 
 export const joborder = createApi({
   reducerPath: 'joborder',
-
+  tagTypes: ['JobOrders'],  // Define tag type
   baseQuery: customBaseQuery,
   endpoints: (builder) => ({
     getVacancies: builder.query<any, void>({ //
@@ -17,6 +17,7 @@ export const joborder = createApi({
     }),
     getOrders: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/joborder/',
+      providesTags: ['JobOrders'], 
     }),
     getSearchCrits: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/joborder/search_crits/',
@@ -35,6 +36,8 @@ export const joborder = createApi({
         method: 'POST',
         body: order,
       }),
+      invalidatesTags: ['JobOrders'],  // Invalidate the tag after mutation
+    
     }),
 
     createCriteria: builder.mutation<void, any>({
@@ -43,6 +46,13 @@ export const joborder = createApi({
         method: 'POST',
         body: crit,
       }),
+    }),
+
+
+    /*------------list for forms and tables ------------ */
+    
+    getOrgs: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
+      query: () => '/api/org/',
     }),
 
 
@@ -58,7 +68,8 @@ export const {
     useLazyGetSearchCritsQuery,
     useCreateProfileMutation,
     useCreateCriteriaMutation,
-    useCreateJobOrderMutation
+    useCreateJobOrderMutation,
+    useGetOrgsQuery,
 
  } = joborder;
 

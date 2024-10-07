@@ -65,13 +65,26 @@ export const authApi = createApi({
         body: newUser,
       }),
     }),
+
+    checkHHConnect:  builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
+      query: () => '/api/hhru/connect',
+    }),
+
+    hhConnect:  builder.mutation<any, void>({ //<LogoutResponse, LogoutRequest>
+      query: () => ({
+        url: `/api/hhru/connect'`,
+        method: 'POST', // Using GET method as per the endpoint requirement
+      }),
+    }),
+    
+    
   }),
 });
 
 export const { useLoginMutation, 
   useLogoutMutation,
   useRegisterMutation, 
-  useLazyMeQuery , useMeQuery} = authApi;
+  useLazyMeQuery , useMeQuery, useCheckHHConnectQuery, useHhConnectMutation} = authApi;
 
 // Define types for the requests and responses
 export interface LoginRequest {

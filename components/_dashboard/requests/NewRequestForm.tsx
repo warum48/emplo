@@ -106,7 +106,7 @@ export const NewRequestForm = ({
     },
 
     criteria: {
-      id: 0,
+     // id: 0,
       speciality: "",
       area: "",
       metro: "",
@@ -117,7 +117,7 @@ export const NewRequestForm = ({
       age: 0,
       salary: 0,
       job_search_status: "",
-      search_limit_target: 0,
+      search_limit_target: 1,
       created_by: "",
     },
 
@@ -560,6 +560,13 @@ form.setValues({
                 //multiple
                 disabled
                 // {...form.getInputProps("missed")}
+              />
+              <NumberInput
+                label="Сколько надо кандидатов"
+                labelProps={{ style: customLabelStyle }}
+                placeholder="Сколько надо кандидатов"
+                min={0}
+                {...form.getInputProps("criteria.search_limit_target")}
               />
               <Checkbox
                 label="Массовый плдбор"

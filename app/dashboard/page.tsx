@@ -13,6 +13,7 @@ import { useGetMeQuery } from '@/rtk/queries/vacancy';
 //import { useGetMeQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
 import Head from 'next/head';
 import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
+import { ConnectionToAggregators } from '@/components/_dashboard/profile/ConnectionToAggregators';
 
 const Dashboard = () => {
   const { data: data_hhme, error: error_hhme, isLoading: isLoading_hhme } = useGetMeQuery();
@@ -66,8 +67,8 @@ const Dashboard = () => {
         <div>
           <div className="grid grid-cols-3 gap-4 ">
             <div className="col-span-2 px-8 py-4 form-bg-and-text">
-              <h3 className="form-header  mb-2">Мои данные</h3>
-              <ProfileForm />{' '}
+              <h3 className="form-header  mb-2">Подключение к сервисам</h3>
+              <ConnectionToAggregators />{' '}
             </div>
             <div className="col-span-1 px-8 py-4  form-bg-and-text">
               <h3 className="form-header mb-2">Поменять пароль</h3>
