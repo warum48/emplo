@@ -95,7 +95,7 @@ export const NewCriteriaForm = ({
     },*/
 
     
-        "name": "Критерий", //55e53ef3f2914a3c94b773cc75b53fa3
+        //"name": "Критерий", //55e53ef3f2914a3c94b773cc75b53fa3
         "speciality": "Мерчандайзер",
         "area": "Санкт-Петербург",
         "metro": "Не указана",
@@ -576,5 +576,11 @@ Request Method:
 POST
 Status Code:
 405 Method Not Allowed
+
+*/
+
+
+/*
+another problem : we pass gender as 'female' - then it transforms in list to 'Женский',  then I try to pass 'Женский" in new job_order , it says "Пола: Женский нет среди доступных"
 
 */

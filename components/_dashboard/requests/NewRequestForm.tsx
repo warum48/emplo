@@ -31,6 +31,7 @@ import { TextHint } from "@/components/__atoms/TextBlocks/TextBlocks";
 import { useMutationNotifications } from "@/hooks/useNotifications";
 import { DatePickerInput } from "@mantine/dates";
 import "dayjs/locale/ru";
+import dayjs from "dayjs";
 //import { useCreateVacancyMutation } from '@/rtk/features/vacancy/vacancyApiSlice';
 
 type TProps = {
@@ -81,7 +82,7 @@ export const NewRequestForm = ({
   const demoValues = {
     
 
-    deadline: "",
+    deadline: dayjs().add(1, "month"),//.format("YYYY-MM-DD"),
     profile: "",
     priority: 2, //'Средний',
     responsible: "",
@@ -296,6 +297,21 @@ form.setValues({
                 </TextHint>
               </div>
 
+
+              <div>
+              <Select
+                label="Профиль"
+                placeholder="Выберите профиль"
+                data={profilesSelectData} // Replace with actual data
+                multiple
+                onChange={(e) => handleSelectProfilesChange(e)}
+              />
+                <TextHint dimmed>
+                  Форма будет заполнена на основе выбранного профиля, затем вы сможете продолжить редактирование
+                </TextHint>
+              </div>
+              
+
               <DatePickerInput
                 locale="ru"
                 label="Дата закрытия"
@@ -321,13 +337,7 @@ form.setValues({
                 {...form.getInputProps("priority")}
               />
               {/*---------------------------------------------from profile------------------------------------------*/}
-              <Select
-                label="Профиль"
-                placeholder="Выберите профиль"
-                data={profilesSelectData} // Replace with actual data
-                multiple
-                onChange={(e) => handleSelectProfilesChange(e)}
-              />
+              
               <TextInput
                 label="Должность"
                 placeholder="Должность" //штатное расписание для совместимости с 1С или системами Заказчика

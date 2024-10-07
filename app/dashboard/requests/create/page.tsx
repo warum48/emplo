@@ -34,7 +34,7 @@ const Settings = () => {
   };
 
   return (
-    <DashBoardPageContainer header="Создать профиль" Icon={IconRobot}>
+    <DashBoardPageContainer header="Создать заявку" Icon={IconRobot}>
       <div className="flex w-full flex-col items-center">
         <FormWithStepperBg />
 
