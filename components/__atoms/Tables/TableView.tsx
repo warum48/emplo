@@ -20,7 +20,7 @@ import { Debugger } from "@/components/__atoms/Debugger/Debugger";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { BasicError } from "@/components/Errors/BasicError";
-import { filterLabelStyle } from "@/styles/mantine_styles";
+import { customLabelStyle, filterLabelStyle } from "@/styles/mantine_styles";
 import { FilterItemContainer } from "@/components/__atoms/Tables/Filters/FilterItemContainer";
 import { FiltersContainer } from "@/components/__atoms/Tables/Filters/FiltersContainer";
 
@@ -124,6 +124,7 @@ export const TableView = ({
                 data={filter.data}
                 placeholder={filter.placeholder}
                 label={filter.label}
+                labelProps={{ style: customLabelStyle }}
                 value={filterState[filter.fieldName]}
                 onChange={(value) =>
                   setFilterState((prev:any) => ({

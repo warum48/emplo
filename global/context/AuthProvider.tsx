@@ -31,21 +31,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const token = cookiesToken.jwt_token;
     if (token) {
-      const decodedToken = jwtDecode(token);
+    /* !! TODO check expiration time
+     const decodedToken = jwtDecode(token);
       const isTokenExpired =
         decodedToken?.exp !== undefined && decodedToken.exp * 1000 < Date.now();
   
       if (isTokenExpired) {
         // Handle token expiration
         dispatch(setAuthState({ token: '', isAuthenticated: false }));
-        router.push('/login');
-      } else {
+        console.log('redirect - token is expired');
+        router.push(Routes.AUTH);
+      } else { 
+       */
         // If token is valid, set it in the Redux state
         dispatch(setAuthToken({ token }));
         fetchMe();
-      }
+     // }
     } else {
-      router.push('/login');
+      console.log('redirect - token is not available');
+      router.push(Routes.AUTH);
     }
   }, [cookiesToken, dispatch, fetchMe, router]);
 
@@ -66,8 +70,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const isOnDashboardPage = typeof window !== 'undefined' && window.location.pathname.includes('dashboard');
 
+console.log(meError, 'meError');
+if(meError){
+console.log('status' in meError);
+if('status' in meError){
+console.log('meError.status === 401', meError.status === 401)
+}
+}
+
     if (meError && 'status' in meError && meError.status === 401) {
       dispatch(setAuthState({ token: '', isAuthenticated: false }));
+      console.log('redirect - meError');
       router.push(Routes.AUTH);
     }
 

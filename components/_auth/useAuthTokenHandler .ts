@@ -13,14 +13,17 @@ export const useAuthTokenHandler = () => {
   const [cookiesToken, setCookieToken] = useCookies(['jwt_token']);
 
   const handleToken = useCallback((jwtToken: string) => {
+
+    console.log('Received token:', jwtToken);
     // Set cookie with token and path for accessibility
-    //setCookieToken('jwt_token', jwtToken, { path: '/' });
-    setCookieToken('jwt_token', jwtToken, { 
+    setCookieToken('jwt_token', jwtToken, { path: '/' });
+  /* !!TODO check why secure token doesn't work and is setting as jwttoken but not jwt_token
+   setCookieToken('jwt_token', jwtToken, { 
       path: '/', 
       secure: process.env.NODE_ENV === 'production', // Ensure secure only in production
       httpOnly: true, // Prevent JavaScript access
       sameSite: 'strict', // Mitigate CSRF
-    });
+    }); */
     
     // Dispatch token to Redux
     dispatch(setAuthToken({ token: jwtToken }));
