@@ -1,11 +1,21 @@
 import { useForm } from "@mantine/form";
-import { TextInput, Textarea, Select, Button, Title } from "@mantine/core";
+import {
+  TextInput,
+  Textarea,
+  Select,
+  Button,
+  Title,
+  useMantineColorScheme,
+} from "@mantine/core";
 //import { useMutation } from "@reduxjs/toolkit";
 import React from "react";
 import { TFromStepperProps } from "./NewProfile";
 import { Preloader } from "@/components/__atoms/Preloader/Preloader";
 import { BasicError } from "@/components/Errors/BasicError";
 import { useMutationNotifications } from "@/hooks/useNotifications";
+import { LinkButton } from "@/components/__atoms/Buttons/LinkButton";
+import { CustomisableField } from "@/components/__atoms/Forms/CustomisableField";
+import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 
 export type FieldObject = {
   type: "TextInput" | "Textarea" | "Select"; // Limiting the type to these specific strings
@@ -20,11 +30,13 @@ export type FieldObject = {
 export type FieldComponent = {
   component: React.FC<any>; //any;//React.JSX.Element; //
   props: any;
+  customisable?: boolean;
 };
 
 export type FieldConfig = FieldObject | FieldComponent;
 
 type FormTemplateProps = {
+  templateValues: any;
   initialValues: any;
   validate: any;
   onSubmit: (values: any) => void;
@@ -36,6 +48,7 @@ type FormTemplateProps = {
 };
 
 export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
+  templateValues,
   initialValues,
   validate,
   onSubmit,
@@ -51,6 +64,8 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   stepNames,
 }) => {
   const form = useForm({ initialValues, validate });
+  //const [customized, setCustomized] = React.useState(false);
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   const handleSubmit = async (values: any) => {
     try {
@@ -70,6 +85,10 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
     error: error,
   });
 
+  function fillFormWithTemplateValues() {
+    form.setValues(templateValues);
+  }
+
   return (
     <div className="relative w-full max-w-full p-4 text-black dark:text-white">
       <form
@@ -77,9 +96,20 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
         className="relative grid w-full max-w-full grid-cols-1 gap-6 text-left"
       >
         <div className="flex w-full max-w-full flex-col gap-6">
-          <Title order={2} className="font-light">
-            {stepNames[activeStep]}
-          </Title>
+          <div className="flex items-end justify-between">
+            <Title order={2} className="font-light">
+              {stepNames[activeStep]}
+            </Title>
+            {/*<LinkButton  onClick={()=>{}} colorScheme={colorScheme}>Заполнить базовыми данными</LinkButton>*/}
+            <div
+              className="cursor-pointer text-xs link-button"
+              onClick={() => {
+                fillFormWithTemplateValues();
+              }}
+            >
+              Заполнить базовыми данными
+            </div>
+          </div>
           {fields.map((steps, index) => (
             <>
               {activeStep === index && (
@@ -87,8 +117,10 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                   {steps.map((field, index) => (
                     <div key={index}>
                       {"component" in field ? ( // Type narrowing using "in" to check if it's a component
-                       // field.component
-                       <field.component {...field.props} />
+                        // field.component
+                        <CustomisableField form={form} field={field}  
+                       // {...form.getInputProps(field.props.formFieldName)}
+                        />
                       ) : (
                         <>
                           {" "}
@@ -105,6 +137,9 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                               label={field.label}
                               placeholder={field.placeholder}
                               required={field.required}
+                              autosize
+                              minRows={2}
+                              maxRows={10}
                               {...form.getInputProps(field.name)}
                             />
                           )}
@@ -161,6 +196,24 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
           {error && <BasicError error={error} />}
         </div>
       </form>
+      <JSONViewer data={form.values} />
     </div>
   );
 };
+
+
+/*
+<div>
+                          <field.component form={form} {...field.props} />
+                          <div
+                            className="mt-2 text-xs opacity-50"
+                            onClick={() => {
+                              setCustomized(!customized);
+                            }}
+                          >
+                            {customized
+                              ? "Заполнить вручную"
+                              : "Выбрать из списка"}
+                          </div>
+                        </div>
+                        */

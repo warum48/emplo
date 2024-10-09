@@ -8,3 +8,5 @@ export function convertArrayToData(array: string[]): { value: string; label: str
       };
     });
   }
+
+  

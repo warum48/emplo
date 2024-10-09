@@ -22,11 +22,14 @@ export const OrganizationsSelect = ({ form, size = 'sm', showLabel = true, class
   // Using useEffect to handle the data update after fetch
   useEffect(() => {
     if (orgs) {
-      // Map the orgs to the format Mantine Select expects
-      const formattedOrgs = orgs.map((org: { id: number; name: string }) => ({
-        value: org.id.toString(),
-        label: org.name,
-      }));
+      //!!!!! Map the orgs to the format Mantine Select expects
+      //const formattedOrgs = orgs.map((org: { id: number; name: string }) => ({
+      //  value: org.id.toString(),
+      //  label: org.name,
+      //}));
+
+      //format to an plain array for useing in CustomisableField
+      const formattedOrgs = orgs.map((org: { id: number; name: string }) => (org.name));
       setOrgsData(formattedOrgs);
     }
   }, [orgs]); // Runs when orgs data is fetched/updated
@@ -51,7 +54,7 @@ export const OrganizationsSelect = ({ form, size = 'sm', showLabel = true, class
           onRetry={refetchOrgs}
         />
       )}
-      <JSONViewer data={orgs} />
+      {/*<JSONViewer data={orgs} />*/}
     </>
   );
 };

@@ -7,6 +7,7 @@ import React from 'react';
 import { useGetSpecialitiesQuery } from '@/rtk/queries/candidates';
 import { QueryStateDisplay } from '@/components/__atoms/QueryStateDisplay/QueryStateDisplay';
 import { customLabelStyle } from '@/styles/mantine_styles';
+import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
 
 type TProps = {
     form: any
@@ -16,7 +17,7 @@ type TProps = {
     formFieldName?:string;
 }
 
-export const SpecialitiesSelect = ({form, size='md', showLabel=true, className='', formFieldName='professional_roles'}: TProps) => {
+export const SpecialitiesSelect = ({form, size='sm', showLabel=true, className='', formFieldName='professional_roles'}: TProps) => {
     const {
         data: specialities,
         error: specialitiesError,
@@ -35,7 +36,8 @@ export const SpecialitiesSelect = ({form, size='md', showLabel=true, className='
             labelProps={{ style: customLabelStyle }}
             required
             data={specialities}
-            {...form.getInputProps(formFieldName)}
+            //{...form.getInputProps(formFieldName)}
+            {...(form ? form.getInputProps(formFieldName) : {})}
           />
         ):  (
             <QueryStateDisplay
@@ -44,6 +46,7 @@ export const SpecialitiesSelect = ({form, size='md', showLabel=true, className='
               onRetry={refetchSpecialities}
             />
           )}
+        {/*  <JSONViewer data={specialities} /> */}
           </>
     )
 }

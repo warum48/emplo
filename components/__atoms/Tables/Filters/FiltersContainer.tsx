@@ -1,11 +1,17 @@
 import { Divider } from '@mantine/core';
 
-export const FiltersContainer = ({children}:{children:React.ReactNode}) => {
+type TProps = {
+  children: React.ReactNode;
+  resetFilters?: () => void;
+}
+
+export const FiltersContainer = ({children, resetFilters}:TProps) => {
   return (
    
     <div className="filters-over-table flex">
-        <div className="flex flex-grow items-center bg-gray-300/25 p-4 dark:bg-gray-700/15">
+        <div className="flex flex-col justify-center items-center bg-gray-300/25 p-4 dark:bg-gray-700/15">
           Фильтры
+          {resetFilters && <div className="mt-2 text-xs cursor-pointer underline link-button" onClick={resetFilters}>Сбросить&nbsp;все</div>}
         </div>
 
         <div className="container grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4 gap-y-2 overflow-hidden px-4 pb-4 pt-2">

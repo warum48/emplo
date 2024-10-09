@@ -7,6 +7,7 @@ import { Preloader } from "@/components/__atoms/Preloader/Preloader";
 import { BasicError } from "@/components/Errors/BasicError";
 import { useMutationNotifications } from "@/hooks/useNotifications";
 import { TFromStepperProps } from "@/components/_dashboard/profiles/create/NewProfile";
+import { LinkButton } from "../Buttons/LinkButton";
 
 export type FieldConfig = {
   type: "TextInput" | "Textarea" | "Select"; // Limiting the type to these specific strings
@@ -71,9 +72,12 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
         className="relative grid w-full max-w-full grid-cols-1 gap-6 text-left"
       >
         <div className="flex w-full max-w-full flex-col gap-6">
+          <div className="flex justify-between">
           <Title order={2} className="font-light">
             {stepNames[activeStep]}
-          </Title>
+          </Title> ллллл
+          <LinkButton  onClick={()=>{}}>Заполнить базовыми данными</LinkButton>
+          </div>
           {fields.map((steps, index) => (
             <>
              

@@ -12,7 +12,7 @@ import { TDynamicFormFieldProps } from '@/types/formComponents/TDynamicFormField
 
 
 
-export const RegionsSelect = ({form, formFieldName='area', onChange, size='md', showLabel=true, className=''}: TDynamicFormFieldProps) => {
+export const RegionsSelect = ({form, formFieldName='area', onChange, size='sm', showLabel=true, className=''}: TDynamicFormFieldProps) => {
     const {
         data: regions,
         error: regionsError,

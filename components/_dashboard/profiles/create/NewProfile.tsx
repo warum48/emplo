@@ -1,6 +1,7 @@
 import { useCreateProfileMutation } from "@/rtk/queries/joborder";
 import { FieldConfig, FormTemplate } from "./FormTemplate";
 import { OrganizationsSelect } from "@/components/DynamicFormFields/Organizations";
+import { SpecialitiesSelect } from "@/components/DynamicFormFields/Specialities";
 
 export type TFromStepperProps = {
   activeStep: number;
@@ -27,16 +28,29 @@ export const NewProfileForm = ({
         placeholder: "Введите имя профиля",
         required: true,
       },
-      {
+      /* {
         type: "TextInput",
         name: "speciality",
         label: "Должность",
         placeholder: "Введите должность",
+      },*/
+      {
+        component: SpecialitiesSelect,
+        props: {
+          formFieldName: "speciality",
+          label: "Должность",
+          placeholder: "Введите должность",
+        },
+        customisable: true,
       },
-      { 
-       // component: <OrganizationsSelect formFieldName="org" /> 
+      {
         component: OrganizationsSelect,
-        props: {formFieldName:'org'},
+        props: {
+          formFieldName: "org",
+          label: "Организация (Юр. лицо)",
+          placeholder: "Введите организацию",
+        },
+        customisable: true,
       },
 
       {
@@ -48,7 +62,7 @@ export const NewProfileForm = ({
 
       {
         type: "TextInput",
-        name: "org_unit",
+        name: "org_project",
         label: "Проект",
         placeholder: "Введите проект",
       },
@@ -73,24 +87,23 @@ export const NewProfileForm = ({
       },
     ],
     [
-
       {
-        name: '',
+        name: "",
         type: "Select",
-                label:"Этап работы",
-                placeholder:"Выберите этап работы",
-                options: [],
-                disabled:true
+        label: "Этап работы",
+        placeholder: "Выберите этап работы",
+        options: [],
+        disabled: true,
       },
       {
-        name:'',
+        name: "",
         type: "Select",
-                label:"Согласование",
-                placeholder:"Выберите согласующего",
-                options:[],
-                //multiple:true,
-                disabled:true
-      }
+        label: "Согласование",
+        placeholder: "Выберите согласующего",
+        options: [],
+        //multiple:true,
+        disabled: true,
+      },
     ],
   ];
 
@@ -103,6 +116,23 @@ export const NewProfileForm = ({
     job_description: "тестовое описание", //Обязанности
     job_conditions: "тестовые условия", //Условия
     job_requirements: "тестовые требования", //Требования
+  };
+
+  const templateValues = {
+    name: "Новый профиль", //Наименование
+    speciality: "Водитель-курьер", //Должность
+    org_unit: "Подразделение", //Подразделение
+    org_project: "Проект", //Проект/направление
+    org: "Чистая Линия",
+    job_description: `Выполнение основных задач и функций в рамках данной должности. 
+Организация и контроль рабочих процессов в соответствии с требованиями. 
+Взаимодействие с коллегами и внешними партнерами по рабочим вопросам.`, //Обязанности
+    job_conditions: `Конкурентоспособная заработная плата и соцпакет.
+Возможности профессионального роста и обучения.
+Комфортные условия труда и гибкий график.`, //Условия
+    job_requirements: `Опыт работы в аналогичной должности будет преимуществом.
+Знание профильных программ и инструментов.
+Высокая степень ответственности и внимательность к деталям.`, //Требования
   };
 
   const initialValues = {
@@ -123,6 +153,7 @@ export const NewProfileForm = ({
   return (
     <FormTemplate
       //initialValues={initialValues}
+      templateValues={templateValues}
       initialValues={demoValues}
       validate={validate}
       onSubmit={handleFormSubmit}

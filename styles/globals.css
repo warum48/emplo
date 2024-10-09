@@ -58,6 +58,9 @@
   .link-default {
     @apply hover:text-pink-800 hover:underline dark:hover:text-pink-200;
   }
+  .link-button{
+    @apply text-pink-400 underline hover:text-pink-700;
+  }
   /*------------------------forms-------------------*/
   .form-paper {
     /* check where it's used and replace with new one*/
