@@ -78,6 +78,11 @@ export const NewPasswordInput = ({ onSuccess = () => {} }: TProps) => {
     error: error_change,
   });
 
+  React.useEffect(() => {
+    console.log("data_change", data_change);
+    console.log("error_change", error_change);
+  }, [error_change, data_change]);
+
   /*    useMutationNotifications({
         text: 'Подтвердите код',
         data: data_change,

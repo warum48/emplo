@@ -78,7 +78,7 @@ export const useMutationNotifications = ({
       notifications.show({
         color: 'red',
         title: 'Ошибка ' + (isDebug? traceId : ''),
-        message: error?.data?.detail?.[0]?.msg || error?.message || 'Неизвестная ошибка',
+        message: error?.data?.detail?.[0]?.msg || error?.message || error?.data?.error|| 'Неизвестная ошибка',
       });
     }
   }, [error]);
