@@ -27,6 +27,9 @@ const Settings = () => {
     setFormData((prevData) => ({ ...prevData, ...values }));
     if (activeStep < 1) {
       setActiveStep(activeStep + 1);
+
+    
+
     } else {
       console.log("Final form data:", { ...formData, ...values });
     }

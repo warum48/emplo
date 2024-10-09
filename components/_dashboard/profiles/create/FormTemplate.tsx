@@ -177,7 +177,13 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
             {activeStep < stepNames.length - 1 && (
               <Button
                 onClick={() =>
-                  setActiveStep((activeStep: number) => activeStep + 1)
+                 // setActiveStep((activeStep: number) => activeStep + 1)
+                 setActiveStep((current) => {
+                  if (form.validate().hasErrors) {
+                    return current;
+                  }
+                  return current < stepNames.length ? current + 1 : current;
+                })
                 }
                 className="w-full max-w-80"
               >

@@ -16,9 +16,10 @@ export const CustomisableField = ({ field, form }: TProps) => {
   return (
     <div>
       {customized ? (
-        <field.component form={form} {...field.props} {...form.getInputProps(field.props.formFieldName)}  />
-      ) : (
         <TextInput form={form} {...field.props} {...form.getInputProps(field.props.formFieldName)} />
+      ) : (
+        
+        <field.component form={form} {...field.props} {...form.getInputProps(field.props.formFieldName)}  />
       )}
 
       <div
@@ -27,7 +28,7 @@ export const CustomisableField = ({ field, form }: TProps) => {
           setCustomized(!customized);
         }}
       >
-        {customized ? "Заполнить вручную" : "Выбрать из списка"}
+        {customized ?"Выбрать из списка" : "Заполнить вручную"  }
       </div>
     {/*}  <JSONViewer data={form.values} />
       <JSONViewer data={field.props} /> */}

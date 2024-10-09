@@ -142,8 +142,45 @@ export const NewProfileForm = ({
     org_unit: "",
   };
 
-  const validate = {
+  /* const validate = {
     name: (value: string) => (value ? null : "Name is required"),
+  }; */
+
+  const toShort = "Поле заполнено не верно, склишком мало букв";
+  const minLength = 2;
+
+  const validate = (values: any) => {
+    if (activeStep === 0) {
+      return {
+        // username:
+        //   values.username.trim().length < 6
+        //     ? 'Username must include at least 6 characters'
+        //     : null,
+        // password:
+        //   values.password.length < 6 ? 'Password must include at least 6 characters' : null,
+        org_unit: values.org_unit.length < minLength ? toShort : null,
+        name: values.name.length < minLength ? toShort : null,
+        speciality: values.org_unit.length < minLength ? toShort : null,
+        // org_unit: "Подразделение", //Подразделение
+        org_project: values.org_project.length < minLength ? toShort : null,
+        org: values.org.length < minLength ? toShort : null,
+        job_description:
+          values.job_description.length < minLength ? toShort : null,
+        job_conditions:
+          values.job_conditions.length < minLength ? toShort : null,
+        job_requirements:
+          values.job_requirements.length < minLength ? toShort : null,
+      };
+    }
+
+    if (activeStep === 1) {
+      return {
+        // name: values.name.trim().length < minLength ? 'Name must include at least 2 characters' : null,
+        // email: /^\S+@\S+$/.test(values.email) ? null : 'Invalid email',
+      };
+    }
+
+    return {};
   };
 
   const handleFormSubmit = (values: any) => {
