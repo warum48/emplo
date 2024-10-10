@@ -8,8 +8,11 @@ import { IconRobot } from "@tabler/icons-react";
 //import { NewProfileForm } from "@/components/_dashboard/profiles/create/NewProfileForm";
 import { FormWithStepperBg } from "@/components/BgColors/FormWithStepperBg";
 import { NewProfileForm } from "@/components/_dashboard/profiles/create/NewProfile"; //Form
+import DataDisplay from "@/components/__atoms/DataDisplay/DataDisplay";
+import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 
 const Settings = () => {
+  const [_formValues, setFormValues] = React.useState({});
   const [activeStep, setActiveStep] = React.useState(0);
   const [formData, setFormData] = React.useState({ field1: "", field2: "" });
   const stepNames = [
@@ -46,6 +49,8 @@ const Settings = () => {
           <div className="relative order-2 w-full  max-w-screen-md rounded-2xl bg-white p-4 text-black dark:bg-customGray-950/85 dark:text-white md:order-1">
             {/*<VacancyCreationFormHH />*/}
             <NewProfileForm
+            _formValues={_formValues}
+            setFormValues={setFormValues}
               activeStep={activeStep}
               onNext={handleNext}
               stepNames={stepNames}
@@ -60,13 +65,29 @@ const Settings = () => {
               orientation={!md ? "horizontal" : "vertical"}
             >
               {stepNames.map((name, index) => (
-                <Stepper.Step label={"Шаг " + (index + 1)} description={name} />
+                <Stepper.Step label={"Шаг " + (index + 1)} 
+                //description={name} 
+               // description={<StepDescription description={name} />}
+                //description={<DataDisplay data={formData}/>}
+                description={<DataDisplay name={name} data={_formValues ? _formValues : {}}/>}
+                
+                />
               ))}
             </Stepper>
           </div>
         </div>
       </div>
+      <JSONViewer data={_formValues} />
     </DashBoardPageContainer>
+  );
+};
+
+const StepDescription = ({ description }: { description: string } ) => {
+  return (
+    <div className="flex flex-col items-center justify-center gap-4">
+      <h2 className="text-xl font-bold">vyjuj vyjuj vyjuj vyjujv yvuvju sdfsdf sdf sdf sdf sdf sdfsdfsdfsdf sdfsdfsdf sdfsdfsdf sdf sdfsdfsdf sdfsdfsdf sdf sdfsdfsdf sdfsdfsdf sdfsdfsdf sdfsdf sdfsdfsdf sdfsdf vuvjuv jujvujuvjvu jvujvu jvuvj uvjuvj {description}</h2> 
+
+    </div>
   );
 };
 

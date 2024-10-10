@@ -54,6 +54,23 @@ export const joborder = createApi({
     getOrgs: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/org/',
     }),
+    getDepartments: builder.query<any, string>({ // components['schemas']['AppUserRegisterSchema']
+     // query: () => '/api/org/departments/',
+      query: (org_name) => `/api/org/departments/?org_name=${org_name}`,
+    }),
+    getUnits: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
+      query: () => '/api/org/units/',
+    }),
+    getProjects: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
+      query: () => '/api/org/projects/',
+    }),
+    getBAreas: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
+      query: () => '/api/org/b_areas/',
+    }),
+    
+    
+    
+    
 
 
 
@@ -70,6 +87,11 @@ export const {
     useCreateCriteriaMutation,
     useCreateJobOrderMutation,
     useGetOrgsQuery,
+    useGetDepartmentsQuery,
+    useGetUnitsQuery,
+    useGetProjectsQuery,
+    useGetBAreasQuery,
+    useLazyGetDepartmentsQuery
 
  } = joborder;
 

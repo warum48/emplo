@@ -23,7 +23,7 @@ export const CustomisableField = ({ field, form }: TProps) => {
       )}
 
       <div
-        className="mt-2 cursor-pointer text-xs underline opacity-50"
+        className="mt-1 cursor-pointer text-xs underline opacity-50"
         onClick={() => {
           setCustomized(!customized);
         }}

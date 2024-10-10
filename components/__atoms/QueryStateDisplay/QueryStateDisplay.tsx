@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Text } from '@mantine/core';
 import { isNetworkError, isSerializedError } from '@/components/Errors/isNetworkError';
 import { Preloader } from '../Preloader/Preloader';
+import { JSONViewer } from '../JSONViewer/JSONViewr';
 
 interface ErrorDisplayProps {
   isLoading: boolean;
@@ -19,12 +20,20 @@ export const QueryStateDisplay: React.FC<ErrorDisplayProps> = ({ isLoading, erro
 
   return (
     <div>
-      <Text c="red" size='xs' pb='xs'>
-        {(isSerializedError(error) && error?.message ) || 'Ошибка загрузки данных.'}
+   
+     {error && <>
+      <Text c="red" size='xs' 
+     // pb='xs'
+      >
+        {//isSerializedError(error) &&  
+        (error?.message  || error?.data?.msg  || 'Ошибка загрузки данных.')
+        }
       </Text>
       {isNetworkError(error) && (
         <Button onClick={onRetry} size='xs'>Попробовать снова</Button>
       )}
+      </>
+    }
     </div>
   );
 };

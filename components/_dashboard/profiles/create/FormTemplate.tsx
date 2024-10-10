@@ -31,11 +31,14 @@ export type FieldComponent = {
   component: React.FC<any>; //any;//React.JSX.Element; //
   props: any;
   customisable?: boolean;
+  dependency?: string; // field is enabled only if this dependency field is not empty
 };
 
 export type FieldConfig = FieldObject | FieldComponent;
 
 type FormTemplateProps = {
+  _formValues:any;
+  setFormValues:React.Dispatch<React.SetStateAction<any>>
   templateValues: any;
   initialValues: any;
   validate: any;
@@ -48,6 +51,9 @@ type FormTemplateProps = {
 };
 
 export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
+  //form,
+  _formValues,
+  setFormValues,
   templateValues,
   initialValues,
   validate,
@@ -63,7 +69,10 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   onNext,
   stepNames,
 }) => {
-  const form = useForm({ initialValues, validate });
+ const form =  useForm({ initialValues, validate, onValuesChange: (values) => {
+  console.log(values);
+  setFormValues(values);
+}, });
   //const [customized, setCustomized] = React.useState(false);
   const { colorScheme, setColorScheme } = useMantineColorScheme();
 

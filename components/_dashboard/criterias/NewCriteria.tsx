@@ -10,9 +10,15 @@ export type TFromStepperProps = {
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   onNext: (values: any) => void;
   stepNames: string[];
+  //form:any;
+  _formValues:any;
+  setFormValues:React.Dispatch<React.SetStateAction<any>>
 };
 
 export const NewProfileForm = ({
+  //form,
+  _formValues,
+  setFormValues,
   activeStep,
   setActiveStep,
   onNext,
@@ -119,7 +125,11 @@ export const NewProfileForm = ({
 
   return (
     <FormTemplate
+   // form={form}
       //initialValues={initialValues}
+      _formValues={_formValues}
+      setFormValues={setFormValues}
+      
       initialValues={demoValues}
       validate={validate}
       onSubmit={handleFormSubmit}

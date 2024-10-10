@@ -1,10 +1,11 @@
 import React from 'react';
 
 interface DataDisplayProps {
+  name?: string;
   data: Record<string, any>;
 }
 
-const DataDisplay: React.FC<DataDisplayProps> = ({ data }) => {
+const DataDisplay: React.FC<DataDisplayProps> = ({ data, name='' }) => {
   const renderData = (data: Record<string, any>) => {
     return Object.entries(data || {} ).map(([key, value]) => (
       <div key={key} className="mb-1 text-xs">
@@ -21,9 +22,12 @@ const DataDisplay: React.FC<DataDisplayProps> = ({ data }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-3xl overflow-auto">
+    <>
+   {name && <div className="text-sm mb-1">{name}</div>} 
+    <div className=" w-full max-w-3xl overflow-auto opacity-50">
       {renderData(data)}
     </div>
+    </>
   );
 };
 

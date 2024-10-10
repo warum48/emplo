@@ -2,15 +2,20 @@ import { useCreateProfileMutation } from "@/rtk/queries/joborder";
 import { FieldConfig, FormTemplate } from "./FormTemplate";
 import { OrganizationsSelect } from "@/components/DynamicFormFields/Organizations";
 import { SpecialitiesSelect } from "@/components/DynamicFormFields/Specialities";
+import { DepartmentsSelect } from "@/components/DynamicFormFields/Departments";
 
 export type TFromStepperProps = {
   activeStep: number;
   setActiveStep: React.Dispatch<React.SetStateAction<number>>;
   onNext: (values: any) => void;
   stepNames: string[];
+  _formValues:any;
+  setFormValues:React.Dispatch<React.SetStateAction<any>>
 };
 
 export const NewProfileForm = ({
+  _formValues,
+  setFormValues,
   activeStep,
   setActiveStep,
   onNext,
@@ -53,11 +58,24 @@ export const NewProfileForm = ({
         customisable: true,
       },
 
+
       {
         type: "TextInput",
         name: "org_unit",
         label: "Подразделение",
         placeholder: "Введите подразделение",
+      },
+
+      {
+        component: DepartmentsSelect,
+        props: {
+          formFieldName: "speciality",
+          label: "department",
+          placeholder: "Введите department",
+          dependency: "org",
+        },
+        
+        customisable: true,
       },
 
       {
@@ -189,6 +207,9 @@ export const NewProfileForm = ({
 
   return (
     <FormTemplate
+   // form={form}
+    _formValues={_formValues}
+    setFormValues={setFormValues}
       //initialValues={initialValues}
       templateValues={templateValues}
       initialValues={demoValues}
