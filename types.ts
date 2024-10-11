@@ -198,7 +198,7 @@ export interface paths {
         };
         /**
          * Export Candidates
-         * @description Экспорт всех кандидатов в csv
+         * @description Экспорт кандидатов в csv
          */
         get: operations["applications_candidates_api_export_candidates"];
         put?: never;
@@ -293,7 +293,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/joborder/search_crits": {
+    "/api/joborder/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Job Order By Id
+         * @description Найти заявку на подбор персонала по id
+         */
+        get: operations["applications_joborders_api_get_job_order_by_id"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/search_crits/": {
         parameters: {
             query?: never;
             header?: never;
@@ -302,7 +322,7 @@ export interface paths {
         };
         /**
          * Get Search Crits
-         * @description Список критериев парсинга
+         * @description Список критериев поиска
          */
         get: operations["applications_joborders_api_get_search_crits"];
         put?: never;
@@ -317,7 +337,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/joborder/job_profiles": {
+    "/api/joborder/search_crits/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Search Crit By Id
+         * @description Критерий поиска по id
+         */
+        get: operations["applications_joborders_api_get_search_crit_by_id"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/job_profiles/": {
         parameters: {
             query?: never;
             header?: never;
@@ -341,7 +381,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/joborder/vacancies": {
+    "/api/joborder/job_profiles/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Job Profile By Id
+         * @description Профиль Должности по id
+         */
+        get: operations["applications_joborders_api_get_job_profile_by_id"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/joborder/vacancies/": {
         parameters: {
             query?: never;
             header?: never;
@@ -365,7 +425,147 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/api/hhru/cand_info": {
+    "/api/joborder/vacancies/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Vacancy By Id
+         * @description Документ Вакансии по id
+         */
+        get: operations["applications_joborders_api_get_vacancy_by_id"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/org/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Org Lst
+         * @description Список доступных пользователю организаций
+         */
+        get: operations["api_org_api_get_org_lst"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/org/all/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get All Org Lst
+         * @description Список всех  организаций
+         */
+        get: operations["api_org_api_get_all_org_lst"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/org/departments/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Org Departments Lst
+         * @description Список доступных пользователю подразделений организации
+         */
+        get: operations["api_org_api_get_org_departments_lst"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/org/units/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Org Units Lst
+         * @description Список доступных пользователю отделов организации
+         */
+        get: operations["api_org_api_get_org_units_lst"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/org/projects/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Org Projects Lst
+         * @description Список доступных пользователю проектов организации
+         */
+        get: operations["api_org_api_get_org_projects_lst"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/org/b_areas/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Org Business Area Lst
+         * @description Список доступных пользователю направлений деятельности организации
+         */
+        get: operations["api_org_api_get_org_business_area_lst"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/cand/info/": {
         parameters: {
             query?: never;
             header?: never;
@@ -376,8 +576,48 @@ export interface paths {
          * Get Cand Info By Id
          * @description Информация о кандидате с hh.ru по его resume_id
          */
-        get: operations["api_hhru_api_get_cand_info_by_id"];
+        get: operations["applications_aggregators_api_get_cand_info_by_id"];
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/cand/comments/check/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Check Cand Comments
+         * @description Количество комментарив с hh.ru по его resume_id
+         */
+        get: operations["applications_aggregators_api_check_cand_comments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/cand/comments/update/chl/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Add New Comments To Cands
+         * @description ЧИСТАЯ ЛИНИЯ: Обновить комментарий с hh.ru по его resume_id
+         */
+        put: operations["applications_aggregators_api_add_new_comments_to_cands"];
         post?: never;
         delete?: never;
         options?: never;
@@ -396,7 +636,7 @@ export interface paths {
          * Get Hh User Info
          * @description Информация по текущему аккаунту клиента
          */
-        get: operations["api_hhru_api_get_hh_user_info"];
+        get: operations["applications_aggregators_api_get_hh_user_info"];
         put?: never;
         post?: never;
         delete?: never;
@@ -416,7 +656,7 @@ export interface paths {
          * Get Hh User Permissions
          * @description Проверка доступа текущего пользователя к платным методам
          */
-        get: operations["api_hhru_api_get_hh_user_permissions"];
+        get: operations["applications_aggregators_api_get_hh_user_permissions"];
         put?: never;
         post?: never;
         delete?: never;
@@ -438,7 +678,7 @@ export interface paths {
          * Search Candidates
          * @description Поиск кандидатов посредством парсинга
          */
-        post: operations["api_hhru_api_search_candidates"];
+        post: operations["applications_aggregators_api_search_candidates"];
         delete?: never;
         options?: never;
         head?: never;
@@ -456,10 +696,10 @@ export interface paths {
          * Get Employer Vacancies
          * @description Просмотр опубликованных вакансий выбранным работодателем
          */
-        get: operations["api_hhru_api_get_employer_vacancies"];
+        get: operations["applications_aggregators_api_get_employer_vacancies"];
         put?: never;
         /** Publish Vacancy */
-        post: operations["api_hhru_api_publish_vacancy"];
+        post: operations["applications_aggregators_api_publish_vacancy"];
         delete?: never;
         options?: never;
         head?: never;
@@ -477,12 +717,12 @@ export interface paths {
          * Get Vacancy Info
          * @description Просмотр данных выбранной вакансии
          */
-        get: operations["api_hhru_api_get_vacancy_info"];
+        get: operations["applications_aggregators_api_get_vacancy_info"];
         /**
          * Edit Vacancy
          * @description Редактирование выбранной вакансии
          */
-        put: operations["api_hhru_api_edit_vacancy"];
+        put: operations["applications_aggregators_api_edit_vacancy"];
         post?: never;
         delete?: never;
         options?: never;
@@ -501,7 +741,7 @@ export interface paths {
          * Get Negotiations
          * @description Просмотр откликов по выбранной вакансии
          */
-        get: operations["api_hhru_api_get_negotiations"];
+        get: operations["applications_aggregators_api_get_negotiations"];
         put?: never;
         post?: never;
         delete?: never;
@@ -521,13 +761,33 @@ export interface paths {
          * Check Connect Hh Account
          * @description Статус подключения аккаунта hh.ru к текущему пользователю
          */
-        get: operations["api_hhru_api_check_connect_hh_account"];
+        get: operations["applications_aggregators_api_check_connect_hh_account"];
         put?: never;
         /**
          * Connect Hh Account
          * @description Подключение аккаунт hh.ru к текущему пользователю
          */
-        post: operations["api_hhru_api_connect_hh_account"];
+        post: operations["applications_aggregators_api_connect_hh_account"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/hhru/reconnect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Reconnect Hh Account
+         * @description Выполнить переподключения аккаунта hh.ru
+         */
+        get: operations["applications_aggregators_api_reconnect_hh_account"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -785,10 +1045,10 @@ export interface components {
          * @description Схема для парсинга внутри БД
          */
         MainPageSearchSchema: {
-            /** Specialty */
-            specialty?: string | null;
+            /** Speciality */
+            speciality: string | null;
             /** Area */
-            area?: string[] | null;
+            area: string[] | null;
             /** Relocation Type */
             relocation_type?: string | null;
             /** Schedule */
@@ -807,170 +1067,477 @@ export interface components {
             job_search_status?: string[] | null;
             /** Limit */
             limit?: number | null;
+            /**
+             * Page
+             * @description Номер страницы
+             * @default 0
+             */
+            page: number | null;
+        };
+        /** JobOrderSchema */
+        JobOrderSchema: {
+            /**
+             * Id
+             * @description Идентификатор Заявки на подбор
+             * @default 1
+             */
+            id: number;
+            /**
+             * Name
+             * @description Навзание заявки в системе
+             * @default Заявка 1
+             */
+            name: string;
+            /**
+             * Status
+             * @description Статус заявки
+             * @default Новая
+             */
+            status: string;
+            job_profile: components["schemas"]["JobProfileSchema"];
+            criteria: components["schemas"]["SearchCritSchema"];
+            /**
+             * Priority
+             * @description Приоритет заявки
+             * @default 1
+             */
+            priority: number;
+            /**
+             * Search Limit Target
+             * @description Лимит поиска (до)
+             * @default 1
+             */
+            search_limit_target: number;
+            /**
+             * Is Mass Selection
+             * @description Массовый подбор ?
+             * @default false
+             */
+            is_mass_selection: boolean;
+            /**
+             * Deadline
+             * Format: date-time
+             * @description Желаемая дата закрытия
+             * @default 2024-10-10T17:04:05.124512
+             */
+            deadline: string;
+            /**
+             * Is Confirmed
+             * @description Утверждена ?
+             * @default false
+             */
+            is_confirmed: boolean;
+            /**
+             * Description
+             * @description Описание/комментарий
+             * @default Не указано
+             */
+            description: string;
+            /**
+             * Responsible
+             * @description Ответственный
+             * @default root
+             */
+            responsible: string;
+            /**
+             * Created By
+             * @description Заявитель
+             * @default root
+             */
+            created_by: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Дата создания
+             * @default 2024-10-10T17:04:05.124606
+             */
+            created_at: string;
+        };
+        /** JobProfileSchema */
+        JobProfileSchema: {
+            /**
+             * Id
+             * @description Идентификатор Профиля должности
+             * @default 1
+             */
+            id: number;
+            /**
+             * Name
+             * @description Наименование Профиля должности
+             * @default Профиль 1
+             */
+            name: string;
+            /**
+             * Speciality
+             * @description Должность
+             * @default Мерчандайзер
+             */
+            speciality: string;
+            /**
+             * Org
+             * @description Компания
+             * @default Чистая Линия
+             */
+            org: string;
+            /**
+             * Org Unit
+             * @description Подразделение
+             * @default Не указано
+             */
+            org_unit: string;
+            /**
+             * Org Department
+             * @description Отдел
+             * @default Не указано
+             */
+            org_department: string;
+            /**
+             * Org Job Name
+             * @description Должность внутри компании
+             * @default Не указано
+             */
+            org_job_name: string;
+            /**
+             * Org Project
+             * @description Проект компании
+             * @default Не указан
+             */
+            org_project: string;
+            /**
+             * Org Area Of Business
+             * @description Направление деятельности
+             * @default Не указан
+             */
+            org_area_of_business: string;
+            /**
+             * Job Description
+             * @description Обязанности
+             * @default
+             */
+            job_description: string;
+            /**
+             * Job Conditions
+             * @description Условия
+             * @default
+             */
+            job_conditions: string;
+            /**
+             * Job Requirements
+             * @description Требования
+             * @default
+             */
+            job_requirements: string;
+            /**
+             * Description
+             * @description Описание/комментарий
+             * @default Не указано
+             */
+            description: string;
+            /**
+             * Created At
+             * Format: date-time
+             * @description Дата создания
+             * @default 2024-10-10T17:04:05.120723
+             */
+            created_at: string;
+            /**
+             * Created By
+             * @description Заявитель
+             * @default root
+             */
+            created_by: string;
+        };
+        /** SearchCritSchema */
+        SearchCritSchema: {
+            /**
+             * Id
+             * @description Идентификатор Критерия поиска
+             * @default 1
+             */
+            id: number;
+            /**
+             * Name
+             * @description Наименование Критерия поиска
+             * @default Критирий 1
+             */
+            name: string;
+            /**
+             * Speciality
+             * @description Должность
+             * @default Мерчандайзер
+             */
+            speciality: string;
+            /**
+             * Area
+             * @description Регион
+             * @default Санкт-Петербург
+             */
+            area: string;
+            /**
+             * Metro
+             * @description Станция метро
+             * @default Не указана
+             */
+            metro: string;
+            /**
+             * Schedule
+             * @description График работы
+             * @default fullDay
+             */
+            schedule: string;
+            /**
+             * Relocation Type
+             * @description Готовность к переезду
+             * @default living_or_relocation
+             */
+            relocation_type: string;
+            /**
+             * Experience
+             * @description Опыт работы (лет)
+             * @default 1
+             */
+            experience: number;
+            /**
+             * Gender
+             * @description Пол
+             * @default male
+             */
+            gender: string;
+            /**
+             * Age
+             * @description Возраст
+             * @default 18
+             */
+            age: number;
+            /**
+             * Salary
+             * @description Зарплата (до)
+             * @default 30000
+             */
+            salary: number;
+            /**
+             * Job Search Status
+             * @description Статус разюме
+             * @default active_search
+             */
+            job_search_status: string;
+            /**
+             * Created By
+             * @description Заявитель
+             * @default root
+             */
+            created_by: string;
         };
         /** ErrorSchema */
         ErrorSchema: {
-            /** Error */
+            /**
+             * Error
+             * @description Фатальная ошибка
+             * @default Emotional DAMAGE!
+             */
             error: string;
         };
         /** MessageSchema */
         MessageSchema: {
-            /** Msg */
+            /**
+             * Msg
+             * @description Сообщение о неполадке
+             * @default Что-то пошло не так
+             */
             msg: string;
         };
         /** JobOrderAddSchema */
         JobOrderAddSchema: {
+            /**
+             * Name
+             * @description Название заявки
+             */
+            name?: string | null;
             /** Job Profile */
-            job_profile: number;
-            /** Vacancy */
-            vacancy: number;
+            job_profile: components["schemas"]["JobProfileAddSchema"] | number;
+            /** Criteria */
+            criteria: components["schemas"]["SearchCritAddSchema"] | number;
+            /**
+             * Priority
+             * @description Приоритет заявки
+             * @default 1
+             */
+            priority: number;
+            /**
+             * Search Limit Target
+             * @description Лимит поиска (до)
+             * @default 1
+             */
+            search_limit_target: number;
+            /**
+             * Is Mass Selection
+             * @description Массовый подбор ?
+             * @default false
+             */
+            is_mass_selection: boolean;
             /**
              * Deadline
-             * Format: date
+             * Format: date-time
+             * @description Желаемая дата закрытия
+             * @default 2024-10-10T17:04:05.126980
              */
             deadline: string;
-            /** Description */
+            /**
+             * Description
+             * @description Описание/комментарий
+             * @default Не указано
+             */
             description: string;
-            /** Responsible */
-            responsible: number;
-        };
-        /** SearchCritSchema */
-        SearchCritSchema: {
-            /** Id */
-            id: number;
-            /** Speciality */
-            speciality: string;
-            /** Area */
-            area: string;
-            /** Metro */
-            metro: string;
-            /** Schedule */
-            schedule: string;
-            /** Relocation Type */
-            relocation_type: string;
-            /** Experience */
-            experience: number;
-            /** Gender */
-            gender: number;
-            /** Age */
-            age: number;
-            /** Salary */
-            salary: number;
-            /** Job Search Status */
-            job_search_status: string;
-            /** Search Limit Target */
-            search_limit_target: string;
-            /** Created By */
-            created_by: string;
-        };
-        /** SearchCritAddSchema */
-        SearchCritAddSchema: {
-            /** Speciality */
-            speciality: string | null;
-            /** Area */
-            area: string | null;
-            /** Metro */
-            metro?: string | null;
-            /** Schedule */
-            schedule?: string | null;
-            /** Relocation Type */
-            relocation_type?: string | null;
-            /** Experience */
-            experience: number | null;
-            /** Gender */
-            gender?: string | null;
-            /** Age */
-            age: number | null;
-            /** Salary */
-            salary: number | null;
-            /** Job Search Status */
-            job_search_status: string | null;
-            /** Search Limit Target */
-            search_limit_target: number | null;
-            /** Created By */
-            created_by: null;
+            /**
+             * Responsible
+             * @description Ответственный
+             * @default root
+             */
+            responsible: string;
         };
         /** JobProfileAddSchema */
         JobProfileAddSchema: {
-            /** Speciality */
+            /**
+             * Name
+             * @description Наименование Профиля должности
+             * @default Профиль 423759a714c44f369893076665a8111a
+             */
+            name: string;
+            /**
+             * Speciality
+             * @description Должность
+             * @default Мерчандайзер
+             */
             speciality: string;
-            /** Org */
+            /**
+             * Org
+             * @description Компания
+             * @default Чистая Линия
+             */
             org: string;
-            /** Org Job Name */
+            /**
+             * Org Unit
+             * @description Подразделение
+             * @default Не указано
+             */
+            org_unit: string;
+            /**
+             * Org Department
+             * @description Отдел
+             * @default Не указано
+             */
+            org_department: string;
+            /**
+             * Org Job Name
+             * @description Должность внутри компании
+             * @default Не указано
+             */
             org_job_name: string;
-            criteria: components["schemas"]["SearchCritSchema"];
-            /** Description */
+            /**
+             * Org Project
+             * @description Проект компании
+             * @default Не указан
+             */
+            org_project: string;
+            /**
+             * Org Area Of Business
+             * @description Направление деятельности
+             * @default Не указан
+             */
+            org_area_of_business: string;
+            /**
+             * Job Description
+             * @description Обязанности
+             * @default
+             */
+            job_description: string;
+            /**
+             * Job Conditions
+             * @description Условия
+             * @default
+             */
+            job_conditions: string;
+            /**
+             * Job Requirements
+             * @description Требования
+             * @default
+             */
+            job_requirements: string;
+            /**
+             * Description
+             * @description Описание/комментарий
+             * @default Не указано
+             */
             description: string;
         };
-        /** VacancyAddSchema */
-        VacancyAddSchema: {
-            /** Name */
+        /** SearchCritAddSchema */
+        SearchCritAddSchema: {
+            /**
+             * Name
+             * @description Наименование Критерия поиска
+             * @default Критерий 99134b7531d046a3b7c50f78a0ce8531
+             */
             name: string;
-            /** Job Profile */
-            job_profile: number;
             /**
-             * Deadline
-             * Format: date
+             * Speciality
+             * @description Должность
+             * @default Мерчандайзер
              */
-            deadline: string;
-            /** Responsible */
-            responsible: number;
-        };
-        /**
-         * CandidateSearchSchema
-         * @description Схема фильтров парсинга для api
-         */
-        CandidateSearchSchema: {
-            /** Specialty */
-            specialty: string;
-            /** Area */
-            area: string[];
-            /** Relocation Type */
-            relocation_type?: string | null;
-            /** Schedule */
-            schedule?: string[] | null;
+            speciality: string | null;
             /**
-             * Skills
-             * @default []
+             * Area
+             * @description Регион
+             * @default Санкт-Петербург
              */
-            skills: string[];
-            /** Experience */
-            experience: string | number;
-            /** Gender */
-            gender: string;
-            /** Age */
-            age: number;
-            /** Salary */
-            salary: number;
-            /** Job Search Status */
-            job_search_status: string[];
-            /** Limit */
-            limit: number;
-        };
-        /** SalarySchema */
-        SalarySchema: {
+            area: string | null;
             /**
-             * Код валюты из справочника hh.ru
-             * @default RUR
+             * Metro
+             * @description Метро
+             * @default Не указана
              */
-            currency: string | null;
+            metro: string | null;
             /**
-             * Нижняя граница ЗП
-             * @description На hh.ru параметр from в соответствии
-             * @default 10000
+             * Schedule
+             * @description График работы
+             * @default fullDay
              */
-            bottom: number | null;
+            schedule: string | null;
             /**
-             * С вычетом налога
-             * @description Признак что границы зарплаты указаны до вычета налогов
-             * @default true
+             * Relocation Type
+             * @description Готовность к переезду
+             * @default living_or_relocation
              */
-            gross: boolean | null;
+            relocation_type: string | null;
             /**
-             * Верхняя граница ЗП
-             * @default 200000
+             * Experience
+             * @description Опыт работы (лет)
+             * @default 1
              */
-            to: number | null;
+            experience: number | null;
+            /**
+             * Gender
+             * @description Пол
+             * @default male
+             */
+            gender: string | null;
+            /**
+             * Age
+             * @description Возраст
+             * @default 18
+             */
+            age: number | null;
+            /**
+             * Salary
+             * @description Зарплата (до)
+             * @default 30000
+             */
+            salary: number | null;
+            /**
+             * Job Search Status
+             * @description Статус разюме
+             * @default active_search
+             */
+            job_search_status: string | null;
         };
         /**
          * VacancySchema
@@ -1033,6 +1600,180 @@ export interface components {
              * @default true
              */
             allow_messages: boolean | null;
+        };
+        /** VacancyAddSchema */
+        VacancyAddSchema: {
+            /**
+             * Name
+             * @description Наименование Вакансии
+             * @default Вакансия d2c5dbb95a374a548fffa18f1a5476b3
+             */
+            name: string;
+            /** Job Order */
+            job_order: components["schemas"]["JobOrderAddSchema"] | number;
+            /**
+             * Deadline
+             * Format: date-time
+             * @description Желаемая дата закрытия
+             * @default 2024-10-10T17:04:05.132110
+             */
+            deadline: string;
+            /**
+             * Responsible
+             * @description Ответственный
+             * @default root
+             */
+            responsible: string;
+        };
+        /** OrgSchema */
+        OrgSchema: {
+            /** ID */
+            id?: number | null;
+            /** Название */
+            name?: string | null;
+        };
+        /** OrgDepartmentSchema */
+        OrgDepartmentSchema: {
+            /** ID */
+            id?: number | null;
+            /** Организация */
+            org: number;
+            /** Название */
+            name?: string | null;
+            /** Описание */
+            description?: string | null;
+        };
+        /** OrgUnitSchema */
+        OrgUnitSchema: {
+            /** ID */
+            id?: number | null;
+            /** Подразделение компании */
+            department: number;
+            /** Название */
+            name?: string | null;
+            /** Описание */
+            description?: string | null;
+        };
+        /** OrgProjectSchema */
+        OrgProjectSchema: {
+            /** ID */
+            id?: number | null;
+            /** Отдел компании */
+            unit: number;
+            /** Название */
+            name?: string | null;
+            /** Описание */
+            description?: string | null;
+        };
+        /** OrgBAreaSchema */
+        OrgBAreaSchema: {
+            /** ID */
+            id?: number | null;
+            /** Отдел компании */
+            unit: number;
+            /** Название */
+            name?: string | null;
+            /** Описание */
+            description?: string | null;
+        };
+        /**
+         * CandidateSearchSchema
+         * @description Схема фильтров парсинга для api
+         */
+        CandidateSearchSchema: {
+            /**
+             * Speciality
+             * @description Должность
+             * @default Мерчандайзер
+             */
+            speciality: string;
+            /**
+             * Area
+             * @description Регион
+             * @default [
+             *       "Санкт-Петербург"
+             *     ]
+             */
+            area: string[];
+            /** Relocation Type */
+            relocation_type?: string | null;
+            /** Schedule */
+            schedule?: string[] | null;
+            /**
+             * Skills
+             * @default []
+             */
+            skills: string[];
+            /**
+             * Experience
+             * @description Суммарный опыт
+             * @default 1
+             */
+            experience: number | string;
+            /**
+             * Gender
+             * @description Пол
+             * @default male
+             */
+            gender: string;
+            /**
+             * Age
+             * @description Возраст (от)
+             * @default 18
+             */
+            age: number;
+            /**
+             * Salary
+             * @description Зарплата (до)
+             * @default 200000
+             */
+            salary: number;
+            /**
+             * Job Search Status
+             * @description Статус резюме
+             * @default [
+             *       "active_search",
+             *       "looking_for_offers"
+             *     ]
+             */
+            job_search_status: string[];
+            /**
+             * Limit
+             * @description Результат на одной странице
+             * @default 200
+             */
+            limit: number;
+            /**
+             * Page
+             * @description Номер страницы
+             * @default 0
+             */
+            page: number | null;
+        };
+        /** SalarySchema */
+        SalarySchema: {
+            /**
+             * Код валюты из справочника hh.ru
+             * @default RUR
+             */
+            currency: string | null;
+            /**
+             * Нижняя граница ЗП
+             * @description На hh.ru параметр from в соответствии
+             * @default 10000
+             */
+            bottom: number | null;
+            /**
+             * С вычетом налога
+             * @description Признак что границы зарплаты указаны до вычета налогов
+             * @default true
+             */
+            gross: boolean | null;
+            /**
+             * Верхняя граница ЗП
+             * @default 200000
+             */
+            to: number | null;
         };
         /** VacancyEditSchema */
         VacancyEditSchema: {
@@ -1305,7 +2046,8 @@ export interface operations {
         parameters: {
             query?: {
                 role_filter?: string | null;
-                search_date?: string | null;
+                search_date_from?: string | null;
+                search_date_to?: string | null;
             };
             header?: never;
             path?: never;
@@ -1385,6 +2127,15 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobOrderSchema"][];
+                };
+            };
             /** @description Bad Request */
             400: {
                 headers: {
@@ -1424,6 +2175,55 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    applications_joborders_api_get_job_order_by_id: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobOrderSchema"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
             };
         };
     };
@@ -1487,6 +2287,55 @@ export interface operations {
             };
         };
     };
+    applications_joborders_api_get_search_crit_by_id: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchCritSchema"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
     applications_joborders_api_get_job_profiles: {
         parameters: {
             query?: never;
@@ -1496,6 +2345,15 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobProfileSchema"][];
+                };
+            };
             /** @description Bad Request */
             400: {
                 headers: {
@@ -1538,6 +2396,55 @@ export interface operations {
             };
         };
     };
+    applications_joborders_api_get_job_profile_by_id: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JobProfileSchema"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
     applications_joborders_api_get_vacancies: {
         parameters: {
             query?: never;
@@ -1547,6 +2454,15 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VacancySchema"][];
+                };
+            };
             /** @description Bad Request */
             400: {
                 headers: {
@@ -1589,7 +2505,279 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_get_cand_info_by_id: {
+    applications_joborders_api_get_vacancy_by_id: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VacancySchema"];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
+    api_org_api_get_org_lst: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrgSchema"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
+    api_org_api_get_all_org_lst: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrgSchema"][];
+                };
+            };
+        };
+    };
+    api_org_api_get_org_departments_lst: {
+        parameters: {
+            query?: {
+                org_name?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrgDepartmentSchema"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
+    api_org_api_get_org_units_lst: {
+        parameters: {
+            query?: {
+                org_name?: string;
+                department_name?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrgUnitSchema"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
+    api_org_api_get_org_projects_lst: {
+        parameters: {
+            query?: {
+                org_name?: string;
+                department_name?: string;
+                unit_name?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrgProjectSchema"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
+    api_org_api_get_org_business_area_lst: {
+        parameters: {
+            query?: {
+                org_name?: string;
+                department_name?: string;
+                unit_name?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OrgBAreaSchema"][];
+                };
+            };
+            /** @description Bad Request */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorSchema"];
+                };
+            };
+            /** @description Internal Server Error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MessageSchema"];
+                };
+            };
+        };
+    };
+    applications_aggregators_api_get_cand_info_by_id: {
         parameters: {
             query: {
                 cand_id: string;
@@ -1609,7 +2797,50 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_get_hh_user_info: {
+    applications_aggregators_api_check_cand_comments: {
+        parameters: {
+            query: {
+                cand_id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_aggregators_api_add_new_comments_to_cands: {
+        parameters: {
+            query?: {
+                new_comment?: string;
+                cand_id?: string;
+                search_date_from?: string;
+                search_date_to?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_aggregators_api_get_hh_user_info: {
         parameters: {
             query?: never;
             header?: never;
@@ -1627,7 +2858,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_get_hh_user_permissions: {
+    applications_aggregators_api_get_hh_user_permissions: {
         parameters: {
             query?: never;
             header?: never;
@@ -1645,9 +2876,12 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_search_candidates: {
+    applications_aggregators_api_search_candidates: {
         parameters: {
-            query?: never;
+            query?: {
+                saveToDB?: boolean;
+                without_contacts?: boolean;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -1667,7 +2901,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_get_employer_vacancies: {
+    applications_aggregators_api_get_employer_vacancies: {
         parameters: {
             query?: {
                 employer_id?: number | null;
@@ -1687,7 +2921,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_publish_vacancy: {
+    applications_aggregators_api_publish_vacancy: {
         parameters: {
             query?: never;
             header?: never;
@@ -1709,7 +2943,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_get_vacancy_info: {
+    applications_aggregators_api_get_vacancy_info: {
         parameters: {
             query?: never;
             header?: never;
@@ -1729,7 +2963,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_edit_vacancy: {
+    applications_aggregators_api_edit_vacancy: {
         parameters: {
             query?: never;
             header?: never;
@@ -1753,7 +2987,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_get_negotiations: {
+    applications_aggregators_api_get_negotiations: {
         parameters: {
             query?: never;
             header?: never;
@@ -1773,7 +3007,7 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_check_connect_hh_account: {
+    applications_aggregators_api_check_connect_hh_account: {
         parameters: {
             query?: never;
             header?: never;
@@ -1791,7 +3025,25 @@ export interface operations {
             };
         };
     };
-    api_hhru_api_connect_hh_account: {
+    applications_aggregators_api_connect_hh_account: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    applications_aggregators_api_reconnect_hh_account: {
         parameters: {
             query?: never;
             header?: never;

@@ -58,8 +58,8 @@ export const joborder = createApi({
      // query: () => '/api/org/departments/',
       query: (org_name) => `/api/org/departments/?org_name=${org_name}`,
     }),
-    getUnits: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
-      query: () => '/api/org/units/',
+    getUnits: builder.query<components['schemas']['OrgUnitSchema'][], Record<string, string>>({ // components['schemas']['AppUserRegisterSchema'] //, {org_name: string, department_name: string}
+      query: ({org_name}) => `/api/org/units/?org_name=${org_name}`, //, department_name //&department_name=${department_name}
     }),
     getProjects: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/org/projects/',
@@ -91,7 +91,10 @@ export const {
     useGetUnitsQuery,
     useGetProjectsQuery,
     useGetBAreasQuery,
-    useLazyGetDepartmentsQuery
+    useLazyGetDepartmentsQuery,
+    useLazyGetUnitsQuery,
+    useLazyGetProjectsQuery,
+    useLazyGetBAreasQuery,  
 
  } = joborder;
 

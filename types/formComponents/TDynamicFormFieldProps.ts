@@ -6,4 +6,5 @@ export type TDynamicFormFieldProps = {
     formFieldName?:string;
     onChange?:any;
     dependency? :string;
+    dependencies? :any[];
 }

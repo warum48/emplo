@@ -17,8 +17,19 @@ import { LinkButton } from "@/components/__atoms/Buttons/LinkButton";
 import { CustomisableField } from "@/components/__atoms/Forms/CustomisableField";
 import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 
+import { RichTextEditor, Link } from "@mantine/tiptap";
+import { useEditor } from "@tiptap/react";
+
+import StarterKit from "@tiptap/starter-kit";
+import "@mantine/tiptap/styles.css";
+//import Highlight from '@tiptap/extension-highlight';
+//import Underline from '@tiptap/extension-underline';
+//import TextAlign from '@tiptap/extension-text-align';
+//import Superscript from '@tiptap/extension-superscript';
+//import SubScript from '@tiptap/extension-subscript';
+
 export type FieldObject = {
-  type: "TextInput" | "Textarea" | "Select"; // Limiting the type to these specific strings
+  type: "TextInput" | "Textarea" | "Select" | "RichTextEditor"; // Limiting the type to these specific strings
   name: string;
   label: string;
   placeholder: string;
@@ -31,14 +42,14 @@ export type FieldComponent = {
   component: React.FC<any>; //any;//React.JSX.Element; //
   props: any;
   customisable?: boolean;
-  dependency?: string; // field is enabled only if this dependency field is not empty
+  //dependency?: string; // field is enabled only if this dependency field is not empty
 };
 
 export type FieldConfig = FieldObject | FieldComponent;
 
 type FormTemplateProps = {
-  _formValues:any;
-  setFormValues:React.Dispatch<React.SetStateAction<any>>
+  _formValues: any;
+  setFormValues: React.Dispatch<React.SetStateAction<any>>;
   templateValues: any;
   initialValues: any;
   validate: any;
@@ -69,10 +80,14 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   onNext,
   stepNames,
 }) => {
- const form =  useForm({ initialValues, validate, onValuesChange: (values) => {
-  console.log(values);
-  setFormValues(values);
-}, });
+  const form = useForm({
+    initialValues,
+    validate,
+    onValuesChange: (values) => {
+      console.log(values);
+      setFormValues(values);
+    },
+  });
   //const [customized, setCustomized] = React.useState(false);
   const { colorScheme, setColorScheme } = useMantineColorScheme();
 
@@ -98,6 +113,19 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
     form.setValues(templateValues);
   }
 
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+    //  Underline,
+      Link,
+   //   Superscript,
+   //   SubScript,
+   //   Highlight,
+   //   TextAlign.configure({ types: ['heading', 'paragraph'] }),
+    ],
+   // content,
+  });
+
   return (
     <div className="relative w-full max-w-full p-4 text-black dark:text-white">
       <form
@@ -111,7 +139,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
             </Title>
             {/*<LinkButton  onClick={()=>{}} colorScheme={colorScheme}>Заполнить базовыми данными</LinkButton>*/}
             <div
-              className="cursor-pointer text-xs link-button"
+              className="link-button cursor-pointer text-xs"
               onClick={() => {
                 fillFormWithTemplateValues();
               }}
@@ -127,8 +155,10 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                     <div key={index}>
                       {"component" in field ? ( // Type narrowing using "in" to check if it's a component
                         // field.component
-                        <CustomisableField form={form} field={field}  
-                       // {...form.getInputProps(field.props.formFieldName)}
+                        <CustomisableField
+                          form={form}
+                          field={field}
+                          // {...form.getInputProps(field.props.formFieldName)}
                         />
                       ) : (
                         <>
@@ -151,6 +181,26 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                               maxRows={10}
                               {...form.getInputProps(field.name)}
                             />
+                          )}
+                          {field.type === "RichTextEditor" && (
+                            <><div className='text-sm'>{ field.label}</div>
+                            <RichTextEditor editor={editor}  >
+                              
+                               
+                              <RichTextEditor.Toolbar sticky stickyOffset={60}  {...form.getInputProps(field.name)} >
+                                <RichTextEditor.ControlsGroup>
+                                  <RichTextEditor.Bold />
+                                  <RichTextEditor.Italic />
+                                  <RichTextEditor.Underline />
+                                  <RichTextEditor.Strikethrough />
+                                  <RichTextEditor.ClearFormatting />
+                                  <RichTextEditor.Highlight />
+                                  <RichTextEditor.Code />
+                                </RichTextEditor.ControlsGroup>
+                              </RichTextEditor.Toolbar>
+                              <RichTextEditor.Content />
+                            </RichTextEditor>
+                            </>
                           )}
                           {field.type === "Select" && field.options && (
                             <Select
@@ -186,13 +236,13 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
             {activeStep < stepNames.length - 1 && (
               <Button
                 onClick={() =>
-                 // setActiveStep((activeStep: number) => activeStep + 1)
-                 setActiveStep((current) => {
-                  if (form.validate().hasErrors) {
-                    return current;
-                  }
-                  return current < stepNames.length ? current + 1 : current;
-                })
+                  // setActiveStep((activeStep: number) => activeStep + 1)
+                  setActiveStep((current) => {
+                    if (form.validate().hasErrors) {
+                      return current;
+                    }
+                    return current < stepNames.length ? current + 1 : current;
+                  })
                 }
                 className="w-full max-w-80"
               >
@@ -215,7 +265,6 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
     </div>
   );
 };
-
 
 /*
 <div>
