@@ -1,10 +1,8 @@
-import {
-  FieldComponent,
-  FieldConfig,
-} from "@/components/_dashboard/profiles/create/FormTemplate";
+
 import { TextInput } from "@mantine/core";
 import React from "react";
 import { JSONViewer } from "../JSONViewer/JSONViewr";
+import { FieldComponent } from "./types/FieldConfig";
 
 type TProps = {
   field: FieldComponent;

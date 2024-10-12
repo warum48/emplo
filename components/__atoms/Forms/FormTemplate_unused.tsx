@@ -10,7 +10,7 @@ import { TFromStepperProps } from "@/components/_dashboard/profiles/create/NewPr
 import { LinkButton } from "../Buttons/LinkButton";
 
 export type FieldConfig = {
-  type: "TextInput" | "Textarea" | "Select"; // Limiting the type to these specific strings
+  type: "TextInput" | "Textarea" | "Select" | "RichTextEditor"; // Limiting the type to these specific strings
   name: string;
   label: string;
   placeholder: string;

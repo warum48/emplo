@@ -11,6 +11,16 @@ button {
     align-items: flex-start;
     overflow-y: auto;
 }
+
+.richText ul {
+    list-style-type: disc !important;
+    padding-left: 1.5rem; /* Ensure there’s some padding */
+  }
+  
+  .richText ol {
+    list-style-type: decimal !important;
+    padding-left: 1.5rem;
+  }
 /*button:hover {
     box-shadow: 0 0 30px 0 rgb(55, 82, 163, 20);
 }*/

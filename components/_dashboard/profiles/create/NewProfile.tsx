@@ -1,8 +1,9 @@
 import { useCreateProfileMutation } from "@/rtk/queries/joborder";
-import { FieldConfig, FormTemplate } from "./FormTemplate";
+import {  FormTemplate } from "./FormTemplate"; //FieldConfig,
 import { OrganizationsSelect } from "@/components/DynamicFormFields/Organizations";
 import { SpecialitiesSelect } from "@/components/DynamicFormFields/Specialities";
 import { DepartmentsSelect } from "@/components/DynamicFormFields/Departments";
+import { FieldConfig } from "@/components/__atoms/Forms/types/FieldConfig";
 
 export type TFromStepperProps = {
   activeStep: number;

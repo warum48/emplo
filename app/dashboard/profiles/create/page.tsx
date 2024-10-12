@@ -13,12 +13,14 @@ import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 import { DepartmentsSelect } from "@/components/DynamicFormFields/Departments";
 import { OrganizationsSelect } from "@/components/DynamicFormFields/Organizations";
 import {
-  FieldConfig,
+ // FieldConfig,
   FormTemplate,
 } from "@/components/_dashboard/profiles/create/FormTemplate";
 import { useCreateProfileMutation } from "@/rtk/queries/joborder";
 import { SpecialitiesSelect } from "@/components/DynamicFormFields/Specialities";
 import { UnitSelect } from "@/components/DynamicFormFields/Units";
+import { FieldConfig } from "@/components/__atoms/Forms/types/FieldConfig";
+//import { FieldConfig } from "@/components/__atoms/Forms/FormTemplate_unused";
 
 const Settings = () => {
   const [_formValues, setFormValues] = React.useState({});

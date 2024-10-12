@@ -16,36 +16,17 @@ import { useMutationNotifications } from "@/hooks/useNotifications";
 import { LinkButton } from "@/components/__atoms/Buttons/LinkButton";
 import { CustomisableField } from "@/components/__atoms/Forms/CustomisableField";
 import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
+import { FieldConfig } from "@/components/__atoms/Forms/types/FieldConfig";
+import { ReachTextEditorField } from "@/components/__atoms/Forms/RichTextEditorField";
 
-import { RichTextEditor, Link } from "@mantine/tiptap";
-import { useEditor } from "@tiptap/react";
 
-import StarterKit from "@tiptap/starter-kit";
-import "@mantine/tiptap/styles.css";
 //import Highlight from '@tiptap/extension-highlight';
 //import Underline from '@tiptap/extension-underline';
 //import TextAlign from '@tiptap/extension-text-align';
 //import Superscript from '@tiptap/extension-superscript';
 //import SubScript from '@tiptap/extension-subscript';
 
-export type FieldObject = {
-  type: "TextInput" | "Textarea" | "Select" | "RichTextEditor"; // Limiting the type to these specific strings
-  name: string;
-  label: string;
-  placeholder: string;
-  required?: boolean;
-  disabled?: boolean;
-  options?: { value: string; label: string }[]; // Optional for Select fields
-};
 
-export type FieldComponent = {
-  component: React.FC<any>; //any;//React.JSX.Element; //
-  props: any;
-  customisable?: boolean;
-  //dependency?: string; // field is enabled only if this dependency field is not empty
-};
-
-export type FieldConfig = FieldObject | FieldComponent;
 
 type FormTemplateProps = {
   _formValues: any;
@@ -113,18 +94,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
     form.setValues(templateValues);
   }
 
-  const editor = useEditor({
-    extensions: [
-      StarterKit,
-    //  Underline,
-      Link,
-   //   Superscript,
-   //   SubScript,
-   //   Highlight,
-   //   TextAlign.configure({ types: ['heading', 'paragraph'] }),
-    ],
-   // content,
-  });
+ 
 
   return (
     <div className="relative w-full max-w-full p-4 text-black dark:text-white">
@@ -183,24 +153,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                             />
                           )}
                           {field.type === "RichTextEditor" && (
-                            <><div className='text-sm'>{ field.label}</div>
-                            <RichTextEditor editor={editor}  >
-                              
-                               
-                              <RichTextEditor.Toolbar sticky stickyOffset={60}  {...form.getInputProps(field.name)} >
-                                <RichTextEditor.ControlsGroup>
-                                  <RichTextEditor.Bold />
-                                  <RichTextEditor.Italic />
-                                  <RichTextEditor.Underline />
-                                  <RichTextEditor.Strikethrough />
-                                  <RichTextEditor.ClearFormatting />
-                                  <RichTextEditor.Highlight />
-                                  <RichTextEditor.Code />
-                                </RichTextEditor.ControlsGroup>
-                              </RichTextEditor.Toolbar>
-                              <RichTextEditor.Content />
-                            </RichTextEditor>
-                            </>
+                            <ReachTextEditorField form={form} field={field}/>
                           )}
                           {field.type === "Select" && field.options && (
                             <Select
