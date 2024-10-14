@@ -28,7 +28,7 @@ export const RequestState = () => {
     },
     // Add validation rules for the form fields
     validate: {
-      // specialty: (value) => (value ? null : 'Please select a position'),
+      // speciality: (value) => (value ? null : 'Please select a position'),
       /* experience: (value) => (value ? null : 'Please select your experience level'),
       gender: (value) => (value ? null : 'Please select your gender'),
       age: (value) => (value >= 14 && value <= 90 ? null : 'Please enter a valid age (14-90)'),

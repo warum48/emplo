@@ -4,7 +4,7 @@ import { customBaseQuery } from './_customBaseQuery';
 import { Candidate } from '@/types/Candidate';
 
 export interface SearchRequest {
-  specialty: string;
+  speciality: string;
   area: string[];
 }
 

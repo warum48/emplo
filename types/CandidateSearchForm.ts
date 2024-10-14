@@ -16,7 +16,7 @@ export type Schedule =
   | "flyInFlyOut";
 
 export interface CandidateSearchFormValues {
-  specialty: string; // Use appropriate type if specific options are available
+  speciality: string; // Use appropriate type if specific options are available
   area: string[]; // Assuming these are IDs of the areas
   relocation_type?: RelocationType;
   schedule: Schedule[];

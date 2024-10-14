@@ -14,7 +14,7 @@ type TProps = {
 
 export const QuickSearch = ({onSearch}:TProps) => {
 
-  const [specialty, setSpecialty] = useState('');
+  const [speciality, setSpecialty] = useState('');
   const [area, setArea] = useState('');
   const [searchCandidates, { data, error, isLoading }] = useSearchCandidatesMutation();
   const [searchHHCandidates, { data:data_hh, error:error_hh, isLoading:isLoading_hh }] = useSearchHHCandidatesMutation();
@@ -22,10 +22,10 @@ export const QuickSearch = ({onSearch}:TProps) => {
 
   const handleSearch = async () => {
     try {
-     // await searchCandidates({ specialty, area }).unwrap();
-    //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      //const results = await searchCandidates({ specialty, area }).unwrap();
-      const results = await searchCandidates({ specialty, area: [area] }).unwrap();
+     // await searchCandidates({ speciality, area }).unwrap();
+    //  const { data: results } = await searchCandidates({ speciality, area }).unwrap();
+      //const results = await searchCandidates({ speciality, area }).unwrap();
+      const results = await searchCandidates({ speciality, area: [area] }).unwrap();
       if (Array.isArray(results?.items)) {
         dispatch(setSearchResults(results));
         onSearch();
@@ -39,10 +39,10 @@ export const QuickSearch = ({onSearch}:TProps) => {
 
   const handleSearchHH = async () => {
     try {
-     // await searchCandidates({ specialty, area }).unwrap();
-    //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      //const results = await searchCandidates({ specialty, area }).unwrap();
-      const results = await searchHHCandidates({ specialty, area: [area] }).unwrap();
+     // await searchCandidates({ speciality, area }).unwrap();
+    //  const { data: results } = await searchCandidates({ speciality, area }).unwrap();
+      //const results = await searchCandidates({ speciality, area }).unwrap();
+      const results = await searchHHCandidates({ speciality, area: [area] }).unwrap();
       if (Array.isArray(results?.items)) {
         dispatch(setSearchHHResults(results));
         onSearch();

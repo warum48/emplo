@@ -21,15 +21,15 @@ export const PopularSearches = ({ onSearch, gridCols = 3, searchType = 'inner' }
     useSearchHHCandidatesMutation();
   const dispatch = useDispatch();
 
-  const handleSearch = async (specialty: string, area: string[]) => {
+  const handleSearch = async (speciality: string, area: string[]) => {
     try {
-      // await searchCandidates({ specialty, area }).unwrap();
-      //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      //const results = await searchCandidates({ specialty, area }).unwrap();
+      // await searchCandidates({ speciality, area }).unwrap();
+      //  const { data: results } = await searchCandidates({ speciality, area }).unwrap();
+      //const results = await searchCandidates({ speciality, area }).unwrap();
       const results =
         searchType === 'inner'
-          ? await searchCandidates({ specialty, area }).unwrap()
-          : await searchAICandidates({ specialty, area }).unwrap();
+          ? await searchCandidates({ speciality, area }).unwrap()
+          : await searchAICandidates({ speciality, area }).unwrap();
 
       if (Array.isArray(results?.items)) {
         if (searchType === 'inner') {

@@ -25,7 +25,7 @@ type TProps = {
 };
 
 type TFormValues = {
-  specialty: string;
+  speciality: string;
   area: string[]; //[];
 };
 
@@ -55,7 +55,7 @@ export const QuickSearch = ({ onSearch }: TProps) => {
 
   const form = useForm({
     initialValues: {
-      specialty: "", //'',
+      speciality: "", //'',
       area: [], //[], //'',
     },
     validate: {
@@ -83,11 +83,11 @@ export const QuickSearch = ({ onSearch }: TProps) => {
 
   const handleSubmit = async (values: TFormValues) => {
     try {
-      // await searchCandidates({ specialty, area }).unwrap();
-      //  const { data: results } = await searchCandidates({ specialty, area }).unwrap();
-      //const results = await searchCandidates({ specialty, area }).unwrap();
+      // await searchCandidates({ speciality, area }).unwrap();
+      //  const { data: results } = await searchCandidates({ speciality, area }).unwrap();
+      //const results = await searchCandidates({ speciality, area }).unwrap();
       const quickSearchValues = {
-        specialty: values.specialty,
+        speciality: values.speciality,
         area: values.area,
       }
       const results = await searchCandidates(quickSearchValues).unwrap();
@@ -138,7 +138,7 @@ export const QuickSearch = ({ onSearch }: TProps) => {
         />
         <SpecialitiesSelect
           form={form}
-          formFieldName="specialty"
+          formFieldName="speciality"
           size="lg"
           showLabel={false}
           className="flex-shrink-0 flex-grow"
