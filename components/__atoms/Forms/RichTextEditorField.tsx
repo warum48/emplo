@@ -40,7 +40,7 @@ export const ReachTextEditorField = ({field, form}:TProps) => {
 
     return (
     <><div className='text-sm '>{ field.label}</div>
-                            <RichTextEditor editor={editor} className="richText list-disc list-inside bg-customGray-950" >
+                            <RichTextEditor editor={editor} className="richText list-disc list-inside " >
                               
                                
                               <RichTextEditor.Toolbar sticky stickyOffset={60}  {...form.getInputProps(field.name)} >
@@ -61,7 +61,7 @@ export const ReachTextEditorField = ({field, form}:TProps) => {
          
                                 </RichTextEditor.ControlsGroup>
                               </RichTextEditor.Toolbar>
-                              <RichTextEditor.Content className="[&>div>div]:!p-3 text-sm ^leading-6 text-[--mantine-color-text] leading-[--mantine-line-height] bg-customGray-950" />
+                              <RichTextEditor.Content className="[&>div>div]:!p-3 text-sm ^leading-6 text-[--mantine-color-text] leading-[--mantine-line-height] [&>div>div]:!bg-customGray-950" />
                             </RichTextEditor>
                             </>
     )

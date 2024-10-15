@@ -29,7 +29,7 @@ export const ConnectionToAggregators = () => {
       }, [data_hhConnect, refetchHHConnect]);
     
      if  (isLoading_hhCheck) return <Preloader />  
-     if (error_hhCheck) return <BasicError error={error_hhCheck} />   
+    
 
   return (
     <>
@@ -50,6 +50,7 @@ export const ConnectionToAggregators = () => {
         )}
       </div>
       <ProfileForm editEnabled={false} />
+      {error_hhCheck &&  <BasicError error={error_hhCheck} />   }
       <JSONViewer data={data_hhCheck} />
     </>
   );

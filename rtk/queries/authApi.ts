@@ -90,7 +90,7 @@ export const authApi = createApi({
     hhConnect: builder.mutation<any, void>({
       //<LogoutResponse, LogoutRequest>
       query: () => ({
-        url: `/api/hhru/connect'`,
+        url: `/api/hhru/connect`,
         method: "POST", // Using GET method as per the endpoint requirement
       }),
     }),
