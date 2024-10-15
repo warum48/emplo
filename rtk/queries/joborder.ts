@@ -16,6 +16,9 @@ export const joborder = createApi({
       query: () => '/api/joborder/job_profiles/',
       providesTags: ['Profiles'],
     }),
+    getProfileById:builder.query<any, string | number>({
+      query: (id) => `/api/joborder/job_profiles/${id}`,
+    }),
     getOrders: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/joborder/',
       providesTags: ['JobOrders'], 
@@ -92,6 +95,7 @@ export const joborder = createApi({
 export const { 
     useGetVacanciesQuery,
     useGetProfilesQuery,
+    useGetProfileByIdQuery,
     useGetOrdersQuery,
     useGetSearchCritsQuery,
     useLazyGetSearchCritsQuery,

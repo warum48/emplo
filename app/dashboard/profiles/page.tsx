@@ -112,8 +112,9 @@ const Requests = () => {
           loading={isLoading}
           error={error}
           actionsMenu={[
-            { text: "Редактировать", link: "/dashboard/profiles/23" },
-            { text: "Создать заявку", link: "/dashboard/vacancies/create" },
+            //{ text: "Редактировать", link: "/dashboard/profiles/23" },
+            //{ text: "Создать заявку", link: "/dashboard/vacancies/create" },
+            { text: "Создать копию", link: "/dashboard/profiles/copy/", linkParam:'id' },
             { text: "Удалить", function: deleteProfile, param:'id', confirmationRequired:true },
             //{
             //  text: "Удалить",

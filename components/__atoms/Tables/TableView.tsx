@@ -51,8 +51,9 @@ type TAction = {
   text: string;
   link?: string;
   onClick?: () => void;
-  function?: (param:string) => void;
+  function?: (param: string) => void;
   param?: string;
+  linkParam?: string;
   confirmationRequired?: boolean;
 };
 
@@ -71,14 +72,14 @@ type TProps = {
   tds: TCellValue[];
   loading: boolean;
   error: any;
-  actionsMenu:  TAction[]/*{
+  actionsMenu: TAction[] /*{
     text: string;
     link?: string;
     onClick?: () => void;
     function?: (param:string) => void;
     param?: string;
     confirmationRequired?: boolean;
-  }[]; */
+  }[]; */;
 };
 
 const getNestedValue = (obj: any, path: string) => {
@@ -104,14 +105,15 @@ export const TableView = ({
   const [opened, { toggle }] = useDisclosure(false);
   const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
 
-  const [selectedAction, setSelectedAction] = React.useState<TAction | null>(null);
+  const [selectedAction, setSelectedAction] = React.useState<TAction | null>(
+    null,
+  );
   const [row, setRow] = React.useState<any>(null);
 
-
-  const handleMenuItemClick = (action:TAction, row:any) => {
+  const handleMenuItemClick = (action: TAction, row: any) => {
     if (action.function) {
       setSelectedAction(action); // Set selected action
-      setShowConfirmator(true);  // Show confirmator
+      setShowConfirmator(true); // Show confirmator
       setRow(row);
     } else {
       // Redirect action
@@ -176,7 +178,7 @@ export const TableView = ({
                 labelProps={{ style: filterLabelStyle }}
                 label={filter.label}
               />*/}
-                    {filterState[filter.fieldName]}
+                    {/*filterState[filter.fieldName]*/}
                     <Select
                       key={filterState[filter.fieldName]}
                       data={filter.data}
@@ -233,40 +235,43 @@ export const TableView = ({
                     <Menu.Dropdown>
                       {actionsMenu.map((action, index) => (
                         <>
-                        <Menu.Item
-                          //onClick={
-                          //  action.onClick
-                          //    ? action.onClick
-                          //    : () => {
-                          //        toggle();
-                          //        router.push(action.link || "/");
-                          //      }
-                          //}
-                          onClick={
-                            
-                            action.function != undefined
-                              ? () => { 
-                                console.log('action.function', action.function);
-                                console.log('action.param', action.param);
-                                if(action.function != undefined){
-                              //  action.function(row[action.param || "id"] ||`0`)
-                            //  setShowConfirmator(true)
-                            handleMenuItemClick(action, row);
-                                }
-                              }
-                              : () => {
-                                console.log('--redir--action.function', action.function);
-                                console.log('action.param', action.param);
-                                  toggle();
-                                  router.push(action.link || "/");
-                                }
-                          }
-                        >
-                          {action.text} {row?.id}
-                        </Menu.Item>
-                       
-                       
-                      </>
+                          <Menu.Item
+                            //onClick={
+                            //  action.onClick
+                            //    ? action.onClick
+                            //    : () => {
+                            //        toggle();
+                            //        router.push(action.link || "/");
+                            //      }
+                            //}
+                            onClick={
+                              action.function != undefined
+                                ? () => {
+                                    console.log(
+                                      "action.function",
+                                      action.function,
+                                    );
+                                    console.log("action.param", action.param);
+                                    if (action.function != undefined) {
+                                      //  action.function(row[action.param || "id"] ||`0`)
+                                      //  setShowConfirmator(true)
+                                      handleMenuItemClick(action, row);
+                                    }
+                                  }
+                                : () => {
+                                    console.log(
+                                      "--redir--action.function",
+                                      action.function,
+                                    );
+                                    console.log("action.param", action.param);
+                                    toggle();
+                                    router.push(action.link  + (action.linkParam ? row[action.linkParam ] : '' ));
+                                  }
+                            }
+                          >
+                            {action.text} {row?.id}
+                          </Menu.Item>
+                        </>
                       ))}
                     </Menu.Dropdown>
                   </Menu>
@@ -306,17 +311,17 @@ export const TableView = ({
         {error && <BasicError error={error} className="mt-4" />}
       </div>
       <Confirmator
-                        //onConfirm={() => { 
-                        //  if(action.function != undefined){
-                        //    action.function(row[action.param || "id"] ||`0`)
-                        //    }
-                        //}} //
-                        onConfirm={handleConfirm}
-                        header={'Вы действительно хотите очистить форму?'}
-                        showConfirmator={showConfirmator}
-                        setShowConfirmator={setShowConfirmator}
-                        closeOnConfirm={true}
-                      />
+        //onConfirm={() => {
+        //  if(action.function != undefined){
+        //    action.function(row[action.param || "id"] ||`0`)
+        //    }
+        //}} //
+        onConfirm={handleConfirm}
+        header={"Вы действительно хотите очистить форму?"}
+        showConfirmator={showConfirmator}
+        setShowConfirmator={setShowConfirmator}
+        closeOnConfirm={true}
+      />
     </>
   );
 };

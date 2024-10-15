@@ -31,8 +31,9 @@ import { ReachTextEditorField } from "@/components/__atoms/Forms/RichTextEditorF
 type FormTemplateProps = {
   _formValues: any;
   setFormValues: React.Dispatch<React.SetStateAction<any>>;
-  templateValues: any;
+  templateValues?: any;
   initialValues: any;
+  queryValues?: any;
   validate: any;
   onSubmit: (values: any) => void;
   fields: FieldConfig[][];
@@ -49,6 +50,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   _formValues,
   setFormValues,
   templateValues,
+  queryValues,
   initialValues,
   validate,
   onSubmit,
@@ -95,7 +97,17 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   function fillFormWithTemplateValues() {
     form.setValues(templateValues);
   }
+  
 
+  React.useEffect(() => {
+    console.log('SETTING QUERY');
+    // Effect runs when any field in obj changes
+    if(queryValues && JSON.stringify(queryValues) !== JSON.stringify(form.values)) {
+    form.setValues(queryValues);
+    }
+   // console.log('templateValues', queryValues);
+  //}, [Object.values(queryValues || {})]);
+}, [JSON.stringify(queryValues || {})]);
  
 
   return (
@@ -110,6 +122,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
               {stepNames[activeStep]}
             </Title>
             {/*<LinkButton  onClick={()=>{}} colorScheme={colorScheme}>Заполнить базовыми данными</LinkButton>*/}
+            {templateValues &&
             <div
               className="link-button cursor-pointer text-xs"
               onClick={() => {
@@ -118,6 +131,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
             >
               Заполнить базовыми данными
             </div>
+}
           </div>
           {fields.map((steps, index) => (
             <>

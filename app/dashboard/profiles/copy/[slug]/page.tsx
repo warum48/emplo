@@ -11,21 +11,23 @@ import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 import {
   FormTemplate,
 } from "@/components/_dashboard/profiles/create/FormTemplate";
-import { useCreateProfileMutation } from "@/rtk/queries/joborder";
+import { useCreateProfileMutation, useGetProfileByIdQuery } from "@/rtk/queries/joborder";
 import { templateValues } from "@/components/_dashboard/profiles/_data/templateValues";
 import { FormUtils } from "@/utils/FormUtils";
 import { demoValues } from "@/components/_dashboard/profiles/_data/demoValues";
 import { validatorStep1 } from "@/components/_dashboard/profiles/_data/validatorStep1";
 import { fields } from "@/components/_dashboard/profiles/_data/fields";
+import { QueryStateDisplay } from "@/components/__atoms/QueryStateDisplay/QueryStateDisplay";
 
 
-const Settings = () => {
+const Page = ({ params }: { params: { slug: string } }) => {
+  const { data: dataProfile, error: errorProfile, isLoading: isLoadingProfile, refetch: refetchProfile } = useGetProfileByIdQuery(params.slug);
   const [_formValues, setFormValues] = React.useState({});
   const [activeStep, setActiveStep] = React.useState(0);
   const [formData, setFormData] = React.useState({ field1: "", field2: "" });
   const stepNames = [
-    "Основная информация",
-    "Критерии",
+    "Основная информация"//,
+   // "Критерии",
   ]; 
   const md = useMediaQuery("(min-width: 768px)");
 
@@ -60,6 +62,11 @@ const Settings = () => {
     console.log("Form Submitted:", values);
   };
 
+  React.useEffect(() => {
+    console.log('DP',dataProfile);
+    setFormValues(dataProfile);
+  }, [dataProfile]);
+
 
   return (
     <DashBoardPageContainer header="Создать профиль" Icon={IconRobot}>
@@ -68,11 +75,22 @@ const Settings = () => {
 
         <div className="flex w-full flex-col items-start justify-center gap-4 md:flex-row">
           <div className="formcont relative order-2 w-full max-w-screen-md rounded-2xl bg-white p-4 text-black dark:bg-customGray-950/85 dark:text-white md:order-1">
+           
+           
+          <QueryStateDisplay
+            isLoading={isLoadingProfile}
+            error={errorProfile}
+            onRetry={refetchProfile}
+            //isNetworkError={isNetworkError} // Pass the isNetworkError function
+          />
+
+{ (dataProfile || true )&& 
             <FormTemplate
               _formValues={_formValues}
               setFormValues={setFormValues}
-              templateValues={templateValues}
-              initialValues={demoValues}
+              //templateValues={dataProfile}
+              initialValues={dataProfile}
+              queryValues={dataProfile}
               validate={validate}
               onSubmit={handleFormSubmit}
               fields={fields}
@@ -85,8 +103,12 @@ const Settings = () => {
               stepNames={stepNames}
               setActiveStep={setActiveStep}
             />
+}
+
+
           </div>
 
+{stepNames.length > 1 &&
           <div className="rightcol order-1 w-full pl-4 pt-8 md:order-2 md:w-[196px] lg:w-[250px]">
             <Stepper
               active={activeStep}
@@ -106,54 +128,13 @@ const Settings = () => {
               ))}
             </Stepper>
           </div>
+}
         </div>
       </div>
       <JSONViewer data={_formValues} />
+      <JSONViewer data={dataProfile} />
     </DashBoardPageContainer>
   );
 };
 
-/* {
-      type: "TextInput",
-      name: "speciality",
-      label: "Должность",
-      placeholder: "Введите должность",
-    },*/
-
-/*   {
-        type: "TextInput",
-        name: "org_unit",
-        label: "Подразделение",
-        placeholder: "Введите подразделение",
-      },
-
-     {
-        component: DepartmentsSelect,
-        props: {
-          formFieldName: "speciality",
-          label: "department",
-          placeholder: "Введите department",
-          dependency: "org",
-        },
-
-        customisable: true,
-      },
-*/
-
-{
-  /*  <div className="flex w-full flex-col justify-center gap-4 md:flex-row items-start">
-          <div className="formcont relative order-2 w-full  max-w-screen-md rounded-2xl bg-white p-4 text-black dark:bg-customGray-950/85 dark:text-white md:order-1">
-           <VacancyCreationFormHH />
-            <NewProfileForm
-              _formValues={_formValues}
-              setFormValues={setFormValues}
-              activeStep={activeStep}
-              onNext={handleNext}
-              stepNames={stepNames}
-              setActiveStep={setActiveStep}
-            />*/
-}
-
-
-
-export default Settings;
+export default Page;
