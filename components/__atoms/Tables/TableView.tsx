@@ -5,6 +5,7 @@ import {
   Divider,
   Input,
   Menu,
+  Portal,
   Select,
   Table,
   Text,
@@ -24,6 +25,9 @@ import { customLabelStyle, filterLabelStyle } from "@/styles/mantine_styles";
 import { FilterItemContainer } from "@/components/__atoms/Tables/Filters/FilterItemContainer";
 import { FiltersContainer } from "@/components/__atoms/Tables/Filters/FiltersContainer";
 import { Preloader } from "../Preloader/Preloader";
+import ErrorBoundary from "../Suspense/ErrorBoundary";
+import ErrorFallback from "../Suspense/ErrorFallback";
+import { Confirmator } from "@/components/__uiutils/Confirmator";
 
 const mockFilter = ["все"];
 
@@ -43,6 +47,15 @@ type TFilter = FilterWithSelect | FilterWithComponent;
 
 type TCellValue = { value: string; formatter: (value: any) => string } | string;
 
+type TAction = {
+  text: string;
+  link?: string;
+  onClick?: () => void;
+  function?: (param:string) => void;
+  param?: string;
+  confirmationRequired?: boolean;
+};
+
 type TProps = {
   header: string;
   addButton: {
@@ -51,26 +64,28 @@ type TProps = {
   };
   filters: TFilter[];
 
-  filterState?: any;//Record<string, string>;
+  filterState?: any; //Record<string, string>;
   setFilterState?: React.Dispatch<React.SetStateAction<any>>;
   data: any[];
   ths: string[];
   tds: TCellValue[];
   loading: boolean;
   error: any;
-  actionsMenu: {
+  actionsMenu:  TAction[]/*{
     text: string;
-    link: string;
+    link?: string;
     onClick?: () => void;
-  }[];
+    function?: (param:string) => void;
+    param?: string;
+    confirmationRequired?: boolean;
+  }[]; */
 };
 
 const getNestedValue = (obj: any, path: string) => {
-  return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
 };
 
 export const TableView = ({
-
   filters,
   filterState = {},
   setFilterState = () => {},
@@ -87,37 +102,56 @@ export const TableView = ({
 }: TProps) => {
   const router = useRouter();
   const [opened, { toggle }] = useDisclosure(false);
+  const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
 
+  const [selectedAction, setSelectedAction] = React.useState<TAction | null>(null);
+  const [row, setRow] = React.useState<any>(null);
+
+
+  const handleMenuItemClick = (action:TAction, row:any) => {
+    if (action.function) {
+      setSelectedAction(action); // Set selected action
+      setShowConfirmator(true);  // Show confirmator
+      setRow(row);
+    } else {
+      // Redirect action
+      router.push(action.link || "/");
+    }
+  };
+
+  const handleConfirm = () => {
+    if (selectedAction && selectedAction.function) {
+      selectedAction.function(row[selectedAction.param || "id"] || `0`);
+    }
+    setShowConfirmator(false); // Close the confirmator
+  };
 
   const filteredData = React.useMemo(() => {
     return data?.filter((row) => {
       return Object.entries(filterState).every(([key, value]) => {
         if (!value) return true; // Skip filter if no value selected
-        return key.split('.').reduce((o, i) => o?.[i], row) === value;
+        return key.split(".").reduce((o, i) => o?.[i], row) === value;
       });
     });
   }, [data, filterState]);
 
   const numberOfAppliedFilters = React.useMemo(() => {
-    return  Object.keys(filterState).reduce((acc, key) => {
-      filterState[key] != '' ? acc++ : acc
+    return Object.keys(filterState).reduce((acc, key) => {
+      filterState[key] != "" ? acc++ : acc;
       return acc;
     }, 0);
   }, [data, filterState]);
 
   const resetFilters = () => {
-    setFilterState((prevState:any) => {
+    setFilterState((prevState: any) => {
       // Create a new object with the same keys but empty string values
       return Object.keys(prevState).reduce((acc, key) => {
         //acc[key] = '';
-        acc[key as keyof typeof acc] = '' as typeof acc[keyof typeof acc];
+        acc[key as keyof typeof acc] = "" as (typeof acc)[keyof typeof acc];
         return acc;
       }, {});
     });
   };
-  
-
-
 
   return (
     <>
@@ -129,40 +163,45 @@ export const TableView = ({
       </div>
       <FiltersContainer resetFilters={resetFilters}>
         {filters.map((filter, index) => (
-          <FilterItemContainer key={index}>
-            {"component" in filter ? ( // Type narrowing using "in" to check if it's a component
-              filter.component
-            ) : (
-              <>
-              {/*<Select
+          <>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <FilterItemContainer key={index}>
+                {"component" in filter ? ( // Type narrowing using "in" to check if it's a component <ErrorFallback key={index}> </ErrorFallback>
+                  filter.component
+                ) : (
+                  <>
+                    {/*<Select
                 data={filter.data} // Safely access Select props
                 placeholder={filter.placeholder}
                 labelProps={{ style: filterLabelStyle }}
                 label={filter.label}
               />*/}
-              {filterState[filter.fieldName] }
-              <Select
-              key={filterState[filter.fieldName]}
-                data={filter.data}
-                placeholder={filter.placeholder}
-                label={filter.label}
-                labelProps={{ style: customLabelStyle }}
-                value={filterState[filter.fieldName]}
-                onChange={(value) =>
-                  setFilterState((prev:any) => ({
-                    ...prev,
-                    [filter.fieldName]: value,
-                  }))
-                }
-              />
-              </>
-            )
-          }
-          </FilterItemContainer>
+                    {filterState[filter.fieldName]}
+                    <Select
+                      key={filterState[filter.fieldName]}
+                      data={filter.data}
+                      placeholder={filter.placeholder}
+                      label={filter.label}
+                      labelProps={{ style: customLabelStyle }}
+                      value={filterState[filter.fieldName]}
+                      onChange={(value) =>
+                        setFilterState((prev: any) => ({
+                          ...prev,
+                          [filter.fieldName]: value,
+                        }))
+                      }
+                    />
+                  </>
+                )}
+              </FilterItemContainer>
+            </ErrorBoundary>
+            {/*<JSONViewer data={filter} />*/}
+          </>
         ))}
       </FiltersContainer>
-      <div className="w-full overflow-x-auto"
-      //className="inline-block min-w-full"
+      <div
+        className="w-full overflow-x-auto"
+        //className="inline-block min-w-full"
       >
         <Table className="mt-4 min-w-full overflow-hidden">
           <Table.Thead>
@@ -193,18 +232,41 @@ export const TableView = ({
                     </Menu.Target>
                     <Menu.Dropdown>
                       {actionsMenu.map((action, index) => (
+                        <>
                         <Menu.Item
+                          //onClick={
+                          //  action.onClick
+                          //    ? action.onClick
+                          //    : () => {
+                          //        toggle();
+                          //        router.push(action.link || "/");
+                          //      }
+                          //}
                           onClick={
-                            action.onClick
-                              ? action.onClick
+                            
+                            action.function != undefined
+                              ? () => { 
+                                console.log('action.function', action.function);
+                                console.log('action.param', action.param);
+                                if(action.function != undefined){
+                              //  action.function(row[action.param || "id"] ||`0`)
+                            //  setShowConfirmator(true)
+                            handleMenuItemClick(action, row);
+                                }
+                              }
                               : () => {
+                                console.log('--redir--action.function', action.function);
+                                console.log('action.param', action.param);
                                   toggle();
-                                  router.push(action.link);
+                                  router.push(action.link || "/");
                                 }
                           }
                         >
-                          {action.text}
+                          {action.text} {row?.id}
                         </Menu.Item>
+                       
+                       
+                      </>
                       ))}
                     </Menu.Dropdown>
                   </Menu>
@@ -216,26 +278,45 @@ export const TableView = ({
                         ? row[td] // Handle string type
                         : row[td.value] && td.formatter(row[td.value]) // Handle object with formatter
                     */}
-                    {typeof td === "string"
-      ? getNestedValue(row, td)  // Handle string type, possibly nested
-      : getNestedValue(row, td.value) && td.formatter(getNestedValue(row, td.value)) // Handle object with formatter, possibly nested
-    }
+                    {
+                      typeof td === "string"
+                        ? getNestedValue(row, td) // Handle string type, possibly nested
+                        : getNestedValue(row, td.value) &&
+                          td.formatter(getNestedValue(row, td.value)) // Handle object with formatter, possibly nested
+                    }
                   </Table.Td>
                 ))}
               </Table.Tr>
             ))}
           </Table.Tbody>
         </Table>
-       
-        {numberOfAppliedFilters > 1 && filteredData && filteredData.length == 0 && (
-          <div className="my-4 text-xs">Данных, удовлетворяющих все выбранные фильтры ({numberOfAppliedFilters}), нет</div>
-        )}
-        {loading && <Preloader  />}
+
+        {numberOfAppliedFilters > 1 &&
+          filteredData &&
+          filteredData.length == 0 && (
+            <div className="my-4 text-xs">
+              Данных, удовлетворяющих все выбранные фильтры (
+              {numberOfAppliedFilters}), нет
+            </div>
+          )}
+        {loading && <Preloader />}
         <Debugger>
           <JSONViewer data={data} />
         </Debugger>
         {error && <BasicError error={error} className="mt-4" />}
       </div>
+      <Confirmator
+                        //onConfirm={() => { 
+                        //  if(action.function != undefined){
+                        //    action.function(row[action.param || "id"] ||`0`)
+                        //    }
+                        //}} //
+                        onConfirm={handleConfirm}
+                        header={'Вы действительно хотите очистить форму?'}
+                        showConfirmator={showConfirmator}
+                        setShowConfirmator={setShowConfirmator}
+                        closeOnConfirm={true}
+                      />
     </>
   );
 };
@@ -285,7 +366,6 @@ export const TableView = ({
   );
 };
 */
-
 
 /*
 org_unit - Подразделение

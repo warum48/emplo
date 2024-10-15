@@ -6,7 +6,7 @@ import { components } from '@/types';
 
 export const joborder = createApi({
   reducerPath: 'joborder',
-  tagTypes: ['JobOrders'],  // Define tag type
+  tagTypes: ['JobOrders', 'Profiles'],  // Define tag type
   baseQuery: customBaseQuery,
   endpoints: (builder) => ({
     getVacancies: builder.query<any, void>({ //
@@ -14,6 +14,7 @@ export const joborder = createApi({
     }),
     getProfiles: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/joborder/job_profiles/',
+      providesTags: ['Profiles'],
     }),
     getOrders: builder.query<any, void>({ // components['schemas']['AppUserRegisterSchema']
       query: () => '/api/joborder/',
@@ -46,6 +47,17 @@ export const joborder = createApi({
         method: 'POST',
         body: crit,
       }),
+    }),
+
+    /*------------delete ------------   ---------------*/
+    //api/joborder/job_profiles/{id}
+    deleteProfile: builder.mutation<void, any>({
+      query: (id) => ({
+        url: `/api/joborder/job_profiles/${id}`,
+        method: 'DELETE',
+        //body: crit,
+      }),
+      invalidatesTags: ['Profiles'],
     }),
 
 
@@ -95,6 +107,6 @@ export const {
     useLazyGetUnitsQuery,
     useLazyGetProjectsQuery,
     useLazyGetBAreasQuery,  
-
+    useDeleteProfileMutation
  } = joborder;
 

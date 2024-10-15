@@ -5,14 +5,25 @@ import { RequestTable } from "@/components/Requests/RequestTable";
 import { ProfilesTable } from "@/components/_dashboard/profiles/ProfilesTable";
 import { TableView } from "@/components/__atoms/Tables/TableView";
 import { RegionsSelect } from "@/components/DynamicFormFields/Regions";
-import { useGetProfilesQuery } from "@/rtk/queries/joborder";
+import { useDeleteProfileMutation, useGetProfilesQuery } from "@/rtk/queries/joborder";
 import dayjs from "dayjs";
 import React from "react";
 import { TableUtils } from "@/utils/TableUtils";
+import { useMutationNotifications } from "@/hooks/useNotifications";
 
 const Requests = () => {
   const mockFilter = ["все"];
   const { data, error, isLoading } = useGetProfilesQuery();
+  const [ deleteProfile, {data: data_delete, error: error_delete, isLoading: isLoading_delete}] = useDeleteProfileMutation();
+
+  useMutationNotifications({
+    text: "Профиль успешно удален",
+    data: data_delete,
+    data_details: (data_delete as any)?.msg
+      ? (data_delete as any)?.msg
+      : "", ////Вы можете найти его в списке профилей
+    error: error_delete,
+  });
 
   const [filterState, setFilterState] = React.useState({
     "org_unit": "",
@@ -28,19 +39,19 @@ const Requests = () => {
 
   
     return {
-      orgUnits: TableUtils.getUniqueValues( data,"org_unit").map((value) => ({
+      orgUnits: TableUtils.getUniqueValues( data,"org_unit").filter((value) => value).map((value) => ({
         value,
         label: value || "Не указано"
       })),
-      orgs: TableUtils.getUniqueValues( data,"org").map((value) => ({
+      orgs: TableUtils.getUniqueValues( data,"org").filter((value) => value).map((value) => ({
         value,
         label: value || "Не указано"
       })),
-      specialities: TableUtils.getUniqueValues(data,"speciality").map((value) => ({
+      specialities: TableUtils.getUniqueValues(data,"speciality").filter((value) => value).map((value) => ({
         value,
         label: value || "Не указано"
       })),
-      names: TableUtils.getUniqueValues(data,"name").map((value) => ({
+      names: TableUtils.getUniqueValues(data,"name").filter((value) => value).map((value) => ({
         value,
         label: value || "Не указано"
       })),
@@ -103,13 +114,14 @@ const Requests = () => {
           actionsMenu={[
             { text: "Редактировать", link: "/dashboard/profiles/23" },
             { text: "Создать заявку", link: "/dashboard/vacancies/create" },
-            {
-              text: "Удалить",
-              link: "",
-              onClick: () => {
-                console.log("remove");
-              },
-            },
+            { text: "Удалить", function: deleteProfile, param:'id', confirmationRequired:true },
+            //{
+            //  text: "Удалить",
+            //  link: "",
+            //  onClick: () => {
+            //    console.log("remove");
+            //  },
+            //},
           ]}
         />
       </div>

@@ -5,12 +5,14 @@ import { RequestTable } from '@/components/Requests/RequestTable';
 import { TableView } from '@/components/__atoms/Tables/TableView';
 import { RegionsSelect } from '@/components/DynamicFormFields/Regions';
 import dayjs from 'dayjs';
-import { useGetOrdersQuery } from '@/rtk/queries/joborder';
+import { useDeleteProfileMutation, useGetOrdersQuery } from '@/rtk/queries/joborder';
 import React from 'react';
+import { TableUtils } from '@/utils/TableUtils';
 
 const Requests = () => {
   const mockFilter = ["все"];
   const {data, error, isLoading} = useGetOrdersQuery();
+ 
 
  
 // External filter state
@@ -21,25 +23,25 @@ const [filterState, setFilterState] = React.useState({
 });
 
 // Generate filter data
-const filterOptions = React.useMemo(() => {
-  if (!data) return {};
-  
  // const getUniqueValues = (field:any) => [...new Set(data.map((item) => field.split('.').reduce((o, i) => o?.[i], item)))];
- const getUniqueValues = (field: string) => 
-  [...new Set<string>(data.map((item:any) => field.split('.').reduce((o, i) => o?.[i], item)))];
+ //const getUniqueValues = (field: string) => 
+ // [...new Set<string>(data.map((item:any) => field.split('.').reduce((o, i) => o?.[i], item)))];
  // "target": "es5", - more errors with this setting in tsconfig
 
 
+const filterOptions = React.useMemo(() => {
+  if (!data) return {};
+  
   return {
-    orgUnits: getUniqueValues("job_profile.org_unit").map((value) => ({
+    orgUnits: TableUtils.getUniqueValues(data,"job_profile.org_unit").filter((value) => value).map((value) => ({
       value,
       label: value || "Не указано"
     })),
-    specialities: getUniqueValues("criteria.speciality").map((value) => ({
+    specialities: TableUtils.getUniqueValues(data,"criteria.speciality").filter((value) => value).map((value) => ({
       value,
       label: value || "Не указано"
     })),
-    names: getUniqueValues("name").map((value) => ({
+    names: TableUtils.getUniqueValues(data,"name").filter((value) => value).map((value) => ({
       value,
       label: value || "Не указано"
     })),
@@ -69,13 +71,13 @@ const filterOptions = React.useMemo(() => {
               label: "Подразделение:",
               fieldName: "job_profile.org_unit",
             },
-         /*   {
+           {
               data: filterOptions.specialities,
               placeholder: "Все",
               label: "Наименование:",
               fieldName: "criteria.speciality",
             },
-            */
+          /*   */
             {
               data: filterOptions.names,
               placeholder: "Все",
@@ -123,13 +125,15 @@ const filterOptions = React.useMemo(() => {
           actionsMenu={[
             { text: "Редактировать", link: "/dashboard/profiles/23" },
             { text: "Создать заявку", link: "/dashboard/vacancies/create" },
-            {
-              text: "Удалить",
-              link: "",
-              onClick: () => {
-                console.log("remove");
-              },
-            },
+          //  { text: "Удалить", function: deleteProfile, param:'id' },
+            //{
+            //  text: "Удалить",
+            //  link: "",
+            //  onClick: () => {
+            //    console.log("remove");
+            //    deleteProfile(0);
+            //  },
+            //},
           ]}
         />
       </div>

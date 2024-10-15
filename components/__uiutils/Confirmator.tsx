@@ -21,7 +21,7 @@ export const Confirmator: React.FC<ConfirmatorProps> = ({
 }) => {
   return (
     <Modal
-      //style={{zIndex: 6000}}
+      style={{zIndex: 6000}}
       opened={showConfirmator}
       onClose={() => setShowConfirmator(false)}
       withCloseButton={false}
