@@ -5,6 +5,7 @@ export type FieldObject = {
     placeholder: string;
     required?: boolean;
     disabled?: boolean;
+    description?: string;
     options?: { value: string; label: string }[]; // Optional for Select fields
   };
   

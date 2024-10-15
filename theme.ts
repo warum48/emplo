@@ -118,4 +118,14 @@ export const theme = createTheme({
       }),
     },
   },*/
+  /*
+  components: {
+    Input: {
+      styles: (theme: { colorScheme: string; }) => ({
+        input: {
+          backgroundColor: theme.colorScheme === 'dark' ? '#1f1f1f' : '#ffffff', // Dark and light mode backgrounds
+        },
+      }),
+    },
+  },*/
 });

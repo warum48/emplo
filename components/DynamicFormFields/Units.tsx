@@ -15,7 +15,7 @@ type TDependency = {
   ruName?: string;
 };
 
-export const UnitSelect = ({ form, size = 'sm', showLabel = true, className = '', formFieldName = 'professional_roles', dependencies = [] }: TDynamicFormFieldProps & { dependencies: TDependency[] }) => {
+export const UnitSelect = ({ form, size = 'sm',  showLabel = true, className = '', formFieldName = 'professional_roles', dependencies = [] , label, description, required, placeholder }: TDynamicFormFieldProps & { dependencies: TDependency[] }) => {
   // State for dynamic dependencies
   const [paramsObject, setParamsObject] = useState<Record<string, string>>({});
 
@@ -53,11 +53,12 @@ export const UnitSelect = ({ form, size = 'sm', showLabel = true, className = ''
   return (
     <>
       <Select
-        label={showLabel ? 'Unit' : null}
+        label={showLabel ? label : null}
+        description={description}
         size={size}
         className={className}
-        placeholder="Выберите unit"
-        required
+        placeholder={placeholder || "Выберите подразделение"}   
+        required={required}
         data={formattedData}
         disabled={formattedData.length === 0}
         {...(form ? form.getInputProps(formFieldName) : {})}

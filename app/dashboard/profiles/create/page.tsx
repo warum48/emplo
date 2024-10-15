@@ -76,6 +76,7 @@ const Settings = () => {
           formFieldName: "org",
           label: "Организация (Юр. лицо)",
           placeholder: "Введите организацию",
+          description:"Компания в которой требуется сотудник (справочник - перечисление)",
         },
         customisable: true,
       },
@@ -87,6 +88,7 @@ const Settings = () => {
           formFieldName: "org_unit",
           label: "Подразделение",
           placeholder: "Введите Подразделение",
+          description:"Отдел/подразделение  - организационная единица, в которую осуществляется подбор (может передаваться по обмену)",
           //  dependency: "org",
           dependencies: [
             { formFieldName: "org", getParamName: "org_name", ruName: "Подразделение" },

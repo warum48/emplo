@@ -42,6 +42,8 @@ type FormTemplateProps = {
   error: any;
 };
 
+
+
 export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   //form,
   _formValues,
@@ -136,6 +138,8 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                           {field.type === "TextInput" && (
                             <TextInput
                               label={field.label}
+                             //label={<LabelComponent label={field.label} description=" ssdfljksdflkj sldkjlsdf lksdflk "/> }
+                             description={field.description}
                               placeholder={field.placeholder}
                               required={field.required}
                               {...form.getInputProps(field.name)}

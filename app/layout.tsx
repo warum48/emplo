@@ -2,6 +2,7 @@
 import "@mantine/core/styles.css";
 import React from "react";
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+//import { Global, useMantineTheme } from '@mantine/core';
 
 import { theme } from "../theme";
 import { useState, useEffect } from "react";
@@ -75,6 +76,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         ></link>
       </head>
       <body className="^overflow-x-hidden min-h-full bg-white font-roboto text-black dark:bg-adjGray-900 dark:text-white">
+      
         <GlobalProvider>
           <MantineProvider
             theme={theme}

@@ -9,7 +9,7 @@ import { TDynamicFormFieldProps } from '@/types/formComponents/TDynamicFormField
 import { useGetOrgsQuery } from '@/rtk/queries/joborder';
 import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
 
-export const OrganizationsSelect = ({ form, size = 'sm', showLabel = true, className = '', formFieldName = 'professional_roles' }: TDynamicFormFieldProps) => {
+export const OrganizationsSelect = ({ form, size = 'sm', showLabel = true, className = '', formFieldName = 'professional_roles', ...props }: TDynamicFormFieldProps) => {
   const {
     data: orgs,
     error: orgsError,
@@ -46,6 +46,7 @@ export const OrganizationsSelect = ({ form, size = 'sm', showLabel = true, class
           required
           data={orgsData} // Using the mapped orgs data
           {...(form ? form.getInputProps(formFieldName) : {})}
+          {...props}
         />
       ) : (
         <QueryStateDisplay
