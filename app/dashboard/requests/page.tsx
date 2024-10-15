@@ -62,26 +62,27 @@ const filterOptions = React.useMemo(() => {
             link: "/dashboard/requests/create",
           }}
           filters={[
-          /*   {
+             {
               //data: mockFilter,
               data: filterOptions.orgUnits,
               placeholder: "Все",
               label: "Подразделение:",
               fieldName: "job_profile.org_unit",
             },
-            {
+         /*   {
               data: filterOptions.specialities,
               placeholder: "Все",
               label: "Наименование:",
               fieldName: "criteria.speciality",
             },
+            */
             {
               data: filterOptions.names,
               placeholder: "Все",
               label: "Название:",
               fieldName: "name",
             },
-            
+          /*  
            {
               component: <RegionsSelect />,
               fieldName: "name",
