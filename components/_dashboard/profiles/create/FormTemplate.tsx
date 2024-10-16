@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 //import { useMutation } from "@reduxjs/toolkit";
 import React from "react";
-import { TFromStepperProps } from "./NewProfile";
+//import { TFromStepperProps } from "./NewProfile";
 import { Preloader } from "@/components/__atoms/Preloader/Preloader";
 import { BasicError } from "@/components/Errors/BasicError";
 import { useMutationNotifications } from "@/hooks/useNotifications";
@@ -18,6 +18,7 @@ import { CustomisableField } from "@/components/__atoms/Forms/CustomisableField"
 import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
 import { FieldConfig } from "@/components/__atoms/Forms/types/FieldConfig";
 import { ReachTextEditorField } from "@/components/__atoms/Forms/RichTextEditorField";
+import { TFromStepperProps } from "@/components/__atoms/Forms/types/TFormStepperProps";
 
 
 //import Highlight from '@tiptap/extension-highlight';
@@ -35,7 +36,7 @@ type FormTemplateProps = {
   initialValues: any;
   queryValues?: any;
   validate: any;
-  onSubmit: (values: any) => void;
+  onSubmit?: (values: any) => void;
   fields: FieldConfig[][];
   mutation: any; // RTK Mutation function
   data: any;
@@ -62,7 +63,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
 
   activeStep,
   setActiveStep,
-  onNext,
+//  onNext,
   stepNames,
 }) => {
   const form = useForm({
@@ -79,7 +80,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
   const handleSubmit = async (values: any) => {
     try {
       await mutation(values).unwrap();
-      onSubmit(values);
+      if(onSubmit) {onSubmit(values);}
     } catch (error) {
       console.error("Form submission failed:", error);
     }
@@ -171,7 +172,7 @@ export const FormTemplate: React.FC<FormTemplateProps & TFromStepperProps> = ({
                             />
                           )}
                           {field.type === "RichTextEditor" && (
-                            <ReachTextEditorField form={form} field={field}/>
+                            <ReachTextEditorField form={form} field={field} {...form.getInputProps(field.name)}/>
                           )}
                           {field.type === "Select" && field.options && (
                             <Select

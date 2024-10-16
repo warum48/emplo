@@ -1,313 +1,177 @@
-'use client';
-import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
-import { CandidatesTable } from '@/components/_dashboard/vacancies/list/VacanciesList/CandidatesTable';
-import { VacancyListComponent } from '@/components/_dashboard/vacancies/list/VacanciesList/VacanciesList';
-//import VacanciesList from '@/components/_dashboard/predictor/vacancies/list/VacanciesList/VacanciesList';
+"use client";
+import { DashBoardPageContainer } from "@/components/_dashboard/PageContainer/DashBoardPageContainer";
+import { Stepper } from "@mantine/core";
 
+import React from "react";
+import { useMediaQuery } from "@mantine/hooks";
+import { IconRobot } from "@tabler/icons-react";
+import { FormWithStepperBg } from "@/components/BgColors/FormWithStepperBg";
+import DataDisplay from "@/components/__atoms/DataDisplay/DataDisplay";
+import { JSONViewer } from "@/components/__atoms/JSONViewer/JSONViewr";
+import { FormTemplate } from "@/components/_dashboard/profiles/create/FormTemplate";
+import {
+  useCreateProfileMutation,
+  useDeleteProfileMutation,
+  useGetProfileByIdQuery,
+} from "@/rtk/queries/joborder";
+import { templateValues } from "@/components/_dashboard/profiles/_data/templateValues";
+import { FormUtils } from "@/utils/FormUtils";
+import { demoValues } from "@/components/_dashboard/profiles/_data/demoValues";
+import { validatorStep1 } from "@/components/_dashboard/profiles/_data/validatorStep1";
+import { fields } from "@/components/_dashboard/profiles/_data/fields";
+import { QueryStateDisplay } from "@/components/__atoms/QueryStateDisplay/QueryStateDisplay";
+import { stepNames } from "@/components/_dashboard/profiles/_data/stepNames";
+import { FormWithStepperContainer } from "@/components/__atoms/Forms/containers/FormWithStepperContainer";
+import { FormContainer } from "@/components/__atoms/Forms/containers/FormContainer";
+import { StepperContainer } from "@/components/__atoms/Forms/containers/StepperContainer";
 import { Button, Checkbox, Drawer, Group, NumberInput, Select, Tabs, Textarea, TextInput } from '@mantine/core';
-import React from 'react';
-import { IconList, IconRobot } from '@tabler/icons-react';
-import VacancyCard from '@/components/_dashboard/vacancies/VacancyCard';
-import { useGetVacancyByIdQuery } from '@/rtk/queries/vacancy';
-import { Preloader } from '@/components/__atoms/Preloader/Preloader';
-import { customLabelStyle } from '@/styles/mantine_styles';
-import { VacancyZayavka } from '@/types/Vacancy';
-import { useForm } from '@mantine/form';
-import { STYLES } from '@/global/CONSTS';
+import { useMutationNotifications } from "@/hooks/useNotifications";
+import { Confirmator } from "@/components/__uiutils/Confirmator";
+import { useRouter } from "next/navigation";
 
 const Page = ({ params }: { params: { slug: string } }) => {
-  const { data: data_vacancy, error, isLoading } = useGetVacancyByIdQuery(params.slug);
-  const [menuIsOpen, setMenuIsOpen] = React.useState(false);
+  const {
+    data: dataProfile,
+    error: errorProfile,
+    isLoading: isLoadingProfile,
+    refetch: refetchProfile,
+  } = useGetProfileByIdQuery(params.slug);
+  const [ deleteProfile, {data: data_delete, error: error_delete, isLoading: isLoading_delete}] = useDeleteProfileMutation();
+  const [_formValues, setFormValues] = React.useState({});
+  const [activeStep, setActiveStep] = React.useState(0);
+  const md = useMediaQuery("(min-width: 768px)");
+  const [showConfirmator, setShowConfirmator] = React.useState<boolean>(false);
+  const router = useRouter();
 
-  const form = useForm<VacancyZayavka>({
-    initialValues: {
-      /*  jobTitle: '',
-      department: '',
-      projectDirection: '',
-      jobName: '',
-      jobID: '',
-      desiredClosureDate: '',
-      massRecruitment: false,
-      candidateCount: 1,
-      responsibilities: '',
-      conditions: '',
-      requirements: '',*/
-      jobTitle: '',
-      department: '',
-      projectDirection: '',
-      jobName: '',
-      jobID: '',
-      desiredClosureDate: '',
-      area: [],
-      relocation_type: undefined,
-      schedule: [],
-      experience: 0,
-      gender: 'male',
-      age: { from: 0, to: 0 },
-      salary: 0,
-      parsing: [], //{ hh: false, rabota: false },
-      postVacancy: [], //{ hh: false, rabota: false },
-      massRecruitment: false,
-      candidateCount: 1,
-      responsibilities: '',
-      conditions: '',
-      requirements: '',
-    },
-
-    validate: {
-     /* jobTitle: (value) => (value ? null : 'Введите должность'),
-      department: (value) => (value ? null : 'Укажите подразделение'),
-      projectDirection: (value) => (value ? null : 'Укажите проект/направление'),
-      jobName: (value) => (value ? null : 'Укажите наименование вакансии'),*/
-      /*validate: (values) => {
-      const errors = {} as any;
-      if (activeStep === 0 && values.field1.length < 2) {
-        errors.field1 = 'Field 1 must have at least 2 characters';
-      }
-      if (activeStep === 1 && values.field2.length < 5) {
-        errors.field2 = 'Field 2 must have at least 5 characters';
-      }
-      return errors;
-    },*/
-    },
+  useMutationNotifications({
+    text: "Профиль успешно удален",
+    data: data_delete,
+    data_details: (data_delete as any)?.msg
+      ? (data_delete as any)?.msg
+      : "", ////Вы можете найти его в списке профилей
+    error: error_delete,
   });
 
-  const handleSubmit = async (values: VacancyZayavka) => {
-    try {
-      //!!!!await createVacancy(values).unwrap();
-      console.log('Vacancy created successfully');
-    } catch (error) {
-      console.error('Failed to create vacancy:', error);
-    }
-  };
+  /*const [createProfile, { isLoading, isError, error, data }] =
+    useCreateProfileMutation();
 
+  const validate = (values: any) => {
+    if (activeStep === 0) {
+      return validatorStep1(values);
+    }
+    if (activeStep === 1) {
+      return {};
+    }
+    return {};
+  };*/
+  React.useEffect(() => {
+    console.log("DP", dataProfile);
+    setFormValues(dataProfile);
+  }, [dataProfile]);
 
   return (
-    <DashBoardPageContainer header="Вакансии" hasLeftMenu={false}   Icon={IconRobot} >
-        <div className="flex flex-col gap-6 w-full max-w-full">
-      <Tabs defaultValue="gallery">
-      <Tabs.List>
-        <Tabs.Tab value="gallery" >
-          Основная информация
-        </Tabs.Tab>
-        <Tabs.Tab value="messages" >
-          Критерии
-        </Tabs.Tab>
-        <Tabs.Tab value="settings">
-        Настройки и администрирование
-        </Tabs.Tab>
-      </Tabs.List>
-      <form
-        onSubmit={form.onSubmit(handleSubmit)}
-        className="form-bg-and-text p-8"
-      >
-      <Tabs.Panel value="gallery" className="flex flex-col gap-6 w-full max-w-full">
-      <>
-              <TextInput
-                label="Должность"
-                placeholder="штатное расписание для совместимости с 1С или системами Заказчика"
-                labelProps={{ style: customLabelStyle }}
-                {...form.getInputProps('jobTitle')}
-              />
+    <>
+    <DashBoardPageContainer header="Создать профиль" Icon={IconRobot}>
+      <div className="flex flex-col items-center">
+       {/*} <FormWithStepperBg /> */}
 
-              <TextInput
-                label="Подразделение"
-                placeholder="Отдел/подразделение - организационная единица, в которую осуществляется подбор (может передаваться по обмену)"
-                labelProps={{ style: customLabelStyle }}
-                {...form.getInputProps('department')}
-              />
+        <FormWithStepperContainer>
+          <div className="form-bg-and-text p-4 w-full max-w-screen-md">
+            <QueryStateDisplay
+              isLoading={isLoadingProfile}
+              error={errorProfile}
+              onRetry={refetchProfile}
+              //isNetworkError={isNetworkError} // Pass the isNetworkError function
+            />
 
-              <TextInput
-                label="Проект/направление"
-                placeholder="На всякий случай: еще один аналитический разрез для фильтрации и группировки подбора (как у Сбера)"
-                labelProps={{ style: customLabelStyle }}
-                {...form.getInputProps('projectDirection')}
-              />
+            {stepNames.length > 1 && dataProfile &&  _formValues &&(
+              <Tabs defaultValue="t0">
+              <Tabs.List>
+              {stepNames.map((name, index) => (
+                <Tabs.Tab value={'t'+index} className="uppercase">
+                  {name}
+                </Tabs.Tab>
+              ))}
+              </Tabs.List>
+             
+              {stepNames.map((name, index) => (
+              <Tabs.Panel value={'t'+index} className="flex flex-col gap-6 ">
+               
+                <DataDisplay
+                        //name={name}
+                        textStyle="text-sm p-4"
+                        data={FormUtils.formValuesToStepDetailsObject(
+                          index,
+                          fields,
+                          _formValues,
+                        )}
+                      />
+              </Tabs.Panel>
+               ))}
+              </Tabs>
+            )}
+          
 
-              <TextInput
-                label="Наименование вакансии"
-                placeholder="Введите наименование вакансии"
-                labelProps={{ style: customLabelStyle }}
-                {...form.getInputProps('jobName')}
-              />
-
-              <TextInput
-                label="ID вакансии"
-                placeholder="ID вакансии. Укажите номер или идентификатор вакансии из ваших систем (например, из 1С), чтобы не путать вакансии с одинаковыми названиями между собой. Может быть пустым или заполняться вручную если нет обмена."
-                labelProps={{ style: customLabelStyle }}
-                {...form.getInputProps('jobID')}
-              />
-
-              <TextInput
-                label="Желаемая дата закрытия"
-                placeholder="Введите желаемую дату закрытия вакансии"
-                labelProps={{ style: customLabelStyle }}
-                {...form.getInputProps('desiredClosureDate')}
-              />
-
-              <Checkbox
-                label="Массовый подбор"
-                checked={form.values.massRecruitment}
-                onChange={(event) =>
-                  form.setFieldValue('massRecruitment', event.currentTarget.checked)
+          <div
+            className={`mt-4 flex w-full ${activeStep == 0 ? "justify-center" : "justify-center"} gap-4 p-4`}
+          >
+           
+              <Button
+                variant="outline"
+                onClick={() =>
+                // deleteProfile(params.slug)
+                setShowConfirmator(true)
                 }
-                // labelProps={{ style: customLabelStyle }}
-              />
+                className="w-full max-w-80"
+              >
+                Удалить
+              </Button>
+            
+           
+              <Button
+                onClick={() => {
+                  console.log('')
+                     router.push(`/dashboard/profiles/edit/${params.slug}`)
+                }}
+                className="w-full max-w-80"
+              >
+                Редактировать
+              </Button>
+           
+            
+              <Button type="submit" className="w-full max-w-80"
+              onClick={() => {
+                console.log('')
+                   router.push(`/dashboard/profiles/copy/${params.slug}`)
+              }}
+              >
+                Создать копию
+              </Button>
+            
+          </div>
+          </div>
+        </FormWithStepperContainer>
+      </div>
+   {/*   <JSONViewer data={_formValues} />
+      <JSONViewer data={dataProfile} /> */}
 
-              <NumberInput
-                label="Количество кандидатов"
-                labelProps={{ style: customLabelStyle }}
-                placeholder="Введите количество кандидатов, после работы ИИ для рассмотрения Заказчиком"
-                min={1}
-                {...form.getInputProps('candidateCount')}
-              />
-
-              <Textarea
-                label="Обязанности"
-                placeholder="Описание обязанностей (для размещения вакансии)"
-                labelProps={{ style: customLabelStyle }}
-                minRows={4}
-                {...form.getInputProps('responsibilities')}
-              />
-
-              <Textarea
-                label="Условия"
-                placeholder="Описание условий (для размещения вакансии)"
-                labelProps={{ style: customLabelStyle }}
-                minRows={4}
-                {...form.getInputProps('conditions')}
-              />
-
-              <Textarea
-                label="Требования"
-                placeholder="Описание требований (для размещения вакансии)"
-                labelProps={{ style: customLabelStyle }}
-                minRows={4}
-                {...form.getInputProps('requirements')}
-              />
-              <div className="flex gap-4">
-                <Button variant='outline'>Отмена</Button>
-                <Button >Сохранить</Button>
-              </div>
-            </>
-      </Tabs.Panel>
-
-      <Tabs.Panel value="messages" className="flex flex-col gap-6 w-full max-w-full">
-      <Select
-      labelProps={{ style: customLabelStyle }}
-                label="Метро/район"
-                placeholder="Выберите один или несколько регионов"
-                data={[]} // Replace with actual data
-                multiple
-                {...form.getInputProps('area')}
-              />
-
-              <Select
-              labelProps={{ style: customLabelStyle }}
-                label="Готовность к переезду"
-                placeholder="Выберите готовность к переезду"
-                data={[
-                  { value: 'living_or_relocation', label: 'Проживание или переезд' },
-                  { value: 'living', label: 'Проживание' },
-                  { value: 'relocation', label: 'Переезд' },
-                ]}
-                {...form.getInputProps('relocationType')}
-              />
-
-              <Checkbox.Group label="График работы" {...form.getInputProps('schedule')}>
-                <Checkbox mt={STYLES.FORM.labelMargin} value="fullDay" label="Полный день" />
-                <Checkbox mt="xs" value="shift" label="Сменный график" />
-                <Checkbox mt="xs" value="flexible" label="Гибкий" />
-                <Checkbox mt="xs" value="remote" label="Удаленная работа" />
-                <Checkbox mt="xs" value="flyInFlyOut" label="Вахта" />
-              </Checkbox.Group>
-
-              <NumberInput
-              
-                label="Опыт работы (лет)"
-                labelProps={{ style: customLabelStyle }}
-                placeholder="Введите количество лет опыта"
-                min={0}
-                {...form.getInputProps('experience')}
-              />
-
-              <Select
-              labelProps={{ style: customLabelStyle }}
-                label="Пол"
-                placeholder="Выберите пол"
-                data={[
-                  { value: 'male', label: 'Муж' },
-                  { value: 'female', label: 'Жен' },
-                ]}
-                {...form.getInputProps('gender')}
-              />
-
-              <Group>
-                <NumberInput
-                  label="Возраст (от)"
-                  labelProps={{ style: customLabelStyle }}
-                  placeholder="Введите возраст от"
-                  min={0}
-                  {...form.getInputProps('age.from')}
-                />
-
-                <NumberInput
-                  label="Возраст (до)"
-                  labelProps={{ style: customLabelStyle }}
-                  placeholder="Введите возраст до (не обязательно)"
-                  min={0}
-                  {...form.getInputProps('age.to')}
-                />
-              </Group>
-
-              <NumberInput
-                label="Зарплата до"
-                labelProps={{ style: customLabelStyle }}
-                placeholder="Введите зарплату до (не обязательно)"
-                min={0}
-                {...form.getInputProps('salary')}
-              />
-
-<div className="flex gap-4">
-                <Button variant='outline'>Отмена</Button>
-                <Button >Сохранить</Button>
-              </div>
-      </Tabs.Panel>
-
-      <Tabs.Panel value="settings" className="flex flex-col gap-6 w-full max-w-full">
-      <Checkbox.Group label="Парсинг" {...form.getInputProps('parsing')}>
-                <Checkbox value="hh" label="hh.ru" mt={STYLES.FORM.labelMargin} />
-                <Checkbox value="rabota" label="rabota.ru" mt="xs" />
-              </Checkbox.Group>
-
-              <Checkbox.Group label="Разместить вакансию" {...form.getInputProps('postVacancy')}>
-                <Checkbox value="hh" label="hh.ru" mt={STYLES.FORM.labelMargin} />
-                <Checkbox value="rabota" label="rabota.ru" mt="xs" />
-              </Checkbox.Group>
-
-              <Select
-                labelProps={{ style: customLabelStyle }}
-                label="Согласование"
-                placeholder="Выберите согласующего"
-                data={[]} // Replace with actual data
-                multiple
-                {...form.getInputProps('area')}
-              />
-
-              <Checkbox.Group label="Разместить вакансию" {...form.getInputProps('postVacancy')}>
-                <Checkbox value="hh" label="hh.ru" mt={STYLES.FORM.labelMargin} />
-                <Checkbox value="rabota" label="rabota.ru" mt="xs"/>
-              </Checkbox.Group>
-
-              <div className="flex gap-4">
-                <Button variant='outline'>Отмена</Button>
-                <Button >Сохранить</Button>
-              </div>
-      </Tabs.Panel>
-      </form>
-    </Tabs>
-    </div>
     </DashBoardPageContainer>
+    <Confirmator
+    //onConfirm={() => {
+    //  if(action.function != undefined){
+    //    action.function(row[action.param || "id"] ||`0`)
+    //    }
+    //}} //
+    onConfirm={() => {
+      deleteProfile(params.slug)
+      setShowConfirmator(false)
+    }}
+    header={"Вы действительно хотите удалить профиль?"}
+    showConfirmator={showConfirmator}
+    setShowConfirmator={setShowConfirmator}
+    closeOnConfirm={true}
+  />
+  </>
   );
 };
 

@@ -1,69 +1,81 @@
 import { RichTextEditor, Link } from "@mantine/tiptap";
 import { useEditor } from "@tiptap/react";
-
 import StarterKit from "@tiptap/starter-kit";
 import "@mantine/tiptap/styles.css";
 import { FieldConfig } from "./FormTemplate_unused";
 import { useEffect } from "react";
-//import { FieldConfig } from "@/components/_dashboard/profiles/create/FormTemplate";
+import { JSONViewer } from "../JSONViewer/JSONViewr";
 
 type TProps = {
-    field: FieldConfig;
-    form:any;
-}
+  field: FieldConfig;
+  form: any;
+};
 
-export const ReachTextEditorField = ({field, form}:TProps) => {
+export const ReachTextEditorField = ({ field, form }: TProps) => {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      Link,
+    ],
+    content: form.values[field.name] || "", // Set initial content from form values
+    onUpdate(props) {
+      form.setFieldValue(field.name, props.editor.getHTML()); // Sync editor content with form
+      console.log("Editor Content:", props.editor.getHTML());
+    },
+  });
 
-    const editor = useEditor({
-        extensions: [
-          StarterKit,
-        //  Underline,
-          Link,
-       //   Superscript,
-       //   SubScript,
-       //   Highlight,
-       //   TextAlign.configure({ types: ['heading', 'paragraph'] }),
-        ],
-        onUpdate(props) {
-          form.setFieldValue(field.name, props.editor.getHTML());
-          console.log(props.editor.getHTML());
-        },
-       // content,
-      });
+  // Ensure the editor content is set when form values change
+  useEffect(() => {
+    if (editor && form.values[field.name] && editor.getHTML() !== form.values[field.name]) {
+      editor.commands.setContent(form.values[field.name]);
+      console.log("Set content to editor:", form.values[field.name]);
+    }
+  }, [form.values[field.name], editor]);
 
-      useEffect(() => {
-        console.log("form.values[field.name]", form.values[field.name]);
-        if (form.values[field.name]) {
-          editor?.commands.setContent(form.values[field.name]);
-        }
-      }, [form.values[field.name]]);
+  return (
+    <>
+      <div className="text-sm">{field.label}</div>
+      <RichTextEditor
+        editor={editor}
+        className="richText list-inside list-disc"
+        key={"k" + form.values[field.name]}
+      >
+        <RichTextEditor.Toolbar
+          sticky
+          stickyOffset={60}
+          {...form.getInputProps(field.name)}
+        >
+          <RichTextEditor.ControlsGroup>
+            <RichTextEditor.Bold />
+            <RichTextEditor.Italic />
+            <RichTextEditor.BulletList />
+            <RichTextEditor.OrderedList />
+          </RichTextEditor.ControlsGroup>
+        </RichTextEditor.Toolbar>
+        <RichTextEditor.Content
+          key={form.values[field.name]}
+          className="^leading-6 text-sm leading-[--mantine-line-height] text-[--mantine-color-text] [&>div>div]:dark:!bg-customGray-950 [&>div>div]:!p-3"
+        />
+      </RichTextEditor>
+     
+    </>
+  );
+};
 
-    return (
-    <><div className='text-sm '>{ field.label}</div>
-                            <RichTextEditor editor={editor} className="richText list-disc list-inside " >
-                              
-                               
-                              <RichTextEditor.Toolbar sticky stickyOffset={60}  {...form.getInputProps(field.name)} >
-                                <RichTextEditor.ControlsGroup>
-                                  <RichTextEditor.Bold />
-                                  <RichTextEditor.Italic />
-                                {/*}  <RichTextEditor.Underline />
+
+{
+  /*
+  
+   <JSONViewer data={form.values[field.name]} />
+      <JSONViewer data={editor?.getHTML()} />
+  
+  
+  
+  <RichTextEditor.Underline />
                                   <RichTextEditor.Strikethrough />
                                  
                                   <RichTextEditor.Highlight />
                                   <RichTextEditor.Code /> 
                                    <RichTextEditor.ClearFormatting />
-                                  */}
-
-                                  <RichTextEditor.BulletList />
-          <RichTextEditor.OrderedList />
-
-         
-                                </RichTextEditor.ControlsGroup>
-                              </RichTextEditor.Toolbar>
-                              <RichTextEditor.Content className="[&>div>div]:!p-3 text-sm ^leading-6 text-[--mantine-color-text] leading-[--mantine-line-height] [&>div>div]:!bg-customGray-950" />
-                            </RichTextEditor>
-                            </>
-    )
-
+                                  */
 }

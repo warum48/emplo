@@ -4,15 +4,9 @@ import { OrganizationsSelect } from "@/components/DynamicFormFields/Organization
 import { SpecialitiesSelect } from "@/components/DynamicFormFields/Specialities";
 import { DepartmentsSelect } from "@/components/DynamicFormFields/Departments";
 import { FieldConfig } from "@/components/__atoms/Forms/types/FieldConfig";
+import { TFromStepperProps } from "../../criterias/NewCriteria";
 
-export type TFromStepperProps = {
-  activeStep: number;
-  setActiveStep: React.Dispatch<React.SetStateAction<number>>;
-  onNext: (values: any) => void;
-  stepNames: string[];
-  _formValues:any;
-  setFormValues:React.Dispatch<React.SetStateAction<any>>
-};
+
 
 export const NewProfileForm = ({
   _formValues,
@@ -222,7 +216,7 @@ export const NewProfileForm = ({
       loading={isLoading}
       error={isError ? error : null}
       activeStep={activeStep}
-      onNext={onNext}
+     // onNext={onNext}
       stepNames={stepNames}
       setActiveStep={setActiveStep}
     />

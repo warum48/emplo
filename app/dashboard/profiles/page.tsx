@@ -114,6 +114,8 @@ const Requests = () => {
           actionsMenu={[
             //{ text: "Редактировать", link: "/dashboard/profiles/23" },
             //{ text: "Создать заявку", link: "/dashboard/vacancies/create" },
+            { text: "Просмотреть", link: "/dashboard/profiles/", linkParam:'id' },
+            { text: "Редактировать", link: "/dashboard/profiles/edit/", linkParam:'id' },
             { text: "Создать копию", link: "/dashboard/profiles/copy/", linkParam:'id' },
             { text: "Удалить", function: deleteProfile, param:'id', confirmationRequired:true },
             //{

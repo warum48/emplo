@@ -317,7 +317,7 @@ export const TableView = ({
         //    }
         //}} //
         onConfirm={handleConfirm}
-        header={"Вы действительно хотите очистить форму?"}
+        header={"Вы действительно хотите удалить профиль?"}
         showConfirmator={showConfirmator}
         setShowConfirmator={setShowConfirmator}
         closeOnConfirm={true}

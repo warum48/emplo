@@ -52,6 +52,16 @@ export const joborder = createApi({
       }),
     }),
 
+    /*--------------PUT ---------------*/
+    updateProfile: builder.mutation<void, any>({
+      query: (profile) => ({
+        url: `/api/joborder/job_profiles/${profile.id}`,
+        method: 'PUT',
+        body: profile,
+      }),
+      invalidatesTags: ['Profiles'],
+    }),
+
     /*------------delete ------------   ---------------*/
     //api/joborder/job_profiles/{id}
     deleteProfile: builder.mutation<void, any>({
@@ -111,6 +121,7 @@ export const {
     useLazyGetUnitsQuery,
     useLazyGetProjectsQuery,
     useLazyGetBAreasQuery,  
-    useDeleteProfileMutation
+    useDeleteProfileMutation,
+    useUpdateProfileMutation,
  } = joborder;
 
