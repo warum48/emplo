@@ -24,8 +24,8 @@ const Settings = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [formData, setFormData] = React.useState({ field1: "", field2: "" });
   const stepNames = [
-    "Основная информация",
-    "Критерии",
+    "Новый профиль вакансии",
+   // "Критерии",
   ]; 
   const md = useMediaQuery("(min-width: 768px)");
 
@@ -86,7 +86,7 @@ const Settings = () => {
               setActiveStep={setActiveStep}
             />
           </div>
-
+          {stepNames.length > 1 &&
           <div className="rightcol order-1 w-full pl-4 pt-8 md:order-2 md:w-[196px] lg:w-[250px]">
             <Stepper
               active={activeStep}
@@ -106,6 +106,7 @@ const Settings = () => {
               ))}
             </Stepper>
           </div>
+}
         </div>
       </div>
       <JSONViewer data={_formValues} />

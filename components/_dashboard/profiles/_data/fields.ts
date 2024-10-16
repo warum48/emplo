@@ -9,8 +9,8 @@ export const fields: FieldConfig[][] = [
       {
         type: "TextInput",
         name: "name",
-        label: "Имя профиля",
-        placeholder: "Введите имя профиля",
+        label: "Название вакансии",
+        placeholder: "Введите название вакансии",
         required: true,
       },
 
