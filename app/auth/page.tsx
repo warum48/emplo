@@ -1,10 +1,8 @@
 import React from 'react';
-import { useForm } from '@mantine/form';
-import { TextInput, PasswordInput, Button, Text } from '@mantine/core';
 import Head from 'next/head';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
-import { ParticlesComponent } from '@/components/Particles/Particles';
 import Header from '@/components/Header/Header';
+import { AuthRegFormContainer } from '@/components/_auth/AuthRegFormContainer';
 const AuthPage = () => {
     return (
       <>
@@ -12,7 +10,9 @@ const AuthPage = () => {
           <title>Authorization</title>
         </Head>
         <Header/>
+        <AuthRegFormContainer>
         <AuthorizationForm />
+        </AuthRegFormContainer> 
       </>
     );
   };

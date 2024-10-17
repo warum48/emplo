@@ -1,29 +1,27 @@
-import { empoyees } from "@/mockdata/emploees";
-import Employee from "./Employee";
+import Employee from './Employee';
 import classes from './autogrid.module.css';
-import { ParticlesComponent } from "../Particles/Particles";
 
+import { JSONViewer } from '../__atoms/JSONViewer/JSONViewr';
+import { Debugger } from '../__atoms/Debugger/Debugger';
 
-import { useSelector } from 'react-redux';
-import { RootState } from '@/rtk/store/store';
-import { JSONViewer } from "../__atoms/JSONViewer/JSONViewr";
-import { Debugger } from "../__atoms/Debugger/Debugger";
+type TProps = {
+  results?: any;
+  candidates: any;
+};
 
-export const ResultList: React.FC = () => {
-    const results = useSelector((state: RootState) => state.search.results);
-    console.log('results'   , results);
-    return (
-        <>
-        <Debugger>
-        <JSONViewer data={results} /></Debugger>
-        {/*} <ParticlesComponent /> */}
-        <div className={classes.container}>
-            {results.candidates.map((employee:any) => (
-                <Employee employee={employee}/>
-            ))}
-            
-        </div>
-       
-        </>
-    );
+export const ResultList = ({ results, candidates }: TProps) => {
+  return (
+    <>
+      <Debugger>
+        <JSONViewer data={results} />
+      </Debugger>
+      <div className={classes.container}>
+        {
+       // results.items.map((employee: any) => (
+        candidates?.map((employee: any) => (  
+          <Employee employee={employee} />
+        ))}
+      </div>
+    </>
+  );
 };

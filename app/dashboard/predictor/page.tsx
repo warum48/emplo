@@ -2,14 +2,14 @@
 
 'use client';
 import React from 'react';
-import { useGetCandidatesQuery } from '@/rtk/services/api';
+import { useGetCandidatesQuery } from '@/rtk/queries/candidates';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/rtk/store/store';
 
 
 const CandidatesPage: React.FC = () => {
   const { data: posts, error, isLoading } = useGetCandidatesQuery();
-  const value = useSelector((state: RootState) => state.someFeature.value);
+
   const dispatch = useDispatch();
 
   if (isLoading) return <div>Loading...</div>;

@@ -3,49 +3,95 @@
 @tailwind utilities;
 
 @layer utilities {
-    .bg-left-top-50 {
-      background-position: left top;
-      background-size: 50% auto;
-      background-repeat: no-repeat;
-    }
-    .bg-right-top-50 {
-        background-position: right top;
-        background-size: 50% auto;
-        background-repeat: no-repeat;
-      }
-      .border-default{
-        @apply  border-neutral-400/15
-      }
-    .form-paper{
-        @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85; //dark:bg-customGray-950/85 
-    }
-    .page-header{
-      @apply text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-0 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
-    } 
-
-    .page-header-compact{
-      @apply text-neutral-700 dark:text-neutral-50 text-base font-light mt-3 mb-2 text-left  [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
-    }
-
-    .dashboard-section-header{
-      @apply text-neutral-700 dark:text-neutral-50 text-xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
-    }
-    .dashboard-section-header_sm{
-      @apply text-neutral-700 dark:text-neutral-50 text-md font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
-    }
-    .dashboard-page-container{
-      @apply flex flex-col space-y-8 px-8 mt-16 py-4;
-    }
-    .dashboard-page-container-compact{
-      @apply flex flex-col space-y-8 px-8 mt-3 py-1; /*6*/
-    }
-    .dashboard-page-container-nopadding{
-      @apply flex flex-col space-y-8 pl-0 pr-0 mt-16 py-5;
-    }
-    .dashboard-page-container-compact-nopadding{
-      @apply flex flex-col space-y-8 pl-0 pr-0 mt-3 py-0; /*6*/
-    }
-    .dashboard-menu-item{
-      @apply px-8 py-2 text-sm  hover:bg-gray-700  /*font-semibold*/
-    }
+  .bg-left-top-50 {
+    background-position: left top;
+    background-size: 50% auto;
+    background-repeat: no-repeat;
   }
+  .bg-right-top-50 {
+    background-position: right top;
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+  }
+  /*------------------------borders-------------------*/
+  .border-default {
+    @apply border-neutral-400/15;
+  }
+  /*------------------------texts-------------------*/
+  .page-header {
+    @apply text-neutral-700 dark:text-neutral-50 text-3xl  mb-0 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+  }
+  .page-header-compact {
+    @apply text-neutral-700 dark:text-neutral-50 text-base font-light mt-3 mb-2 text-left  [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+  }
+  .card-white-header {
+    @apply text-white text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+  }
+  .form-header {
+    @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light;
+  }
+  /*----dashboard texts-------------------*/
+  .dashboard-section-header {
+    @apply text-neutral-700 dark:text-neutral-50 text-xl mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+  }
+  .dashboard-section-header_sm {
+    @apply text-neutral-700 dark:text-neutral-50 text-md  mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)];
+  }
+  /*------------------------containers-------------------*/
+  .dashboard-page-container {
+    @apply flex flex-col space-y-8 px-2 md:px-8 mt-16 py-4; /* */
+  }
+  .dashboard-page-container-compact {
+    @apply flex flex-col space-y-8 px-4 md:px-8  py-1 pt-4; /*6*/ /* mt-3 !!!!margin adds scroll if h-full */
+  }
+  .dashboard-page-container-nopadding {
+    @apply flex flex-col space-y-4 md:space-y-8 pl-0 pr-0 mt-16 py-5; /* */
+  }
+  .dashboard-page-container-compact-nopadding {
+    @apply flex flex-col space-y-6 md:space-y-8 pl-0 pr-0 mt-3 py-1; /*6*/ /* */
+  }
+  /*------------------------links-------------------*/
+  .dashboard-menu-item {
+    /* check wtf */
+    @apply px-8 py-2 text-sm  hover:bg-gray-700  /*font-semibold*/;
+  }
+  .link-default {
+    @apply hover:text-pink-800 hover:underline dark:hover:text-pink-200;
+  }
+  .link-button{
+    @apply text-pink-400 underline hover:text-pink-700;
+  }
+  /*------------------------forms-------------------*/
+  .form-paper {
+    /* check where it's used and replace with new one*/
+    @apply bg-white bg-opacity-95 text-gray-900  dark:text-white dark:bg-gray-900/85;
+    //dark: bg-customGray-950/85;
+  }
+  .form-bg-and-text {
+    @apply text-black dark:text-white bg-white dark:bg-customGray-950/85;
+  }
+  .dashboard-single-col-form {
+    @apply p-4 w-full relative max-w-full max-w-screen-md rounded-2xl form-bg-and-text;
+  }
+  .filters-over-table {
+    @apply justify-between flex items-stretch gap-0 rounded-xl bg-gray-300/25 dark:bg-gray-700/15 mt-4 p-0 overflow-hidden shadow-inner shadow-[0_1px_2px_0_rgba(0,0,0,0.22)_inset];
+  }
+  .vert-divider {
+    @apply dark:border-gray-500 border-gray-300;
+  }
+  /*------------------------errors-------------------*/
+  .error-container {
+    @apply border border-red-500/50 bg-red-100 dark:bg-red-900 dark:bg-opacity-10 p-4 text-black dark:text-white rounded-md text-xs break-words max-h-48 max-w-xl overflow-y-auto;
+  }
+  
+   /* .checkbox-group > div > .mantine-Checkbox-root {
+      @apply bg-red-500;
+    }*/
+    .checkbox-group {
+      @apply space-y-2;
+    }
+    .checkbox-group > div {
+      @apply space-y-2;
+    }
+  
+}

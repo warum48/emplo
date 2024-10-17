@@ -1,0 +1,1 @@
+//export const dynamicFiledProps = { form, size = 'sm',  showLabel = true, className = '', formFieldName = 'professional_roles', dependencies = [] , label, description, required, placeholder }: TDynamicFormFieldProps & { dependencies: TDependency[] }

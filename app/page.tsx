@@ -1,24 +1,27 @@
-'use client';
+"use client";
 
-import Head from 'next/head';
-import Header from '@/components/Header/Header';
-import { Input, Button, Transition, Checkbox } from '@mantine/core';
-import Footer from '@/components/Footer/Footer';
-import Link from 'next/link';
-import React from 'react';
-import { ResultList } from '@/components/ResultList/ResultList';
+import Head from "next/head";
+import Header from "@/components/Header/Header";
+import { Input, Button, Transition, Checkbox } from "@mantine/core";
+import Footer from "@/components/Footer/Footer";
+import Link from "next/link";
+import React from "react";
+import { ResultList } from "@/components/ResultList/ResultList";
 
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
-import { ParticlesComponent } from '@/components/Particles/Particles';
-import { PopularSearches } from '@/components/PopularSearches/PopularSearches';
-import { About } from '@/components/About/About';
-import { QuickSearch } from '@/components/JobSearchForm/QuickSearch';
-import { IntroText } from '@/components/_main/IntroText';
-import { ExpandSearchButton } from '@/components/_main/ExpandSearchButton';
-import { MainBlockContainer } from '@/components/_main/MainBlockContainer';
-import { InfoBlock } from '@/components/_main/InfoBlock';
-import PerspectiveCards from '@/components/_main/PerspectiveCards.tsx/PerspectiveCards';
-import { Plans } from '@/components/_main/Plans';
+import JobSearchForm from "@/components/Search/JobSearchForm";
+import { ParticlesComponent } from "@/components/Particles/Particles";
+
+import { About } from "@/components/About/About";
+import { QuickSearch } from "@/components/Search/QuickSearchForm";
+import { IntroText } from "@/components/_main/IntroText";
+import { ExpandSearchButton } from "@/components/_main/ExpandSearchButton";
+import { MainBlockContainer } from "@/components/_main/MainBlockContainer";
+import { InfoBlock } from "@/components/_main/InfoBlock";
+import PerspectiveCards from "@/components/_main/PerspectiveCards.tsx/PerspectiveCards";
+import { Plans } from "@/components/_main/Plans";
+import { PopularSearches } from "@/components/Search/PopularSearches";
+import { useSelector } from "react-redux";
+import { RootState } from "@/rtk/store/store";
 
 const Home = () => {
   const [resultState, setResultState] = React.useState(false);
@@ -26,6 +29,7 @@ const Home = () => {
   const mainRef = React.useRef<HTMLDivElement>(null);
   const [extendedSearch, setExtendedSearch] = React.useState(false);
   const [smallGradientPadding, setSmallGradientPadding] = React.useState(true);
+  const results = useSelector((state: RootState) => state.search.results);
 
   const onSearch = () => {
     setResultState(!resultState);
@@ -36,20 +40,20 @@ const Home = () => {
     const handleTransitionEnd = (event: TransitionEvent) => {
       if (event.target === mainRef.current) {
         setIsAnimating(false);
-        console.log('Transition complete');
+        console.log("Transition complete");
         // Add your custom logic here
       }
     };
 
     const mainElement = mainRef.current;
     if (mainElement) {
-      mainElement.addEventListener('transitionend', handleTransitionEnd);
+      mainElement.addEventListener("transitionend", handleTransitionEnd);
     }
 
     // Clean up the event listener on component unmount or when the effect re-runs
     return () => {
       if (mainElement) {
-        mainElement.removeEventListener('transitionend', handleTransitionEnd);
+        mainElement.removeEventListener("transitionend", handleTransitionEnd);
       }
     };
 
@@ -66,47 +70,38 @@ const Home = () => {
         <meta name="description" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Button
-        className="fixed z-50 bottom-5 right-5"
-        onClick={() => {
-          setResultState(!resultState);
-          setIsAnimating(true);
-        }}
-      >
-        switch view
-      </Button>
 
       <div
-        className={` 
-          pt-20
-          transition-all duration-400 grid grid-cols-1 gap-0 
-             ${(resultState && isAnimating) || !resultState ? 'md:grid-cols-1' : 'md:grid-cols-3 xl:grid-cols-4'}  `}
+        id="search"
+        className={`duration-400 grid grid-cols-1 gap-0 pt-20 transition-all ${(resultState && isAnimating) || !resultState ? "md:grid-cols-1" : "md:grid-cols-3 xl:grid-cols-4"} `}
       >
         <div className="col-span-1">
-          <MainBlockContainer resultState={resultState} isAnimating={isAnimating} mainRef={mainRef}>
+          <MainBlockContainer
+            resultState={resultState}
+            isAnimating={isAnimating}
+            mainRef={mainRef}
+          >
             {!resultState && (
               <div
                 // id="particles-js"
-                className={`absolute top-0 right-0 h-full w-1/4 overflow-hidden transition-all duration-500
-                                ${resultState || isAnimating ? 'opacity-0' : 'opacity-100'}
-                                `}
+                className={`absolute right-0 top-0 h-full w-1/4 overflow-hidden transition-all duration-500 ${resultState || isAnimating ? "opacity-0" : "opacity-100"} `}
               >
                 <ParticlesComponent />
               </div>
             )}
 
-            <div className=" w-full  ">
+            <div className="w-full">
               <Transition
                 mounted={!resultState}
                 transition="fade"
                 duration={500}
                 timingFunction="ease"
                 onExited={() => {
-                  console.log('EXITED');
+                  console.log("EXITED");
                   setIsAnimating(false);
                 }}
                 onEntered={() => {
-                  console.log('EXITED');
+                  console.log("EXITED");
                   setIsAnimating(false);
                 }}
               >
@@ -114,31 +109,32 @@ const Home = () => {
                   <div style={styles}>
                     {((resultState && isAnimating) || !resultState) && (
                       <div
-                        className={`w-full max-w-5xl flex m-auto flex-col justify-start transition-all duration-700
-                                        ${resultState ? 'opacity-0' : 'opacity-100'}
-                                        `}
+                        className={`m-auto flex w-full max-w-5xl flex-col justify-start transition-all duration-700 ${resultState ? "opacity-0" : "opacity-100"} `}
                       >
                         <IntroText />
                         <div
-                          className={`flex justify-start items-center space-x-4 w-full p-4 
-                                      transition-all duration-500
-                                      bg-opacity-30 dark:bg-gray-900 
-                                      bg-white   
-                                      ${extendedSearch ? 'bg-opacity-70 dark:bg-opacity-85' : 'bg-opacity-30 dark:bg-opacity-85'} 
-                                      z-10`}
+                          className={`flex w-full items-center justify-start space-x-4 bg-white bg-opacity-30 p-4 transition-all duration-500 dark:bg-gray-900 ${extendedSearch ? "bg-opacity-70 dark:bg-opacity-85" : "bg-opacity-30 dark:bg-opacity-85"} z-10`}
                         >
                           {extendedSearch ? (
-                            <JobSearchForm gridCols={3} key={'extendedSearch'} />
+                            <JobSearchForm
+                              gridCols={3}
+                              key={"extendedSearch"}
+                              onSearch={onSearch}
+                            />
                           ) : (
                             <QuickSearch onSearch={onSearch} />
                           )}
                         </div>
-                        <ExpandSearchButton
-                          extendedSearch={extendedSearch}
-                          setExtendedSearch={setExtendedSearch}
-                        />
-                        <div className="mt-8 text-white text-left w-full">
-                          <h2 className="text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+                        <div className="z-20 flex items-center justify-between">
+                          <div>&nbsp;</div>
+
+                          <ExpandSearchButton
+                            extendedSearch={extendedSearch}
+                            setExtendedSearch={setExtendedSearch}
+                          />
+                        </div>
+                        <div className="mt-8 w-full text-left text-white">
+                          <h2 className="mb-4 text-2xl font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
                             Популярные запросы
                           </h2>
                           <PopularSearches onSearch={onSearch} />
@@ -159,33 +155,30 @@ const Home = () => {
                 {(styles) => (
                   <div
                     style={styles}
-                    className={`w-full max-w-5xl flex flex-col justify-start
-                                    ${isAnimating ? ' absolute ' : ' relative'}
-                                    `}
+                    className={`flex w-full max-w-5xl flex-col justify-start ${isAnimating ? "absolute" : "relative"} `}
                   >
                     <div
                       className={
-                        `bg-white bg-opacity-100 text-gray-900  dark:text-white dark:bg-customGray-950/85            
-                        ${smallGradientPadding ? 'ml-0 mr-0 -mt-[80px] -mb-[80px] ' : 'mx-4  -my-16 '}
-                                      `
+                        `bg-white bg-opacity-100 text-gray-900 dark:bg-customGray-950/85 dark:text-white ${smallGradientPadding ? "-mb-[80px] -mt-[80px] ml-0 mr-0" : "-my-16 mx-4"} `
                         //${smallGradientPadding ? 'mx-0.5 -my-[76px] ' : 'mx-4  -my-16 '}
                         // mx-0.5 -my-16
                         // mx-1 -my-16
                       }
                     >
-                      
                       {resultState && (
                         <>
                           <JobSearchForm />
-                          <div className="text-xs flex p-4 gap-2">
+                          <div className="flex gap-2 p-4 text-xs">
                             <Checkbox
                               checked={smallGradientPadding}
                               onChange={(event) =>
-                                setSmallGradientPadding(event.currentTarget.checked)
+                                setSmallGradientPadding(
+                                  event.currentTarget.checked,
+                                )
                               }
                             />
-                            Я серьезный белый гетеросексуальный мужик, поменьше этих ваших розовых
-                            радуг пожалуйста
+                            Я серьезный белый гетеросексуальный мужик, поменьше
+                            этих ваших розовых радуг пожалуйста
                           </div>
                         </>
                       )}
@@ -198,21 +191,31 @@ const Home = () => {
         </div>
         {resultState && !isAnimating && (
           <div
-            className="col-span-1 md:col-span-2 xl:col-span-3  bg-gray-100 p-8 bg-right-top-50
-                          dark:bg-opacity-50
-                          dark:bg-customGray-900"
+            className="bg-right-top-50 col-span-1 bg-gray-100 p-8 dark:bg-customGray-900 dark:bg-opacity-50 md:col-span-2 xl:col-span-3"
             //mt-16
           >
-            <h2 className="text-neutral-700 dark:text-neutral-50 text-3xl font-bold mb-4 text-left font-light [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]">
+            <h2 className="mb-4 text-left text-3xl font-bold font-light text-neutral-700 [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] dark:text-neutral-50">
               Результаты поиска
             </h2>
-            <ResultList />
+            <ResultList results={results} candidates={results?.items} />
+            <div className="mt-8 flex justify-end">
+              <Button
+                onClick={() => {
+                  setResultState(!resultState);
+                  setIsAnimating(true);
+                }}
+              >
+                Назад
+              </Button>
+            </div>
           </div>
         )}
       </div>
+      <div id="about"></div>
       <InfoBlock />
       <About />
       {/* <Plans/>*/}
+      <div id="contacts"></div>
       <Footer />
     </>
   );

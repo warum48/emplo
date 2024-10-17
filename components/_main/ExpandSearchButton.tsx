@@ -9,7 +9,7 @@ type TProps = {
 export const ExpandSearchButton = ({ extendedSearch, setExtendedSearch }: TProps) => {
     const { colorScheme } = useMantineColorScheme();
   return (
-    <div className="flex justify-end items-center z-20">
+    
       <div
         className={`flex justify-end items-center bg-white 
                              dark:bg-gray-950 
@@ -26,6 +26,6 @@ export const ExpandSearchButton = ({ extendedSearch, setExtendedSearch }: TProps
           {!extendedSearch ? 'Расширенный поиск' : 'Быстрый поиск'}
         </LinkButton>
       </div>
-    </div>
+    
   );
 };

@@ -30,17 +30,30 @@ export const theme = createTheme({
       '#33000B',
     ],
     myCustomPink: [
-      '#FDE7EA', // lightest pink
-      '#F9C2C8',
-      '#F59CA7',
-      '#bd5889',
-      '#a9375f', //'#ED5263',
-      '#982153', //'#E82D41',// base pink
-       '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
+      '#fde7f8', // lightest pink
+      '#f9c2f2',
+      '#f59ce8',
+      '#d25ebf',
+      '#ba4083', //'#ED5263',
+     '#b13780', // '#982168', //'#E82D41',// base pink
+      '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
       // this color is good for main button: '#863866',
-      '#67286b', //'#8c1d42',
-      '#5e1531',
-      '#300C0D', // darkest pink
+      '#6b284f', //'#8c1d42',
+      '#5e153e',
+      '#310d2d', // darkest pink
+    ],
+    'my-custom-pink': [
+      '#fde7f8', // lightest pink
+      '#f9c2f2',
+      '#f59ce8',
+      '#d25ebf',
+      '#a93776', //'#ED5263',
+      '#982168', //'#E82D41',// base pink
+      '#9e3472',//'#873e87'-более фиолетовый,// '#873e75'-cлишком бледный,//'#9e3472'-слишком красный,//'#824089',// '#ba2557', // main color for buttons in light theme
+      // this color is good for main button: '#863866',
+      '#6b284f', //'#8c1d42',
+      '#5e153e',
+      '#310d2d', // darkest pink
     ],
     dark: [
       '#dfe4ea',
@@ -50,11 +63,24 @@ export const theme = createTheme({
       '#2f3542',
       '#1e272e',
       '#212632', //'#343c4f'// '#202831',// '#131a21',
-      '#0e1114',//'#0e1114',
+      '#12141b',//'#0e1114',
       '#080a0c',//'#080a0c',
       '#040506',//'#040506',
     ],
     customGray:  [
+      '#f5f5f4',
+      '#e7e7e5',
+      '#d6d6d4',
+      '#b7b7b5',
+      '#9a9a97',
+      '#7c7c79',
+      '#666664',
+      '#4d4d4b',
+      '#333349',
+      '#212024', //'#24222a',
+      '#14161d',
+    ],
+    'custom-grey':  [
       '#f5f5f4',
       '#e7e7e5',
       '#d6d6d4',
@@ -88,6 +114,16 @@ export const theme = createTheme({
       styles: (theme:any) => ({
         input: {
           backgroundColor: `${theme.colors.gray[0]}B3`, // Adds 70% opacity to the default background color
+        },
+      }),
+    },
+  },*/
+  /*
+  components: {
+    Input: {
+      styles: (theme: { colorScheme: string; }) => ({
+        input: {
+          backgroundColor: theme.colorScheme === 'dark' ? '#1f1f1f' : '#ffffff', // Dark and light mode backgrounds
         },
       }),
     },

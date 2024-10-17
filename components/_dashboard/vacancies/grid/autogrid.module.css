@@ -1,0 +1,32 @@
+.container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  transition: all 0.4s;
+}
+
+.gridItem {
+  position: relative;
+  /* width: 580px;  Start with a specific width -- this line helps to animate , width can be higher than real width, some hacky way*/
+  max-width: 100%;
+  flex: 1;
+  min-width: 280px;
+  transition: width 0.4s ease;
+}
+
+.gridItem.expanded {
+  width: 100%; /* Expand to full width */
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 320px) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}

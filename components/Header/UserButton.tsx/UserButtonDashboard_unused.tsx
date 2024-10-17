@@ -2,7 +2,7 @@ import { Avatar, Button } from "@mantine/core";
 import { RootState } from '@/rtk/store/store';
 import Link from "next/link";
 import { useSelector } from "react-redux";
-import { User } from "@/rtk/services/authApi";
+import { User } from "@/rtk/queries/authApi";
 
 export const UserButtonDashboard = () =>{
     const photo = null;

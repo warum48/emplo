@@ -1,24 +1,25 @@
 'use client';
 import AuthorizationForm from '@/components/_auth/AuthorizationForm';
-import { DashBoardPageContainer } from '@/components/_dashboard/predictor/DashBoardPageContainer';
+import { DashBoardPageContainer } from '@/components/_dashboard/PageContainer/DashBoardPageContainer';
 import { PredictorsList } from '@/components/_dashboard/predictor/Predictors';
 import { XY } from '@/components/_dashboard/predictor/XY';
 import DashBoardHeader from '@/components/Header/DashBoardHeader';
 import Header from '@/components/Header/Header';
-import JobSearchForm from '@/components/JobSearchForm/JobSearchForm';
+import JobSearchForm from '@/components/Search/JobSearchForm';
 import { ResultList } from '@/components/ResultList/ResultList';
-import { setCompactLayout } from '@/rtk/features/UISettings';
+import { setCompactLayout } from '@/rtk/slices/UISettings';
 import { RootState } from '@/rtk/store/store';
 import { Switch } from '@mantine/core';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
+import { IconSettings } from '@tabler/icons-react';
 
 const Settings = () => {
   const dispatch = useDispatch();
   const compactLayout = useSelector((state: RootState) => state.UISettings.compactLayout);
 
   return (
-     <DashBoardPageContainer header="Настройки">
+     <DashBoardPageContainer header="Настройки" Icon={IconSettings} >
       <div>
       <h3 className="dashboard-section-header">Модель ИИ</h3>
       <PredictorsList/>

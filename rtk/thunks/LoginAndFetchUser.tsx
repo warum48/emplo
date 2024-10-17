@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authApi } from '../services/authApi';
-import { setAuthState } from '../features/authSlice';
+import { authApi } from '../queries/authApi';
+import { setAuthState } from '../slices/authSlice';
 //import { setAuthState } from './authSlice';
 //import { authApi } from './authApi';
 
@@ -13,7 +13,10 @@ export const loginAndFetchUser = createAsyncThunk(
       const userResponse = await dispatch(authApi.endpoints.me.initiate());
       if ('data' in userResponse) {
         console.log('thunk-me');
-        dispatch(setAuthState({ isAuthenticated: true, user: userResponse.data }));
+        dispatch(setAuthState({ isAuthenticated: true, 
+         // user: userResponse.data
+        token: userResponse.data.token
+        }));
       }
     }
   }

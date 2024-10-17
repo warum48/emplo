@@ -37,7 +37,7 @@ export const MainBlockContainer = ({ children, resultState, isAnimating, mainRef
                   px-0
                   bg-opacity-70
                   ${resultState ? 'bg-gradient-to-b' : 'bg-gradient-to-br'}
-                  ${resultState ? 'from-fuchsia-950/85 via-rose-500/95 to-rose-900/85' : 'from-fuchsia-950/85 via-rose-500/75 to-rose-900/95'}
+                  ${resultState ? 'from-fuchsia-950/85 via-rose-500/95 to-rose-900/85' : 'from-fuchsia-950/85 via-rose-500/75 to-pink-900/95'}
                   ${resultState ? 'dark:from-indigo-950/90 dark:via-rose-800/70 dark:to-rose-900/10' : 'dark:from-indigo-950/75 dark:via-rose-800/75 dark:to-pink-900/95 '} 
                   ${resultState ? 'px-0 ' : 'px-8'}
                  py-20

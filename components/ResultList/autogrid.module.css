@@ -1,29 +1,59 @@
-.container {
-    display: grid;
-    gap:16px;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 /*  center last row doesn't work grid-template-rows: repeat(auto-fill, minmax(1fr, 80px));
     justify-content: center;*/
-}
 
-
-
-.gridItem {
-    position: relative;
-    min-width: 400px;
-    max-width: 100%;
-    flex: 1;
+.container {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  transition: all 0.4s;
   
 }
 
-
-.gridItem.expanded  {
-    min-width: 100%;
-    max-width: 100%;
-    width:100%;
-    flex: 1;
-   /* border: 1px solid black;*/
-    grid-column:  1 /  -1;
+/*
+.gridItem {
+  position: relative;
+  min-width: 280px;
+  max-width: 100%;
+  flex: 1;
+  transition: all 0.4s;
 }
 
+.gridItem.expanded {
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
+  flex: 1;
+  transition: all 0.4s;
+  grid-column: 1 / -1;
+}
+  */
 
+  .gridItem {
+    position: relative;
+   /* width: 580px;  Start with a specific width -- this line helps to animate , width can be higher than real width, some hacky way*/
+    max-width: 100%;
+    flex: 1;
+    min-width: 280px;
+    transition: width 0.4s ease;
+
+  }
+  
+  .gridItem.expanded {
+    width: 100%; /* Expand to full width */
+    grid-column: 1 / -1;
+  }
+  
+
+  
+
+@media (max-width: 320px) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+}

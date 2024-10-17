@@ -3,45 +3,51 @@ import { setupListeners } from '@reduxjs/toolkit/query/react';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
-import { api } from '../services/api';
-import { authApi } from '../services/authApi';
-import someSlice from '../features/someFeature/someSlice';
-import tempSlice from '../features/tempFeature/tempSlice';
-import candidateSearchSlice from '../features/searchCandidateForm/searchCandidate';
-import resumeFormSlice from '../features/resumeForm';
-import createVacancySlice from '../features/vacancy/vacancySlice';
-import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
-//import createVacancyHHSlice from '../features/vacancy/vacancySliceHH';
-import UISettingsSlice from '../features/UISettings';
-import searchReducer from '../features/search/searchSlice';
-import authReducer from '../features/authSlice';
-import { predictorApi } from '@/rtk/services/predictorApi';
-import thunk from 'redux-thunk';
+//----------------QUERIES----------------
+import { api } from '../queries/candidates';
+import { debug } from '../queries/debug';
+import { joborder} from '../queries/joborder';
+import { authApi } from '../queries/authApi';
+import { vacancyApi } from '../queries/vacancy';
+import { predictorApi } from '@/rtk/queries/predictorApi';
+//-----------------SLICES----------------
+import candidateSearchReducer from '../slices/searchCandidateForm/searchCandidate';
+import resumeFormSlice from '../slices/resumeForm';
+import createVacancySlice from '../slices/vacancy/vacancySlice';
+import createVacancyHHSlice from '../slices/vacancy/vacancySliceHH';
+import UISettingsSlice from '../slices/UISettings';
+import searchReducer from '../slices/search/searchSlice';
+import quickSearchReducer from '../slices/quickSearch';
+import searchAIReducer from '../slices/search/searchHHSlice';
+import authReducer from '../slices/authSlice';
+import authFormSlice from '../slices/authForm';
 
-//import { configureStore, createAsyncThunk, createSlice, MiddlewareArray } from '@reduxjs/toolkit';
-import { fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { loginAndFetchUser } from '../thunks/LoginAndFetchUser';
-import UISettings from '../features/UISettings';
-//import thunk from 'redux-thunk';
-//import { tempSlice } from './features/tempFeature/tempSlice'; // Adjust the path as necessary
+import { listenerMiddleware } from './listenerMidleware';
+
 
 
 const rootReducer = combineReducers({
   [predictorApi.reducerPath]: predictorApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [api.reducerPath]: api.reducer,
+  [vacancyApi.reducerPath]: vacancyApi.reducer,
+  [joborder.reducerPath]: joborder.reducer,
+  [debug.reducerPath]: debug.reducer,
+
+  //vacancyForm: vacancyFormReducer,
 
   createVacancy: persistReducer({ key: 'createVacancyHH', storage }, createVacancySlice),
   createVacancyHH: persistReducer({ key: 'createVacancyHH', storage }, createVacancyHHSlice),
   auth: authReducer,
   search: searchReducer,
-  someFeature: persistReducer({ key: 'someFeature', storage }, someSlice),
-  jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice),
+  quickSearch: quickSearchReducer,
+  searchAI: searchAIReducer,
+  authForm: persistReducer({ key: 'authForm', storage }, authFormSlice),
+  //!!jobSearch: persistReducer({ key: 'candidateSearch', storage }, candidateSearchSlice), //persist form - temporary disabled, form changes offten
+  jobSearch: candidateSearchReducer,
   resumeForm: persistReducer({ key: 'resumeForm', storage }, resumeFormSlice),
   UISettings: persistReducer({ key: 'UISettings', storage }, UISettingsSlice),
-  tempFeature: tempSlice, // Non-persistent slice
-  // Add other slices here
-  //temp: tempSlice.reducer, // Add the temp slice reducer here
 });
 
 const store = configureStore({
@@ -49,12 +55,8 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // Required for persist to work with non-serializable data like promises
-      thunk: {
-        extraArgument: loginAndFetchUser//authApi
-      }
-    }).concat(api.middleware, authApi.middleware, predictorApi.middleware)//.concat(thunk),
-  //middleware: (getDefaultMiddleware) =>
-  //  getDefaultMiddleware().concat(authApi.middleware).concat(thunk),
+    }).concat(api.middleware, debug.middleware, joborder.middleware, authApi.middleware, predictorApi.middleware, vacancyApi.middleware).prepend(listenerMiddleware.middleware)
+
     
 });
 
@@ -63,7 +65,6 @@ setupListeners(store.dispatch);
 export const persistor = persistStore(store);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-//export type AppDispatch = typeof store.dispatch;
 
 
 export default store;

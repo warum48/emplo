@@ -16,12 +16,12 @@ export type Schedule =
   | "flyInFlyOut";
 
 export interface CandidateSearchFormValues {
-  specialty: string; // Use appropriate type if specific options are available
+  speciality: string; // Use appropriate type if specific options are available
   area: string[]; // Assuming these are IDs of the areas
   relocation_type?: RelocationType;
   schedule: Schedule[];
   skills?: string[]; // Use appropriate type if specific options are available
-  experience: "noExperience" | "between1And3" | "between3And6" | "moreThan6";
+  experience: number; //"noExperience" | "between1And3" | "between3And6" | "moreThan6";
   gender: Gender;
   age: number;
   salary: number;

@@ -1,0 +1,185 @@
+import { Table, Checkbox, Button, Badge, Menu, ActionIcon, Group, Text } from '@mantine/core';
+import { useState } from 'react';
+import { IconDotsVertical } from '@tabler/icons-react';
+import { StyledButton } from '@/components/__atoms/Buttons/StyledButton';
+//import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/slices/vacancy/vacancySliceHHReal';
+import { JSONViewer } from '@/components/__atoms/JSONViewer/JSONViewr';
+import DataDisplay from '@/components/__atoms/DataDisplay/DataDisplay';
+import { useGetVacancyByIdQuery, useGetVacancyNegotiationsByIdQuery } from '@/rtk/queries/vacancy';
+import { UIUtils } from '@/utils/UIUtils';
+import CandidateCard from '../../CandidateCard';
+import { CandidateTableRow } from './CandidateTableRow';
+//import DataDisplay from '@/components/_dashboard/profile/HHMe';
+
+interface Candidate {
+  id: number;
+  candidate_id: string;
+  first_name: string;
+  last_name: string;
+  middle_name: string;
+  age: number;
+  gender: string;
+  birth_date: string;
+  alternate_url: string;
+  area: string;
+  business_trip_readiness: string;
+  skills: string;
+  salary: number;
+  resume_status: string;
+  professional_roles: string;
+  total_experience: number;
+}
+
+const candidates: Candidate[] = [
+  {
+    id: 1,
+    candidate_id: '1',
+    first_name: 'Полина',
+    last_name: 'Перевозникова',
+    middle_name: 'Ивановна',
+    age: 29,
+    gender: 'Женский',
+    birth_date: '1995-04-15',
+    alternate_url: '+7 924 543 32 14',
+    area: 'Санкт-Петербург',
+    business_trip_readiness: 'Нет',
+    skills: 'UI/UX Design, Photoshop, Figma',
+    salary: 120000,
+    resume_status: 'Собеседование',
+    professional_roles: 'Дизайнер',
+    total_experience: 6,
+  },
+  {
+    id: 2,
+    candidate_id: '2',
+    first_name: 'Влад',
+    last_name: 'Архипкин',
+    middle_name: '',
+    age: 25,
+    gender: 'Мужской',
+    birth_date: '1998-03-22',
+    alternate_url: '+7 924 543 32 15',
+    area: 'Москва',
+    business_trip_readiness: 'Да',
+    skills: 'Front-end Development, React, JavaScript',
+    salary: 150000,
+    resume_status: 'На рассмотрении',
+    professional_roles: 'Разработчик',
+    total_experience: 3,
+  },
+  {
+    id: 3,
+    candidate_id: '3',
+    first_name: 'Алексей',
+    last_name: 'Борискин',
+    middle_name: 'Иванович',
+    age: 32,
+    gender: 'Мужской',
+    birth_date: '1992-12-05',
+    alternate_url: 'Не указан',
+    area: 'Сыктывкар',
+    business_trip_readiness: 'Нет',
+    skills: 'Project Management, Agile, Scrum',
+    salary: 180000,
+    resume_status: 'Новый',
+    professional_roles: 'Менеджер проектов',
+    total_experience: 10,
+  },
+  {
+    id: 4,
+    candidate_id: '4',
+    first_name: 'Алексей',
+    last_name: 'Иванов',
+    middle_name: 'Кириллович',
+    age: 28,
+    gender: 'Мужской',
+    birth_date: '1996-01-11',
+    alternate_url: '+7 924 543 32 16',
+    area: 'Москва',
+    business_trip_readiness: 'Да',
+    skills: 'Back-end Development, Node.js, Databases',
+    salary: 160000,
+    resume_status: 'Тестовое задание',
+    professional_roles: 'Разработчик',
+    total_experience: 5,
+  },
+  {
+    id: 5,
+    candidate_id: '5',
+    first_name: 'Анна',
+    last_name: 'Александрова',
+    middle_name: 'Сергеевна',
+    age: 30,
+    gender: 'Женский',
+    birth_date: '1993-07-08',
+    alternate_url: '+7 951 326 42 15',
+    area: 'Москва',
+    business_trip_readiness: 'Нет',
+    skills: 'Marketing, SEO, Content Strategy',
+    salary: 140000,
+    resume_status: 'Тестовое задание',
+    professional_roles: 'Маркетолог',
+    total_experience: 7,
+  },
+];
+
+type TProps = {
+  vacancyId:string;
+}
+
+export function CandidatesTable({vacancyId}:TProps) { //default 
+
+  const { data: data_vacancies, error, isLoading } = useGetVacancyByIdQuery(vacancyId);
+  const { data: data_neg, error:error_neg, isLoading:isLoading_neg } = useGetVacancyNegotiationsByIdQuery(vacancyId);
+
+  return (
+    <div className="p-4 text-black dark:text-white rounded"
+    //w-full max-w-full 
+    >
+      <div className="justify-between flex  items-center gap-4">
+      
+        <Text size="xl" 
+       // weight={700}
+        >Список кандидатов</Text>
+        <Button className="bg-teal-500 text-white">Добавить кандидата</Button> 
+      </div>
+      <Table striped highlightOnHover className="mt-4">
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>&nbsp;</Table.Th>
+            <Table.Th>Имя</Table.Th>
+            <Table.Th>Статус</Table.Th>
+            <Table.Th>Телефон</Table.Th>
+            <Table.Th>Город</Table.Th>
+            <Table.Th>Пол</Table.Th>
+            <Table.Th>Навыки</Table.Th>
+            <Table.Th>Опыт работы </Table.Th> 
+            <Table.Th></Table.Th>
+            <Table.Th></Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+        <tbody>
+          {
+         // data_neg?.items?.map((candidate:any) => (
+        candidates?.map((candidate:any) => (  
+            <CandidateTableRow key={candidate.id} candidate_={candidate} />
+          ))}
+        </tbody>
+      </Table>
+      <br/><br/>
+      {/*}
+      <DataDisplay data={data_vacancies} /> */}
+      
+    {/*  <DataDisplay data={data_neg} /> */}
+     
+      {/*data_neg?.items?.[0] &&
+      <>
+       <JSONViewer data={data_neg?.items[0]}/>
+      <CandidateCard data={data_neg?.items[0]} />
+      </>
+*/}
+    </div>
+  );
+}
+
+
