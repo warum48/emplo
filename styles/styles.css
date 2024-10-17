@@ -28,3 +28,44 @@ button {
     background-color: #14161d;/* #101117;*/
 }
 
+
+/*-----------------GLOWS-----------------*/
+.glowing-modal {
+    background: black;
+    padding: 24px 24px 0;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,.25);
+    position: relative;
+    border-radius: 8px;
+}
+.has-glow {
+    --glow-accent-1: #8964e8;
+    --glow-accent-2: #25a6e9;
+}
+.has-glow:before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    transform: translate(0);
+    z-index: -1;
+    opacity: .5;
+    background: linear-gradient(135deg,var(--glow-accent-1) 0,var(--glow-accent-2) 100%);
+    border-radius: 8px;
+    animation: glow-enter-blur 1s ease .5s;
+    animation-fill-mode: both;
+}
+.has-glow:after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    transform: translate(0);
+    z-index: -1;
+    opacity: .5;
+    background: linear-gradient(135deg,transparent 0,transparent 34%,transparent 49%,#fff 57%,#fff 64%,var(--glow-accent-1) 66%,var(--glow-accent-2) 100%);
+    background-size: 300% 300%;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    transition: background-position .8s ease;
+    border-radius: 9px;
+    animation: glow-enter-stroke .5s ease .5s;
+    animation-fill-mode: both;
+}
